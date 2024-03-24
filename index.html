@@ -14,15 +14,13 @@
 <body draggable="false">
   <nav id="custom-title-bar">
     <span id="drag-region" style="width: 100%">Electron Widget App</span>
-    <div style="display: flex; flex-direction: row; flex-wrap: nowrap">
-      <button id="minimizeBtn" class="nav-btn">—</button>
+    <div class="nav-btn-container">
+      <button id="minimizeBtn" class="nav-btn w-48">—</button>
       <button id="closeBtn" class="nav-btn">X</button>
     </div>
   </nav>
 
-  <main>
-    <div id="widgetsData" class="widget-items-container"></div>
-  </main>
+  <main id="widgetsData" class="widgets-container"></main>
 
   <!-- Scripts are separated into their own files for organization -->
   <script type="module" src="/src/renderer.js"></script>
