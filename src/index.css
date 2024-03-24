@@ -1,4 +1,7 @@
 /* styles.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Add styles here to customize the appearance of your app */
 :root {
@@ -43,9 +46,7 @@ nav {
   color: bisque;
   margin: 0.1rem;
   border: 0;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
+  transition: background-color 0.3s, color 0.3s;
   font-weight: bold;
   border-radius: 0.3rem;
   width: 2rem;
