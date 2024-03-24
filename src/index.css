@@ -5,22 +5,22 @@
 
 @layer base {
   :root {
-    @apply bg-[#161616] select-none text-white p-0 m-0;
+    @apply m-0 select-none bg-[#161616] p-0 text-white;
   }
 
   body {
-    @apply p-0 m-0;
+    @apply m-0 p-0;
   }
 
   nav {
-    @apply w-full bg-[#141414] flex-row flex justify-between h-fit items-center text-gray-300 font-bold;
+    @apply flex h-fit w-full flex-row items-center justify-between bg-[#141414] font-bold text-gray-300;
   }
   p {
-    @apply text-sm font-normal p-0 m-0;
+    @apply m-0 p-0 text-sm font-normal;
   }
 
   h1 {
-    @apply p-0 m-0 text-2xl;
+    @apply m-0 p-0 text-2xl;
   }
   main {
     @apply flex flex-col gap-2;
@@ -29,19 +29,19 @@
 /* Add styles here to customize the appearance of your app */
 
 .nav-btn {
-  @apply bg-transparent border-0 transition-colors duration-300 font-bold rounded-md w-8 h-8 cursor-default hover:bg-black/50;
+  @apply h-8 w-8 cursor-default rounded-md border-0 bg-transparent font-bold transition-colors duration-300 hover:bg-black/50;
 }
 
 .nav-btn-container {
-  @apply flex flex-row items-center w-fit gap-2;
+  @apply flex w-fit flex-row items-center gap-2;
 }
 
 .widget-list-item {
-  @apply w-full h-auto text-left font-bold bg-gray-900 flex flex-row flex-wrap justify-between items-center hover:bg-gray-950;
+  @apply flex h-auto w-full flex-row flex-wrap items-center justify-between bg-gray-900 text-left font-bold hover:bg-gray-950;
 }
 
 .icon {
-  @apply w-6 h-6 inline-block bg-cover rounded-md border-none m-1 cursor-pointer;
+  @apply m-1 inline-block h-6 w-6 cursor-pointer rounded-md border-none bg-cover;
 }
 
 .eye-visible {

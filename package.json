@@ -23,7 +23,10 @@
     "@electron/fuses": "^1.7.0",
     "autoprefixer": "^10.4.19",
     "electron": "29.1.5",
+    "eslint-config-prettier": "^9.1.0",
     "postcss": "^8.4.38",
+    "prettier": "3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.12",
     "tailwindcss": "^3.4.1",
     "vite": "^5.0.12"
   },
