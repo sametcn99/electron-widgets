@@ -1,0 +1,125 @@
+/* styles.css */
+
+/* Add styles here to customize the appearance of your app */
+:root {
+  background-color: #161616;
+  -webkit-user-select: none;
+  user-select: none;
+  color: antiquewhite;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+main {
+  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: center;
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+
+nav {
+  width: 100%;
+  background-color: #141414;
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  height: 2rem;
+  align-items: center;
+  color: #6666ff;
+  font-weight: bold;
+}
+
+.nav-btn {
+  background-color: transparent;
+  color: bisque;
+  margin: 0.1rem;
+  border: 0;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
+  font-weight: bold;
+  border-radius: 0.3rem;
+  width: 2rem;
+  height: 2rem;
+}
+
+.nav-btn:hover {
+  background-color: #6666ff;
+  color: black;
+  cursor: pointer;
+}
+
+.nav-btn:active {
+  transform: scale(0.95);
+}
+
+p {
+  font-size: small;
+  font-weight: normal;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  padding: 0;
+  margin: 0;
+}
+
+.widget-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+}
+
+.widget-list-item {
+  width: 100%;
+  height: fit-content;
+  text-align: start;
+  font-weight: bold;
+  background-color: #1c1c1c;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.widget-list-item:hover {
+  background-color: #0e0e0e;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  background-size: cover;
+  border-radius: 0.3rem;
+  border: none;
+  margin: 0.4rem;
+  cursor: pointer;
+}
+
+.eye-visible {
+  background-image: url("../assets/eye.svg");
+  background-color: #6666ff;
+}
+
+.eye-invisible {
+  background-image: url("../assets/eye-slash.svg");
+  background-color: #6666ff;
+}
+
+.settings-icon {
+  background-image: url("../assets/gear-six.svg");
+  background-color: #6666ff;
+}

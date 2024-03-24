@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="/src/index.css" />
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'" />
+  <title>Hello World!</title>
+</head>
+
+<body draggable="false">
+  <nav id="custom-title-bar">
+    <span id="drag-region" style="width: 100%">Electron Widget App</span>
+    <div style="display: flex; flex-direction: row; flex-wrap: nowrap">
+      <button id="minimizeBtn" class="nav-btn">—</button>
+      <button id="closeBtn" class="nav-btn">X</button>
+    </div>
+  </nav>
+
+  <main>
+    <div id="widgetsData" class="widget-items-container"></div>
+  </main>
+
+  <!-- Scripts are separated into their own files for organization -->
+  <script type="module" src="/src/renderer.js"></script>
+
+</body>
+
+</html>
