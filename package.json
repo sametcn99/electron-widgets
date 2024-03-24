@@ -9,7 +9,7 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.3.1",
@@ -20,10 +20,13 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.3.1",
     "@electron-forge/plugin-fuses": "^7.2.0",
     "@electron-forge/plugin-vite": "^7.3.1",
+    "@electron-internal/eslint-config": "^1.0.1",
     "@electron/fuses": "^1.7.0",
     "autoprefixer": "^10.4.19",
     "electron": "29.1.5",
+    "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-node": "^11.1.0",
     "postcss": "^8.4.38",
     "prettier": "3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.12",

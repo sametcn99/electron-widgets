@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('node:path');
 import { readFileSync, writeFileSync } from 'node:fs';
