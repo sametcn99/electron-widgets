@@ -28,6 +28,9 @@
 }
 /* Add styles here to customize the appearance of your app */
 
+.drag-region {
+  @apply w-full;
+}
 .nav-btn {
   @apply h-8 w-8 cursor-default rounded-md border-0 bg-transparent font-bold transition-colors duration-300 hover:bg-black/50;
 }

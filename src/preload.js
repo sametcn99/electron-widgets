@@ -15,8 +15,8 @@ const { contextBridge, ipcRenderer } = require('electron/renderer')
  * Exposes Electron APIs and IPC methods to the main world
  */
 contextBridge.exposeInMainWorld("electronAPI", {
-  minimizeWindow: () => ipcRenderer.invoke("minimize-window"),
-  closeWindow: () => ipcRenderer.invoke("close-window"),
+  minimizeWindow: () => ipcRenderer.invoke('window-action', 'minimize'),
+  closeWindow: () => ipcRenderer.invoke('window-action', 'close'),
   readWidgetsJSON: () => ipcRenderer.invoke("read-widgets-json"),
   writeWidgetsJSON: () => ipcRenderer.invoke("write-widgets-json"),
 });
@@ -49,39 +49,39 @@ window.addEventListener("DOMContentLoaded", async () => {
 
       // Iterate over the object properties
       Object.entries(widgetsData).forEach(([widgetKey, widgetDetails]) => {
-        const widgetListItemDetails = document.createElement("div");
-        widgetListItemDetails.classList.add("widget-list-item");
-        widgetListItemDetails.id = widgetKey; // Set the id to the widget key
+        const widgetListItem = document.createElement("div");
+        widgetListItem.classList.add("widget-list-item");
+        widgetListItem.id = widgetKey; // Set the id to the widget key
 
-        const widgetElement = document.createElement("div");
-        widgetElement.classList.add("widget-list-item-details");
+        const widgetListItemDetails = document.createElement("div");
+        widgetListItemDetails.classList.add("widget-list-item-details");
 
         // Create and append the title element
         const titleElement = document.createElement("h1");
         titleElement.textContent =
           widgetDetails.title || `Widget ${widgetKey} missing title`;
-        widgetElement.appendChild(titleElement);
+        widgetListItemDetails.appendChild(titleElement);
         titleElement.style.color = "#6666FF";
         // Create and append the created_at element
         const createdAtElement = document.createElement("p");
         createdAtElement.textContent =
           `Created: ${widgetDetails.created_at}` ||
           `Widget ${widgetKey} missing created_at`;
-        widgetElement.appendChild(createdAtElement);
+        widgetListItemDetails.appendChild(createdAtElement);
 
         // Create and append the updated_at element
         const updatedAtElement = document.createElement("p");
         updatedAtElement.textContent =
           `Updated: ${widgetDetails.updated_at}` ||
           `Widget ${widgetKey} missing updated_at`;
-        widgetElement.appendChild(updatedAtElement);
+        widgetListItemDetails.appendChild(updatedAtElement);
 
         // Create and append the creator element
         const creatorElement = document.createElement("p");
         creatorElement.textContent =
           `Creator: ${widgetDetails.creator}` ||
           `Widget ${widgetKey} missing creator`;
-        widgetElement.appendChild(creatorElement);
+        widgetListItemDetails.appendChild(creatorElement);
 
         // Create and append the settings button
         const settingsButton = document.createElement("button");
@@ -113,10 +113,10 @@ window.addEventListener("DOMContentLoaded", async () => {
         });
         buttonsElement.appendChild(settingsButton);
         buttonsElement.appendChild(makeVisible);
-        // Finally, append the widgetElement to the widgetsContainer
-        widgetListItemDetails.appendChild(widgetElement);
-        widgetListItemDetails.appendChild(buttonsElement);
-        widgetsContainer.appendChild(widgetListItemDetails);
+        // Finally, append the widgetListItemDetails to the widgetsContainer
+        widgetListItem.appendChild(widgetListItemDetails);
+        widgetListItem.appendChild(buttonsElement);
+        widgetsContainer.appendChild(widgetListItem);
       });
     } catch (error) {
       console.error("Failed to load widgets:", error);

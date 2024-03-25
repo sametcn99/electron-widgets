@@ -5,6 +5,9 @@ import { readFileSync, writeFile, writeFileSync } from 'node:fs';
 // In this file you can include the rest of your app's specific main process code.
 // You can also put them in separate files and import them here.
 
+// CONSTANTS
+const widgetsJsonPath = path.join(__dirname, "/widgets/widgets.json");
+
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   app.quit();
@@ -20,27 +23,29 @@ if (require('electron-squirrel-startup')) {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 450,
-    height: 650,
+    width: 450, // Set the initial width of the window
+    height: 650, // Set the initial height of the window
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
+      preload: path.join(__dirname, "preload.js"), // Path to preload script
     },
-    autoHideMenuBar: true,
-    titleBarStyle: "hidden",
+    autoHideMenuBar: true, // Hide the menu bar
+    titleBarStyle: "hidden", // Hide the title bar
   });
 
-  // and load the index.html of the app.
+  // Load the main window content
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
+    // If a dev server URL is provided, load it
     mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
   } else {
+    // Otherwise, load the index.html from the file system
     mainWindow.loadFile(
       path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`),
     );
   }
-
-  // Open the DevTools.
+  // Open the DevTools for debugging
   mainWindow.webContents.openDevTools();
 };
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -68,8 +73,6 @@ app.on('window-all-closed', () => {
 });
 
 
-
-
 /**
  * Creates windows for widgets defined in the widgets.json file.
  *
@@ -80,24 +83,29 @@ app.on('window-all-closed', () => {
  */
 function createWindowsForWidgets() {
   try {
-    const widgetsData = JSON.parse(getWidgetJson());
+    // Parse the widgets JSON data
+    const widgetsData = JSON.parse(getWidgetsJson());
     if (typeof widgetsData !== "object" || Array.isArray(widgetsData)) {
       console.error("Unexpected widgets data structure:", widgetsData);
       return;
     }
+    // Iterate through each widget in the data
     Object.entries(widgetsData).forEach(([key, widget]) => {
+      // Check if the widget is set to be visible
       if (widget.visible) {
+        // Generate random positions if none are defined
         if (!widget.positionX && !widget.positionY) {
-          // if no position is defined then create a positionX and positionY and write into widgetsData json
           widget.positionX = Math.floor(Math.random() * 100);
           widget.positionY = Math.floor(Math.random() * 100);
           widgetsData[key] = widget;
+          // Update the widgets.json file with new positions
           writeFileSync(
             path.join(__dirname, "/widgets/widgets.json"),
             JSON.stringify(widgetsData, null, 2),
           );
         }
         try {
+          // Create a new browser window for the widget
           const win = new BrowserWindow({
             width: widget.width,
             height: widget.height,
@@ -109,6 +117,7 @@ function createWindowsForWidgets() {
             y: widget.positionY,
           });
 
+          // Load the widget's HTML file into the window
           const indexPath = path.join(__dirname, "widgets", key, "index.html");
           console.log(`Loading ${indexPath}`);
           win.loadFile(indexPath);
@@ -131,25 +140,26 @@ function createWindowsForWidgets() {
  */
 
 /**
- * Handles the 'minimize-window' IPC message by minimizing the focused window.
- * When the 'minimize-window' message is received, this gets the currently focused
- * BrowserWindow instance and calls win.minimize() to minimize the window.
+ * Handles the 'window-action' IPC message by performing an action on the focused window.
+ * When the 'window-action' message is received, this gets the currently focused
+ * BrowserWindow instance and performs an action (minimize, close) based on the
+ * passed action parameter.
  */
-ipcMain.handle("minimize-window", () => {
+ipcMain.handle("window-action", (event, action) => {
   const win = BrowserWindow.getFocusedWindow();
-  win.minimize();
-})
-
-/**
- * Handles the 'close-window' IPC message by closing the focused window.
- * When the 'close-window' message is received, this gets the currently focused
- * BrowserWindow instance and calls win.close() to close the window.
- */
-ipcMain.handle("close-window", () => {
-  const win = BrowserWindow.getFocusedWindow();
-  win.close();
-})
-
+  if (win) {
+    switch (action) {
+      case "minimize":
+        win.minimize();
+        break;
+      case "close":
+        win.close();
+        break;
+      default:
+        console.log(`Unknown action: ${action}`);
+    }
+  }
+});
 
 /**
  * Handles the 'read-widgets-json' IPC message by returning the contents of the
@@ -159,12 +169,13 @@ ipcMain.handle("close-window", () => {
  * located in the widgets directory and returns its contents as a string.
  */
 ipcMain.handle("read-widgets-json", () => {
-  const filePath = path.join(__dirname, "/widgets/widgets.json");
-  let widgetsData = readFileSync(
-    filePath,
-    "utf-8",
-  );
-  return widgetsData;
+  try {
+    let widgetsData = readFileSync(widgetsJsonPath, "utf-8");
+    return widgetsData;
+  } catch (err) {
+    console.error(`Error reading widgets.json: ${err}`);
+    return null; // or handle the error as appropriate
+  }
 });
 
 /**
@@ -174,10 +185,9 @@ ipcMain.handle("read-widgets-json", () => {
  */
 ipcMain.handle("write-widgets-json", async (event, data) => {
   try {
-    const filePath = path.join(__dirname, "/widgets/widgets.json");
-    console.log("Writing to widgets.json:", filePath);
+    console.log("Writing to widgets.json:", widgetsJsonPath);
     console.log("Writing to widgets.json:", "public/widgets/widgets.json");
-    await writeFile(filePath, data, (err) => {
+    await writeFile(widgetsJsonPath, data, (err) => {
       if (err) {
         console.error(`Error writing to widgets.json: ${err}`);
         return;
@@ -201,10 +211,9 @@ ipcMain.handle("write-widgets-json", async (event, data) => {
  * Reads the widgets.json configuration file located in the widgets directory
  * and returns its contents as a string.
  */
-function getWidgetJson() {
+function getWidgetsJson() {
   try {
-    const filePath = path.join(__dirname, "/widgets/widgets.json");
-    const widgetsData = readFileSync(filePath, "utf-8");
+    const widgetsData = readFileSync(widgetsJsonPath, "utf-8");
     return widgetsData;
   } catch (error) {
     console.error("Failed to read widgets.json:", error);
