@@ -102,6 +102,10 @@ ipcMain.handle("write-widgets-json", async (event, data) => {
       }
       console.log('Data has been written to widgets.json');
     });
+
+    // This code creates a file named "widgets.json" in the "public" folder, 
+    // which may not be necessary in production.
+    // test it later
     await writeFile("public/widgets/widgets.json", data, (err) => {
       if (err) {
         console.error(`Error writing to public/widgets/widgets.json: ${err}`);
