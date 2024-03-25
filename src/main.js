@@ -1,13 +1,15 @@
 /* eslint-disable no-undef */
 import { app, BrowserWindow, ipcMain } from 'electron';
-import { existsSync, readFileSync, writeFile, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFile, writeFileSync } from 'node:fs';
 import path from 'node:path'
-import { defaultWidgetsJson } from './utils/defaultWidgetsJson';
 // In this file you can include the rest of your app's specific main process code.
 // You can also put them in separate files and import them here.
 
 // CONSTANTS
-const widgetsJsonPath = path.join(__dirname, "/widgets/widgets.json");
+const sourceWidgetsDir = path.join(__dirname, 'widgets');
+const widgetsDir = path.join(require('os').homedir(), 'Desktop', 'widgets');
+const widgetsJsonPath = path.join(widgetsDir, "widgets.json");
+
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -18,7 +20,7 @@ if (require('electron-squirrel-startup')) {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  checkWidgetsJsonIsExist()
+  copyWidgetsDirIfNeeded(sourceWidgetsDir, widgetsDir)
   createWindow();
   createWindowsForWidgets()
 
@@ -102,17 +104,6 @@ ipcMain.handle("write-widgets-json", async (event, data) => {
       }
       console.log('Data has been written to widgets.json');
     });
-
-    // This code creates a file named "widgets.json" in the "public" folder, 
-    // which may not be necessary in production.
-    // test it later
-    await writeFile("public/widgets/widgets.json", data, (err) => {
-      if (err) {
-        console.error(`Error writing to public/widgets/widgets.json: ${err}`);
-        return;
-      }
-      console.log('Data has been written to public/widgets/widgets.json');
-    });
   } catch (err) {
     console.error(`Error writing to widgets.json:`, err);
   }
@@ -192,10 +183,14 @@ function createWindowsForWidgets() {
             resizable: widget.resizable,
             x: widget.positionX,
             y: widget.positionY,
+            webPreferences: {
+              contextIsolation: false,
+              nodeIntegration: true,
+            }
           });
 
           // Load the widget's HTML file into the window
-          const indexPath = path.join(__dirname, "widgets", key, "index.html");
+          const indexPath = path.join(widgetsDir, key, "index.html");
           console.log(`Loading ${indexPath}`);
           win.loadFile(indexPath);
         } catch (err) {
@@ -224,11 +219,37 @@ function getWidgetsJson() {
 }
 
 
-function checkWidgetsJsonIsExist() {
-  if (!existsSync(widgetsJsonPath)) {
-    writeFileSync(widgetsJsonPath, JSON.stringify(defaultWidgetsJson, null, 2), 'utf-8');
-    console.log('widgets.json created successfully.', widgetsJsonPath);
-  } else {
-    console.log('widgets.json is already exists.', widgetsJsonPath);
+/**
+ * Copies the widgets directory if it does not already exist.
+ * Recursively copies the contents of the source widgets directory to the
+ * destination widgets directory, creating any missing directories.
+ * @param {string} sourceWidgetsDir - The path to the source widgets directory
+ * @param {string} widgetsDir - The path to the destination widgets directory
+ */
+function copyWidgetsDirIfNeeded(sourceWidgetsDir, widgetsDir) {
+  try {
+    if (!existsSync(widgetsDir)) {
+      console.log("widgets directory is not found. Copying...");
+
+      // Create the destination directory if it doesn't exist
+      mkdirSync(widgetsDir, { recursive: true });
+      // Read the contents of the source directory
+      const entries = readdirSync(sourceWidgetsDir, { withFileTypes: true });
+
+      // Iterate over the contents of the source directory
+      for (let entry of entries) {
+        const srcPath = path.join(sourceWidgetsDir, entry.name);
+        const destPath = path.join(widgetsDir, entry.name);
+
+        // Recursively copy directories, or copy files directly
+        entry.isDirectory()
+          ? copyWidgetsDirIfNeeded(srcPath, destPath)
+          : copyFileSync(srcPath, destPath);
+      }
+      console.log("widgets directory created successfully.", widgetsDir);
+    }
+  } catch (error) {
+    console.error("Failed to copy widgets directory:", error);
   }
 }
+
