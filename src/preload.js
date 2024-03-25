@@ -6,10 +6,7 @@
  *
  * https://www.electronjs.org/docs/latest/tutorial/sandbox
  */
-
-
 const { contextBridge, ipcRenderer } = require('electron/renderer')
-
 
 /**
  * Exposes Electron APIs and IPC methods to the main world
@@ -17,8 +14,6 @@ const { contextBridge, ipcRenderer } = require('electron/renderer')
 contextBridge.exposeInMainWorld("electronAPI", {
   minimizeWindow: () => ipcRenderer.invoke('window-action', 'minimize'),
   closeWindow: () => ipcRenderer.invoke('window-action', 'close'),
-  readWidgetsJSON: () => ipcRenderer.invoke("read-widgets-json"),
-  writeWidgetsJSON: () => ipcRenderer.invoke("write-widgets-json"),
 });
 
 /**
@@ -38,12 +33,16 @@ window.addEventListener("DOMContentLoaded", async () => {
    */
   async function loadWidgets() {
     try {
+      // Fetch the raw widget data from the main process
       let widgetsDataRaw = await ipcRenderer.invoke("read-widgets-json");
+      // Parse the raw data into a JSON object
       const widgetsData = JSON.parse(widgetsDataRaw);
+      // Check if the data structure is not an object or if it's an array
       if (typeof widgetsData !== "object" || Array.isArray(widgetsData)) {
         console.error("Unexpected widgets data structure:", widgetsData);
         return;
       }
+
       const widgetsContainer = document.getElementById("widgetsData");
       widgetsContainer.innerHTML = ""; // Clear existing widgets
 
@@ -126,7 +125,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 /**
  * Toggles the visibility of a widget in the widgets data.
- *
  * @param {string} widgetId - The ID of the widget to toggle
  * @param {boolean} visible - Whether to set the widget visibility to true or false
  */

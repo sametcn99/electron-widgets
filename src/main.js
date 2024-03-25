@@ -96,7 +96,6 @@ ipcMain.handle("read-widgets-json", () => {
 ipcMain.handle("write-widgets-json", async (event, data) => {
   try {
     console.log("Writing to widgets.json:", widgetsJsonPath);
-    console.log("Writing to widgets.json:", "public/widgets/widgets.json");
     await writeFile(widgetsJsonPath, data, (err) => {
       if (err) {
         console.error(`Error writing to widgets.json: ${err}`);
@@ -143,7 +142,6 @@ const createWindow = () => {
 
 /**
  * Creates windows for widgets defined in the widgets.json file.
- *
  * Parses the widgets data and creates a BrowserWindow for each widget
  * that has the "visible" property set to true. If no "positionX" or
  * "positionY" is defined, it will generate random values and update
@@ -218,7 +216,6 @@ function getWidgetsJson() {
   }
 }
 
-
 /**
  * Copies the widgets directory if it does not already exist.
  * Recursively copies the contents of the source widgets directory to the
@@ -245,11 +242,10 @@ function copyWidgetsDirIfNeeded(sourceWidgetsDir, widgetsDir) {
         entry.isDirectory()
           ? copyWidgetsDirIfNeeded(srcPath, destPath)
           : copyFileSync(srcPath, destPath);
+        console.log(`Copied ${srcPath} to ${destPath}`);
       }
-      console.log("widgets directory created successfully.", widgetsDir);
     }
   } catch (error) {
     console.error("Failed to copy widgets directory:", error);
   }
 }
-

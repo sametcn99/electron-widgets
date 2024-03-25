@@ -12,16 +12,18 @@ document.addEventListener('DOMContentLoaded', () => {
     dragWindow()
 });
 
+
 /**
- * Handles dragging of the window by tracking mouse movements during drag operations.
- * Binds mouse/touch events to the drag region to track dragging state and move
- * the window accordingly.
+ * Handles dragging of the window by tracking mouse events on the title bar element.
+ * Listens for mousedown events to initiate dragging, tracks mousemove events to
+ * update the window position during dragging, and listens for mouseup to stop dragging.
  */
 function dragWindow() {
     const titleBar = document.getElementById("drag-region");
     let isDragging = false;
     let offsetX, offsetY;
 
+    // Listen for the mouse down event on the title bar to initiate dragging
     titleBar.addEventListener("mousedown", (e) => {
         isDragging = true;
         offsetX = e.clientX - window.screenX;
@@ -29,6 +31,7 @@ function dragWindow() {
         console.log(`dragging started at ${window.screenX}, ${window.screenY}`);
     });
 
+    // Track mouse movement to handle window dragging
     window.addEventListener("mousemove", (e) => {
         if (isDragging === false) return;
         const { screenX, screenY } = e;
@@ -37,13 +40,14 @@ function dragWindow() {
         console.log(`moved to ${screenX - offsetX}, ${screenY - offsetY}`);
     });
 
+    // Stop dragging when mouse button is released
     window.addEventListener("mouseup", () => {
         isDragging = false;
+        console.log(`dragging stopped`);
     });
 }
 /**
  * Sets up click handlers for window control buttons to minimize or close the window.
- *
  * The minimizeBtn and closeBtn elements are expected to exist in the DOM. When
  * clicked, they call the corresponding methods on window.electronAPI to minimize
  * or close the window.

@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/**
+ * Defines base styles for elements
+ * Applies default styling to root, body, navigation, paragraphs, headings and main elements
+ */
 @layer base {
   :root {
     @apply m-0 select-none bg-[#161616] p-0 text-white;
@@ -26,35 +30,45 @@
     @apply flex flex-col gap-2;
   }
 }
-/* Add styles here to customize the appearance of your app */
 
-.drag-region {
-  @apply w-full;
-}
-.nav-btn {
-  @apply h-8 w-8 cursor-default rounded-md border-0 bg-transparent font-bold transition-colors duration-300 hover:bg-black/50;
-}
+/**
+ * Defines styles for common UI components
+ * This layer defines styles for reusable UI components like buttons, lists and icons.
+ */
+@layer components {
+  .drag-region {
+    @apply w-full;
+  }
+  .nav-btn {
+    @apply h-8 w-8 cursor-default rounded-md border-0 bg-transparent font-bold transition-colors duration-300 hover:bg-black/50;
+  }
 
-.nav-btn-container {
-  @apply flex w-fit flex-row items-center gap-2;
-}
+  .nav-btn-container {
+    @apply flex w-fit flex-row items-center gap-2;
+  }
 
-.widget-list-item {
-  @apply flex h-auto w-full flex-row flex-wrap items-center justify-between bg-gray-900 text-left font-bold hover:bg-gray-950;
-}
+  .widget-list-item {
+    @apply flex h-auto w-full flex-row flex-wrap items-center justify-between bg-gray-900 text-left font-bold hover:bg-gray-950;
+  }
 
-.icon {
-  @apply m-1 inline-block h-6 w-6 cursor-pointer rounded-md border-none bg-cover;
-}
-
-.eye-visible {
-  @apply bg-[#6666ff] bg-[url("../assets/eye.svg")];
-}
-
-.eye-invisible {
-  @apply bg-[#6666ff] bg-[url("../assets/eye-slash.svg")];
+  .icon {
+    @apply m-1 inline-block h-6 w-6 cursor-pointer rounded-md border-none bg-cover;
+  }
 }
 
-.settings-icon {
-  @apply bg-[#6666ff] bg-[url("../assets/gear-six.svg")];
+/**
+ * Defines utility classes for common SVG icons
+*/
+@layer utilities {
+  .eye-visible {
+    @apply bg-[#6666ff] bg-[url("../assets/eye.svg")];
+  }
+
+  .eye-invisible {
+    @apply bg-[#6666ff] bg-[url("../assets/eye-slash.svg")];
+  }
+
+  .settings-icon {
+    @apply bg-[#6666ff] bg-[url("../assets/gear-six.svg")];
+  }
 }
