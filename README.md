@@ -49,6 +49,4 @@ For those who want to contribute to the project, you can follow these steps:
 
 ## License
 
-This project is licensed under the MIT License. For more information, see the LICENSE file.
-
-This README file serves as a general summary of the project. For more detailed information and updates, please visit the project's GitHub page.
+This project is licensed under the [GPL 3.0](LICENSE). Feel free to use and modify the code as per your requirements.
