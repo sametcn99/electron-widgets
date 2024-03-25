@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { app, BrowserWindow, ipcMain } from 'electron';
-const path = require('node:path');
 import { existsSync, readFileSync, writeFile, writeFileSync } from 'node:fs';
+import path from 'node:path'
 import { defaultWidgetsJson } from './utils/defaultWidgetsJson';
 // In this file you can include the rest of your app's specific main process code.
 // You can also put them in separate files and import them here.
@@ -14,9 +14,108 @@ if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.whenReady().then(() => {
+  checkWidgetsJsonIsExist()
+  createWindow();
+  createWindowsForWidgets()
+
+  // On OS X it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
+});
+
+// Quit when all windows are closed, except on macOS. There, it's common
+// for applications and their menu bar to stay active until the user quits
+// explicitly with Cmd + Q.
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
+});
+
+/**
+ * IPC FUNCTIONS
+ * Inter-process communication (IPC) is a key part of building feature-rich desktop applications in Electron. 
+ * Because the main and renderer processes have different responsibilities in Electron's process model,
+ * IPC is the only way to perform many common tasks, such as calling a native API from your UI or 
+ * triggering changes in your web contents from native menus.
+ */
+
+/**
+ * Handles the 'window-action' IPC message by performing an action on the focused window.
+ * When the 'window-action' message is received, this gets the currently focused
+ * BrowserWindow instance and performs an action (minimize, close) based on the
+ * passed action parameter.
+ */
+ipcMain.handle("window-action", (event, action) => {
+  const win = BrowserWindow.getFocusedWindow();
+  if (win) {
+    switch (action) {
+      case "minimize":
+        win.minimize();
+        break;
+      case "close":
+        win.close();
+        break;
+      default:
+        console.log(`Unknown action: ${action}`);
+    }
+  }
+});
+
+/**
+ * Handles the 'read-widgets-json' IPC message by returning the contents of the
+ * widgets.json file.
+ * When the message is received, this function reads the widgets.json file
+ * located in the widgets directory and returns its contents as a string.
+ */
+ipcMain.handle("read-widgets-json", () => {
+  try {
+    let widgetsData = readFileSync(widgetsJsonPath, "utf-8");
+    return widgetsData;
+  } catch (err) {
+    console.error(`Error reading widgets.json: ${err}`);
+    return null; // or handle the error as appropriate
+  }
+});
+
+/**
+ * Handles the 'write-widgets-json' IPC message by writing data to the widgets.json file.
+ * Writes the provided data to widgets.json in the app directory and also to public/widgets/widgets.json.
+ * Catches any errors writing and logs them.
+ */
+ipcMain.handle("write-widgets-json", async (event, data) => {
+  try {
+    console.log("Writing to widgets.json:", widgetsJsonPath);
+    console.log("Writing to widgets.json:", "public/widgets/widgets.json");
+    await writeFile(widgetsJsonPath, data, (err) => {
+      if (err) {
+        console.error(`Error writing to widgets.json: ${err}`);
+        return;
+      }
+      console.log('Data has been written to widgets.json');
+    });
+    await writeFile("public/widgets/widgets.json", data, (err) => {
+      if (err) {
+        console.error(`Error writing to public/widgets/widgets.json: ${err}`);
+        return;
+      }
+      console.log('Data has been written to public/widgets/widgets.json');
+    });
+  } catch (err) {
+    console.error(`Error writing to widgets.json:`, err);
+  }
+});
+
 /**
  * Creates the main browser window.
- *
  * Sets up the window with default dimensions and preferences. Loads either
  * the local dev server URL or built HTML file depending on environment.
  * Also opens the DevTools for development.
@@ -46,39 +145,6 @@ const createWindow = () => {
   // Open the DevTools for debugging
   mainWindow.webContents.openDevTools();
 };
-
-
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
-  if (!existsSync(widgetsJsonPath)) {
-    writeFileSync(widgetsJsonPath, JSON.stringify(defaultWidgetsJson, null, 2), 'utf-8');
-    console.log('widgets.json created successfully.');
-  } else {
-    console.log('widgets.json is already exists.');
-  }
-  createWindow();
-  createWindowsForWidgets()
-
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
-    }
-  });
-});
-
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
-
 
 /**
  * Creates windows for widgets defined in the widgets.json file.
@@ -139,81 +205,6 @@ function createWindowsForWidgets() {
 }
 
 /**
- * IPC FUNCTIONS
- * Inter-process communication (IPC) is a key part of building feature-rich desktop applications in Electron. 
- * Because the main and renderer processes have different responsibilities in Electron's process model,
- * IPC is the only way to perform many common tasks, such as calling a native API from your UI or 
- * triggering changes in your web contents from native menus.
- */
-
-/**
- * Handles the 'window-action' IPC message by performing an action on the focused window.
- * When the 'window-action' message is received, this gets the currently focused
- * BrowserWindow instance and performs an action (minimize, close) based on the
- * passed action parameter.
- */
-ipcMain.handle("window-action", (event, action) => {
-  const win = BrowserWindow.getFocusedWindow();
-  if (win) {
-    switch (action) {
-      case "minimize":
-        win.minimize();
-        break;
-      case "close":
-        win.close();
-        break;
-      default:
-        console.log(`Unknown action: ${action}`);
-    }
-  }
-});
-
-/**
- * Handles the 'read-widgets-json' IPC message by returning the contents of the
- * widgets.json file.
- *
- * When the message is received, this function reads the widgets.json file
- * located in the widgets directory and returns its contents as a string.
- */
-ipcMain.handle("read-widgets-json", () => {
-  try {
-    let widgetsData = readFileSync(widgetsJsonPath, "utf-8");
-    return widgetsData;
-  } catch (err) {
-    console.error(`Error reading widgets.json: ${err}`);
-    return null; // or handle the error as appropriate
-  }
-});
-
-/**
- * Handles the 'write-widgets-json' IPC message by writing data to the widgets.json file.
- * Writes the provided data to widgets.json in the app directory and also to public/widgets/widgets.json.
- * Catches any errors writing and logs them.
- */
-ipcMain.handle("write-widgets-json", async (event, data) => {
-  try {
-    console.log("Writing to widgets.json:", widgetsJsonPath);
-    console.log("Writing to widgets.json:", "public/widgets/widgets.json");
-    await writeFile(widgetsJsonPath, data, (err) => {
-      if (err) {
-        console.error(`Error writing to widgets.json: ${err}`);
-        return;
-      }
-      console.log('Data has been written to widgets.json');
-    });
-    await writeFile("public/widgets/widgets.json", data, (err) => {
-      if (err) {
-        console.error(`Error writing to public/widgets/widgets.json: ${err}`);
-        return;
-      }
-      console.log('Data has been written to public/widgets/widgets.json');
-    });
-  } catch (err) {
-    console.error(`Error writing to widgets.json:`, err);
-  }
-});
-
-/**
  * Gets the widget JSON data from the widgets.json file
  * Reads the widgets.json configuration file located in the widgets directory
  * and returns its contents as a string.
@@ -225,5 +216,15 @@ function getWidgetsJson() {
   } catch (error) {
     console.error("Failed to read widgets.json:", error);
     throw error; // Rethrow the error after logging it
+  }
+}
+
+
+function checkWidgetsJsonIsExist() {
+  if (!existsSync(widgetsJsonPath)) {
+    writeFileSync(widgetsJsonPath, JSON.stringify(defaultWidgetsJson, null, 2), 'utf-8');
+    console.log('widgets.json created successfully.', widgetsJsonPath);
+  } else {
+    console.log('widgets.json is already exists.', widgetsJsonPath);
   }
 }
