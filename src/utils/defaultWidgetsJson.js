@@ -1,4 +1,4 @@
-{
+export const defaultWidgetsJson = {
     "clock": {
         "title": "clock",
         "visible": false,

@@ -1,7 +1,8 @@
 /* eslint-disable no-undef */
 import { app, BrowserWindow, ipcMain } from 'electron';
 const path = require('node:path');
-import { readFileSync, writeFile, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFile, writeFileSync } from 'node:fs';
+import { defaultWidgetsJson } from './utils/defaultWidgetsJson';
 // In this file you can include the rest of your app's specific main process code.
 // You can also put them in separate files and import them here.
 
@@ -51,6 +52,12 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  if (!existsSync(widgetsJsonPath)) {
+    writeFileSync(widgetsJsonPath, JSON.stringify(defaultWidgetsJson, null, 2), 'utf-8');
+    console.log('widgets.json created successfully.');
+  } else {
+    console.log('widgets.json is already exists.');
+  }
   createWindow();
   createWindowsForWidgets()
 
