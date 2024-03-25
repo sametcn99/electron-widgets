@@ -2,30 +2,40 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 const path = require('node:path');
 import { readFileSync, writeFile, writeFileSync } from 'node:fs';
-
+// In this file you can include the rest of your app's specific main process code.
+// You can also put them in separate files and import them here.
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
+/**
+ * Creates the main browser window.
+ *
+ * Sets up the window with default dimensions and preferences. Loads either
+ * the local dev server URL or built HTML file depending on environment.
+ * Also opens the DevTools for development.
+ */
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 450,
     height: 650,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, "preload.js"),
     },
     autoHideMenuBar: true,
-    titleBarStyle: 'hidden',
+    titleBarStyle: "hidden",
   });
 
   // and load the index.html of the app.
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
   } else {
-    mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
+    mainWindow.loadFile(
+      path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`),
+    );
   }
 
   // Open the DevTools.
@@ -57,10 +67,17 @@ app.on('window-all-closed', () => {
   }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
 
 
+
+/**
+ * Creates windows for widgets defined in the widgets.json file.
+ *
+ * Parses the widgets data and creates a BrowserWindow for each widget
+ * that has the "visible" property set to true. If no "positionX" or
+ * "positionY" is defined, it will generate random values and update
+ * the widgets.json file.
+ */
 function createWindowsForWidgets() {
   try {
     const widgetsData = JSON.parse(getWidgetJson());
@@ -77,7 +94,7 @@ function createWindowsForWidgets() {
           widgetsData[key] = widget;
           writeFileSync(
             path.join(__dirname, "/widgets/widgets.json"),
-            JSON.stringify(widgetsData, null, 2)
+            JSON.stringify(widgetsData, null, 2),
           );
         }
         try {
@@ -104,9 +121,6 @@ function createWindowsForWidgets() {
     console.error(`Error parsing widgets data: ${err}`);
   }
 }
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
 
 /**
  * IPC FUNCTIONS
@@ -145,8 +159,9 @@ ipcMain.handle("close-window", () => {
  * located in the widgets directory and returns its contents as a string.
  */
 ipcMain.handle("read-widgets-json", () => {
+  const filePath = path.join(__dirname, "/widgets/widgets.json");
   let widgetsData = readFileSync(
-    path.join(__dirname, "/widgets/widgets.json"),
+    filePath,
     "utf-8",
   );
   return widgetsData;
@@ -159,7 +174,7 @@ ipcMain.handle("read-widgets-json", () => {
  */
 ipcMain.handle("write-widgets-json", async (event, data) => {
   try {
-    const filePath = path.join(__dirname, "widgets.json");
+    const filePath = path.join(__dirname, "/widgets/widgets.json");
     console.log("Writing to widgets.json:", filePath);
     console.log("Writing to widgets.json:", "public/widgets/widgets.json");
     await writeFile(filePath, data, (err) => {
@@ -180,3 +195,19 @@ ipcMain.handle("write-widgets-json", async (event, data) => {
     console.error(`Error writing to widgets.json:`, err);
   }
 });
+
+/**
+ * Gets the widget JSON data from the widgets.json file
+ * Reads the widgets.json configuration file located in the widgets directory
+ * and returns its contents as a string.
+ */
+function getWidgetJson() {
+  try {
+    const filePath = path.join(__dirname, "/widgets/widgets.json");
+    const widgetsData = readFileSync(filePath, "utf-8");
+    return widgetsData;
+  } catch (error) {
+    console.error("Failed to read widgets.json:", error);
+    throw error; // Rethrow the error after logging it
+  }
+}
