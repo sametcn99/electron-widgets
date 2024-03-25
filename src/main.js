@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
-const { app, BrowserWindow, ipcMain } = require('electron');
+import { app, BrowserWindow, ipcMain } from 'electron';
 const path = require('node:path');
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFile, writeFileSync } from 'node:fs';
 
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -37,7 +37,7 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow();
-  createWindowForWidgets()
+  createWindowsForWidgets()
 
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
@@ -61,7 +61,7 @@ app.on('window-all-closed', () => {
 // code. You can also put them in separate files and import them here.
 
 
-function createWindowForWidgets() {
+function createWindowsForWidgets() {
   try {
     const widgetsData = JSON.parse(getWidgetJson());
     if (typeof widgetsData !== "object" || Array.isArray(widgetsData)) {
@@ -124,7 +124,6 @@ function createWindowForWidgets() {
 ipcMain.handle("minimize-window", () => {
   const win = BrowserWindow.getFocusedWindow();
   win.minimize();
-  console.log("Minimized");
 })
 
 /**
@@ -135,26 +134,49 @@ ipcMain.handle("minimize-window", () => {
 ipcMain.handle("close-window", () => {
   const win = BrowserWindow.getFocusedWindow();
   win.close();
-  console.log("Closed");
 })
 
+
 /**
- * Handles the 'read-widgets-json' IPC message by reading the widgets data
- * from the widgets.json file and returning it.
+ * Handles the 'read-widgets-json' IPC message by returning the contents of the
+ * widgets.json file.
+ *
+ * When the message is received, this function reads the widgets.json file
+ * located in the widgets directory and returns its contents as a string.
  */
 ipcMain.handle("read-widgets-json", () => {
-  return getWidgetJson();
+  let widgetsData = readFileSync(
+    path.join(__dirname, "/widgets/widgets.json"),
+    "utf-8",
+  );
+  return widgetsData;
 });
 
 /**
- * Reads the widgets data from the widgets.json file and returns it.
- *
- * @returns {string} - The contents of the widgets.json file as a string
+ * Handles the 'write-widgets-json' IPC message by writing data to the widgets.json file.
+ * Writes the provided data to widgets.json in the app directory and also to public/widgets/widgets.json.
+ * Catches any errors writing and logs them.
  */
-function getWidgetJson() {
-  const widgetsData = readFileSync(
-    path.join(__dirname, "/widgets/widgets.json"),
-    "utf-8"
-  );
-  return widgetsData;
-}
+ipcMain.handle("write-widgets-json", async (event, data) => {
+  try {
+    const filePath = path.join(__dirname, "widgets.json");
+    console.log("Writing to widgets.json:", filePath);
+    console.log("Writing to widgets.json:", "public/widgets/widgets.json");
+    await writeFile(filePath, data, (err) => {
+      if (err) {
+        console.error(`Error writing to widgets.json: ${err}`);
+        return;
+      }
+      console.log('Data has been written to widgets.json');
+    });
+    await writeFile("public/widgets/widgets.json", data, (err) => {
+      if (err) {
+        console.error(`Error writing to public/widgets/widgets.json: ${err}`);
+        return;
+      }
+      console.log('Data has been written to public/widgets/widgets.json');
+    });
+  } catch (err) {
+    console.error(`Error writing to widgets.json:`, err);
+  }
+});
