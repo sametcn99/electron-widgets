@@ -1,18 +1,25 @@
 /* eslint-disable no-undef */
-import { app, BrowserWindow, ipcMain } from 'electron';
-import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFile, writeFileSync } from 'node:fs';
-import path from 'node:path'
+import { app, BrowserWindow, ipcMain } from "electron";
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  writeFile,
+  writeFileSync,
+} from "node:fs";
+import path from "node:path";
 // In this file you can include the rest of your app's specific main process code.
 // You can also put them in separate files and import them here.
 
 // CONSTANTS
-const sourceWidgetsDir = path.join(__dirname, 'widgets');
-const widgetsDir = path.join(require('os').homedir(), 'Desktop', 'widgets');
+const sourceWidgetsDir = path.join(__dirname, "widgets");
+const widgetsDir = path.join(require("os").homedir(), "Desktop", "widgets");
 const widgetsJsonPath = path.join(widgetsDir, "widgets.json");
 
-
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (require('electron-squirrel-startup')) {
+if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
@@ -20,13 +27,13 @@ if (require('electron-squirrel-startup')) {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  copyWidgetsDirIfNeeded(sourceWidgetsDir, widgetsDir)
+  copyWidgetsDirIfNeeded(sourceWidgetsDir, widgetsDir);
   createWindow();
-  createWindowsForWidgets()
+  createWindowsForWidgets();
 
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
-  app.on('activate', () => {
+  app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
@@ -36,17 +43,17 @@ app.whenReady().then(() => {
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
     app.quit();
   }
 });
 
 /**
  * IPC FUNCTIONS
- * Inter-process communication (IPC) is a key part of building feature-rich desktop applications in Electron. 
+ * Inter-process communication (IPC) is a key part of building feature-rich desktop applications in Electron.
  * Because the main and renderer processes have different responsibilities in Electron's process model,
- * IPC is the only way to perform many common tasks, such as calling a native API from your UI or 
+ * IPC is the only way to perform many common tasks, such as calling a native API from your UI or
  * triggering changes in your web contents from native menus.
  */
 
@@ -101,7 +108,7 @@ ipcMain.handle("write-widgets-json", async (event, data) => {
         console.error(`Error writing to widgets.json: ${err}`);
         return;
       }
-      console.log('Data has been written to widgets.json');
+      console.log("Data has been written to widgets.json");
     });
   } catch (err) {
     console.error(`Error writing to widgets.json:`, err);
@@ -184,13 +191,14 @@ function createWindowsForWidgets() {
             webPreferences: {
               contextIsolation: false,
               nodeIntegration: true,
-            }
+            },
           });
 
           // Load the widget's HTML file into the window
           const indexPath = path.join(widgetsDir, key, "index.html");
           console.log(`Loading ${indexPath}`);
           win.loadFile(indexPath);
+          // win.webContents.openDevTools();
         } catch (err) {
           console.error(`Error creating window for ${key}: ${err}`);
         }

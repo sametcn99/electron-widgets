@@ -7,6 +7,7 @@
  * Defines base styles for elements
  * Applies default styling to root, body, navigation, paragraphs, headings and main elements
  */
+
 @layer base {
   :root {
     @apply m-0 select-none bg-[#161616] p-0 text-white;
