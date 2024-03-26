@@ -47,20 +47,18 @@ document.addEventListener("DOMContentLoaded", () => {
 // }
 
 /**
- * Sets up click handlers for window control buttons to minimize or close the window.
- * The minimizeBtn and closeBtn elements are expected to exist in the DOM. When
- * clicked, they call the corresponding methods on window.electronAPI to minimize
- * or close the window.
+ * Sets up click event handlers for the window control buttons to minimize and close the window.
  */
 function setupWindowControls() {
   const minimizeBtn = document.getElementById("minimizeBtn");
   const closeBtn = document.getElementById("closeBtn");
+  if (minimizeBtn && closeBtn) {
+    minimizeBtn.addEventListener("click", () => {
+      window.electronAPI.minimizeWindow();
+    });
 
-  minimizeBtn.addEventListener("click", () => {
-    window.electronAPI.minimizeWindow();
-  });
-
-  closeBtn.addEventListener("click", () => {
-    window.electronAPI.closeWindow();
-  });
+    closeBtn.addEventListener("click", () => {
+      window.electronAPI.closeWindow();
+    });
+  }
 }
