@@ -47,9 +47,7 @@ export function createWindow() {
 export function createWindowsForWidgets() {
   try {
     // Parse the widgets JSON data
-    const widgetsData: WidgetsConfig = JSON.parse(
-      getWidgetsJson(widgetsJsonPath)
-    );
+    const widgetsData: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
     if (typeof widgetsData !== "object" || Array.isArray(widgetsData)) {
       console.error("Unexpected widgets data structure:", widgetsData);
       return;

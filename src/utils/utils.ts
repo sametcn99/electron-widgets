@@ -29,7 +29,8 @@ export function openDevToolsWithShortcut(win: BrowserWindow) {
  */
 export function getWidgetsJson(widgetsJsonPath: string) {
   try {
-    const widgetsData = readFileSync(widgetsJsonPath, "utf-8");
+    const widgetsDataRaw = readFileSync(widgetsJsonPath, "utf-8");
+    const widgetsData: WidgetsConfig = JSON.parse(widgetsDataRaw);
     return widgetsData;
   } catch (error) {
     console.error("Failed to read widgets.json:", error);
@@ -43,18 +44,22 @@ export function getWidgetsJson(widgetsJsonPath: string) {
  * @param widgetsJsonPath - The path to the widgets.json file.
  */
 export async function setWidgetsJson(
-  jsonData: string,
+  jsonData: typeof JSON,
   widgetsJsonPath: string
 ) {
   try {
     console.log("Writing to widgets.json:", widgetsJsonPath);
-    await writeFile(widgetsJsonPath, jsonData, (err) => {
-      if (err) {
-        console.error(`Error writing to widgets.json: ${err}`);
-        return;
+    await writeFile(
+      widgetsJsonPath,
+      JSON.stringify(jsonData, null, 2),
+      (err) => {
+        if (err) {
+          console.error(`Error writing to widgets.json: ${err}`);
+          return;
+        }
+        console.log("Data has been written to widgets.json");
       }
-      console.log("Data has been written to widgets.json");
-    });
+    );
   } catch (err) {
     console.error(`Error writing to widgets.json:`, err);
   }

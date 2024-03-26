@@ -34,10 +34,10 @@ window.addEventListener("DOMContentLoaded", async () => {
    */
   async function loadWidgets() {
     try {
-      // Fetch the raw widget data from the main process
-      const widgetsDataRaw = await ipcRenderer.invoke("read-widgets-json");
       // Parse the raw data into a JSON object
-      const widgetsData: WidgetsConfig = JSON.parse(widgetsDataRaw);
+      const widgetsData: WidgetsConfig = await ipcRenderer.invoke(
+        "read-widgets-json"
+      );
       // Check if the data structure is not an object or if it's an array
       if (typeof widgetsData !== "object" || Array.isArray(widgetsData)) {
         console.error("Unexpected widgets data structure:", widgetsData);
@@ -133,15 +133,16 @@ window.addEventListener("DOMContentLoaded", async () => {
  */
 async function toggleWidgetVisibility(widgetId: string, visible: boolean) {
   try {
-    const widgetsDataRaw = await ipcRenderer.invoke("read-widgets-json");
-    const widgetsData: WidgetsConfig = JSON.parse(widgetsDataRaw);
+    const widgetsData: WidgetsConfig = await ipcRenderer.invoke(
+      "read-widgets-json"
+    );
     if (widgetsData[widgetId as keyof WidgetsConfig]) {
       widgetsData[widgetId as keyof WidgetsConfig].visible = visible;
     } else {
       console.error("Widget not found: ", widgetId);
       return;
     }
-    const data = JSON.stringify(widgetsData);
+    const data = widgetsData;
     await ipcRenderer.invoke("write-widgets-json", data);
   } catch (error) {
     console.error("Failed to toggle widget visibility:", error);
