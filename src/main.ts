@@ -10,6 +10,8 @@ import {
 } from "node:fs";
 import path from "node:path";
 import os from "node:os";
+import { openDevToolsWithShortcut } from "./utils/utils";
+
 // In this file you can include the rest of your app's specific main process code.
 // You can also put them in separate files and import them here.
 
@@ -31,7 +33,6 @@ app.whenReady().then(() => {
   copyWidgetsDirIfNeeded(sourceWidgetsDir, widgetsDir);
   createWindow();
   createWindowsForWidgets();
-
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   app.on("activate", () => {
@@ -146,6 +147,7 @@ const createWindow = () => {
   }
   // Open the DevTools for debugging
   // mainWindow.webContents.openDevTools();
+  openDevToolsWithShortcut(mainWindow);
 };
 
 /**
@@ -200,6 +202,7 @@ function createWindowsForWidgets() {
           console.log(`Loading ${indexPath}`);
           win.loadFile(indexPath);
           // win.webContents.openDevTools();
+          openDevToolsWithShortcut(win);
         } catch (err) {
           console.error(`Error creating window for ${key}: ${err}`);
         }
