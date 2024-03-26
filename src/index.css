@@ -74,5 +74,6 @@
   }
   .draggable {
     -webkit-app-region: drag;
+    width: 100%;
   }
 }
