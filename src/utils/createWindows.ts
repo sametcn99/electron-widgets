@@ -98,3 +98,57 @@ export function createWindowsForWidgets() {
     console.error(`Error parsing widgets data: ${err}`);
   }
 }
+
+export function createSingleWindowForWidgets(key: string) {
+  try {
+    // Parse the widgets JSON data
+    const widgetsData: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
+    if (typeof widgetsData !== "object" || Array.isArray(widgetsData)) {
+      console.error("Unexpected widgets data structure:", widgetsData);
+      return;
+    }
+    // Iterate through each widget in the data
+    const widget: WidgetConfig = widgetsData[key];
+    // Check if the widget is set to be visible
+    if (widget.visible) {
+      // Generate random positions if none are defined
+      if (!widget.positionX && !widget.positionY) {
+        widget.positionX = Math.floor(Math.random() * 100);
+        widget.positionY = Math.floor(Math.random() * 100);
+        widgetsData[key] = widget;
+        // Update the widgets.json file with new positions
+        writeFileSync(
+          path.join(__dirname, "/widgets/widgets.json"),
+          JSON.stringify(widgetsData, null, 2)
+        );
+      }
+      try {
+        // Create a new browser window for the widget
+        const win = new BrowserWindow({
+          width: widget.width,
+          height: widget.height,
+          autoHideMenuBar: widget.autoHideMenuBar,
+          titleBarStyle: widget.titleBarStyle,
+          transparent: widget.transparent,
+          resizable: widget.resizable,
+          x: widget.positionX,
+          y: widget.positionY,
+          webPreferences: {
+            contextIsolation: false,
+            nodeIntegration: true,
+          },
+        });
+
+        // Load the widget's HTML file into the window
+        const indexPath = path.join(widgetsDir, key, "index.html");
+        console.log(`Loading ${indexPath}`);
+        win.loadFile(indexPath);
+        openDevToolsWithShortcut(win);
+      } catch (err) {
+        console.error(`Error creating window for ${key}: ${err}`);
+      }
+    }
+  } catch (err) {
+    console.error(`Error parsing widgets data: ${err}`);
+  }
+}

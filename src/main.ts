@@ -1,5 +1,9 @@
 import { app, BrowserWindow, ipcMain } from "electron";
-import { createWindow, createWindowsForWidgets } from "./utils/createWindows";
+import {
+  createSingleWindowForWidgets,
+  createWindow,
+  createWindowsForWidgets,
+} from "./utils/createWindows";
 import { sourceWidgetsDir, widgetsDir, widgetsJsonPath } from "./lib/constants";
 import {
   copyWidgetsDirIfNeeded,
@@ -85,6 +89,10 @@ ipcMain.handle("read-widgets-json", () => {
  * Writes the provided data to widgets.json in the app directory and also to public/widgets/widgets.json.
  * Catches any errors writing and logs them.
  */
-ipcMain.handle("write-widgets-json", async (event, data) => {
+ipcMain.handle("write-widgets-json", (event, data) => {
   setWidgetsJson(data, widgetsJsonPath);
+});
+
+ipcMain.handle("create-widget-window", (event, key) => {
+  createSingleWindowForWidgets(key);
 });
