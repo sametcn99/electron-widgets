@@ -5,6 +5,8 @@
  *
  * https://www.electronjs.org/docs/latest/tutorial/sandbox
  */
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { contextBridge, ipcRenderer } = require("electron/renderer");
 
 /**
