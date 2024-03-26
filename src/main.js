@@ -145,7 +145,6 @@ const createWindow = () => {
   }
   // Open the DevTools for debugging
   mainWindow.webContents.openDevTools();
-  mainWindow.setWindowButtonVisibility(false); // Hide the close button on macOS
 };
 
 /**

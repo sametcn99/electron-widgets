@@ -46,6 +46,7 @@ function dragWindow() {
         console.log(`dragging stopped`);
     });
 }
+
 /**
  * Sets up click handlers for window control buttons to minimize or close the window.
  * The minimizeBtn and closeBtn elements are expected to exist in the DOM. When
