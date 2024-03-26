@@ -1,0 +1,48 @@
+:root {
+  user-select: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+
+  --text: #ededed;
+  --background: #212731;
+  --primary: #75abae;
+  --secondary: #31363f;
+  --accent: #d7f41a;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Kanit", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.4rem;
+}
+
+.container h1 {
+  font-size: 6rem;
+  font-weight: bold;
+  color: var(--text);
+  text-align: center;
+  margin: 0px;
+}
+
+.container h3 {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.container {
+  border-radius: 20px;
+  background-color: var(--background);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0rem;
+}
