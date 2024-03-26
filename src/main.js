@@ -49,6 +49,7 @@ app.on("window-all-closed", () => {
   }
 });
 
+
 /**
  * IPC FUNCTIONS
  * Inter-process communication (IPC) is a key part of building feature-rich desktop applications in Electron.
@@ -144,7 +145,7 @@ const createWindow = () => {
     );
   }
   // Open the DevTools for debugging
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 };
 
 /**
@@ -198,6 +199,7 @@ function createWindowsForWidgets() {
           const indexPath = path.join(widgetsDir, key, "index.html");
           console.log(`Loading ${indexPath}`);
           win.loadFile(indexPath);
+          // win.webContents.openDevTools();
         } catch (err) {
           console.error(`Error creating window for ${key}: ${err}`);
         }
