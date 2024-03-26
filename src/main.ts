@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import { app, BrowserWindow, ipcMain } from "electron";
 import {
   copyFileSync,
@@ -10,12 +9,14 @@ import {
   writeFileSync,
 } from "node:fs";
 import path from "node:path";
+import os from "node:os";
 // In this file you can include the rest of your app's specific main process code.
 // You can also put them in separate files and import them here.
 
 // CONSTANTS
 const sourceWidgetsDir = path.join(__dirname, "widgets");
-const widgetsDir = path.join(require("os").homedir(), "Desktop", "widgets");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const widgetsDir = path.join(os.homedir(), "Desktop", "widgets");
 const widgetsJsonPath = path.join(widgetsDir, "widgets.json");
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -48,7 +49,6 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
-
 
 /**
  * IPC FUNCTIONS
@@ -88,7 +88,7 @@ ipcMain.handle("window-action", (event, action) => {
  */
 ipcMain.handle("read-widgets-json", () => {
   try {
-    let widgetsData = readFileSync(widgetsJsonPath, "utf-8");
+    const widgetsData = readFileSync(widgetsJsonPath, "utf-8");
     return widgetsData;
   } catch (err) {
     console.error(`Error reading widgets.json: ${err}`);
@@ -141,7 +141,7 @@ const createWindow = () => {
   } else {
     // Otherwise, load the index.html from the file system
     mainWindow.loadFile(
-      path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`),
+      path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`)
     );
   }
   // Open the DevTools for debugging
@@ -158,7 +158,7 @@ const createWindow = () => {
 function createWindowsForWidgets() {
   try {
     // Parse the widgets JSON data
-    const widgetsData = JSON.parse(getWidgetsJson());
+    const widgetsData: WidgetsConfig = JSON.parse(getWidgetsJson());
     if (typeof widgetsData !== "object" || Array.isArray(widgetsData)) {
       console.error("Unexpected widgets data structure:", widgetsData);
       return;
@@ -175,7 +175,7 @@ function createWindowsForWidgets() {
           // Update the widgets.json file with new positions
           writeFileSync(
             path.join(__dirname, "/widgets/widgets.json"),
-            JSON.stringify(widgetsData, null, 2),
+            JSON.stringify(widgetsData, null, 2)
           );
         }
         try {
@@ -232,7 +232,7 @@ function getWidgetsJson() {
  * @param {string} sourceWidgetsDir - The path to the source widgets directory
  * @param {string} widgetsDir - The path to the destination widgets directory
  */
-function copyWidgetsDirIfNeeded(sourceWidgetsDir, widgetsDir) {
+function copyWidgetsDirIfNeeded(sourceWidgetsDir: string, widgetsDir: string) {
   try {
     if (!existsSync(widgetsDir)) {
       console.log("widgets directory is not found. Copying...");
@@ -243,7 +243,7 @@ function copyWidgetsDirIfNeeded(sourceWidgetsDir, widgetsDir) {
       const entries = readdirSync(sourceWidgetsDir, { withFileTypes: true });
 
       // Iterate over the contents of the source directory
-      for (let entry of entries) {
+      for (const entry of entries) {
         const srcPath = path.join(sourceWidgetsDir, entry.name);
         const destPath = path.join(widgetsDir, entry.name);
 

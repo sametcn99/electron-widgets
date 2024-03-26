@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /**
  * The preload script runs before. It has access to web APIs
  * as well as Electron's renderer process modules and some
@@ -6,14 +5,14 @@
  *
  * https://www.electronjs.org/docs/latest/tutorial/sandbox
  */
-const { contextBridge, ipcRenderer } = require('electron/renderer')
+const { contextBridge, ipcRenderer } = require("electron/renderer");
 
 /**
  * Exposes Electron APIs and IPC methods to the main world
  */
 contextBridge.exposeInMainWorld("electronAPI", {
-  minimizeWindow: () => ipcRenderer.invoke('window-action', 'minimize'),
-  closeWindow: () => ipcRenderer.invoke('window-action', 'close'),
+  minimizeWindow: () => ipcRenderer.invoke("window-action", "minimize"),
+  closeWindow: () => ipcRenderer.invoke("window-action", "close"),
 });
 
 /**
@@ -34,9 +33,9 @@ window.addEventListener("DOMContentLoaded", async () => {
   async function loadWidgets() {
     try {
       // Fetch the raw widget data from the main process
-      let widgetsDataRaw = await ipcRenderer.invoke("read-widgets-json");
+      const widgetsDataRaw = await ipcRenderer.invoke("read-widgets-json");
       // Parse the raw data into a JSON object
-      const widgetsData = JSON.parse(widgetsDataRaw);
+      const widgetsData: WidgetsConfig = JSON.parse(widgetsDataRaw);
       // Check if the data structure is not an object or if it's an array
       if (typeof widgetsData !== "object" || Array.isArray(widgetsData)) {
         console.error("Unexpected widgets data structure:", widgetsData);
@@ -128,17 +127,17 @@ window.addEventListener("DOMContentLoaded", async () => {
  * @param {string} widgetId - The ID of the widget to toggle
  * @param {boolean} visible - Whether to set the widget visibility to true or false
  */
-async function toggleWidgetVisibility(widgetId, visible) {
+async function toggleWidgetVisibility(widgetId: string, visible: boolean) {
   try {
-    let widgetsDataRaw = await ipcRenderer.invoke("read-widgets-json");
-    let widgetsData = JSON.parse(widgetsDataRaw);
-    if (Object.prototype.hasOwnProperty.call(widgetsData, widgetId)) {
-      widgetsData[widgetId].visible = visible;
+    const widgetsDataRaw = await ipcRenderer.invoke("read-widgets-json");
+    const widgetsData: WidgetsConfig = JSON.parse(widgetsDataRaw);
+    if (widgetsData[widgetId as keyof WidgetsConfig]) {
+      widgetsData[widgetId as keyof WidgetsConfig].visible = visible;
     } else {
       console.error("Widget not found: ", widgetId);
       return;
     }
-    let data = JSON.stringify(widgetsData);
+    const data = JSON.stringify(widgetsData);
     await ipcRenderer.invoke("write-widgets-json", data);
   } catch (error) {
     console.error("Failed to toggle widget visibility:", error);

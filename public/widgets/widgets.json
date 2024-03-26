@@ -1,16 +1,16 @@
-export const defaultWidgetsJson = {
+{
     "clock": {
         "title": "clock",
-        "visible": false,
+        "visible": true,
         "created_at": "24.03.2024",
         "updated_at": "24.03.2024",
         "creator": "sametcn99",
-        "width": 500,
-        "height": 150,
+        "width": 370,
+        "height": 165,
         "transparent": true,
-        "autoHideMenuBar": true,
+        "autoHideMenuBar": false,
         "titleBarStyle": "hidden",
-        "resizable": false,
+        "resizable": true,
         "positionX": 354,
         "positionY": 474
     },

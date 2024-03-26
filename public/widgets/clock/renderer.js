@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 
 
@@ -60,6 +61,7 @@ function dragWindow() {
     console.log(`dragging stopped`);
   });
 }
+
 /**
  * Handles resizing of the window by updating the stored width and height in the
  * widgets configuration file. Listens for the 'resize' event and gets the new
