@@ -138,6 +138,7 @@ const createWindow = () => {
   }
   // Open the DevTools for debugging
   mainWindow.webContents.openDevTools();
+  mainWindow.setWindowButtonVisibility(false); // Hide the close button on macOS
 };
 
 /**
@@ -191,6 +192,7 @@ function createWindowsForWidgets() {
           const indexPath = path.join(widgetsDir, key, "index.html");
           console.log(`Loading ${indexPath}`);
           win.loadFile(indexPath);
+          win.webContents.openDevTools();
         } catch (err) {
           console.error(`Error creating window for ${key}: ${err}`);
         }
