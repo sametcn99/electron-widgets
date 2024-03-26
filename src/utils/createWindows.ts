@@ -1,15 +1,7 @@
 import { BrowserWindow } from "electron";
 import path from "node:path";
 import { getWidgetsJson, openDevToolsWithShortcut } from "./utils";
-import {
-  copyFileSync,
-  existsSync,
-  mkdirSync,
-  readdirSync,
-  readFileSync,
-  writeFile,
-  writeFileSync,
-} from "node:fs";
+import { writeFileSync } from "node:fs";
 import { widgetsDir, widgetsJsonPath } from "../lib/constants";
 
 /**
