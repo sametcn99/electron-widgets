@@ -9,7 +9,7 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   setupWindowControls();
-  dragWindow();
+  //dragWindow();
 });
 
 /**
@@ -17,34 +17,34 @@ document.addEventListener("DOMContentLoaded", () => {
  * Listens for mousedown events to initiate dragging, tracks mousemove events to
  * update the window position during dragging, and listens for mouseup to stop dragging.
  */
-function dragWindow() {
-  const titleBar = document.getElementById("drag-region");
-  let isDragging = false;
-  let offsetX: number, offsetY: number;
+// function dragWindow() {
+//   const titleBar = document.getElementById("drag-region");
+//   let isDragging = false;
+//   let offsetX: number, offsetY: number;
 
-  // Listen for the mouse down event on the title bar to initiate dragging
-  titleBar.addEventListener("mousedown", (e) => {
-    isDragging = true;
-    offsetX = e.clientX - window.screenX;
-    offsetY = e.clientY - window.screenY;
-    console.log(`dragging started at ${window.screenX}, ${window.screenY}`);
-  });
+//   // Listen for the mouse down event on the title bar to initiate dragging
+//   titleBar.addEventListener("mousedown", (e) => {
+//     isDragging = true;
+//     offsetX = e.clientX - window.screenX;
+//     offsetY = e.clientY - window.screenY;
+//     console.log(`dragging started at ${window.screenX}, ${window.screenY}`);
+//   });
 
-  // Track mouse movement to handle window dragging
-  window.addEventListener("mousemove", (e) => {
-    if (isDragging === false) return;
-    const { screenX, screenY } = e;
-    // window.moveTo(screenX - offsetX, screenY - offsetY)
-    window.moveBy(e.movementX, e.movementY);
-    console.log(`moved to ${screenX - offsetX}, ${screenY - offsetY}`);
-  });
+//   // Track mouse movement to handle window dragging
+//   window.addEventListener("mousemove", (e) => {
+//     if (isDragging === false) return;
+//     const { screenX, screenY } = e;
+//     // window.moveTo(screenX - offsetX, screenY - offsetY)
+//     window.moveBy(e.movementX, e.movementY);
+//     console.log(`moved to ${screenX - offsetX}, ${screenY - offsetY}`);
+//   });
 
-  // Stop dragging when mouse button is released
-  window.addEventListener("mouseup", () => {
-    isDragging = false;
-    console.log(`dragging stopped`);
-  });
-}
+//   // Stop dragging when mouse button is released
+//   window.addEventListener("mouseup", () => {
+//     isDragging = false;
+//     console.log(`dragging stopped`);
+//   });
+// }
 
 /**
  * Sets up click handlers for window control buttons to minimize or close the window.
