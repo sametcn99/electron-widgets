@@ -2,6 +2,7 @@ import { BrowserWindow, ipcMain } from "electron";
 import { getWidgetsJson, setWidgetsJson } from "../utils";
 import { createSingleWindowForWidgets } from "../create-windows";
 import { widgetsJsonPath } from "../../lib/constants";
+import { IpcChannels } from "../../channels/ipc-channels";
 /**
  * IPC FUNCTIONS
  * Inter-process communication (IPC) is a key part of building feature-rich desktop applications in Electron.
@@ -17,7 +18,7 @@ export function runIpcFunctions() {
    * BrowserWindow instance and performs an action (minimize, close) based on the
    * passed action parameter.
    */
-  ipcMain.handle("window-action", (event, action) => {
+  ipcMain.handle(IpcChannels.WINDOW_ACTION, (event, action) => {
     const win = BrowserWindow.getFocusedWindow();
     if (win) {
       switch (action) {
@@ -39,7 +40,7 @@ export function runIpcFunctions() {
    * When the message is received, this function reads the widgets.json file
    * located in the widgets directory and returns its contents as a string.
    */
-  ipcMain.handle("read-widgets-json", () => {
+  ipcMain.handle(IpcChannels.READ_WIDGETS_JSON, () => {
     return getWidgetsJson(widgetsJsonPath);
   });
 
@@ -48,7 +49,7 @@ export function runIpcFunctions() {
    * Writes the provided data to widgets.json in the app directory and also to public/widgets/widgets.json.
    * Catches any errors writing and logs them.
    */
-  ipcMain.handle("write-widgets-json", (event, data) => {
+  ipcMain.handle(IpcChannels.WRITE_WIDGETS_JSON, (event, data) => {
     setWidgetsJson(data, widgetsJsonPath);
   });
 
@@ -56,7 +57,7 @@ export function runIpcFunctions() {
    * Handles the 'create-widget-window' IPC message by creating a new window to display widgets.
    * Opens a new window and passes the provided key to createSingleWindowForWidgets() to populate it with widgets.
    */
-  ipcMain.handle("create-widget-window", (event, key) => {
+  ipcMain.handle(IpcChannels.CREATE_WIDGET_WINDOW, (event, key) => {
     createSingleWindowForWidgets(key);
   });
 
@@ -65,7 +66,7 @@ export function runIpcFunctions() {
    * Loops through all open windows, checks if the window URL includes the passed key,
    * and closes the window if it matches.
    */
-  ipcMain.handle("close-widget-window", (event, key) => {
+  ipcMain.handle(IpcChannels.CLOSE_WIDGET_WINDOW, (event, key) => {
     BrowserWindow.getAllWindows().forEach((win) => {
       if (win.webContents.getURL().includes(key)) {
         win.close();
