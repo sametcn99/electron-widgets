@@ -15,6 +15,8 @@ export function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 450, // Set the initial width of the window
     height: 650, // Set the initial height of the window
+    minHeight: 400,
+    minWidth: 300,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"), // Path to preload script
     },

@@ -1,6 +1,6 @@
 <template>
-    <footer class="sticky bottom-0 w-full h-12">
-        <img class="object-cover w-8 h-8 rounded-full bg-slate-600 hover:cursor-pointer" src="/assets/github-logo.svg"
+    <footer class="w-full h-6">
+        <img class="object-cover w-6 h-6 rounded-full bg-slate-600 hover:cursor-pointer" src="/assets/github-logo.svg"
             alt="footer image" @click="openLink()" />
     </footer>
 </template>
