@@ -110,6 +110,9 @@ export function createSingleWindowForWidgets(key: string) {
             contextIsolation: false,
             nodeIntegration: true,
           },
+          maximizable: false,
+          minimizable: false,
+          skipTaskbar: true,
         });
 
         // Load the widget's HTML file into the window
