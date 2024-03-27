@@ -144,7 +144,11 @@ async function toggleWidgetVisibility(widgetId: string, visible: boolean) {
     }
     const data = widgetsData;
     ipcRenderer.invoke("write-widgets-json", data);
-    ipcRenderer.invoke("create-widget-window", widgetId);
+    if (visible === true) {
+      ipcRenderer.invoke("create-widget-window", widgetId);
+    } else if (visible === false) {
+      ipcRenderer.invoke("close-widget-window", widgetId);
+    }
   } catch (error) {
     console.error("Failed to toggle widget visibility:", error);
   }

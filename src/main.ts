@@ -96,3 +96,11 @@ ipcMain.handle("write-widgets-json", (event, data) => {
 ipcMain.handle("create-widget-window", (event, key) => {
   createSingleWindowForWidgets(key);
 });
+
+ipcMain.handle("close-widget-window", (event, key) => {
+  BrowserWindow.getAllWindows().forEach((win) => {
+    if (win.webContents.getURL().includes(key)) {
+      win.close();
+    }
+  });
+});

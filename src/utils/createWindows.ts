@@ -82,6 +82,7 @@ export function createWindowsForWidgets() {
               contextIsolation: false,
               nodeIntegration: true,
             },
+            title: widget.title,
           });
 
           // Load the widget's HTML file into the window
