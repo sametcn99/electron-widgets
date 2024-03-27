@@ -10,9 +10,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:import/recommended",
     "plugin:import/electron",
-    "plugin:import/typescript",
-    "@vue/eslint-config-prettier",
-    "plugin:prettier/recommended"
+    "plugin:import/typescript"
   ],
   "parser": "@typescript-eslint/parser"
 }
