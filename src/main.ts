@@ -93,10 +93,19 @@ ipcMain.handle("write-widgets-json", (event, data) => {
   setWidgetsJson(data, widgetsJsonPath);
 });
 
+/**
+ * Handles the 'create-widget-window' IPC message by creating a new window to display widgets.
+ * Opens a new window and passes the provided key to createSingleWindowForWidgets() to populate it with widgets.
+ */
 ipcMain.handle("create-widget-window", (event, key) => {
   createSingleWindowForWidgets(key);
 });
 
+/**
+ * Handles the 'close-widget-window' IPC message by closing any window displaying widgets with the given key.
+ * Loops through all open windows, checks if the window URL includes the passed key,
+ * and closes the window if it matches.
+ */
 ipcMain.handle("close-widget-window", (event, key) => {
   BrowserWindow.getAllWindows().forEach((win) => {
     if (win.webContents.getURL().includes(key)) {

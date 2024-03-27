@@ -56,43 +56,7 @@ export function createWindowsForWidgets() {
     Object.entries(widgetsData).forEach(([key, widget]) => {
       // Check if the widget is set to be visible
       if (widget.visible) {
-        // Generate random positions if none are defined
-        if (!widget.positionX && !widget.positionY) {
-          widget.positionX = Math.floor(Math.random() * 100);
-          widget.positionY = Math.floor(Math.random() * 100);
-          widgetsData[key] = widget;
-          // Update the widgets.json file with new positions
-          writeFileSync(
-            path.join(__dirname, "/widgets/widgets.json"),
-            JSON.stringify(widgetsData, null, 2)
-          );
-        }
-        try {
-          // Create a new browser window for the widget
-          const win = new BrowserWindow({
-            width: widget.width,
-            height: widget.height,
-            autoHideMenuBar: widget.autoHideMenuBar,
-            titleBarStyle: widget.titleBarStyle,
-            transparent: widget.transparent,
-            resizable: widget.resizable,
-            x: widget.positionX,
-            y: widget.positionY,
-            webPreferences: {
-              contextIsolation: false,
-              nodeIntegration: true,
-            },
-            title: widget.title,
-          });
-
-          // Load the widget's HTML file into the window
-          const indexPath = path.join(widgetsDir, key, "index.html");
-          console.log(`Loading ${indexPath}`);
-          win.loadFile(indexPath);
-          openDevToolsWithShortcut(win);
-        } catch (err) {
-          console.error(`Error creating window for ${key}: ${err}`);
-        }
+        createSingleWindowForWidgets(key);
       }
     });
   } catch (err) {
@@ -100,6 +64,14 @@ export function createWindowsForWidgets() {
   }
 }
 
+/**
+ * Creates a single window for the given widget key.
+ * Parses the widgets configuration, checks if the given widget is visible,
+ * generates random positions if needed, creates a BrowserWindow instance
+ * and loads the widget HTML file into it.
+ *
+ * @param key - The key of the widget to create a window for
+ */
 export function createSingleWindowForWidgets(key: string) {
   try {
     // Parse the widgets JSON data

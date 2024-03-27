@@ -72,6 +72,9 @@
   .settings-icon {
     @apply bg-[#6666ff] bg-[url("../assets/gear-six.svg")];
   }
+  /**
+   * Defines styles for draggable elements
+   */
   .draggable {
     -webkit-app-region: drag;
     width: 100%;

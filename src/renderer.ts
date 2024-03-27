@@ -8,7 +8,6 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  setupWindowControls();
   //dragWindow();
 });
 
@@ -45,20 +44,3 @@ document.addEventListener("DOMContentLoaded", () => {
 //     console.log(`dragging stopped`);
 //   });
 // }
-
-/**
- * Sets up click event handlers for the window control buttons to minimize and close the window.
- */
-function setupWindowControls() {
-  const minimizeBtn = document.getElementById("minimizeBtn");
-  const closeBtn = document.getElementById("closeBtn");
-  if (minimizeBtn && closeBtn) {
-    minimizeBtn.addEventListener("click", () => {
-      window.electronAPI.minimizeWindow();
-    });
-
-    closeBtn.addEventListener("click", () => {
-      window.electronAPI.closeWindow();
-    });
-  }
-}
