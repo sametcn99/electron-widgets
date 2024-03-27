@@ -1,4 +1,4 @@
-import { BrowserWindow, ipcMain } from "electron";
+import { BrowserWindow, ipcMain, shell } from "electron";
 import { getWidgetsJson, setWidgetsJson } from "../utils";
 import { createSingleWindowForWidgets } from "../create-windows";
 import { widgetsJsonPath } from "../../lib/constants";
@@ -72,5 +72,10 @@ export function registerMainIPC() {
         win.close();
       }
     });
+  });
+
+  ipcMain.handle(IpcChannels.OPEN_EXTERNAL_LINK, (event, url) => {
+    console.log("Opening external link:", url);
+    shell.openExternal(url);
   });
 }

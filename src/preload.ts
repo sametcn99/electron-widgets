@@ -5,6 +5,7 @@
 //  *
 //  * https://www.electronjs.org/docs/latest/tutorial/sandbox
 //  */
+import { IpcChannels } from "./channels/ipc-channels";
 import { loadWidgets, setupWindowControls } from "./utils/dom/main-dom";
 /**
  * Handles setting up event listeners and initializing UI elements on DOM ready
@@ -12,4 +13,11 @@ import { loadWidgets, setupWindowControls } from "./utils/dom/main-dom";
 window.addEventListener("DOMContentLoaded", async () => {
   loadWidgets();
   setupWindowControls();
+});
+
+import { contextBridge, ipcRenderer } from "electron";
+
+contextBridge.exposeInMainWorld("electronAPI", {
+  openExternalLink: (url: string) =>
+    ipcRenderer.invoke(IpcChannels.OPEN_EXTERNAL_LINK, url),
 });

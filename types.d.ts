@@ -25,6 +25,7 @@ declare global {
 export interface IElectronAPI {
   minimizeWindow(): () => Promise<void>;
   closeWindow(): () => Promise<void>;
+  openExternalLink(url): () => Promise<void>;
 }
 
 declare global {

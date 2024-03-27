@@ -10,22 +10,22 @@
 
 @layer base {
   :root {
-    @apply m-0 select-none bg-[#161616] p-0 text-white;
+    @apply m-0  bg-[#161616] p-0 text-white;
   }
 
   body {
-    @apply p-0 m-0;
+    @apply p-0 select-none;
   }
 
   p {
-    @apply p-0 m-0 text-sm font-normal;
+    @apply p-0 text-sm font-normal;
   }
 
   h1 {
-    @apply p-0 m-0 text-2xl;
+    @apply p-0 text-2xl;
   }
   main {
-    @apply flex flex-col gap-2;
+    @apply flex flex-col h-full gap-2;
   }
 }
 
