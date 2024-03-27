@@ -26,8 +26,8 @@ export interface IElectronAPI {
   minimizeWindow(): () => Promise<void>;
   closeWindow(): () => Promise<void>;
   openExternalLink(url): () => Promise<void>;
+  readWidgetsJson(): () => Promise<WidgetsConfig>;
 }
-
 declare global {
   interface Window {
     electronAPI: IElectronAPI;

@@ -20,4 +20,5 @@ import { contextBridge, ipcRenderer } from "electron";
 contextBridge.exposeInMainWorld("electronAPI", {
   openExternalLink: (url: string) =>
     ipcRenderer.invoke(IpcChannels.OPEN_EXTERNAL_LINK, url),
+  readWidgetsJson: () => ipcRenderer.invoke(IpcChannels.READ_WIDGETS_JSON),
 });

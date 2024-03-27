@@ -20,7 +20,9 @@
   </footer>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import WidgetList from './components/widgetList.vue';
+
 console.log('👋 This message is being logged by "App.vue", included via Vite');
 const openLink = () => {
   console.log(
