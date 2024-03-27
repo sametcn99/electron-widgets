@@ -29,7 +29,7 @@ export function createWindow() {
   } else {
     // Otherwise, load the index.html from the file system
     mainWindow.loadFile(
-      path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`)
+      path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`),
     );
   }
   // Open the DevTools for debugging
@@ -92,7 +92,7 @@ export function createSingleWindowForWidgets(key: string) {
         // Update the widgets.json file with new positions
         writeFileSync(
           path.join(__dirname, "/widgets/widgets.json"),
-          JSON.stringify(widgetsData, null, 2)
+          JSON.stringify(widgetsData, null, 2),
         );
       }
       try {
