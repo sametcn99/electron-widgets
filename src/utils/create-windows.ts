@@ -100,6 +100,10 @@ export function createSingleWindowForWidgets(key: string) {
       try {
         // Create a new browser window for the widget
         const win = new BrowserWindow({
+          webPreferences: {
+            contextIsolation: false,
+            nodeIntegration: true,
+          },
           width: widget.width,
           height: widget.height,
           autoHideMenuBar: widget.autoHideMenuBar,
@@ -108,10 +112,6 @@ export function createSingleWindowForWidgets(key: string) {
           resizable: widget.resizable,
           x: widget.positionX,
           y: widget.positionY,
-          webPreferences: {
-            contextIsolation: false,
-            nodeIntegration: true,
-          },
           maximizable: false,
           minimizable: false,
           skipTaskbar: true,
