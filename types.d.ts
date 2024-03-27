@@ -21,16 +21,17 @@ declare global {
     [key: string]: WidgetConfig;
   }
 }
-
-export interface IElectronAPI {
-  minimizeWindow(): () => Promise<void>;
-  closeWindow(): () => Promise<void>;
-  openExternalLink(url): () => Promise<void>;
-  readWidgetsJson(): () => Promise<WidgetsConfig>;
-}
 declare global {
   interface Window {
-    electronAPI: IElectronAPI;
+    electronAPI: {
+      minimizeWindow: () => Promise<void>;
+      closeWindow: () => Promise<void>;
+      openExternalLink: (url: string) => Promise<void>;
+      readWidgetsJson: () => Promise<WidgetsConfig>;
+      writeWidgetJson: (data: WidgetsConfig) => Promise<void>;
+      createWidgetWindow: (widgetKey: string) => Promise<void>;
+      closeWidgetWindow: (widgetKey: string) => Promise<void>;
+    };
   }
 }
 

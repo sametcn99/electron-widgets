@@ -3,50 +3,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/**
- * Defines base styles for elements
- * Applies default styling to root, body, navigation, paragraphs, headings and main elements
- */
-
 @layer base {
   :root {
-    @apply m-0  bg-[#161616] p-0 text-white;
-  }
-
-  body {
-    @apply select-none p-0;
-  }
-
-  p {
-    @apply p-0 text-sm font-normal;
-  }
-
-  h1 {
-    @apply p-0 text-2xl;
-  }
-  main {
-    @apply flex h-full flex-col gap-2;
+    @apply m-0  bg-[#161616] p-0 text-white select-none;
   }
 }
 
-/**
- * Defines styles for common UI components
- * This layer defines styles for reusable UI components like buttons, lists and icons.
- */
-@layer components {
-  .widget-list-item {
-    @apply flex h-auto w-full flex-row flex-wrap items-center justify-between bg-gray-900 text-left font-bold hover:bg-gray-950;
-  }
-
-  .icon {
-    @apply m-1 inline-block h-6 w-6 cursor-pointer rounded-md border-none bg-cover;
-  }
-}
-
-/**
- * Defines utility classes for common SVG icons
-*/
 @layer utilities {
+  .icon {
+    @apply inline-block w-6 h-6 m-1 bg-cover border-none rounded-md cursor-pointer;
+  }
   .eye-visible {
     @apply bg-[#6666ff] bg-[url("../assets/eye.svg")];
   }
@@ -60,9 +26,6 @@
   }
 }
 
-/**
-   * Defines styles for draggable elements
-   */
 .draggable {
   -webkit-app-region: drag;
   width: 100%;
