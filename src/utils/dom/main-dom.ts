@@ -1,4 +1,5 @@
 import { ipcRenderer } from "electron";
+import { IpcChannels } from "../../channels/ipc-channels";
 
 /**
  * Loads widget data from Electron IPC and renders it to the DOM.
@@ -10,7 +11,7 @@ export async function loadWidgets() {
   try {
     // Parse the raw data into a JSON object
     const widgetsData: WidgetsConfig = await ipcRenderer.invoke(
-      "read-widgets-json"
+      IpcChannels.READ_WIDGETS_JSON
     );
     // Check if the data structure is not an object or if it's an array
     if (typeof widgetsData !== "object" || Array.isArray(widgetsData)) {
@@ -129,10 +130,10 @@ export function setupWindowControls() {
 
   if (minimizeBtn && closeBtn) {
     minimizeBtn.addEventListener("click", () => {
-      ipcRenderer.invoke("window-action", "minimize");
+      ipcRenderer.invoke(IpcChannels.WINDOW_ACTION, "minimize");
     });
     closeBtn.addEventListener("click", () => {
-      ipcRenderer.invoke("window-action", "close");
+      ipcRenderer.invoke(IpcChannels.WINDOW_ACTION, "close");
     });
   }
 }
@@ -146,7 +147,7 @@ async function toggleWidgetVisibility(widgetId: string, visible: boolean) {
   try {
     // Invoke IPC to read the current widgets configuration
     const widgetsData: WidgetsConfig = await ipcRenderer.invoke(
-      "read-widgets-json"
+      IpcChannels.READ_WIDGETS_JSON
     );
     // Check if the widget exists in the configuration
     if (widgetsData[widgetId as keyof WidgetsConfig]) {
@@ -159,12 +160,12 @@ async function toggleWidgetVisibility(widgetId: string, visible: boolean) {
     }
     const data = widgetsData;
     // Write the updated widgets configuration back
-    ipcRenderer.invoke("write-widgets-json", data);
+    ipcRenderer.invoke(IpcChannels.WRITE_WIDGETS_JSON, data);
     // Create or close the widget window based on visibility
     if (visible === true) {
-      ipcRenderer.invoke("create-widget-window", widgetId);
+      ipcRenderer.invoke(IpcChannels.CREATE_WIDGET_WINDOW, widgetId);
     } else if (visible === false) {
-      ipcRenderer.invoke("close-widget-window", widgetId);
+      ipcRenderer.invoke(IpcChannels.CLOSE_WIDGET_WINDOW, widgetId);
     }
   } catch (error) {
     // Log any errors encountered during the process
