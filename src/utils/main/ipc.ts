@@ -11,7 +11,7 @@ import { IpcChannels } from "../../channels/ipc-channels";
  * triggering changes in your web contents from native menus.
  */
 
-export function runIpcFunctions() {
+export function registerMainIPC() {
   /**
    * Handles the 'window-action' IPC message by performing an action on the focused window.
    * When the 'window-action' message is received, this gets the currently focused

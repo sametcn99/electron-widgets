@@ -2,6 +2,7 @@ import { app, BrowserWindow } from "electron";
 import { createWindow, createWindowsForWidgets } from "../create-windows";
 import { sourceWidgetsDir, widgetsDir } from "../../lib/constants";
 import { copyWidgetsDirIfNeeded } from "../utils";
+import { registerMainIPC } from "./ipc";
 
 export function runAppFunctions() {
   // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -33,4 +34,5 @@ export function runAppFunctions() {
       app.quit();
     }
   });
+  registerMainIPC();
 }
