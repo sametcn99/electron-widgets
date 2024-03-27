@@ -6,10 +6,13 @@
  * `contextIsolation` is turned on. Use the contextBridge API in `preload.js`
  * to expose Node.js functionality from the main process.
  */
+import { createApp } from "vue";
+import App from "./app.vue";
 
-document.addEventListener("DOMContentLoaded", () => {
-  //dragWindow();
-});
+createApp(App).mount("#app");
+// document.addEventListener("DOMContentLoaded", () => {
+//   //dragWindow();
+// });
 
 /**
  * Handles dragging of the window by tracking mouse events on the title bar element.

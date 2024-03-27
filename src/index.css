@@ -17,9 +17,6 @@
     @apply p-0 m-0;
   }
 
-  nav {
-    @apply flex h-fit w-full flex-row items-center justify-between bg-[#141414] font-bold text-gray-300;
-  }
   p {
     @apply p-0 m-0 text-sm font-normal;
   }
@@ -37,17 +34,6 @@
  * This layer defines styles for reusable UI components like buttons, lists and icons.
  */
 @layer components {
-  .drag-region {
-    @apply w-full;
-  }
-  .nav-btn {
-    @apply w-8 h-8 font-bold transition-colors duration-300 bg-transparent border-0 rounded-md cursor-default hover:bg-black/50;
-  }
-
-  .nav-btn-container {
-    @apply flex flex-row items-center gap-2 w-fit;
-  }
-
   .widget-list-item {
     @apply flex flex-row flex-wrap items-center justify-between w-full h-auto font-bold text-left bg-gray-900 hover:bg-gray-950;
   }
@@ -72,11 +58,12 @@
   .settings-icon {
     @apply bg-[#6666ff] bg-[url("../assets/gear-six.svg")];
   }
-  /**
+}
+
+/**
    * Defines styles for draggable elements
    */
-  .draggable {
-    -webkit-app-region: drag;
-    width: 100%;
-  }
+.draggable {
+  -webkit-app-region: drag;
+  width: 100%;
 }
