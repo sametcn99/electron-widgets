@@ -21,6 +21,8 @@ declare global {
     frame: boolean;
     hasShadow: boolean;
     closable: boolean;
+    contextIsolation: boolean;
+    nodeIntegration: boolean;
   }
 
   // Assuming widgetsData is an object where each key is a string and the value is a WidgetConfig
@@ -38,6 +40,9 @@ declare global {
       writeWidgetJson: (data: WidgetsConfig) => Promise<void>;
       createWidgetWindow: (widgetKey: string) => Promise<void>;
       closeWidgetWindow: (widgetKey: string) => Promise<void>;
+    };
+    withoutContextApi: {
+      openExternalLink: (url: string) => Promise<void>;
     };
   }
 }

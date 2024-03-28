@@ -1,30 +1,39 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 
+// Add event listener to execute code when the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
-  updateTime(); // Start the clock when the page loads
-  dragWindow();
-  resizeWindow();
+  dragWindow(); // Call dragWindow function to enable window dragging
+  resizeWindow(); // Call resizeWindow function to handle window resizing
+
+  // Add event listener to search input field for keydown event
+  document
+    .getElementById("searchInput")
+    .addEventListener("keydown", function (event) {
+      if (event.keyCode === 13) {
+        // Check if Enter key is pressed
+        search(); // Call search function
+      }
+    });
 });
 
-function updateTime() {
-  let now = new Date();
-  let hour = now.getHours();
-  let minute = now.getMinutes();
-  let second = now.getSeconds();
+// Function to perform search
+function search() {
+  try {
+    var searchEngine = document.getElementById("searchEngine").value; // Get search engine value
+    var searchTerm = document.getElementById("searchInput").value; // Get search term value
 
-  let dateElement = document.getElementById("date");
-  dateElement.textContent = now.toDateString();
-
-  hour = hour < 10 ? "0" + hour : hour;
-  minute = minute < 10 ? "0" + minute : minute;
-  second = second < 10 ? "0" + second : second;
-
-  let timeHTML = hour + ":" + minute + ":" + second;
-  document.getElementById("clock").textContent = timeHTML;
+    if (searchTerm.trim() !== "") {
+      // Check if search term is not empty
+      var searchURL = searchEngine + encodeURIComponent(searchTerm); // Create search URL
+      window.electronAPI.openExternalLink(searchURL); // Open search URL in external browser
+    }
+  } catch (error) {
+    console.error("Error occurred during search:", error); // Log any errors that occur during search
+  } finally {
+    document.getElementById("searchInput").value = ""; // Clear search input field
+  }
 }
-
-setInterval(updateTime, 1000); // Update every second
 
 /**
  * Handles dragging of the window by tracking mouse events on the title bar element.
@@ -76,8 +85,8 @@ function resizeWindow() {
       const widgetsData = await window.electronAPI.readWidgetsJson();
       console.log(widgetsData);
       // Update the widget dimensions in the configuration
-      widgetsData.clock.width = width;
-      widgetsData.clock.height = height;
+      widgetsData.search.width = width;
+      widgetsData.search.height = height;
       // Write the updated configuration back to the file
       window.electronAPI.writeWidgetJson(widgetsData);
       console.log(`Window resized to: ${width}x${height}`);

@@ -66,8 +66,9 @@ export function createSingleWindowForWidgets(key: string) {
         // Create a new browser window for the widget
         const win = new BrowserWindow({
           webPreferences: {
-            contextIsolation: false,
-            nodeIntegration: true,
+            contextIsolation: widget.contextIsolation,
+            nodeIntegration: widget.nodeIntegration,
+            preload: path.join(__dirname, "preload.js"), // Path to preload script
           },
           width: widget.width,
           height: widget.height,

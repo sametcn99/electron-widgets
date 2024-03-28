@@ -12,6 +12,12 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 import { contextBridge, ipcRenderer } from "electron";
 
+// preload with contextIsolation disabled
+window.withoutContextApi = {
+  openExternalLink: (url: string) =>
+    ipcRenderer.invoke(IpcChannels.OPEN_EXTERNAL_LINK, url),
+};
+
 /**
  * Exposes Electron API to the main world.
  */

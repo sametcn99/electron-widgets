@@ -75,29 +75,18 @@ function renderWeatherData(data) {
  */
 function resizeWindow() {
   // Add an event listener to handle window resize events
-  window.addEventListener("resize", () => {
+  window.addEventListener("resize", async () => {
     try {
-      // Require necessary modules
-      const path = require("path");
-      const jsonPath = path.join(
-        require("os").homedir(),
-        "Desktop",
-        "widgets",
-        "widgets.json",
-      );
-      const { readFileSync, writeFileSync } = require("fs");
-
       // Get the new window dimensions
       let width = window.innerWidth;
       let height = window.innerHeight;
       // Read the current widgets configuration
-      const widgetsData = JSON.parse(readFileSync(jsonPath));
-      console.log(widgetsData);
-      // Update the clock widget dimensions in the configuration
+      const widgetsData = await window.electronAPI.readWidgetsJson();
+      // Update the widget dimensions in the configuration
       widgetsData.weather.width = width;
       widgetsData.weather.height = height;
       // Write the updated configuration back to the file
-      writeFileSync(jsonPath, JSON.stringify(widgetsData, null, 2));
+      window.electronAPI.writeWidgetJson(widgetsData);
       console.log(`Window resized to: ${width}x${height}`);
     } catch (error) {
       // Log any errors that occur during the resize process
