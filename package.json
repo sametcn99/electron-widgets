@@ -30,6 +30,7 @@
     "electron": "29.1.5",
     "eslint": "^8.57.0",
     "eslint-plugin-import": "^2.29.1",
+    "htmlhint": "^1.1.4",
     "postcss": "^8.4.38",
     "prettier": "3.2.5",
     "tailwindcss": "^3.4.1",
