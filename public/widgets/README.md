@@ -37,3 +37,5 @@ Creating widgets involves setting up the right files and writing the code that d
 ## Note
 
 **In renderer.js, Node integration is enabled with a setting of true, and context isolation is disabled with a setting of false. This configuration grants access to Node.js APIs like fs (file system) and path within the renderer process.**
+
+**You can use Embedded JavaScript(.ejs) too. :)**

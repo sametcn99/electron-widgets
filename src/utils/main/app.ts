@@ -5,6 +5,7 @@ import { copyWidgetsDirIfNeeded } from "../utils";
 import { registerMainIPC } from "./ipc";
 import is from "electron-is";
 import { createWindow } from "../windows/main-window";
+import { renderEjsFiles } from "../ejs";
 let tray;
 
 /**
@@ -23,6 +24,7 @@ export function registerApp() {
   app.whenReady().then(() => {
     copyWidgetsDirIfNeeded(sourceWidgetsDir, widgetsDir);
     createWindow();
+    renderEjsFiles();
     createWindowsForWidgets();
 
     // Create tray icon
