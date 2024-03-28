@@ -14,6 +14,12 @@ declare global {
     resizable: boolean;
     positionX?: number;
     positionY?: number;
+    maximizable: boolean;
+    minimizable: boolean;
+    skipTaskbar: boolean;
+    thickFrame: boolean;
+    frame: boolean;
+    hasShadow: boolean;
   }
 
   // Assuming widgetsData is an object where each key is a string and the value is a WidgetConfig

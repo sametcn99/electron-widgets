@@ -77,9 +77,12 @@ export function createSingleWindowForWidgets(key: string) {
           resizable: widget.resizable,
           x: widget.positionX,
           y: widget.positionY,
-          maximizable: false,
-          minimizable: false,
-          skipTaskbar: true,
+          maximizable: widget.maximizable,
+          minimizable: widget.minimizable,
+          skipTaskbar: widget.skipTaskbar,
+          thickFrame: widget.thickFrame,
+          frame: widget.frame,
+          hasShadow: widget.hasShadow,
         });
 
         // Load the widget's HTML file into the window
