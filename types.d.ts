@@ -20,6 +20,7 @@ declare global {
     thickFrame: boolean;
     frame: boolean;
     hasShadow: boolean;
+    closable: boolean;
   }
 
   // Assuming widgetsData is an object where each key is a string and the value is a WidgetConfig
