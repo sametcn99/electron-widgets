@@ -58,7 +58,7 @@
         "titleBarStyle": "hidden",
         "resizable": true,
         "positionX": 10,
-        "positionY": 150,
+        "positionY": 410,
         "maximizable": false,
         "minimizable": false,
         "skipTaskbar": true,
