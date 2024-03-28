@@ -3729,6 +3729,13 @@ node-api-version@^0.2.0:
   dependencies:
     semver "^7.3.5"
 
+node-disk-info@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.npmjs.org/node-disk-info/-/node-disk-info-1.3.0.tgz"
+  integrity sha512-NEx858vJZ0AoBtmD/ChBIHLjFTF28xCsDIgmFl4jtGKsvlUx9DU/OrMDjvj3qp/E4hzLN0HvTg7eJx5XFQvbeg==
+  dependencies:
+    iconv-lite "^0.6.2"
+
 node-fetch@^2.6.7:
   version "2.7.0"
   resolved "https://registry.npmjs.org/node-fetch/-/node-fetch-2.7.0.tgz"

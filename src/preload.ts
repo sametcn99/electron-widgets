@@ -35,7 +35,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
    * @returns A promise that resolves with the contents of the JSON file.
    */
   readWidgetsJson: () => ipcRenderer.invoke(IpcChannels.READ_WIDGETS_JSON),
-
+  getDiskUsage: () => ipcRenderer.invoke(IpcChannels.GET_DISK_USAGE),
   /**
    * Writes the widgets JSON file.
    * @param data - The JSON data to write.

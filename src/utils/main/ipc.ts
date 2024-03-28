@@ -1,5 +1,5 @@
 import { BrowserWindow, ipcMain, shell } from "electron";
-import { getWidgetsJson, setWidgetsJson } from "../utils";
+import { getDiskUsage, getWidgetsJson, setWidgetsJson } from "../utils";
 import { widgetsJsonPath } from "../../lib/constants";
 import { IpcChannels } from "../../channels/ipc-channels";
 import { createSingleWindowForWidgets } from "../windows/widget-windows";
@@ -82,5 +82,9 @@ export function registerMainIPC() {
   ipcMain.handle(IpcChannels.OPEN_EXTERNAL_LINK, (event, url) => {
     console.log("Opening external link:", url);
     shell.openExternal(url);
+  });
+
+  ipcMain.handle(IpcChannels.GET_DISK_USAGE, () => {
+    return getDiskUsage();
   });
 }

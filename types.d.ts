@@ -40,6 +40,7 @@ declare global {
       writeWidgetJson: (data: WidgetsConfig) => Promise<void>;
       createWidgetWindow: (widgetKey: string) => Promise<void>;
       closeWidgetWindow: (widgetKey: string) => Promise<void>;
+      getDiskUsage: () => Promise<Drive[]>;
     };
     withoutContextApi: {
       openExternalLink: (url: string) => Promise<void>;

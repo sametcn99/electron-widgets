@@ -1,7 +1,7 @@
 import { app, BrowserWindow, Menu, nativeImage, screen, Tray } from "electron";
 import { createWindowsForWidgets } from "../windows/widget-windows";
 import { iconPath, sourceWidgetsDir, widgetsDir } from "../../lib/constants";
-import { copyWidgetsDirIfNeeded } from "../utils";
+import { copyWidgetsDirIfNeeded, getDiskUsage } from "../utils";
 import { registerMainIPC } from "./ipc";
 import is from "electron-is";
 import { createWindow } from "../windows/main-window";
@@ -26,7 +26,7 @@ export function registerApp() {
     createWindow();
     renderEjsFiles();
     createWindowsForWidgets();
-
+    getDiskUsage();
     // Create tray icon
     const pixelRatio = is.windows()
       ? screen.getPrimaryDisplay().scaleFactor || 1

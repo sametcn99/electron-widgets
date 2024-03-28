@@ -67,5 +67,28 @@
         "hasShadow": false,
         "contextIsolation": true,
         "nodeIntegration": true
+    },
+    "diskinfo": {
+        "title": "diskinfo",
+        "visible": false,
+        "created_at": "24.03.2024",
+        "updated_at": "24.03.2024",
+        "creator": "sametcn99",
+        "width": 300,
+        "height": 150,
+        "transparent": true,
+        "autoHideMenuBar": true,
+        "titleBarStyle": "hidden",
+        "resizable": true,
+        "positionX": 10,
+        "positionY": 410,
+        "maximizable": false,
+        "minimizable": false,
+        "skipTaskbar": true,
+        "thickFrame": false,
+        "frame": false,
+        "hasShadow": false,
+        "contextIsolation": true,
+        "nodeIntegration": true
     }
 }

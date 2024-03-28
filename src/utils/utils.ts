@@ -9,7 +9,7 @@ import {
   writeFileSync,
 } from "node:fs";
 import path from "node:path";
-
+import nodeDiskInfo from "node-disk-info";
 /**
  * Registers a keyboard shortcut to open the dev tools when pressing F12.
  * @export
@@ -61,7 +61,7 @@ export function setWidgetsJson(jsonData: typeof JSON, widgetsJsonPath: string) {
  */
 export function copyWidgetsDirIfNeeded(
   sourceWidgetsDir: string,
-  widgetsDir: string
+  widgetsDir: string,
 ) {
   try {
     if (!existsSync(widgetsDir)) {
@@ -86,5 +86,14 @@ export function copyWidgetsDirIfNeeded(
     }
   } catch (error) {
     console.error("Failed to copy widgets directory:", error);
+  }
+}
+
+export function getDiskUsage() {
+  try {
+    const disks = nodeDiskInfo.getDiskInfoSync();
+    return disks;
+  } catch (e) {
+    console.error(e);
   }
 }
