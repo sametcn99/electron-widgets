@@ -3,6 +3,9 @@ import path from "node:path";
 import { getWidgetsJson, openDevToolsWithShortcut } from "./utils";
 import { writeFileSync } from "node:fs";
 import { widgetsDir, widgetsJsonPath } from "../lib/constants";
+import { showNotification } from "./notification";
+
+let mainWindow: BrowserWindow | null = null;
 
 /**
  * Creates the main browser window.
@@ -11,8 +14,12 @@ import { widgetsDir, widgetsJsonPath } from "../lib/constants";
  * Also opens the DevTools for development.
  */
 export function createWindow() {
+  if (mainWindow !== null) {
+    console.log("Window is already open");
+    return;
+  }
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 450, // Set the initial width of the window
     height: 650, // Set the initial height of the window
     minHeight: 400,
@@ -34,6 +41,13 @@ export function createWindow() {
       path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`),
     );
   }
+  mainWindow.on("closed", () => {
+    mainWindow = null;
+    showNotification(
+      "Electron Widgets",
+      "The application is still running in the background.",
+    );
+  });
   // Open the DevTools for debugging
   // mainWindow.webContents.openDevTools();
   openDevToolsWithShortcut(mainWindow);

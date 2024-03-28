@@ -1,6 +1,7 @@
-import { runAppFunctions } from "./utils/main/app";
+import { registerApp } from "./utils/main/app";
 
-// In this file you can include the rest of your app's specific main process code.
-// You can also put them in separate files and import them here.
-
-runAppFunctions();
+/**
+ * Entry point of the application.
+ * Registers the app and initializes it.
+ */
+registerApp();
