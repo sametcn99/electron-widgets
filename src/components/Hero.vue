@@ -62,6 +62,4 @@ function toggleVisibility(widget: WidgetConfig) {
     widget.visible = !widget.visible;
     toggleWidgetVisibility(widget.title, widget.visible);
 }
-
-
 </script>
