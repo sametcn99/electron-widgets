@@ -1,24 +1,21 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./index.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
     <title>Basic Clock Widget</title>
-</head>
+  </head>
 
-<body id="body" class="draggable">
+  <body id="body" class="draggable">
     <div class="container">
-        <h1 id="clock"></h1>
-        <h3 id="date"></h3>
+      <h1 id="clock"></h1>
+      <h3 id="date"></h3>
     </div>
     <script src="./renderer.js" type="module"></script>
-</body>
-
+    <script type="module">
+      import { resizeWindow } from "../utils.js";
+      resizeWindow(clock);
+    </script>
+  </body>
 </html>

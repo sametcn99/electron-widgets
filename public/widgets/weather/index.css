@@ -1,0 +1,61 @@
+:root {
+  -webkit-user-select: none;
+  user-select: none;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  height: auto;
+  --text: #cbd5e1;
+  --background: #09090b;
+  --primary: #94a3b8;
+}
+
+body {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  letter-spacing: 0.1rem;
+  -webkit-app-region: drag;
+  color: var(--text);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+}
+
+#weather {
+  border-radius: 20px;
+  background-color: var(--background);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  box-shadow: inset 0 0 10px 5px rgba(0, 0, 0, 0.5);
+}
+
+.weather-icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  width: 50px;
+}
+
+.weather-info {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}

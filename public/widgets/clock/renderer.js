@@ -1,11 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 
-
 document.addEventListener("DOMContentLoaded", () => {
   updateTime(); // Start the clock when the page loads
-  dragWindow()
-  resizeWindow()
+  dragWindow();
+  resizeWindow();
 });
 
 function updateTime() {
@@ -26,7 +25,6 @@ function updateTime() {
 }
 
 setInterval(updateTime, 1000); // Update every second
-
 
 /**
  * Handles dragging of the window by tracking mouse events on the title bar element.

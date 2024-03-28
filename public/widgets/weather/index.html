@@ -1,23 +1,18 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Forecast</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./index.css" />
+  </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Weather Widget</title>
-    <style>
-        #weather {
-            font-size: 18px;
-            color: #333;
-            text-align: center;
-            margin: 20px;
-        }
-    </style>
-</head>
-
-<body>
-    <div id="weather">Hava durumu yükleniyor...</div>
-    <script src="./renderer.js"></script>
-</body>
-
+  <body>
+    <div id="weather"></div>
+    <script src="./renderer.js" type="module"></script>
+  </body>
 </html>
