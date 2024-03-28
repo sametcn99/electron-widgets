@@ -67,11 +67,16 @@ export function registerMainIPC() {
    * and closes the window if it matches.
    */
   ipcMain.handle(IpcChannels.CLOSE_WIDGET_WINDOW, (event, key) => {
-    BrowserWindow.getAllWindows().forEach((win) => {
-      if (win.webContents.getURL().includes(key)) {
-        win.close();
-      }
-    });
+    console.log("Closing widget window:", key);
+    try {
+      BrowserWindow.getAllWindows().forEach((win) => {
+        if (win.webContents.getURL().includes(key)) {
+          win.close();
+        }
+      });
+    } catch (error) {
+      console.error("Error closing widget window:", error);
+    }
   });
 
   ipcMain.handle(IpcChannels.OPEN_EXTERNAL_LINK, (event, url) => {

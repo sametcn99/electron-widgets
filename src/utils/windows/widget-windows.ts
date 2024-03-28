@@ -83,7 +83,7 @@ export function createSingleWindowForWidgets(key: string) {
           thickFrame: widget.thickFrame,
           frame: widget.frame,
           hasShadow: widget.hasShadow,
-          closable: widget.closable,
+          closable: true,
         });
 
         // Load the widget's HTML file into the window

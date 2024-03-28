@@ -18,8 +18,7 @@
         "skipTaskbar": true,
         "thickFrame": false,
         "frame": false,
-        "hasShadow": false,
-        "closable": false
+        "hasShadow": false
     },
     "weather": {
         "title": "weather",
@@ -40,7 +39,6 @@
         "skipTaskbar": true,
         "thickFrame": false,
         "frame": false,
-        "hasShadow": false,
-        "closable": false
+        "hasShadow": false
     }
 }
