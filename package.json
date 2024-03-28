@@ -48,6 +48,7 @@
     "electron-is": "^3.0.0",
     "electron-localshortcut": "^3.2.1",
     "electron-squirrel-startup": "^1.0.0",
+    "electron-store": "^8.2.0",
     "lodash-es": "^4.17.21",
     "prettier-plugin-tailwindcss": "^0.5.12",
     "vue": "^3.4.21"

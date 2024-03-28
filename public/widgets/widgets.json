@@ -12,7 +12,14 @@
         "titleBarStyle": "hidden",
         "resizable": true,
         "positionX": 10,
-        "positionY": 10
+        "positionY": 10,
+        "maximizable": false,
+        "minimizable": false,
+        "skipTaskbar": true,
+        "thickFrame": false,
+        "frame": false,
+        "hasShadow": false,
+        "closable": false
     },
     "weather": {
         "title": "weather",
@@ -27,6 +34,13 @@
         "titleBarStyle": "hidden",
         "resizable": true,
         "positionX": 10,
-        "positionY": 150
+        "positionY": 150,
+        "maximizable": false,
+        "minimizable": false,
+        "skipTaskbar": true,
+        "thickFrame": false,
+        "frame": false,
+        "hasShadow": false,
+        "closable": false
     }
 }
