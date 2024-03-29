@@ -27,6 +27,15 @@ export function registerApp() {
     renderEjsFiles();
     createWindowsForWidgets();
     getDiskUsage();
+
+    // buildVueProject(vuePath)
+    //   .then(() => {
+    //     console.log("Vue project built successfully");
+    //   })
+    //   .catch((err) => {
+    //     console.error("Vue project build failed", err);
+    //   });
+
     // Create tray icon
     const pixelRatio = is.windows()
       ? screen.getPrimaryDisplay().scaleFactor || 1

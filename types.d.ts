@@ -23,6 +23,8 @@ declare global {
     closable: boolean;
     contextIsolation: boolean;
     nodeIntegration: boolean;
+    path: string;
+    port: number;
   }
 
   // Assuming widgetsData is an object where each key is a string and the value is a WidgetConfig

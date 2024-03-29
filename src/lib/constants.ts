@@ -16,3 +16,5 @@ export const windowsMap = new Map<string, BrowserWindow>();
 
 // Define the path to the electron.png icon
 export const iconPath = path.join(__dirname, "assets", "electron.png");
+
+export const vuePath = path.join(widgetsDir, "vue-project");
