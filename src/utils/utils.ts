@@ -1,5 +1,5 @@
 import { BrowserWindow } from "electron";
-import electronLocalshortcut from "electron-localshortcut";
+import { register } from "electron-localshortcut";
 import {
   copyFileSync,
   existsSync,
@@ -9,7 +9,7 @@ import {
   writeFileSync,
 } from "node:fs";
 import path from "node:path";
-import nodeDiskInfo from "node-disk-info";
+import { getDiskInfoSync } from "node-disk-info";
 import Drive from "node-disk-info/dist/classes/drive";
 
 /**
@@ -18,7 +18,7 @@ import Drive from "node-disk-info/dist/classes/drive";
  * @param {BrowserWindow} win - The BrowserWindow instance.
  */
 export function openDevToolsWithShortcut(win: BrowserWindow) {
-  electronLocalshortcut.register(win, "F12", () => {
+  register(win, "F12", () => {
     win.webContents.openDevTools();
   });
 }
@@ -97,7 +97,7 @@ export function copyWidgetsDirIfNeeded(
  */
 export function getDiskUsage() {
   try {
-    const disks: Drive[] = nodeDiskInfo.getDiskInfoSync();
+    const disks: Drive[] = getDiskInfoSync();
     return disks;
   } catch (e) {
     console.error(e);
