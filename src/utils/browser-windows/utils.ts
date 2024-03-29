@@ -159,3 +159,18 @@ export const setAlwaysOnTopAllWindowsExceptMain = (
     console.error("Error setting always on top:", error);
   }
 };
+
+export const getAllWindowsExceptMain = (): BrowserWindow[] => {
+  try {
+    const windows: BrowserWindow[] = [];
+    BrowserWindow.getAllWindows().forEach((win) => {
+      if (win.webContents.getTitle() !== "Electron Widgets") {
+        windows.push(win);
+      }
+    });
+    return windows;
+  } catch (error) {
+    console.error("Error getting windows:", error);
+    return [];
+  }
+};

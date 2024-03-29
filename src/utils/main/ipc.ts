@@ -3,6 +3,8 @@ import { getDiskUsage, getWidgetsJson, setWidgetsJson } from "../utils";
 import { widgetsJsonPath } from "../../lib/constants";
 import { IpcChannels } from "../../channels/ipc-channels";
 import { createSingleWindowForWidgets } from "../browser-windows/widget-windows";
+import { getAllWindowsExceptMain } from "../browser-windows/utils";
+
 /**
  * IPC FUNCTIONS
  * Inter-process communication (IPC) is a key part of building feature-rich desktop applications in Electron.
@@ -86,5 +88,14 @@ export function registerMainIPC() {
 
   ipcMain.handle(IpcChannels.GET_DISK_USAGE, () => {
     return getDiskUsage();
+  });
+
+  ipcMain.handle(IpcChannels.OPEN_DIRECTORY, () => {
+    shell.showItemInFolder(widgetsJsonPath);
+  });
+  ipcMain.handle(IpcChannels.SHOW_ALL_WIDGETS, () => {
+    getAllWindowsExceptMain().forEach((win) => {
+      win.show();
+    });
   });
 }

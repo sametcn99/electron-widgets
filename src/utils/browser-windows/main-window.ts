@@ -13,7 +13,7 @@ let mainWindow: BrowserWindow | null = null;
  */
 export function createWindow() {
   if (mainWindow !== null) {
-    console.log("Window is already open");
+    mainWindow.show();
     return;
   }
   // Create the browser window.

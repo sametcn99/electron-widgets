@@ -5,7 +5,7 @@ import { copyWidgetsDirIfNeeded, getDiskUsage } from "../utils";
 import { registerMainIPC } from "./ipc";
 import is from "electron-is";
 import { createWindow } from "../browser-windows/main-window";
-import { renderEjsFiles } from "../ejs";
+import { getMainWindow } from "../browser-windows/utils";
 let tray;
 
 /**
@@ -24,7 +24,6 @@ export function registerApp() {
   app.whenReady().then(() => {
     copyWidgetsDirIfNeeded(sourceWidgetsDir, widgetsDir);
     createWindow();
-    renderEjsFiles();
     createWindowsForWidgets();
     getDiskUsage();
 
@@ -47,16 +46,17 @@ export function registerApp() {
     });
 
     tray = new Tray(trayIcon);
-
     // Create tray context menu
     const contextMenu = Menu.buildFromTemplate([
       { label: "Open", click: () => createWindow() },
       { label: "Quit", click: () => app.quit() },
     ]);
 
-    tray.setToolTip("This is my application.");
+    tray.setToolTip("Electron Widgets");
     tray.setContextMenu(contextMenu);
-
+    tray.on("click", () => {
+      getMainWindow()?.show();
+    });
     app.on("activate", () => {
       if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();

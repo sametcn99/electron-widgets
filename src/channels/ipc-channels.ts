@@ -7,4 +7,6 @@ export enum IpcChannels {
   CLOSE_WIDGET_WINDOW = "close-widget-window", // Channel for closing widget windows
   OPEN_EXTERNAL_LINK = "open-external-link", // Channel for opening external links
   GET_DISK_USAGE = "get-disk-usage", // Channel for opening external links
+  OPEN_DIRECTORY = "dialog:openDirectory", // Channel for opening file dialog
+  SHOW_ALL_WIDGETS = "show-all-widgets", // Channel for showing all widgets
 }

@@ -1,7 +1,11 @@
 <template>
-    <footer class="w-full h-6">
-        <img class="object-cover w-6 h-6 rounded-full bg-slate-600 hover:cursor-pointer" src="/assets/github-logo.svg"
-            alt="footer image" @click="openLink()" />
+    <footer class="flex flex-row w-full h-6 gap-2 pl-2">
+        <img class="object-cover w-8 h-8 p-2 rounded-full bg-slate-300 hover:cursor-pointer"
+            src="/assets/github-logo.svg" alt="github logo" @click="openLink()" />
+        <img id="open-directory" class="object-cover w-8 h-8 p-2 rounded-full bg-slate-300 hover:cursor-pointer"
+            src="/assets/folder.svg" alt="folder logo" />
+        <img id="show-all-widgets" class="object-cover w-8 h-8 p-2 rounded-full bg-slate-300 hover:cursor-pointer"
+            src="/assets/eye.svg" alt="eye logo" />
     </footer>
 </template>
 <script setup>

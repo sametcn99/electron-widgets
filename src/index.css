@@ -11,7 +11,7 @@
 
 @layer utilities {
   .icon {
-    @apply inline-block w-6 h-6 m-1 bg-cover border-none rounded-md cursor-pointer bg-zinc-500;
+    @apply inline-block w-6 h-6 m-1 bg-cover border-none rounded-md cursor-pointer bg-slate-300;
   }
   .eye-visible {
     @apply bg-[url("../assets/eye.svg")];

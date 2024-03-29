@@ -17,6 +17,19 @@ window.addEventListener("DOMContentLoaded", async () => {
       ipcRenderer.invoke(IpcChannels.WINDOW_ACTION, "close");
     });
   }
+  const folderBtn = document.getElementById("open-directory");
+  if (folderBtn) {
+    folderBtn.addEventListener("click", () => {
+      ipcRenderer.invoke(IpcChannels.OPEN_DIRECTORY);
+    });
+  }
+
+  const showAllWidgetsBtn = document.getElementById("show-all-widgets");
+  if (showAllWidgetsBtn) {
+    showAllWidgetsBtn.addEventListener("click", () => {
+      ipcRenderer.invoke(IpcChannels.SHOW_ALL_WIDGETS);
+    });
+  }
 });
 
 import { contextBridge, ipcRenderer } from "electron";

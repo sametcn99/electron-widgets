@@ -1,6 +1,6 @@
 import { BrowserWindow } from "electron";
 import path from "node:path";
-import { homedir } from "os";
+import { homedir, } from "os";
 
 // Define the source widgets directory
 export const sourceWidgetsDir = path.join(__dirname, "widgets");
