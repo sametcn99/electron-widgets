@@ -10,6 +10,8 @@ import {
 } from "node:fs";
 import path from "node:path";
 import nodeDiskInfo from "node-disk-info";
+import Drive from "node-disk-info/dist/classes/drive";
+
 /**
  * Registers a keyboard shortcut to open the dev tools when pressing F12.
  * @export
@@ -89,12 +91,15 @@ export function copyWidgetsDirIfNeeded(
   }
 }
 
+/**
+ * Retrieves the disk usage information for all drives.
+ * @returns An array of Drive objects representing the disk usage information for each drive.
+ */
 export function getDiskUsage() {
   try {
-    const disks = nodeDiskInfo.getDiskInfoSync();
+    const disks: Drive[] = nodeDiskInfo.getDiskInfoSync();
     return disks;
   } catch (e) {
     console.error(e);
   }
 }
-

@@ -2,7 +2,7 @@ import { BrowserWindow, ipcMain, shell } from "electron";
 import { getDiskUsage, getWidgetsJson, setWidgetsJson } from "../utils";
 import { widgetsJsonPath } from "../../lib/constants";
 import { IpcChannels } from "../../channels/ipc-channels";
-import { createSingleWindowForWidgets } from "../windows/widget-windows";
+import { createSingleWindowForWidgets } from "../browser-windows/widget-windows";
 /**
  * IPC FUNCTIONS
  * Inter-process communication (IPC) is a key part of building feature-rich desktop applications in Electron.

@@ -1,10 +1,10 @@
 import { app, BrowserWindow, Menu, nativeImage, screen, Tray } from "electron";
-import { createWindowsForWidgets } from "../windows/widget-windows";
+import { createWindowsForWidgets } from "../browser-windows/widget-windows";
 import { iconPath, sourceWidgetsDir, widgetsDir } from "../../lib/constants";
 import { copyWidgetsDirIfNeeded, getDiskUsage } from "../utils";
 import { registerMainIPC } from "./ipc";
 import is from "electron-is";
-import { createWindow } from "../windows/main-window";
+import { createWindow } from "../browser-windows/main-window";
 import { renderEjsFiles } from "../ejs";
 let tray;
 

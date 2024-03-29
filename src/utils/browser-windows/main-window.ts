@@ -18,6 +18,7 @@ export function createWindow() {
   }
   // Create the browser window.
   mainWindow = new BrowserWindow({
+    title: "Electron Widgets",
     width: 450, // Set the initial width of the window
     height: 650, // Set the initial height of the window
     minHeight: 400,
@@ -27,6 +28,7 @@ export function createWindow() {
     },
     autoHideMenuBar: true, // Hide the menu bar
     titleBarStyle: "hidden", // Hide the title bar
+    fullscreenable: false, // Disable fullscreen
   });
 
   // Load the main window content

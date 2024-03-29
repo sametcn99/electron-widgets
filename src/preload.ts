@@ -4,10 +4,19 @@
  */
 
 import { IpcChannels } from "./channels/ipc-channels";
-import { setupWindowControls } from "./utils/dom/main-dom";
 
 window.addEventListener("DOMContentLoaded", async () => {
-  setupWindowControls();
+  const minimizeBtn = document.getElementById("minimizeBtn");
+  const closeBtn = document.getElementById("closeBtn");
+
+  if (minimizeBtn && closeBtn) {
+    minimizeBtn.addEventListener("click", () => {
+      ipcRenderer.invoke(IpcChannels.WINDOW_ACTION, "minimize");
+    });
+    closeBtn.addEventListener("click", () => {
+      ipcRenderer.invoke(IpcChannels.WINDOW_ACTION, "close");
+    });
+  }
 });
 
 import { contextBridge, ipcRenderer } from "electron";
