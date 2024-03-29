@@ -1,3 +1,7 @@
+# Project Preview
+
+![Screenshot 2024-03-29 at 16 19 15](https://github.com/MuhsinCanY/electron-widgets/assets/96295315/a4f254b8-3473-4db7-bae6-cc978a951798)
+
 # Project Overview
 
 This project is a desktop application developed using Electron.js and Node.js. The application allows users to create and manage widgets on their desktops. These widgets enable users to quickly and easily access the information or tools they need.
