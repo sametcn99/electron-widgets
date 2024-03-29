@@ -19,8 +19,10 @@
         "thickFrame": false,
         "frame": false,
         "hasShadow": false,
-        "contextIsolation": true,
-        "nodeIntegration": true
+        "webpreferences": {
+            "contextIsolation": true,
+            "nodeIntegration": true
+        }
     },
     "weather": {
         "title": "weather",
@@ -42,8 +44,10 @@
         "thickFrame": false,
         "frame": false,
         "hasShadow": false,
-        "contextIsolation": true,
-        "nodeIntegration": true
+        "webpreferences": {
+            "contextIsolation": true,
+            "nodeIntegration": true
+        }
     },
     "search": {
         "title": "search",
@@ -65,7 +69,9 @@
         "thickFrame": false,
         "frame": false,
         "hasShadow": false,
-        "contextIsolation": true,
-        "nodeIntegration": true
+        "webpreferences": {
+            "contextIsolation": true,
+            "nodeIntegration": true
+        }
     }
 }

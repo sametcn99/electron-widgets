@@ -21,8 +21,10 @@ declare global {
     frame: boolean;
     hasShadow: boolean;
     closable: boolean;
-    contextIsolation: boolean;
-    nodeIntegration: boolean;
+    webpreferences: {
+      contextIsolation: boolean;
+      nodeIntegration: boolean;
+    };
     path: string;
     port: number;
   }
