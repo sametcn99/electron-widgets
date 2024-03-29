@@ -12,8 +12,8 @@ declare global {
     titleBarStyle: "default" | "hidden" | "customButtonsOnHover";
     transparent: boolean;
     resizable: boolean;
-    positionX?: number;
-    positionY?: number;
+    x: number;
+    y: number;
     maximizable: boolean;
     minimizable: boolean;
     skipTaskbar: boolean;

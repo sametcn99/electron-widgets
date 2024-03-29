@@ -52,9 +52,9 @@ export function createSingleWindowForWidgets(key: string) {
     // Check if the widget is set to be visible
     if (widget.visible) {
       // Generate random positions if none are defined
-      if (!widget.positionX && !widget.positionY) {
-        widget.positionX = Math.floor(Math.random() * 100);
-        widget.positionY = Math.floor(Math.random() * 100);
+      if (!widget.x && !widget.y) {
+        widget.x = Math.floor(Math.random() * 100);
+        widget.y = Math.floor(Math.random() * 100);
         widgetsData[key] = widget;
         // Update the widgets.json file with new positions
         writeFileSync(
@@ -76,8 +76,8 @@ export function createSingleWindowForWidgets(key: string) {
           titleBarStyle: widget.titleBarStyle,
           transparent: widget.transparent,
           resizable: widget.resizable,
-          x: widget.positionX,
-          y: widget.positionY,
+          x: widget.x,
+          y: widget.y,
           maximizable: widget.maximizable,
           minimizable: widget.minimizable,
           skipTaskbar: widget.skipTaskbar,
