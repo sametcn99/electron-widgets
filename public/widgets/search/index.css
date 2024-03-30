@@ -18,7 +18,7 @@ body {
 
 .draggable {
   -webkit-app-region: drag;
-  height: max-content;
+  height:100%;
   width: 100%;
 }
 
@@ -47,6 +47,7 @@ main {
   display: flex;
   place-items: center;
   border-radius: 20px;
+  flex-direction: column;
 }
 
 select {

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --text: #d8d8d8;
+        --background: #030303;
+        --primary: #cecece;
+      }
+      @font-face {
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        src: url();
+      }
+      * {
+        padding: 0px;
+        margin: 0px;
+      }
+      body {
+        color: var(--text);
+        -webkit-app-region: drag;
+      }
+    </style>
+  </head>
+  <body>
+    <main
+      style="
+        background-color: var(--background);
+        width: 100%;
+        height: 100vh;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        gap: 1rem;
+      "
+    >
+      <div
+        id="diskUsage"
+        style="
+          display: flex;
+          flex-direction: row;
+          gap: 2px;
+          border-radius: 20px;
+          font-weight: bold;
+          padding: 1rem;
+        "
+      >
+        <p id="usedSpace">100GB</p>
+        /
+        <p id="totalSpace">500GB</p>
+      </div>
+      <div
+        style="
+          width: 100%;
+          height: 20px;
+          background-color: rgb(10, 68, 4);
+          border-radius: 20px;
+        "
+      >
+        <div
+          id="bar"
+          style="
+            width: 90%;
+            background-color: rgb(77, 0, 0);
+            height: 20px;
+            border-radius: 20px;
+          "
+        ></div>
+      </div>
+    </main>
+
+    <script>
+      // Örnek veri alımı yerine, sabit bir veri kullanıyorum.
+      const data = window.electronAPI.getDiskUsage().then((data) => {
+        // DOM'u güncelleyen bir fonksiyon
+        console.log(data);
+        // Örnek veriyle DOM'u güncelle
+        updateDiskUsage(data);
+      });
+      function updateDiskUsage(data) {
+        document.getElementById("usedSpace").textContent = bytesToGigabytes(
+          data[0]._used
+        );
+        document.getElementById("totalSpace").textContent = bytesToGigabytes(
+          data[0]._blocks
+        );
+        document.getElementById("bar").textContent = data[0]._capacity;
+        // Diğer ilgili DOM güncellemeleri buraya ekleyebilirsiniz.
+      }
+      function bytesToGigabytes(bytes) {
+        return (bytes / (1024 * 1024 * 1024)).toFixed(2) + "GB";
+      }
+    </script>
+  </body>
+</html>
