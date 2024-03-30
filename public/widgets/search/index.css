@@ -2,8 +2,8 @@
   padding: 0;
   margin: 0;
   --text: #d8d8d8;
-    --background: #030303;
-    --primary: #cecece;
+  --background: #030303;
+  --primary: #cecece;
 }
 
 @font-face {
@@ -12,13 +12,17 @@
 }
 
 body {
-  -webkit-app-region: drag;
   padding: 0;
   margin: 0;
 }
 
+.draggable {
+  -webkit-app-region: drag;
+  height: max-content;
+  width: 100%;
+}
+
 .container {
-  -webkit-app-region: no-drag;
   border-radius: 20px;
   display: flex;
   flex-direction: row;
@@ -26,7 +30,7 @@ body {
   justify-content: center;
   gap: 0.3rem;
   width: 100%;
-  height: 100vh;
+  height: fit-content;
   padding: 0;
   margin: 0;
   border-radius: 20px;
