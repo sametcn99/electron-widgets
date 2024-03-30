@@ -13,6 +13,10 @@ import { getAllWindowsExceptMain } from "../browser-windows/utils";
  * triggering changes in your web contents from native menus.
  */
 
+/**
+ * Registers the main IPC event handlers.
+ * This function sets up the event handlers for various IPC messages used in the application.
+ */
 export function registerMainIPC() {
   /**
    * Handles the 'window-action' IPC message by performing an action on the focused window.
@@ -81,18 +85,23 @@ export function registerMainIPC() {
     }
   });
 
+  // Handles the 'open-external-link' IPC message by opening the provided URL in the default browser.
   ipcMain.handle(IpcChannels.OPEN_EXTERNAL_LINK, (event, url) => {
     console.log("Opening external link:", url);
     shell.openExternal(url);
   });
 
+  // Handles the 'get-disk-usage' IPC message by returning the disk usage information.
   ipcMain.handle(IpcChannels.GET_DISK_USAGE, () => {
     return getDiskUsage();
   });
 
+  // Handles the 'open-directory' IPC message by showing the widgets.json file in the file explorer.
   ipcMain.handle(IpcChannels.OPEN_DIRECTORY, () => {
     shell.showItemInFolder(widgetsJsonPath);
   });
+
+  // Handles the 'show-all-widgets' IPC message by showing all widget windows except the main window.
   ipcMain.handle(IpcChannels.SHOW_ALL_WIDGETS, () => {
     getAllWindowsExceptMain().forEach((win) => {
       win.show();
