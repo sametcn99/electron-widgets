@@ -1,15 +1,10 @@
-import { app, BrowserWindow, Menu, nativeImage, screen, Tray } from "electron";
+import { app, BrowserWindow } from "electron";
 import { createWindowsForWidgets } from "../browser-windows/widget-windows";
-import { iconPath, sourceWidgetsDir, widgetsDir } from "../../lib/constants";
-import { copyWidgetsDirIfNeeded, getDiskUsage } from "../utils";
+import { sourceWidgetsDir, widgetsDir } from "../../lib/constants";
+import { copyWidgetsDirIfNeeded } from "../utils";
 import { registerMainIPC } from "./ipc";
-import is from "electron-is";
 import { createWindow } from "../browser-windows/main-window";
-import {
-  getAllWindowsExceptMain,
-  getMainWindow,
-} from "../browser-windows/utils";
-let tray;
+import { registerTray } from "./tray";
 
 /**
  * Registers the Electron app and sets up necessary event handlers and functionality.
@@ -20,7 +15,6 @@ export function registerApp() {
   if (require("electron-squirrel-startup")) {
     app.quit();
   }
-
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
@@ -28,46 +22,8 @@ export function registerApp() {
     copyWidgetsDirIfNeeded(sourceWidgetsDir, widgetsDir);
     createWindow();
     createWindowsForWidgets();
-    getDiskUsage();
+    registerTray();
 
-    // buildVueProject(vuePath)
-    //   .then(() => {
-    //     console.log("Vue project built successfully");
-    //   })
-    //   .catch((err) => {
-    //     console.error("Vue project build failed", err);
-    //   });
-
-    // Create tray icon
-    const pixelRatio = is.windows()
-      ? screen.getPrimaryDisplay().scaleFactor || 1
-      : 1;
-
-    const trayIcon = nativeImage.createFromPath(iconPath).resize({
-      width: 16 * pixelRatio,
-      height: 16 * pixelRatio,
-    });
-
-    tray = new Tray(trayIcon);
-    // Create tray context menu
-    const contextMenu = Menu.buildFromTemplate([
-      { label: "Open", click: () => createWindow() },
-      {
-        label: "Show All Widgets",
-        click: () => getAllWindowsExceptMain().forEach((win) => win.show()),
-      },
-      {
-        label: "Hide All Widgets",
-        click: () => getAllWindowsExceptMain().forEach((win) => win.hide()),
-      },
-      { label: "Quit", click: () => app.quit() },
-    ]);
-
-    tray.setToolTip("Electron Widgets");
-    tray.setContextMenu(contextMenu);
-    tray.on("click", () => {
-      getMainWindow()?.show();
-    });
     app.on("activate", () => {
       if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
