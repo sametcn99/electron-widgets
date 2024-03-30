@@ -49,6 +49,7 @@
   },
   "license": "GPL-3.0",
   "dependencies": {
+    "@electron-forge/shared-types": "^7.3.1",
     "@rushstack/eslint-patch": "^1.10.1",
     "@vue/eslint-config-prettier": "^9.0.0",
     "ejs": "^3.1.9",
