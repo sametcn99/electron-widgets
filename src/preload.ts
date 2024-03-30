@@ -9,6 +9,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   const minimizeBtn = document.getElementById("minimizeBtn");
   const closeBtn = document.getElementById("closeBtn");
 
+  // Add event listeners for minimize and close buttons
   if (minimizeBtn && closeBtn) {
     minimizeBtn.addEventListener("click", () => {
       ipcRenderer.invoke(IpcChannels.WINDOW_ACTION, "minimize");
@@ -17,6 +18,8 @@ window.addEventListener("DOMContentLoaded", async () => {
       ipcRenderer.invoke(IpcChannels.WINDOW_ACTION, "close");
     });
   }
+
+  // Add event listener for folder button
   const folderBtn = document.getElementById("open-directory");
   if (folderBtn) {
     folderBtn.addEventListener("click", () => {
@@ -24,12 +27,33 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  // Add event listener for show all widgets button
   const showAllWidgetsBtn = document.getElementById("show-all-widgets");
   if (showAllWidgetsBtn) {
     showAllWidgetsBtn.addEventListener("click", () => {
       ipcRenderer.invoke(IpcChannels.SHOW_ALL_WIDGETS);
     });
   }
+
+  // Add an event listener to handle window resize events
+  window.addEventListener("resize", async () => {
+    try {
+      ipcRenderer.invoke(IpcChannels.RESIZE_WIDGET_WINDOW);
+    } catch (error) {
+      // Log any errors that occur during the resize process
+      console.error("Error resizing window:", error);
+    }
+  });
+
+  // Add an event listener to handle window drag events
+  window.addEventListener("mousemove", () => {
+    try {
+      ipcRenderer.invoke(IpcChannels.DRAG_WIDGET_WINDOW);
+    } catch (error) {
+      // Log any errors that occur during the drag process
+      console.error("Error dragging window:", error);
+    }
+  });
 });
 
 import { contextBridge, ipcRenderer } from "electron";

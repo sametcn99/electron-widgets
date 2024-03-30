@@ -1,13 +1,10 @@
 <template>
     <main class="flex flex-col h-full gap-2">
         <div v-for="widget in widgets" :key="widget.title"
-            class="flex flex-row flex-wrap items-center justify-between w-full p-4 font-bold text-left hover:bg-zinc-900"
+            class="flex flex-row flex-wrap items-center justify-between w-full p-2 font-bold text-left hover:bg-zinc-900"
             id="widgetsData">
             <div>
-                <h1 class="p-0 text-3xl">{{ widget.title }} </h1>
-                <p class="p-0 text-sm font-normal">Creator: {{ widget.creator }}</p>
-                <p class="p-0 text-sm font-normal">Updated at: {{ widget.updated_at }}</p>
-                <p class="p-0 text-sm font-normal">Created at: {{ widget.created_at }}</p>
+                <h1 class="p-0 text-2xl">{{ widget.title }} </h1>
             </div>
             <div>
                 <button :class="{ 'icon eye-visible': widget.visible, 'icon eye-invisible': !widget.visible, }"

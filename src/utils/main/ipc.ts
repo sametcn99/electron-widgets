@@ -1,6 +1,6 @@
 import { BrowserWindow, ipcMain, shell } from "electron";
 import { getDiskUsage, getWidgetsJson, setWidgetsJson } from "../utils";
-import { widgetsJsonPath } from "../../lib/constants";
+import { applicationName, widgetsJsonPath } from "../../lib/constants";
 import { IpcChannels } from "../../channels/ipc-channels";
 import { createSingleWindowForWidgets } from "../browser-windows/widget-windows";
 import { getAllWindowsExceptMain } from "../browser-windows/utils";
@@ -106,5 +106,43 @@ export function registerMainIPC() {
     getAllWindowsExceptMain().forEach((win) => {
       win.show();
     });
+  });
+
+  // Handles the 'resize-widget-window' IPC message by updating the width and height of the widget window.
+  ipcMain.handle(IpcChannels.RESIZE_WIDGET_WINDOW, () => {
+    const win = BrowserWindow.getFocusedWindow();
+    const title: string =
+      BrowserWindow.getFocusedWindow()?.getTitle() as string;
+    console.log("Resizing widget window:", win?.getSize()[0], title);
+    const widgets: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
+    if (win && widgets[title]) {
+      widgets[title].width = win.getSize()[0];
+      widgets[title].height = win.getSize()[1];
+      setWidgetsJson(widgets, widgetsJsonPath);
+    } else {
+      console.error(
+        `Widget with title "${title}" not found in widgets config.`,
+      );
+    }
+  });
+
+  // Handles the 'drag-widget-window' IPC message by updating the position of the widget window.
+  // This function gets the currently focused BrowserWindow instance and updates the x and y coordinates
+  // of the widget in the widgets.json file based on the window's position.
+  ipcMain.handle(IpcChannels.DRAG_WIDGET_WINDOW, () => {
+    const widgets: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
+    const win = BrowserWindow.getFocusedWindow();
+    const title: string =
+      BrowserWindow.getFocusedWindow()?.getTitle() as string;
+    if (
+      win &&
+      widgets[title] &&
+      win?.isFocused() &&
+      widgets[title].title != applicationName
+    ) {
+      widgets[title].x = win.getPosition()[0];
+      widgets[title].y = win.getPosition()[1];
+      setWidgetsJson(widgets, widgetsJsonPath);
+    }
   });
 }

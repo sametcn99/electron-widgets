@@ -45,9 +45,11 @@ export function getWidgetsJson(widgetsJsonPath: string) {
  * @param jsonData - The JSON data to write.
  * @param widgetsJsonPath - The path to the widgets.json file.
  */
-export function setWidgetsJson(jsonData: typeof JSON, widgetsJsonPath: string) {
+export function setWidgetsJson(
+  jsonData: WidgetsConfig,
+  widgetsJsonPath: string,
+) {
   try {
-    console.log("Writing to widgets.json:", widgetsJsonPath);
     writeFileSync(widgetsJsonPath, JSON.stringify(jsonData, null, 2));
   } catch (err) {
     console.error(`Error writing to widgets.json:`, err);
@@ -83,7 +85,6 @@ export function copyWidgetsDirIfNeeded(
         entry.isDirectory()
           ? copyWidgetsDirIfNeeded(srcPath, destPath)
           : copyFileSync(srcPath, destPath);
-        console.log(`Copied ${srcPath} to ${destPath}`);
       }
     }
   } catch (error) {

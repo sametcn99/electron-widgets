@@ -9,4 +9,6 @@ export enum IpcChannels {
   GET_DISK_USAGE = "get-disk-usage", // Channel for opening external links
   OPEN_DIRECTORY = "dialog:openDirectory", // Channel for opening file dialog
   SHOW_ALL_WIDGETS = "show-all-widgets", // Channel for showing all widgets
+  RESIZE_WIDGET_WINDOW = "resize-widget-window", // Channel for resizing widget windows
+  DRAG_WIDGET_WINDOW = "drag-widget-window", // Channel for dragging widget windows
 }

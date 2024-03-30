@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-document.addEventListener("DOMContentLoaded", () => {
-  resizeWindow();
-});
+document.addEventListener("DOMContentLoaded", () => {});
 
 let lon;
 let lat;
@@ -66,31 +64,4 @@ function renderWeatherData(data) {
   });
 
   weatherDiv.innerHTML = weatherHTML;
-}
-
-/**
- * Handles resizing of the window by updating the stored width and height in the
- * widgets configuration file. Listens for the 'resize' event and gets the new
- * dimensions, then writes them back to the config.
- */
-function resizeWindow() {
-  // Add an event listener to handle window resize events
-  window.addEventListener("resize", async () => {
-    try {
-      // Get the new window dimensions
-      let width = window.innerWidth;
-      let height = window.innerHeight;
-      // Read the current widgets configuration
-      const widgetsData = await window.electronAPI.readWidgetsJson();
-      // Update the widget dimensions in the configuration
-      widgetsData.weather.width = width;
-      widgetsData.weather.height = height;
-      // Write the updated configuration back to the file
-      window.electronAPI.writeWidgetJson(widgetsData);
-      console.log(`Window resized to: ${width}x${height}`);
-    } catch (error) {
-      // Log any errors that occur during the resize process
-      console.error("Error resizing window:", error);
-    }
-  });
 }
