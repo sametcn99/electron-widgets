@@ -1,4 +1,5 @@
 import { BrowserWindow } from "electron";
+import { applicationName } from "../../lib/constants";
 
 /**
  * Retrieves the main Electron BrowserWindow instance.
@@ -8,7 +9,7 @@ export const getMainWindow = (): Electron.BrowserWindow | undefined => {
   try {
     let mainWindow: Electron.BrowserWindow | undefined;
     BrowserWindow.getAllWindows().forEach((win) => {
-      if (win.webContents.getTitle() === "Electron Widgets") {
+      if (win.webContents.getTitle() === applicationName) {
         mainWindow = win;
       }
     });
@@ -24,7 +25,7 @@ export const getMainWindow = (): Electron.BrowserWindow | undefined => {
 export const minimizeAllWindowsExceptMain = (): void => {
   try {
     BrowserWindow.getAllWindows().forEach((win) => {
-      if (win.webContents.getTitle() !== "Electron Widgets") {
+      if (win.webContents.getTitle() !== applicationName) {
         win.minimize();
       }
     });
@@ -39,7 +40,7 @@ export const minimizeAllWindowsExceptMain = (): void => {
 export const closeAllWindowsExceptMain = (): void => {
   try {
     BrowserWindow.getAllWindows().forEach((win) => {
-      if (win.webContents.getTitle() !== "Electron Widgets") {
+      if (win.webContents.getTitle() !== applicationName) {
         win.close();
       }
     });
@@ -132,7 +133,7 @@ export const showAllWindows = (): void => {
 export const hideAllWindowsExceptMain = (): void => {
   try {
     BrowserWindow.getAllWindows().forEach((win) => {
-      if (win.webContents.getTitle() !== "Electron Widgets") {
+      if (win.webContents.getTitle() !== applicationName) {
         win.hide();
       }
     });
@@ -151,7 +152,7 @@ export const setAlwaysOnTopAllWindowsExceptMain = (
 ): void => {
   try {
     BrowserWindow.getAllWindows().forEach((win) => {
-      if (win.webContents.getTitle() !== "Electron Widgets") {
+      if (win.webContents.getTitle() !== applicationName) {
         win.setAlwaysOnTop(alwaysOnTop);
       }
     });
@@ -164,7 +165,7 @@ export const getAllWindowsExceptMain = (): BrowserWindow[] => {
   try {
     const windows: BrowserWindow[] = [];
     BrowserWindow.getAllWindows().forEach((win) => {
-      if (win.webContents.getTitle() !== "Electron Widgets") {
+      if (win.webContents.getTitle() !== applicationName) {
         windows.push(win);
       }
     });

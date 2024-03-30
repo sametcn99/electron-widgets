@@ -65,6 +65,7 @@ export function createSingleWindowForWidgets(key: string) {
       try {
         // Create a new browser window for the widget
         const win = new BrowserWindow({
+          title: widget.title,
           webPreferences: {
             contextIsolation: widget.webpreferences.contextIsolation,
             nodeIntegration: widget.webpreferences.nodeIntegration,

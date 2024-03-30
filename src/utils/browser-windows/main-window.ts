@@ -2,6 +2,7 @@ import { BrowserWindow } from "electron";
 import path from "node:path";
 import { showNotification } from "../notification";
 import { openDevToolsWithShortcut } from "../utils";
+import { applicationName } from "../../lib/constants";
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -18,7 +19,7 @@ export function createWindow() {
   }
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    title: "Electron Widgets",
+    title: applicationName,
     width: 450, // Set the initial width of the window
     height: 650, // Set the initial height of the window
     minHeight: 400,
@@ -44,7 +45,7 @@ export function createWindow() {
   mainWindow.on("closed", () => {
     mainWindow = null;
     showNotification(
-      "Electron Widgets",
+      applicationName,
       "The application is still running in the background.",
     );
   });

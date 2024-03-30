@@ -16,12 +16,7 @@
     "esModuleInterop": true,
     "noImplicitAny": true,
     "sourceMap": true,
-    "baseUrl": "./",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
+    "baseUrl": "@",
     "outDir": "dist",
     "moduleResolution": "node",
     "resolveJsonModule": true

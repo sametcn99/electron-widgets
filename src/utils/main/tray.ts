@@ -1,5 +1,5 @@
 import { app, Menu, nativeImage, screen, Tray } from "electron";
-import { iconPath } from "../../lib/constants";
+import { applicationName, iconPath } from "../../lib/constants";
 import is from "electron-is";
 import { createWindow } from "../browser-windows/main-window";
 import {
@@ -42,7 +42,7 @@ export function registerTray() {
   ]);
 
   // Set the tooltip for the tray
-  tray.setToolTip("Electron Widgets");
+  tray.setToolTip(applicationName);
 
   // Set the context menu for the tray
   tray.setContextMenu(contextMenu);
