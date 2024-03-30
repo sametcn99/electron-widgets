@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      :root {
+        --text: #d8d8d8;
+        --background: #030303;
+        --primary: #cecece;
+      }
+      @font-face {
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        src: url();
+      }
+      * {
+        padding: 0px;
+        margin: 0px;
+      }
+      body {
+        color: var(--text);
+        -webkit-app-region: drag;
+      }
+    </style>
+  </head>
+  <body>
+    <main
+      style="
+        width: 100%;
+        height: 100vh;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        font-size: 5rem;
+      "
+    >
+      <h1 id="clock"></h1>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        updateTime(); // Start the clock when the page loads
+        function updateTime() {
+          let now = new Date();
+          let hour = now.getHours();
+          let minute = now.getMinutes();
+          let second = now.getSeconds();
+
+          hour = hour < 10 ? "0" + hour : hour;
+          minute = minute < 10 ? "0" + minute : minute;
+          second = second < 10 ? "0" + second : second;
+
+          let timeHTML = hour + ":" + minute + ":" + second;
+          document.getElementById("clock").textContent = timeHTML;
+        }
+
+        setInterval(updateTime, 1000); // Update every second
+      });
+    </script>
+  </body>
+</html>

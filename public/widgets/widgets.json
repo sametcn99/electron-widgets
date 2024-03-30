@@ -49,6 +49,28 @@
       "nodeIntegration": true
     }
   },
+  "transparentClock": {
+    "title": "transparentClock",
+    "visible": true,
+    "width": 652,
+    "height": 427,
+    "transparent": true,
+    "autoHideMenuBar": true,
+    "titleBarStyle": "hidden",
+    "resizable": true,
+    "x": 14,
+    "y": 825,
+    "maximizable": false,
+    "minimizable": false,
+    "skipTaskbar": true,
+    "thickFrame": false,
+    "frame": false,
+    "hasShadow": false,
+    "webpreferences": {
+      "contextIsolation": true,
+      "nodeIntegration": true
+    }
+  },
   "dailyWeather": {
     "title": "dailyWeather",
     "visible": true,
