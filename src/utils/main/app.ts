@@ -5,7 +5,10 @@ import { copyWidgetsDirIfNeeded, getDiskUsage } from "../utils";
 import { registerMainIPC } from "./ipc";
 import is from "electron-is";
 import { createWindow } from "../browser-windows/main-window";
-import { getMainWindow } from "../browser-windows/utils";
+import {
+  getAllWindowsExceptMain,
+  getMainWindow,
+} from "../browser-windows/utils";
 let tray;
 
 /**
@@ -49,6 +52,14 @@ export function registerApp() {
     // Create tray context menu
     const contextMenu = Menu.buildFromTemplate([
       { label: "Open", click: () => createWindow() },
+      {
+        label: "Show All Widgets",
+        click: () => getAllWindowsExceptMain().forEach((win) => win.show()),
+      },
+      {
+        label: "Hide All Widgets",
+        click: () => getAllWindowsExceptMain().forEach((win) => win.hide()),
+      },
       { label: "Quit", click: () => app.quit() },
     ]);
 
