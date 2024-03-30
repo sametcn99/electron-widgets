@@ -105,4 +105,6 @@ contextBridge.exposeInMainWorld("electronAPI", {
    */
   closeWidgetWindow: (widgetKey: string) =>
     ipcRenderer.invoke(IpcChannels.CLOSE_WIDGET_WINDOW, widgetKey),
+
+  addWidget: () => ipcRenderer.invoke(IpcChannels.ADD_WIDGET_DIALOG),
 });

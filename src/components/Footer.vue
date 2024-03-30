@@ -4,11 +4,13 @@
             src="/assets/github-logo.svg" alt="github logo" @click="openLink()" />
         <img id="open-directory" class="object-cover w-8 h-8 p-2 rounded-full bg-slate-300 hover:cursor-pointer"
             src="/assets/folder.svg" alt="folder logo" />
+        <img id="add-widget" class="object-cover w-8 h-8 p-2 rounded-full bg-slate-300 hover:cursor-pointer"
+            src="/assets/folder-plus.svg" alt="folder plus" @click="addWidget()" />
         <img id="show-all-widgets" class="object-cover w-8 h-8 p-2 rounded-full bg-slate-300 hover:cursor-pointer"
             src="/assets/eye.svg" alt="eye logo" />
     </footer>
 </template>
-<script setup>
+<script setup lang="ts">
 const openLink = () => {
     const confirm = window.confirm(
         "You are exiting the application. Are you sure you want to continue?",
@@ -17,4 +19,7 @@ const openLink = () => {
         window.electronAPI.openExternalLink("https://sametcc.me/electron-widgets");
     }
 };
+const addWidget = () => {
+    window.electronAPI.addWidget();
+}
 </script>

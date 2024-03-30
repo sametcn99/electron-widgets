@@ -45,6 +45,7 @@ declare global {
       createWidgetWindow: (widgetKey: string) => Promise<void>;
       closeWidgetWindow: (widgetKey: string) => Promise<void>;
       getDiskUsage: () => Promise<Drive[]>;
+      addWidget: () => Promise<void>;
     };
     withoutContextApi: {
       openExternalLink: (url: string) => Promise<void>;

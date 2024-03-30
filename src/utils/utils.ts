@@ -29,7 +29,7 @@ export function openDevToolsWithShortcut(win: BrowserWindow) {
  * @returns The contents of the widgets.json file as a string.
  * @throws If an error occurs while reading the file.
  */
-export function getWidgetsJson(widgetsJsonPath: string) {
+export function getWidgetsJson(widgetsJsonPath: string): WidgetsConfig {
   try {
     const widgetsDataRaw = readFileSync(widgetsJsonPath, "utf-8");
     const widgetsData: WidgetsConfig = JSON.parse(widgetsDataRaw);

@@ -18,3 +18,5 @@ export const windowsMap = new Map<string, BrowserWindow>();
 export const iconPath = path.join(__dirname, "assets", "electron.png");
 
 export const applicationName: string = "Electron Widgets";
+
+export const homePath: string = path.join(homedir());

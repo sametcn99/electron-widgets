@@ -1,9 +1,18 @@
-import { BrowserWindow, ipcMain, shell } from "electron";
+import { app, BrowserWindow, dialog, ipcMain, shell } from "electron";
 import { getDiskUsage, getWidgetsJson, setWidgetsJson } from "../utils";
-import { applicationName, widgetsJsonPath } from "../../lib/constants";
+import {
+  applicationName,
+  homePath,
+  widgetsDir,
+  widgetsJsonPath,
+} from "../../lib/constants";
 import { IpcChannels } from "../../channels/ipc-channels";
 import { createSingleWindowForWidgets } from "../browser-windows/widget-windows";
 import { getAllWindowsExceptMain } from "../browser-windows/utils";
+import { copySync } from "fs-extra";
+import path from "path";
+import { mkdirSync, existsSync } from "node:fs";
+import { preset } from "../../lib/preset";
 
 /**
  * IPC FUNCTIONS
@@ -143,6 +152,76 @@ export function registerMainIPC() {
       widgets[title].x = win.getPosition()[0];
       widgets[title].y = win.getPosition()[1];
       setWidgetsJson(widgets, widgetsJsonPath);
+    }
+  });
+
+  // Handles the 'add-widget-dialog' IPC message by showing a dialog to add a new widget.
+  // The dialog allows the user to select a folder to add as a widget. If the user cancels the dialog, nothing happens.
+  // If the user selects a folder, the function checks if the folder contains an index.html file.
+  // If the folder contains an index.html file, the function creates a destination directory for the widget,
+  // copies the widget files to the destination directory, and adds the widget to the widgets.json file.
+  // If the widget already exists, an error message is shown, and if the widget is added successfully, a success message is shown.
+  // The app is then relaunched to reflect the changes.
+  ipcMain.handle(IpcChannels.ADD_WIDGET_DIALOG, async () => {
+    const mainWindow = BrowserWindow.getFocusedWindow();
+    if (mainWindow) {
+      const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, {
+        properties: ["openDirectory"],
+        title: "Select a folder to add as a widget.",
+        defaultPath: homePath,
+      });
+      if (canceled) {
+        return;
+      } else {
+        const srcDir = filePaths[0];
+        const srcDirName = path.basename(filePaths[0]);
+
+        // Create the destination directory for the widget
+        mkdirSync(path.join(widgetsDir, srcDirName), { recursive: true });
+
+        const indexhtml = path.join(filePaths[0], "index.html");
+
+        if (existsSync(indexhtml)) {
+          // Copy the widget files to the destination directory
+          copySync(path.join(srcDir), path.join(widgetsDir, srcDirName), {
+            overwrite: true,
+          });
+          getWidgetsJson(widgetsJsonPath);
+          if (
+            Object.keys(getWidgetsJson(widgetsJsonPath)).includes(srcDirName)
+          ) {
+            // Show error message if the widget already exists
+            dialog.showMessageBox(mainWindow, {
+              type: "error",
+              message: "Widget already exists.",
+              detail: "The widget is already in the widgets directory.",
+            });
+            return;
+          } else {
+            // Add the widget to the widgets.json file
+            const widgetsData = getWidgetsJson(widgetsJsonPath);
+            widgetsData[srcDirName] = preset;
+            setWidgetsJson(widgetsData, widgetsJsonPath);
+            // Show success message and restart the app
+            dialog.showMessageBox(mainWindow, {
+              type: "info",
+              message: "Widget added successfully.",
+              detail:
+                "The widget has been added to the widgets directory and added config to widgets.json file.",
+            });
+            app.relaunch();
+            app.quit();
+          }
+        } else {
+          // Show error message if the selected directory does not contain an index.html file
+          dialog.showMessageBox(mainWindow, {
+            type: "error",
+            message: "Invalid widget directory.",
+            detail:
+              "The selected directory does not contain an index.html file.",
+          });
+        }
+      }
     }
   });
 }
