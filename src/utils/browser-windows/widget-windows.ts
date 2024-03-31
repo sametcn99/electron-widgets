@@ -1,4 +1,4 @@
-import { BrowserWindow } from "electron";
+import { BrowserWindow, BrowserWindowConstructorOptions } from "electron";
 import path from "node:path";
 import { getWidgetsJson, openDevToolsWithShortcut } from "../utils";
 import { writeFileSync } from "node:fs";
@@ -48,7 +48,8 @@ export function createSingleWindowForWidgets(key: string) {
       return;
     }
     // Iterate through each widget in the data
-    const widget: WidgetConfig = widgetsData[key];
+    const widget: WidgetConfig & BrowserWindowConstructorOptions =
+      widgetsData[key];
     // Check if the widget is set to be visible
     if (widget.visible) {
       // Generate random positions if none are defined
