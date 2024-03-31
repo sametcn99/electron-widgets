@@ -1,4 +1,8 @@
-import { BrowserWindow, BrowserWindowConstructorOptions } from "electron";
+import {
+  BrowserWindow,
+  BrowserWindowConstructorOptions,
+  dialog,
+} from "electron";
 import path from "node:path";
 import { getWidgetsJson, openDevToolsWithShortcut } from "../utils";
 import { writeFileSync } from "node:fs";
@@ -16,7 +20,10 @@ export function createWindowsForWidgets() {
     // Parse the widgets JSON data
     const widgetsData: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
     if (typeof widgetsData !== "object" || Array.isArray(widgetsData)) {
-      console.error("Unexpected widgets data structure:", widgetsData);
+      dialog.showErrorBox(
+        "Error parsing widgets data",
+        "Unexpected widgets data structure",
+      );
       return;
     }
     // Iterate through each widget in the data
@@ -27,7 +34,7 @@ export function createWindowsForWidgets() {
       }
     });
   } catch (err) {
-    console.error(`Error parsing widgets data: ${err}`);
+    dialog.showErrorBox(`Error parsing widgets data`, `${err}`);
   }
 }
 
@@ -96,9 +103,11 @@ export function createSingleWindowForWidgets(key: string) {
         openDevToolsWithShortcut(win);
       } catch (err) {
         console.error(`Error creating window for ${key}: ${err}`);
+        dialog.showErrorBox(`Error creating window for ${key}`, `${err}`);
       }
     }
   } catch (err) {
     console.error(`Error parsing widgets data: ${err}`);
+    dialog.showErrorBox(`Error parsing widgets data`, `${err}`);
   }
 }

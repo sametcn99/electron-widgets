@@ -1,4 +1,4 @@
-import { BrowserWindow } from "electron";
+import { BrowserWindow, dialog } from "electron";
 import { applicationName } from "../../lib/constants";
 
 /**
@@ -16,6 +16,7 @@ export const getMainWindow = (): Electron.BrowserWindow | undefined => {
     return mainWindow;
   } catch (error) {
     console.error("Error getting main window:", error);
+    dialog.showErrorBox("Error getting main window", `${error}`);
   }
 };
 
@@ -31,6 +32,7 @@ export const minimizeAllWindowsExceptMain = (): void => {
     });
   } catch (error) {
     console.error("Error minimizing windows:", error);
+    dialog.showErrorBox("Error minimizing windows", `${error}`);
   }
 };
 
@@ -46,6 +48,7 @@ export const closeAllWindowsExceptMain = (): void => {
     });
   } catch (error) {
     console.error("Error closing windows:", error);
+    dialog.showErrorBox("Error closing windows", `${error}`);
   }
 };
 
@@ -59,6 +62,7 @@ export const closeAllWindows = (): void => {
     });
   } catch (error) {
     console.error("Error closing windows:", error);
+    dialog.showErrorBox("Error closing windows", `${error}`);
   }
 };
 
@@ -72,6 +76,7 @@ export const minimizeAllWindows = (): void => {
     });
   } catch (error) {
     console.error("Error minimizing windows:", error);
+    dialog.showErrorBox("Error minimizing windows", `${error}`);
   }
 };
 
@@ -85,6 +90,7 @@ export const restoreAllWindows = (): void => {
     });
   } catch (error) {
     console.error("Error restoring windows:", error);
+    dialog.showErrorBox("Error restoring windows", `${error}`);
   }
 };
 
@@ -98,6 +104,7 @@ export const toggleDevToolsAllWindows = (): void => {
     });
   } catch (error) {
     console.error("Error toggling DevTools:", error);
+    dialog.showErrorBox("Error toggling DevTools", `${error}`);
   }
 };
 
@@ -111,6 +118,7 @@ export const reloadAllWindows = (): void => {
     });
   } catch (error) {
     console.error("Error reloading windows:", error);
+    dialog.showErrorBox("Error reloading windows", `${error}`);
   }
 };
 
@@ -124,6 +132,7 @@ export const showAllWindows = (): void => {
     });
   } catch (error) {
     console.error("Error showing windows:", error);
+    dialog.showErrorBox("Error showing windows", `${error}`);
   }
 };
 
@@ -139,6 +148,7 @@ export const hideAllWindowsExceptMain = (): void => {
     });
   } catch (error) {
     console.error("Error hiding windows:", error);
+    dialog.showErrorBox("Error hiding windows", `${error}`);
   }
 };
 
@@ -158,6 +168,7 @@ export const setAlwaysOnTopAllWindowsExceptMain = (
     });
   } catch (error) {
     console.error("Error setting always on top:", error);
+    dialog.showErrorBox("Error setting always on top", `${error}`);
   }
 };
 
@@ -172,6 +183,7 @@ export const getAllWindowsExceptMain = (): BrowserWindow[] => {
     return windows;
   } catch (error) {
     console.error("Error getting windows:", error);
+    dialog.showErrorBox("Error getting windows", `${error}`);
     return [];
   }
 };

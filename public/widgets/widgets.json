@@ -73,7 +73,7 @@
   },
   "dailyWeather": {
     "title": "dailyWeather",
-    "visible": true,
+    "visible": false,
     "created_at": "24.03.2024",
     "updated_at": "24.03.2024",
     "creator": "sametcn99",
@@ -98,7 +98,7 @@
   },
   "diskusage": {
     "title": "diskusage",
-    "visible": true,
+    "visible": false,
     "width": 352,
     "height": 127,
     "transparent": true,

@@ -8,6 +8,10 @@ declare global {
     creator: string;
     path: string;
     port: number;
+    width: number;
+    height: number;
+    x: number;
+    y: number;
   }
 
   // Assuming widgetsData is an object where each key is a string and the value is a WidgetConfig

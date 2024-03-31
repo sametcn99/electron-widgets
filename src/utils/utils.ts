@@ -1,4 +1,4 @@
-import { BrowserWindow } from "electron";
+import { BrowserWindow, dialog } from "electron";
 import { register } from "electron-localshortcut";
 import {
   copyFileSync,
@@ -36,6 +36,7 @@ export function getWidgetsJson(widgetsJsonPath: string): WidgetsConfig {
     return widgetsData;
   } catch (error) {
     console.error("Failed to read widgets.json:", error);
+    dialog.showErrorBox("Failed to read widgets.json", `${error}`);
     throw error;
   }
 }
@@ -53,6 +54,7 @@ export function setWidgetsJson(
     writeFileSync(widgetsJsonPath, JSON.stringify(jsonData, null, 2));
   } catch (err) {
     console.error(`Error writing to widgets.json:`, err);
+    dialog.showErrorBox("Error writing to widgets.json", `${err}`);
   }
 }
 
@@ -89,6 +91,7 @@ export function copyWidgetsDirIfNeeded(
     }
   } catch (error) {
     console.error("Failed to copy widgets directory:", error);
+    dialog.showErrorBox("Failed to copy widgets directory", `${error}`);
   }
 }
 
@@ -102,6 +105,7 @@ export function getDiskUsage() {
     return disks;
   } catch (e) {
     console.error(e);
+    dialog.showErrorBox("Error getting disk usage", `${e}`);
   }
 }
 

@@ -45,6 +45,8 @@ export function registerMainIPC() {
           break;
         default:
           console.log(`Unknown action: ${action}`);
+          dialog.showErrorBox("Unknown action", `Unknown action: ${action}`);
+          break;
       }
     }
   });
@@ -91,6 +93,7 @@ export function registerMainIPC() {
       });
     } catch (error) {
       console.error("Error closing widget window:", error);
+      dialog.showErrorBox("Error closing widget window", `${error}`);
     }
   });
 
@@ -131,6 +134,10 @@ export function registerMainIPC() {
     } else {
       console.error(
         `Widget with title "${title}" not found in widgets config.`,
+        dialog.showErrorBox(
+          "Widget not found",
+          `Widget with title "${title}" not found in widgets config.`,
+        ),
       );
     }
   });
