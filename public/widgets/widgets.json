@@ -11,8 +11,8 @@
     "autoHideMenuBar": false,
     "titleBarStyle": "hidden",
     "resizable": true,
-    "x": 10,
-    "y": 10,
+    "x": 191,
+    "y": 292,
     "maximizable": false,
     "minimizable": false,
     "skipTaskbar": true,
@@ -58,7 +58,7 @@
     "autoHideMenuBar": true,
     "titleBarStyle": "hidden",
     "resizable": true,
-    "x": 96,
+    "x": 636,
     "y": 0,
     "maximizable": false,
     "minimizable": false,
@@ -142,5 +142,31 @@
       "contextIsolation": true,
       "nodeIntegration": true
     }
+  },
+  "pomodoro": {
+    "title": "pomodoro",
+    "visible": true,
+    "creator": "https://codepen.io/rajdgreat007/pen/edvZpx",
+    "path": "localhost:3000/",
+    "port": 3000,
+    "width": 257,
+    "height": 383,
+    "transparent": true,
+    "autoHideMenuBar": false,
+    "titleBarStyle": "hidden",
+    "resizable": true,
+    "maximizable": false,
+    "minimizable": false,
+    "skipTaskbar": true,
+    "thickFrame": false,
+    "frame": false,
+    "hasShadow": false,
+    "webpreferences": {
+      "contextIsolation": true,
+      "nodeIntegration": true
+    },
+    "closable": true,
+    "x": 558,
+    "y": 406
   }
 }

@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog, ipcMain, shell } from "electron";
+import { BrowserWindow, dialog, ipcMain, shell } from "electron";
 import { getDiskUsage, getWidgetsJson, setWidgetsJson } from "../utils";
 import {
   applicationName,
@@ -208,6 +208,7 @@ export function registerMainIPC() {
             // Add the widget to the widgets.json file
             const widgetsData = getWidgetsJson(widgetsJsonPath);
             widgetsData[srcDirName] = preset;
+            widgetsData[srcDirName].title = srcDirName;
             setWidgetsJson(widgetsData, widgetsJsonPath);
             // Show success message and restart the app
             dialog.showMessageBox(mainWindow, {
@@ -216,8 +217,6 @@ export function registerMainIPC() {
               detail:
                 "The widget has been added to the widgets directory and added config to widgets.json file.",
             });
-            app.relaunch();
-            app.quit();
           }
         } else {
           // Show error message if the selected directory does not contain an index.html file
