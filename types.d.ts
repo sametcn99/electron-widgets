@@ -6,25 +6,6 @@ declare global {
     created_at: string;
     updated_at: string;
     creator: string;
-    width: number;
-    height: number;
-    autoHideMenuBar: boolean;
-    titleBarStyle: "default" | "hidden" | "customButtonsOnHover";
-    transparent: boolean;
-    resizable: boolean;
-    x: number;
-    y: number;
-    maximizable: boolean;
-    minimizable: boolean;
-    skipTaskbar: boolean;
-    thickFrame: boolean;
-    frame: boolean;
-    hasShadow: boolean;
-    closable: boolean;
-    webpreferences: {
-      contextIsolation: boolean;
-      nodeIntegration: boolean;
-    };
     path: string;
     port: number;
   }
