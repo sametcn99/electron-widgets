@@ -50,7 +50,10 @@ export function createSingleWindowForWidgets(key: string) {
     // Parse the widgets JSON data
     const widgetsData: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
     if (typeof widgetsData !== "object" || Array.isArray(widgetsData)) {
-      console.error("Unexpected widgets data structure:", widgetsData);
+      dialog.showErrorBox(
+        "Error parsing widgets data",
+        "Unexpected widgets data structure",
+      );
       return;
     }
     // Iterate through each widget in the data
