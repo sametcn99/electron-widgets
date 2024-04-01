@@ -93,12 +93,10 @@ export function createSingleWindowForWidgets(key: string) {
         win.loadFile(indexPath);
         openDevToolsWithShortcut(win);
       } catch (err) {
-        console.error(`Error creating window for ${key}: ${err}`);
         dialog.showErrorBox(`Error creating window for ${key}`, `${err}`);
       }
     }
   } catch (err) {
-    console.error(`Error parsing widgets data: ${err}`);
     dialog.showErrorBox(`Error parsing widgets data`, `${err}`);
   }
 }
