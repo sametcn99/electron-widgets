@@ -1,9 +1,9 @@
 import { app, BrowserWindow } from "electron";
-import { createWindowsForWidgets } from "../browser-windows/widget-windows";
 import { sourceWidgetsDir, widgetsDir } from "../../lib/constants";
+import { createWindow } from "../browser-windows/main-window";
+import { createWindowsForWidgets } from "../browser-windows/widget-windows";
 import { copyWidgetsDirIfNeeded } from "../utils";
 import { registerMainIPC } from "./ipc";
-import { createWindow } from "../browser-windows/main-window";
 import { registerTray } from "./tray";
 
 /**

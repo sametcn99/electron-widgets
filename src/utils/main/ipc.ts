@@ -1,18 +1,14 @@
 import { BrowserWindow, dialog, ipcMain, shell } from "electron";
-import { getDiskUsage, getWidgetsJson, setWidgetsJson } from "../utils";
-import {
-  applicationName,
-  homePath,
-  widgetsDir,
-  widgetsJsonPath,
-} from "../../lib/constants";
 import { IpcChannels } from "../../channels/ipc-channels";
-import { createSingleWindowForWidgets } from "../browser-windows/widget-windows";
+import { applicationName, widgetsJsonPath } from "../../lib/constants";
 import { getAllWindowsExceptMain } from "../browser-windows/utils";
-import { copySync } from "fs-extra";
-import path from "path";
-import { mkdirSync, existsSync } from "node:fs";
-import { preset } from "../../lib/preset";
+import { createSingleWindowForWidgets } from "../browser-windows/widget-windows";
+import {
+  addWidgetAsPlugin,
+  getDiskUsage,
+  getWidgetsJson,
+  setWidgetsJson,
+} from "../utils";
 
 /**
  * IPC FUNCTIONS
@@ -86,7 +82,7 @@ export function registerMainIPC() {
   ipcMain.handle(IpcChannels.CLOSE_WIDGET_WINDOW, (event, key) => {
     console.log("Closing widget window:", key);
     try {
-      BrowserWindow.getAllWindows().forEach((win) => {
+      getAllWindowsExceptMain().forEach((win) => {
         if (win.webContents.getURL().includes(key)) {
           win.close();
         }
@@ -170,64 +166,6 @@ export function registerMainIPC() {
   // If the widget already exists, an error message is shown, and if the widget is added successfully, a success message is shown.
   // The app is then relaunched to reflect the changes.
   ipcMain.handle(IpcChannels.ADD_WIDGET_DIALOG, async () => {
-    const mainWindow = BrowserWindow.getFocusedWindow();
-    if (mainWindow) {
-      const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, {
-        properties: ["openDirectory"],
-        title: "Select a folder to add as a widget.",
-        defaultPath: homePath,
-      });
-      if (canceled) {
-        return;
-      } else {
-        const srcDir = filePaths[0];
-        const srcDirName = path.basename(filePaths[0]);
-
-        // Create the destination directory for the widget
-        mkdirSync(path.join(widgetsDir, srcDirName), { recursive: true });
-
-        const indexhtml = path.join(filePaths[0], "index.html");
-
-        if (existsSync(indexhtml)) {
-          // Copy the widget files to the destination directory
-          copySync(path.join(srcDir), path.join(widgetsDir, srcDirName), {
-            overwrite: true,
-          });
-          getWidgetsJson(widgetsJsonPath);
-          if (
-            Object.keys(getWidgetsJson(widgetsJsonPath)).includes(srcDirName)
-          ) {
-            // Show error message if the widget already exists
-            dialog.showMessageBox(mainWindow, {
-              type: "error",
-              message: "Widget already exists.",
-              detail: "The widget is already in the widgets directory.",
-            });
-            return;
-          } else {
-            // Add the widget to the widgets.json file
-            const widgetsData = getWidgetsJson(widgetsJsonPath);
-            widgetsData[srcDirName] = preset;
-            widgetsData[srcDirName].title = srcDirName;
-            setWidgetsJson(widgetsData, widgetsJsonPath);
-            // Show success message and restart the app
-            dialog.showMessageBox(mainWindow, {
-              type: "info",
-              message: "Widget added successfully.",
-              detail:
-                "The widget has been added to the widgets directory and added config to widgets.json file.",
-            });
-          }
-        } else {
-          // Show error message if the selected directory does not contain an index.html file
-          dialog.showMessageBox(mainWindow, {
-            type: "error",
-            message: "Invalid widget directory.",
-            detail:
-              "The selected directory does not contain an index.html file.",
-          });
-        }
-      }
-    }
+    addWidgetAsPlugin();
   });
 }

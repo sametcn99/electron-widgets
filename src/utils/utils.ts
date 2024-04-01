@@ -1,5 +1,8 @@
 import { BrowserWindow, dialog } from "electron";
 import { register } from "electron-localshortcut";
+import { copySync } from "fs-extra";
+import { getDiskInfoSync } from "node-disk-info";
+import Drive from "node-disk-info/dist/classes/drive";
 import {
   copyFileSync,
   existsSync,
@@ -9,8 +12,8 @@ import {
   writeFileSync,
 } from "node:fs";
 import path from "node:path";
-import { getDiskInfoSync } from "node-disk-info";
-import Drive from "node-disk-info/dist/classes/drive";
+import { homePath, widgetsDir, widgetsJsonPath } from "../lib/constants";
+import { preset } from "../lib/preset";
 
 /**
  * Registers a keyboard shortcut to open the dev tools when pressing F12.
@@ -117,4 +120,69 @@ export function getDiskUsage() {
  */
 export function mergeWithPreset(source: WidgetConfig, preset: WidgetConfig) {
   return Object.assign({}, preset, source);
+}
+
+/**
+ * Adds a widget as a plugin.
+ * This function prompts the user to select a folder to add as a widget. It then creates a destination directory for the widget and copies the widget files to the destination directory. It also updates the widgets.json file with the widget information. If the widget already exists, an error message is shown. If the selected directory does not contain an index.html file, an error message is shown as well.
+ *
+ * @returns {Promise<void>} A promise that resolves when the widget is added successfully.
+ */
+export async function addWidgetAsPlugin() {
+  const mainWindow = BrowserWindow.getFocusedWindow();
+  if (mainWindow) {
+    const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, {
+      properties: ["openDirectory"],
+      title: "Select a folder to add as a widget.",
+      defaultPath: homePath,
+    });
+    if (canceled) {
+      return;
+    } else {
+      const srcDir = filePaths[0];
+      const srcDirName = path.basename(filePaths[0]);
+
+      // Create the destination directory for the widget
+      mkdirSync(path.join(widgetsDir, srcDirName), { recursive: true });
+
+      const indexhtml = path.join(filePaths[0], "index.html");
+
+      if (existsSync(indexhtml)) {
+        // Copy the widget files to the destination directory
+        copySync(path.join(srcDir), path.join(widgetsDir, srcDirName), {
+          overwrite: true,
+        });
+        getWidgetsJson(widgetsJsonPath);
+        if (Object.keys(getWidgetsJson(widgetsJsonPath)).includes(srcDirName)) {
+          // Show error message if the widget already exists
+          dialog.showMessageBox(mainWindow, {
+            type: "error",
+            message: "Widget already exists.",
+            detail: "The widget is already in the widgets directory.",
+          });
+          return;
+        } else {
+          // Add the widget to the widgets.json file
+          const widgetsData = getWidgetsJson(widgetsJsonPath);
+          widgetsData[srcDirName] = preset;
+          widgetsData[srcDirName].title = srcDirName;
+          setWidgetsJson(widgetsData, widgetsJsonPath);
+          // Show success message and restart the app
+          dialog.showMessageBox(mainWindow, {
+            type: "info",
+            message: "Widget added successfully.",
+            detail:
+              "The widget has been added to the widgets directory and added config to widgets.json file.",
+          });
+        }
+      } else {
+        // Show error message if the selected directory does not contain an index.html file
+        dialog.showMessageBox(mainWindow, {
+          type: "error",
+          message: "Invalid widget directory.",
+          detail: "The selected directory does not contain an index.html file.",
+        });
+      }
+    }
+  }
 }

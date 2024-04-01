@@ -1,6 +1,6 @@
 import { app, Menu, nativeImage, screen, Tray } from "electron";
-import { applicationName, iconPath } from "../../lib/constants";
 import is from "electron-is";
+import { applicationName, iconPath } from "../../lib/constants";
 import { createWindow } from "../browser-windows/main-window";
 import {
   getAllWindowsExceptMain,
