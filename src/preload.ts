@@ -3,6 +3,8 @@
  * It imports necessary modules and sets up event listeners for the window.
  */
 
+import { IpcChannels } from "./channels/ipc-channels";
+
 window.addEventListener("DOMContentLoaded", async () => {
   const minimizeBtn = document.getElementById("minimizeBtn");
   const closeBtn = document.getElementById("closeBtn");
@@ -55,7 +57,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 });
 
 import { contextBridge, ipcRenderer } from "electron";
-import { IpcChannels } from "./lib/constants";
 
 // preload with contextIsolation disabled
 window.withoutContextApi = {

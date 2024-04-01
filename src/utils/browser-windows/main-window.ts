@@ -1,6 +1,7 @@
 import { BrowserWindow } from "electron";
 import path from "node:path";
-import { openDevToolsWithShortcut, showNotification } from "../utils";
+import { showNotification } from "../notification";
+import { openDevToolsWithShortcut } from "../utils";
 import { applicationName } from "../../lib/constants";
 
 let mainWindow: BrowserWindow | null = null;

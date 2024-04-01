@@ -1,9 +1,6 @@
 import { BrowserWindow, dialog, ipcMain, shell } from "electron";
-import {
-  applicationName,
-  IpcChannels,
-  widgetsJsonPath,
-} from "../../lib/constants";
+import { IpcChannels } from "../../channels/ipc-channels";
+import { applicationName, widgetsJsonPath } from "../../lib/constants";
 import { getAllWindowsExceptMain } from "../browser-windows/utils";
 import { createSingleWindowForWidgets } from "../browser-windows/widget-windows";
 import {

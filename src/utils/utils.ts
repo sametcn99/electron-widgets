@@ -1,4 +1,4 @@
-import { BrowserWindow, dialog, Notification } from "electron";
+import { BrowserWindow, dialog } from "electron";
 import { register } from "electron-localshortcut";
 import { copySync } from "fs-extra";
 import { getDiskInfoSync } from "node-disk-info";
@@ -20,11 +20,11 @@ import { preset } from "../lib/preset";
  * @export
  * @param {BrowserWindow} win - The BrowserWindow instance.
  */
-export const openDevToolsWithShortcut = (win: BrowserWindow) => {
+export function openDevToolsWithShortcut(win: BrowserWindow) {
   register(win, "F12", () => {
     win.webContents.openDevTools();
   });
-};
+}
 
 /**
  * Reads the widgets.json file and returns its contents as a string.
@@ -118,8 +118,9 @@ export function getDiskUsage() {
  * @param preset - The preset widget configuration.
  * @returns A new object that is a merge of the `preset` and `source` configurations.
  */
-export const mergeWithPreset = (source: WidgetConfig, preset: WidgetConfig) =>
-  Object.assign({}, preset, source);
+export function mergeWithPreset(source: WidgetConfig, preset: WidgetConfig) {
+  return Object.assign({}, preset, source);
+}
 
 /**
  * Adds a widget as a plugin.
@@ -184,19 +185,4 @@ export async function addWidgetAsPlugin() {
       }
     }
   }
-}
-
-/**
- * Displays a notification with the specified title and body.
- * @param NOTIFICATION_TITLE - The title of the notification.
- * @param NOTIFICATION_BODY - The body of the notification (optional).
- */
-export function showNotification(
-  NOTIFICATION_TITLE: string,
-  NOTIFICATION_BODY: string = "",
-) {
-  new Notification({
-    title: NOTIFICATION_TITLE,
-    body: NOTIFICATION_BODY,
-  }).show();
 }
