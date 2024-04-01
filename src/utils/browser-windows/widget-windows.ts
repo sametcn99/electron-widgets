@@ -5,7 +5,6 @@ import {
 } from "electron";
 import path from "node:path";
 import { getWidgetsJson, openDevToolsWithShortcut } from "../utils";
-import { writeFileSync } from "node:fs";
 import { widgetsDir, widgetsJsonPath } from "../../lib/constants";
 
 /**
@@ -59,17 +58,6 @@ export function createSingleWindowForWidgets(key: string) {
       widgetsData[key];
     // Check if the widget is set to be visible
     if (widget.visible) {
-      // Generate random positions if none are defined
-      if (!widget.x && !widget.y) {
-        widget.x = Math.floor(Math.random() * 100);
-        widget.y = Math.floor(Math.random() * 100);
-        widgetsData[key] = widget;
-        // Update the widgets.json file with new positions
-        writeFileSync(
-          path.join(__dirname, "/widgets/widgets.json"),
-          JSON.stringify(widgetsData, null, 2),
-        );
-      }
       try {
         // Create a new browser window for the widget
         const win = new BrowserWindow({

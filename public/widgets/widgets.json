@@ -1,7 +1,7 @@
 {
   "clock": {
     "title": "clock",
-    "visible": true,
+    "visible": false,
     "created_at": "24.03.2024",
     "updated_at": "24.03.2024",
     "creator": "sametcn99",
@@ -11,8 +11,6 @@
     "autoHideMenuBar": false,
     "titleBarStyle": "hidden",
     "resizable": true,
-    "x": 191,
-    "y": 292,
     "maximizable": false,
     "minimizable": false,
     "skipTaskbar": true,
@@ -26,7 +24,7 @@
   },
   "weather": {
     "title": "weather",
-    "visible": true,
+    "visible": false,
     "created_at": "24.03.2024",
     "updated_at": "24.03.2024",
     "creator": "sametcn99",
@@ -36,8 +34,6 @@
     "autoHideMenuBar": true,
     "titleBarStyle": "hidden",
     "resizable": true,
-    "x": 10,
-    "y": 410,
     "maximizable": false,
     "minimizable": false,
     "skipTaskbar": true,
@@ -51,15 +47,13 @@
   },
   "transparentClock": {
     "title": "transparentClock",
-    "visible": true,
+    "visible": false,
     "width": 652,
     "height": 427,
     "transparent": true,
     "autoHideMenuBar": true,
     "titleBarStyle": "hidden",
     "resizable": true,
-    "x": 636,
-    "y": 0,
     "maximizable": false,
     "minimizable": false,
     "skipTaskbar": true,
@@ -83,8 +77,6 @@
     "autoHideMenuBar": true,
     "titleBarStyle": "hidden",
     "resizable": true,
-    "x": 10,
-    "y": 221,
     "maximizable": false,
     "minimizable": false,
     "skipTaskbar": true,
@@ -105,8 +97,6 @@
     "autoHideMenuBar": true,
     "titleBarStyle": "hidden",
     "resizable": true,
-    "x": 10,
-    "y": 825,
     "maximizable": false,
     "minimizable": false,
     "skipTaskbar": true,
@@ -120,7 +110,7 @@
   },
   "search": {
     "title": "search",
-    "visible": true,
+    "visible": false,
     "created_at": "24.03.2024",
     "updated_at": "24.03.2024",
     "creator": "sametcn99",
@@ -130,8 +120,6 @@
     "autoHideMenuBar": true,
     "titleBarStyle": "hidden",
     "resizable": true,
-    "x": 10,
-    "y": 669,
     "maximizable": false,
     "minimizable": false,
     "skipTaskbar": true,
@@ -145,7 +133,7 @@
   },
   "pomodoro": {
     "title": "pomodoro",
-    "visible": true,
+    "visible": false,
     "creator": "https://codepen.io/rajdgreat007/pen/edvZpx",
     "path": "localhost:3000/",
     "port": 3000,
@@ -165,8 +153,6 @@
       "contextIsolation": true,
       "nodeIntegration": true
     },
-    "closable": true,
-    "x": 558,
-    "y": 406
+    "closable": true
   }
 }
