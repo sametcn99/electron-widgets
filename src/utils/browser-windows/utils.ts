@@ -172,6 +172,10 @@ export const setAlwaysOnTopAllWindowsExceptMain = (
   }
 };
 
+/**
+ * Retrieves all browser windows except the main window.
+ * @returns An array of BrowserWindow instances representing the windows.
+ */
 export const getAllWindowsExceptMain = (): BrowserWindow[] => {
   try {
     const windows: BrowserWindow[] = [];
