@@ -1,4 +1,6 @@
-export const preset: WidgetConfig = {
+import { BrowserWindowConstructorOptions } from "electron";
+
+export const preset: WidgetConfig & BrowserWindowConstructorOptions = {
   title: `Widget Window - ${Math.floor(Math.random() * 1000)}`,
   visible: true,
   created_at: new Date().toISOString(),
@@ -18,7 +20,7 @@ export const preset: WidgetConfig = {
   thickFrame: false,
   frame: false,
   hasShadow: false,
-  webpreferences: {
+  webPreferences: {
     contextIsolation: true,
     nodeIntegration: true,
   },
