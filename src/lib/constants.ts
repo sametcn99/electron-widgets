@@ -18,3 +18,6 @@ export const iconPath = path.join(__dirname, "assets", "electron.png");
 
 // Define the home path
 export const homePath: string = path.join(homedir());
+
+export const sourceCodeUrl: string =
+  "https://api.github.com/repos/sametcn99/electron-widgets/zipball";

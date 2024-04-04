@@ -98,6 +98,28 @@ export function copyWidgetsDirIfNeeded(
   }
 }
 
+export async function downloadFolder() {
+  try {
+    const url = `https://api.github.com/repos/sametcn99/electron-widgets/zipball/`;
+    console.log("Downloading from:", url);
+
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(
+        "Failed to download folder. HTTP status " + response.status,
+      );
+    }
+    const blob = await response.blob();
+    const arrayBuffer = await blob.arrayBuffer();
+    writeFileSync(
+      path.join(homePath, "widgets.zip"),
+      new Uint8Array(arrayBuffer),
+    );
+  } catch (error) {
+    console.error("Error while downloading folder:", error);
+  }
+}
+
 /**
  * Retrieves the disk usage information for all drives.
  * @returns An array of Drive objects representing the disk usage information for each drive.
