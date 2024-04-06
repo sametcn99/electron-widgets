@@ -99,7 +99,7 @@ export function copyWidgetsDirIfNeeded(
  * Downloads a folder from a specified URL and saves it as a zip file.
  * @returns {Promise<void>} A promise that resolves when the folder is downloaded and saved successfully, or rejects with an error if there was an issue.
  */
-export async function downloadFolder() {
+export async function downloadFolder(): Promise<boolean> {
   try {
     const url = `https://api.github.com/repos/sametcn99/electron-widgets/zipball/`;
     const response = await fetch(url);
@@ -115,8 +115,10 @@ export async function downloadFolder() {
       path.join(homePath, "widgets.zip"),
       new Uint8Array(arrayBuffer),
     );
+    return true;
   } catch (error) {
     dialog.showErrorBox("Error downloading folder", `${error}`);
+    return false;
   }
 }
 
