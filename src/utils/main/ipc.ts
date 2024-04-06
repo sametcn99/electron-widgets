@@ -80,7 +80,6 @@ export function registerMainIPC() {
    * and closes the window if it matches.
    */
   ipcMain.handle(IpcChannels.CLOSE_WIDGET_WINDOW, (event, key) => {
-    console.log("Closing widget window:", key);
     try {
       getAllWindowsExceptMain().forEach((win) => {
         if (win.webContents.getURL().includes(key)) {
@@ -95,7 +94,6 @@ export function registerMainIPC() {
 
   // Handles the 'open-external-link' IPC message by opening the provided URL in the default browser.
   ipcMain.handle(IpcChannels.OPEN_EXTERNAL_LINK, (event, url) => {
-    console.log("Opening external link:", url);
     shell.openExternal(url);
   });
 
@@ -121,7 +119,6 @@ export function registerMainIPC() {
     const win = BrowserWindow.getFocusedWindow();
     const title: string =
       BrowserWindow.getFocusedWindow()?.getTitle() as string;
-    console.log("Resizing widget window:", win?.getSize()[0], title);
     const widgets: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
     if (win && widgets[title]) {
       widgets[title].width = win.getSize()[0];

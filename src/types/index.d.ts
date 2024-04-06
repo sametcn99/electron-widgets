@@ -17,6 +17,7 @@ interface WidgetConfig {
 interface WidgetsConfig {
   [key: string]: WidgetConfig;
 }
+
 interface Window {
   electronAPI: {
     minimizeWindow: () => Promise<void>;
