@@ -11,7 +11,7 @@ export const preset: WidgetConfig & BrowserWindowConstructorOptions = {
   width: 300,
   height: 130,
   transparent: true,
-  autoHideMenuBar: false,
+  autoHideMenuBar: true,
   titleBarStyle: "hidden",
   resizable: true,
   maximizable: false,
