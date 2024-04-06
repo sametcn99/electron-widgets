@@ -38,7 +38,6 @@ export function getWidgetsJson(widgetsJsonPath: string): WidgetsConfig {
     const widgetsData: WidgetsConfig = JSON.parse(widgetsDataRaw);
     return widgetsData;
   } catch (error) {
-    console.error("Failed to read widgets.json:", error);
     dialog.showErrorBox("Failed to read widgets.json", `${error}`);
     throw error;
   }
@@ -56,7 +55,6 @@ export function setWidgetsJson(
   try {
     writeFileSync(widgetsJsonPath, JSON.stringify(jsonData, null, 2));
   } catch (err) {
-    console.error(`Error writing to widgets.json:`, err);
     dialog.showErrorBox("Error writing to widgets.json", `${err}`);
   }
 }
@@ -93,20 +91,22 @@ export function copyWidgetsDirIfNeeded(
       }
     }
   } catch (error) {
-    console.error("Failed to copy widgets directory:", error);
     dialog.showErrorBox("Failed to copy widgets directory", `${error}`);
   }
 }
 
+/**
+ * Downloads a folder from a specified URL and saves it as a zip file.
+ * @returns {Promise<void>} A promise that resolves when the folder is downloaded and saved successfully, or rejects with an error if there was an issue.
+ */
 export async function downloadFolder() {
   try {
     const url = `https://api.github.com/repos/sametcn99/electron-widgets/zipball/`;
-    console.log("Downloading from:", url);
-
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error(
-        "Failed to download folder. HTTP status " + response.status,
+      dialog.showErrorBox(
+        "Failed to download folder",
+        `Failed to download folder. HTTP status ${response.status}`,
       );
     }
     const blob = await response.blob();
@@ -116,7 +116,7 @@ export async function downloadFolder() {
       new Uint8Array(arrayBuffer),
     );
   } catch (error) {
-    console.error("Error while downloading folder:", error);
+    dialog.showErrorBox("Error downloading folder", `${error}`);
   }
 }
 
