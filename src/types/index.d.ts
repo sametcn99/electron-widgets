@@ -29,6 +29,7 @@ interface Window {
     closeWidgetWindow: (widgetKey: string) => Promise<void>;
     getDiskUsage: () => Promise<Drive[]>;
     addWidget: () => Promise<void>;
+    redownloadWidgetsFolder: () => Promise<void>;
   };
   withoutContextApi: {
     openExternalLink: (url: string) => Promise<void>;

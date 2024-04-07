@@ -1,10 +1,9 @@
 import { app, BrowserWindow } from "electron";
-import { sourceWidgetsDir, widgetsDir } from "../../lib/constants";
 import { createWindow } from "../browser-windows/main-window";
 import { createWindowsForWidgets } from "../browser-windows/widget-windows";
-import { copyWidgetsDirIfNeeded } from "../utils";
 import { registerMainIPC } from "./ipc";
 import { registerTray } from "./tray";
+import { downloadAndCopyWidgetsFolderIfNeeded } from "../widgets-folder-utils";
 
 /**
  * Registers the Electron app and sets up necessary event handlers and functionality.
@@ -18,12 +17,11 @@ export function registerApp() {
   // This method will be called when Electron has finished
   // initialization and is ready to create browser windows.
   // Some APIs can only be used after this event occurs.
-  app.whenReady().then(() => {
-    copyWidgetsDirIfNeeded(sourceWidgetsDir, widgetsDir);
+  app.whenReady().then(async () => {
+    await downloadAndCopyWidgetsFolderIfNeeded();
     createWindow();
     createWindowsForWidgets();
     registerTray();
-
     app.on("activate", () => {
       if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();
