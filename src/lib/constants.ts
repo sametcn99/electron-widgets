@@ -21,3 +21,5 @@ export const homePath: string = path.join(homedir());
 
 export const sourceCodeUrl: string =
   "https://api.github.com/repos/sametcn99/electron-widgets/zipball";
+
+export const appName = "Electron Widgets";

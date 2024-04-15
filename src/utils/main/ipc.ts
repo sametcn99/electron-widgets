@@ -1,6 +1,6 @@
 import { BrowserWindow, dialog, ipcMain, shell } from "electron";
 import { IpcChannels } from "../../lib/channels/ipc-channels";
-import { applicationName, widgetsJsonPath } from "../../lib/constants";
+import { applicationName, appName, widgetsJsonPath } from "../../lib/constants";
 import { getAllWindowsExceptMain } from "../browser-windows/utils";
 import { createSingleWindowForWidgets } from "../browser-windows/widget-windows";
 import {
@@ -117,21 +117,23 @@ export function registerMainIPC() {
   // Handles the 'resize-widget-window' IPC message by updating the width and height of the widget window.
   ipcMain.handle(IpcChannels.RESIZE_WIDGET_WINDOW, () => {
     const win = BrowserWindow.getFocusedWindow();
-    const title: string =
-      BrowserWindow.getFocusedWindow()?.getTitle() as string;
-    const widgets: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
-    if (win && widgets[title]) {
-      widgets[title].width = win.getSize()[0];
-      widgets[title].height = win.getSize()[1];
-      setWidgetsJson(widgets, widgetsJsonPath);
-    } else {
-      console.error(
-        `Widget with title "${title}" not found in widgets config.`,
-        dialog.showErrorBox(
-          "Widget not found",
+    if (win?.title !== appName) {
+      const title: string =
+        BrowserWindow.getFocusedWindow()?.getTitle() as string;
+      const widgets: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
+      if (win && widgets[title]) {
+        widgets[title].width = win.getSize()[0];
+        widgets[title].height = win.getSize()[1];
+        setWidgetsJson(widgets, widgetsJsonPath);
+      } else {
+        console.error(
           `Widget with title "${title}" not found in widgets config.`,
-        ),
-      );
+          dialog.showErrorBox(
+            "Widget not found",
+            `Widget with title "${title}" not found in widgets config.`,
+          ),
+        );
+      }
     }
   });
 
