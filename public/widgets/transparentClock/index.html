@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
       :root {
         --text: #d8d8d8;
@@ -30,9 +30,7 @@
         padding-right: 45px;
         border-radius: 50px;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.123); /* x-offset y-offset blur spread color */
-}
-
-   
+      }
     </style>
   </head>
   <body>
@@ -64,7 +62,7 @@
           hour = hour < 10 ? "0" + hour : hour;
           minute = minute < 10 ? "0" + minute : minute;
 
-          let timeHTML = hour + ":" + minute ;
+          let timeHTML = hour + ":" + minute;
           document.getElementById("clock").textContent = timeHTML;
         }
 

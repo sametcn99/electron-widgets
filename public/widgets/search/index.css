@@ -2,20 +2,19 @@
   padding: 0;
   margin: 0;
 
-    /* Light */
-    --light-background: rgb(222, 231, 235);
-    --light-text: #131313e0;
-    --light-primary: #242424c0;
-    --light-border: 1px solid #aebbd6c9;
-    --light-box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.171);
-  
-    /* Dark */
-    --dark-background: #131313;
-    --dark-text: #e0e0e0;
-    --dark-primary: #c0c0c0;
-    --dark-border: 1px solid #3030309a;
-    --dark-box-shadow: 1px 1px 20px rgba(214, 214, 214, 0.096);
+  /* Light */
+  --light-background: rgb(222, 231, 235);
+  --light-text: #131313e0;
+  --light-primary: #242424c0;
+  --light-border: 1px solid #aebbd6c9;
+  --light-box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.171);
 
+  /* Dark */
+  --dark-background: #131313;
+  --dark-text: #e0e0e0;
+  --dark-primary: #c0c0c0;
+  --dark-border: 1px solid #3030309a;
+  --dark-box-shadow: 1px 1px 20px rgba(214, 214, 214, 0.096);
 }
 
 /* Dark */
@@ -29,7 +28,7 @@
   }
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   display: none;
 }
 
@@ -56,7 +55,7 @@ body {
 
 .draggable {
   -webkit-app-region: drag;
-  height:100%;
+  height: 100%;
   width: 100%;
 }
 
@@ -110,8 +109,7 @@ input {
   border-radius: 10px;
 }
 
-.input:focus{
+.input:focus {
   outline: 1px solid rgba(0, 0, 0, 0.829);
   border: 1px solid rgba(0, 0, 0, 0.829);
 }
-

@@ -44,10 +44,12 @@ export function createWindow() {
   }
   mainWindow.on("closed", () => {
     mainWindow = null;
-    showNotification(
-      applicationName,
-      "The application is still running in the background.",
-    );
+    if (BrowserWindow.getAllWindows().length !== 0) {
+      showNotification(
+        applicationName,
+        "The application is still running in the background.",
+      );
+    }
   });
   // Open the DevTools for debugging
   // mainWindow.webContents.openDevTools();

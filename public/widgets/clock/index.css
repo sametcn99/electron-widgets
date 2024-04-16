@@ -1,7 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-
-*{
-}
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
 :root {
   -webkit-user-select: none;
@@ -26,7 +23,7 @@
   --dark-box-shadow: 1px 1px 20px rgba(214, 214, 214, 0.096);
 
   /* Transition */
-  --transition-duration: 1s; 
+  --transition-duration: 1s;
 }
 
 /* Dark */
@@ -44,7 +41,10 @@
   }
 
   .container {
-    transition: background-color var(--transition-duration), border-color var(--transition-duration), box-shadow var(--transition-duration);
+    transition:
+      background-color var(--transition-duration),
+      border-color var(--transition-duration),
+      box-shadow var(--transition-duration);
   }
 }
 
@@ -63,7 +63,10 @@
   }
 
   .container {
-    transition: background-color var(--transition-duration), border-color var(--transition-duration), box-shadow var(--transition-duration);
+    transition:
+      background-color var(--transition-duration),
+      border-color var(--transition-duration),
+      box-shadow var(--transition-duration);
   }
 }
 
@@ -82,7 +85,6 @@ body {
   text-align: center;
   margin: 0px;
   margin-bottom: -30px;
-  font-family: "Roboto", sans-serif;
 }
 
 .container h3 {
@@ -90,7 +92,6 @@ body {
   font-family: "Roboto", sans-serif;
   color: var(--primary);
   margin-bottom: 1rem;
-  font-family: "Roboto", sans-serif;
 }
 
 .container {

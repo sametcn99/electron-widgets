@@ -65,6 +65,28 @@
       "nodeIntegration": true
     }
   },
+  "hacker-news": {
+    "title": "hacker-news",
+    "visible": false,
+    "created_at": "17.04.2024",
+    "creator": "sametcn99",
+    "width": 320,
+    "height": 400,
+    "transparent": true,
+    "autoHideMenuBar": true,
+    "titleBarStyle": "hidden",
+    "resizable": true,
+    "maximizable": false,
+    "minimizable": false,
+    "skipTaskbar": true,
+    "thickFrame": false,
+    "frame": false,
+    "hasShadow": false,
+    "webPreferences": {
+      "contextIsolation": true,
+      "nodeIntegration": true
+    }
+  },
   "dailyWeather": {
     "title": "dailyWeather",
     "visible": false,
