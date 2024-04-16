@@ -89,7 +89,6 @@ export function createSingleWindowForWidgets(key: string) {
 
         // Load the widget's HTML file into the window
         const indexPath = path.join(widgetsDir, key, "index.html");
-        console.log(`Loading ${indexPath}`);
         win.loadFile(indexPath);
         openDevToolsWithShortcut(win);
       } catch (err) {

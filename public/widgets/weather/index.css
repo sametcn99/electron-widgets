@@ -1,3 +1,4 @@
+
 :root {
   -webkit-user-select: none;
   user-select: none;
@@ -5,11 +6,62 @@
   margin: 0;
   width: auto;
   height: auto;
-  --text: #d8d8d8;
-    --background: #030303;
-    --primary: #cecece;
+
+  /* Light */
+  --light-background: rgb(222, 231, 235);
+  --light-text: #131313e0;
+  --light-primary: #242424c0;
+  --light-border: 1px solid #aebbd6c9;
+  --light-box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.171);
+
+  /* Dark */
+  --dark-background: #131313;
+  --dark-text: #e0e0e0;
+  --dark-primary: #c0c0c0;
+  --dark-border: 1px solid #3030309a;
+  --dark-box-shadow: 1px 1px 20px rgba(214, 214, 214, 0.096);
+
+  /* Transition */
+  --transition-duration: 1s; 
 }
 
+/* Dark */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--dark-background);
+    --text: var(--dark-text);
+    --primary: var(--dark-primary);
+    --border: var(--dark-border);
+    --box-shadow: var(--dark-box-shadow);
+  }
+
+  body {
+    transition: background-color var(--transition-duration);
+  }
+
+  .container {
+    transition: background-color var(--transition-duration), border-color var(--transition-duration), box-shadow var(--transition-duration);
+  }
+}
+
+/* Light */
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: var(--light-background);
+    --text: var(--light-text);
+    --primary: var(--light-primary);
+    --border: var(--light-border);
+    --box-shadow: var(--light-box-shadow);
+  }
+
+  body {
+    transition: background-color var(--transition-duration);
+  }
+
+  .container {
+    transition: background-color var(--transition-duration), border-color var(--transition-duration), box-shadow var(--transition-duration);
+  }
+}
 body {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   margin: 0;
@@ -26,7 +78,6 @@ body {
   align-items: center;
   justify-content: center;
   width: 80px;
-  height: 80px;
 }
 
 #weather {

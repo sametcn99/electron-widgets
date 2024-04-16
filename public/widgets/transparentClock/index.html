@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
       :root {
         --text: #d8d8d8;
         --background: #030303;
@@ -15,12 +17,22 @@
       }
       * {
         padding: 0px;
+        font-family: "Roboto", sans-serif;
+
         margin: 0px;
       }
       body {
         color: var(--text);
         -webkit-app-region: drag;
       }
+      #clock {
+        padding-left: 45px;
+        padding-right: 45px;
+        border-radius: 50px;
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.123); /* x-offset y-offset blur spread color */
+}
+
+   
     </style>
   </head>
   <body>
@@ -34,7 +46,7 @@
         align-items: center;
         justify-content: center;
         gap: 1rem;
-        font-size: 5rem;
+        font-size: 2rem;
       "
     >
       <h1 id="clock"></h1>
@@ -51,9 +63,8 @@
 
           hour = hour < 10 ? "0" + hour : hour;
           minute = minute < 10 ? "0" + minute : minute;
-          second = second < 10 ? "0" + second : second;
 
-          let timeHTML = hour + ":" + minute + ":" + second;
+          let timeHTML = hour + ":" + minute ;
           document.getElementById("clock").textContent = timeHTML;
         }
 

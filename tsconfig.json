@@ -11,6 +11,7 @@
     ],
     "target": "ESNext",
     "module": "commonjs",
+    "moduleDetection": "auto",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,

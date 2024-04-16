@@ -17,6 +17,7 @@ interface WidgetConfig {
 interface WidgetsConfig {
   [key: string]: WidgetConfig;
 }
+
 interface Window {
   electronAPI: {
     minimizeWindow: () => Promise<void>;
@@ -28,6 +29,7 @@ interface Window {
     closeWidgetWindow: (widgetKey: string) => Promise<void>;
     getDiskUsage: () => Promise<Drive[]>;
     addWidget: () => Promise<void>;
+    redownloadWidgetsFolder: () => Promise<void>;
   };
   withoutContextApi: {
     openExternalLink: (url: string) => Promise<void>;

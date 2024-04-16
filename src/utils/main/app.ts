@@ -1,10 +1,10 @@
 import { app, BrowserWindow } from "electron";
-import { sourceWidgetsDir, widgetsDir } from "../../lib/constants";
 import { createWindow } from "../browser-windows/main-window";
 import { createWindowsForWidgets } from "../browser-windows/widget-windows";
-import { copyWidgetsDirIfNeeded } from "../utils";
 import { registerMainIPC } from "./ipc";
 import { registerTray } from "./tray";
+import { copyWidgetsDirIfNeeded } from "../widgets-folder-utils";
+import { sourceWidgetsDir, widgetsDir } from "../../lib/constants";
 
 /**
  * Registers the Electron app and sets up necessary event handlers and functionality.
@@ -23,7 +23,6 @@ export function registerApp() {
     createWindow();
     createWindowsForWidgets();
     registerTray();
-
     app.on("activate", () => {
       if (BrowserWindow.getAllWindows().length === 0) {
         createWindow();

@@ -1,6 +1,6 @@
 import { BrowserWindow, dialog, ipcMain, shell } from "electron";
-import { IpcChannels } from "../../channels/ipc-channels";
-import { applicationName, widgetsJsonPath } from "../../lib/constants";
+import { IpcChannels } from "../../lib/channels/ipc-channels";
+import { applicationName, appName, widgetsJsonPath } from "../../lib/constants";
 import { getAllWindowsExceptMain } from "../browser-windows/utils";
 import { createSingleWindowForWidgets } from "../browser-windows/widget-windows";
 import {
@@ -80,7 +80,6 @@ export function registerMainIPC() {
    * and closes the window if it matches.
    */
   ipcMain.handle(IpcChannels.CLOSE_WIDGET_WINDOW, (event, key) => {
-    console.log("Closing widget window:", key);
     try {
       getAllWindowsExceptMain().forEach((win) => {
         if (win.webContents.getURL().includes(key)) {
@@ -95,7 +94,6 @@ export function registerMainIPC() {
 
   // Handles the 'open-external-link' IPC message by opening the provided URL in the default browser.
   ipcMain.handle(IpcChannels.OPEN_EXTERNAL_LINK, (event, url) => {
-    console.log("Opening external link:", url);
     shell.openExternal(url);
   });
 
@@ -119,22 +117,23 @@ export function registerMainIPC() {
   // Handles the 'resize-widget-window' IPC message by updating the width and height of the widget window.
   ipcMain.handle(IpcChannels.RESIZE_WIDGET_WINDOW, () => {
     const win = BrowserWindow.getFocusedWindow();
-    const title: string =
-      BrowserWindow.getFocusedWindow()?.getTitle() as string;
-    console.log("Resizing widget window:", win?.getSize()[0], title);
-    const widgets: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
-    if (win && widgets[title]) {
-      widgets[title].width = win.getSize()[0];
-      widgets[title].height = win.getSize()[1];
-      setWidgetsJson(widgets, widgetsJsonPath);
-    } else {
-      console.error(
-        `Widget with title "${title}" not found in widgets config.`,
-        dialog.showErrorBox(
-          "Widget not found",
+    if (win?.title !== appName) {
+      const title: string =
+        BrowserWindow.getFocusedWindow()?.getTitle() as string;
+      const widgets: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
+      if (win && widgets[title]) {
+        widgets[title].width = win.getSize()[0];
+        widgets[title].height = win.getSize()[1];
+        setWidgetsJson(widgets, widgetsJsonPath);
+      } else {
+        console.error(
           `Widget with title "${title}" not found in widgets config.`,
-        ),
-      );
+          dialog.showErrorBox(
+            "Widget not found",
+            `Widget with title "${title}" not found in widgets config.`,
+          ),
+        );
+      }
     }
   });
 
