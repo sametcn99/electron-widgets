@@ -15,6 +15,44 @@
 
 This project is a desktop application developed using Electron.js and Node.js. The application allows users to create and manage widgets on their desktops. These widgets enable users to quickly and easily access the information or tools they need.
 
+## Widget Screenshots
+<details>
+  <summary>Clock</summary>
+  <img src="/public/widgets/clock/screenshot.png"></img>
+</details>
+<details>
+  <summary>weather</summary>
+  <img src="/public/widgets/weather/screenshot.png"></img>
+</details>
+<details>
+  <summary>dailyWeather</summary>
+  <img src="/public/widgets/dailyWeather/screenshot.png"></img>
+</details>
+<details>
+  <summary>analogClock</summary>
+  <img src="/public/widgets/analogClock/screenshot.png"></img>
+</details>
+<details>
+  <summary>diskusage</summary>
+  <img src="/public/widgets/diskusage/screenshot.png"></img>
+</details>
+<details>
+  <summary>hacker-news</summary>
+  <img src="/public/widgets/hacker-news/screenshot.png"></img>
+</details>
+<details>
+  <summary>pomodoro</summary>
+  <img src="/public/widgets/pomodoro/screenshot.png"></img>
+</details>
+<details>
+  <summary>transparentClock</summary>
+  <img src="/public/widgets/transparentClock/screenshot.png"></img>
+</details>
+<details>
+  <summary>search</summary>
+  <img src="/public/widgets/search/screenshot.png"></img>
+</details>
+
 ## Features
 
 - **Widget Management**: This feature allows users to manage widgets on their desktops effortlessly. They can create new widgets, edit existing ones, and delete widgets they no longer need. This functionality provides users with the flexibility to organize their desktops according to their preferences and needs.
