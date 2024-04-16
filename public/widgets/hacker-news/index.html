@@ -20,6 +20,7 @@
         margin: 0;
         padding: 0;
       }
+
       :root {
         padding: 0;
         margin: 0;
@@ -45,18 +46,22 @@
 
         background-color: transparent;
       }
+
       body {
         overflow-x: hidden;
         font-family: "Montserrat", sans-serif;
       }
+
       /* This will hide the scrollbar */
       ::-webkit-scrollbar {
         width: 10px;
       }
+
       /* This will set the handle of the scrollbar to transparent */
       ::-webkit-scrollbar-thumb {
         background: transparent;
       }
+
       /* This will set the track of the scrollbar to transparent */
       ::-webkit-scrollbar-track {
         background: transparent;
@@ -70,24 +75,30 @@
         width: auto;
         height: 100%;
         font-family: Arial, sans-serif;
+
         a {
           text-decoration: none;
         }
+
         border-radius: 1rem;
       }
+
       #footer {
         display: flex;
         flex-direction: row;
         gap: 0.3rem;
       }
+
       #story {
         padding-top: 0.4rem;
         padding-bottom: 0.4rem;
         display: none;
       }
+
       #title:hover {
         text-decoration: underline;
       }
+
       h1 {
         -webkit-user-select: none;
         user-select: none;
@@ -98,31 +109,39 @@
         padding-bottom: 0.5rem;
         padding-top: 0.5rem;
       }
+
       @media (prefers-color-scheme: dark) {
         h1 {
           background-color: var(--dark-background);
         }
+
         #story {
           border-bottom: 2px solid var(--dark-text);
         }
+
         #container {
           background-color: var(--dark-background);
           color: var(--dark-text);
+
           a {
             color: var(--dark-text);
           }
         }
       }
+
       @media (prefers-color-scheme: light) {
         h1 {
           background-color: var(--light-background);
         }
+
         #story {
           border-bottom: 2px solid var(--light-text);
         }
+
         #container {
           background-color: var(--light-background);
           color: var(--light-text);
+
           a {
             color: var(--light-text);
           }
@@ -131,6 +150,7 @@
     </style>
     <title>hacker-news</title>
   </head>
+
   <body>
     <div id="container">
       <h1 id="widget-title">Hacker News</h1>
@@ -165,47 +185,73 @@
         };
         return date.toLocaleString("en-US", options);
       }
-
-      document.getElementById("time").innerText = new Date(
-        1175714200 * 1000,
-      ).toLocaleString();
-      fetch(
-        "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          data.forEach((id) => {
-            fetch(
-              `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`,
-            )
-              .then((response) => response.json())
-              .then((story) => {
-                console.log(story);
-                const storyContainer = document
-                  .getElementById("story")
-                  .cloneNode(true);
-                storyContainer.id = "story";
-                storyContainer.style.display = "block";
-                storyContainer.innerHTML = `
-            <p id="time">${renderTime(story.time)}</p>
-        <a id="title" href="${story.url}"  target="_blank"
+      document.getElementById("time").innerText = renderTime(1175714200);
+      function clearData() {
+        const container = document.getElementById("container");
+        container.innerHTML = `
+          <h1 id="widget-title">Hacker News</h1>
+      <div id="story">
+        <p id="time">1175714200</p>
+        <a
+          id="title"
+          href="http://www.getdropbox.com/u/2/screencast.html"
+          target="_blank"
           rel="noopener noreferrer"
-          >${story.title}</a
+          >My YC app: Dropbox - Throw away your USB drive</a
         >
         <div id="footer">
           <p>▲</p>
-          <p id="score">${story.score}</p>
+          <p id="score">242</p>
           <p>•</p>
           by
-          <p id="by">${story.by}</p>
+          <p id="by">dhouston</p>
         </div>
-          `;
-                const container = document.getElementById("container");
-                container.appendChild(storyContainer);
-              });
+      </div>
+        `;
+      }
+
+      function fetchData() {
+        clearData();
+        fetch(
+          "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            data.forEach((id) => {
+              fetch(
+                `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`,
+              )
+                .then((response) => response.json())
+                .then((story) => {
+                  console.log(story);
+                  const storyContainer = document
+                    .getElementById("story")
+                    .cloneNode(true);
+                  storyContainer.id = "story";
+                  storyContainer.style.display = "block";
+                  storyContainer.innerHTML = `
+            <p id="time">${renderTime(story.time)}</p>
+            <a id="title" href="${story.url}"  target="_blank"
+            rel="noopener noreferrer"
+            >${story.title}</a
+            >
+            <div id="footer">
+              <p>▲</p>
+              <p id="score">${story.score}</p>
+              <p>•</p>
+              by
+              <p id="by">${story.by}</p>
+              </div>
+              `;
+                  const container = document.getElementById("container");
+                  container.appendChild(storyContainer);
+                });
+            });
           });
-        });
+      }
+
+      setInterval(fetchData, 30 * 60 * 1000);
     </script>
   </body>
 </html>
