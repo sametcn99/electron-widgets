@@ -17,7 +17,11 @@ fetch("http://ip-api.com/json/")
     let apiURL =
       apiBaseURL +
       `latitude=${lat}&longitude=${lon}&current=temperature_2m,is_day,weather_code&daily=weather_code,temperature_2m_max&timeformat=unixtime&timezone=auto`;
-
+    // set location to display
+    const country = document.getElementById("country");
+    country.innerText = data.country;
+    const regionName = document.getElementById("regionName");
+    regionName.innerText = data.regionName;
     return fetch(apiURL);
   })
   .then((response) => response.json())

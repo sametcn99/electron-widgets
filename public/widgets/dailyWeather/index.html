@@ -1,15 +1,18 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./index.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-  <link rel="stylesheet" href="./index.css" />
-</head>
-
-<body>
-  <div style="
+  <body>
+    <div
+      style="
         border-radius: 20px;
         background-color: var(--background);
         padding-top: 20px;
@@ -25,8 +28,10 @@
         width: 100%;
         padding: 0;
         text-align: center;
-      ">
-    <div style="
+      "
+    >
+      <div
+        style="
           display: flex;
           flex-direction: row;
           gap: 2px;
@@ -35,31 +40,49 @@
           margin-bottom: -20px;
           align-items: center;
           justify-content: center;
-        ">
-      <p id="date" style="font-size: large; font-weight: bold">
-        Saturday, Mar 30
-      </p>
-      <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 11px">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-      </svg>
-      <p id="location">Ankara,Turkey</p>
-    </div>
-    <div id="weather-icon" style="
+        "
+      >
+        <p id="date" style="font-size: large; font-weight: bold">
+          Saturday, Mar 30
+        </p>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="#ffffff"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          style="width: 11px"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+          />
+        </svg>
+        <p id="location">
+          <span id="regionName">Ankara</span>, <span id="country">Turkey</span>
+        </p>
+      </div>
+      <div
+        id="weather-icon"
+        style="
           font-size: 1.5rem;
           display: flex;
           margin-bottom: 20px;
           flex-direction: row;
           align-items: center;
           margin-top: 10px;
-
-        ">
-          
-      <i style="color: rgb(165, 135, 0);" id="icon"></i>
-      <p id="temp">23</p>
+        "
+      >
+        <i style="color: rgb(165, 135, 0)" id="icon"></i>
+        <p id="temp">23</p>
+      </div>
     </div>
-  </div>
-  <script src="./renderer.js" type="module"></script>
-</body>
-
+    <script src="./renderer.js" type="module"></script>
+  </body>
 </html>
