@@ -1,6 +1,6 @@
 # Project Preview
 
-## ![Screenshot](https://raw.githubusercontent.com/sametcn99/electron-widgets/master/public/assets/screenshot.png)
+## ![Screenshot](/public/assets/screenshot.png)
 
 ![Electron.js](https://img.shields.io/badge/Electron-191970?style=for-the-badge&logo=Electron&logoColor=white)
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)

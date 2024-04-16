@@ -149,7 +149,7 @@ export function registerMainIPC() {
       win &&
       widgets[title] &&
       win?.isFocused() &&
-      widgets[title].title != applicationName
+      widgets[title].title !== applicationName
     ) {
       widgets[title].x = win.getPosition()[0];
       widgets[title].y = win.getPosition()[1];
