@@ -86,6 +86,8 @@ window.withoutContextApi = {
    */
   openExternalLink: (url: string) =>
     ipcRenderer.invoke(IpcChannels.OPEN_EXTERNAL_LINK, url),
+  openExternalApp: (url: string) =>
+    ipcRenderer.invoke(IpcChannels.OPEN_EXTERNAL_APP, url),
 };
 
 /**

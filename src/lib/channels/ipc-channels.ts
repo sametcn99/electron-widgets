@@ -12,4 +12,5 @@ export enum IpcChannels {
   RESIZE_WIDGET_WINDOW = "resize-widget-window", // Channel for resizing widget windows
   DRAG_WIDGET_WINDOW = "drag-widget-window", // Channel for dragging widget windows
   ADD_WIDGET_DIALOG = "add-widget-dialog", // Channel for adding a widget dialog
+  OPEN_EXTERNAL_APP = "open-external-app", // Channel for opening external apps
 }

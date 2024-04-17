@@ -9,6 +9,7 @@ import {
   getWidgetsJson,
   setWidgetsJson,
 } from "../utils";
+import { execFile } from "child_process";
 
 /**
  * IPC FUNCTIONS
@@ -95,6 +96,18 @@ export function registerMainIPC() {
   // Handles the 'open-external-link' IPC message by opening the provided URL in the default browser.
   ipcMain.handle(IpcChannels.OPEN_EXTERNAL_LINK, (event, url) => {
     shell.openExternal(url);
+  });
+
+  // Handles the 'open-external-link' IPC message by opening the provided URL in the default browser.
+  ipcMain.handle(IpcChannels.OPEN_EXTERNAL_APP, (event, url) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    execFile(url, (error: any) => {
+      if (error) {
+        console.error("Error opening external app:", error);
+        dialog.showErrorBox("Error opening external app", `${error}`);
+      }
+      console.log("External app opened successfully.");
+    });
   });
 
   // Handles the 'get-disk-usage' IPC message by returning the disk usage information.

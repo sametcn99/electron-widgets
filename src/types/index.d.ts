@@ -33,5 +33,6 @@ interface Window {
   };
   withoutContextApi: {
     openExternalLink: (url: string) => Promise<void>;
+    openExternalApp: (url: string) => Promise<void>;
   };
 }
