@@ -30,6 +30,7 @@ interface Window {
     getDiskUsage: () => Promise<Drive[]>;
     addWidget: () => Promise<void>;
     redownloadWidgetsFolder: () => Promise<void>;
+    openExternalApp: (url: string) => Promise<void>;
   };
   withoutContextApi: {
     openExternalLink: (url: string) => Promise<void>;
