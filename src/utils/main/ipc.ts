@@ -83,7 +83,7 @@ export function registerMainIPC() {
   ipcMain.handle(IpcChannels.CLOSE_WIDGET_WINDOW, (event, key) => {
     try {
       getAllWindowsExceptMain().forEach((win) => {
-        if (win.webContents.getURL().includes(key)) {
+        if (win.title === key) {
           win.close();
         }
       });
