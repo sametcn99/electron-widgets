@@ -114,7 +114,7 @@ input {
   border-radius: 10px;
 }
 
-.input:focus {
+input:focus {
   outline: transparent;
   border: transparent;
 }
