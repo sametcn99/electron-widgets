@@ -115,6 +115,6 @@ input {
 }
 
 .input:focus {
-  outline: 1px solid rgba(0, 0, 0, 0.829);
-  border: 1px solid rgba(0, 0, 0, 0.829);
+  outline: transparent;
+  border: transparent;
 }
