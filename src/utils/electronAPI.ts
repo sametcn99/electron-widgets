@@ -65,4 +65,10 @@ contextBridge.exposeInMainWorld("electronAPI", {
    * @returns A promise that resolves with the disk usage information.
    */
   getDiskUsage: () => ipcRenderer.invoke(IpcChannels.GET_DISK_USAGE),
+
+  /**
+   * Retrieves system information.
+   * @returns A promise that resolves with the system information.
+   */
+  getSystemInfo: async () => ipcRenderer.invoke(IpcChannels.SYSTEM_INFO),
 });

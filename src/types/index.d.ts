@@ -31,6 +31,9 @@ interface Window {
     addWidget: () => Promise<void>;
     redownloadWidgetsFolder: () => Promise<void>;
     openExternalApp: (url: string) => Promise<void>;
+    getSystemInfo: () => Promise<
+      Systeminformation.StaticData & Systeminformation.DynamicData
+    >;
   };
   withoutContextApi: {
     openExternalLink: (url: string) => Promise<void>;

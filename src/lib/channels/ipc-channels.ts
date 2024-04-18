@@ -13,4 +13,5 @@ export enum IpcChannels {
   DRAG_WIDGET_WINDOW = "drag-widget-window", // Channel for dragging widget windows
   ADD_WIDGET_DIALOG = "add-widget-dialog", // Channel for adding a widget dialog
   OPEN_EXTERNAL_APP = "open-external-app", // Channel for opening external apps
+  SYSTEM_INFO = "system-info", // Channel for getting system information
 }

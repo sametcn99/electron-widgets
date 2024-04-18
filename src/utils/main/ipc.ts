@@ -10,6 +10,7 @@ import {
   setWidgetsJson,
 } from "../utils";
 import { execFile } from "child_process";
+import { getAllData } from "systeminformation";
 
 /**
  * IPC FUNCTIONS
@@ -177,4 +178,8 @@ ipcMain.handle(IpcChannels.DRAG_WIDGET_WINDOW, () => {
 // The app is then relaunched to reflect the changes.
 ipcMain.handle(IpcChannels.ADD_WIDGET_DIALOG, async () => {
   addWidgetAsPlugin();
+});
+
+ipcMain.handle(IpcChannels.SYSTEM_INFO, async () => {
+  return getAllData();
 });
