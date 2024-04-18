@@ -19,7 +19,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
    */
   writeWidgetJson: (data: string) =>
     ipcRenderer.invoke(IpcChannels.WRITE_WIDGETS_JSON, data),
-
+  //---------------------------------------------------------------------------
   // WINDOW OPERATIONS---------------------------------------------------------
   /**
    * Creates a new widget window.
@@ -36,7 +36,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
    */
   closeWidgetWindow: (widgetKey: string) =>
     ipcRenderer.invoke(IpcChannels.CLOSE_WIDGET_WINDOW, widgetKey),
-
+  //---------------------------------------------------------------------------
   // APP OPERATIONS------------------------------------------------------------
   /**
    * Opens a dialog to add a new widget.
