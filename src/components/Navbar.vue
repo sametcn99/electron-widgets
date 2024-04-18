@@ -1,6 +1,6 @@
 <template>
     <nav id="custom-title-bar"
-        class="sticky top-0 flex flex-row items-center justify-between w-full px-2 font-bold bg-black h-fit">
+        class="sticky top-0 z-50 flex flex-row items-center justify-between w-full px-2 font-bold bg-black h-fit">
         <div class="flex flex-row items-center w-full gap-2 draggable">
             <img src="/assets/electron.png" alt="logo" class="w-4 h-4" />
             <span>Electron Widgets</span>
