@@ -13,14 +13,6 @@
   .icon {
     @apply inline-block w-6 h-6 m-1 bg-cover border-none rounded-md cursor-pointer bg-slate-300;
   }
-  .eye-visible {
-    @apply bg-[url("../assets/eye.svg")];
-  }
-
-  .eye-invisible {
-    @apply bg-[url("../assets/eye-slash.svg")];
-  }
-
   .settings-icon {
     @apply bg-[url("../assets/gear-six.svg")];
   }

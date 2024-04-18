@@ -48,8 +48,8 @@
   "transparentClock": {
     "title": "transparentClock",
     "visible": false,
-    "width": 270,
-    "height": 110,
+    "width": 280,
+    "height": 80,
     "transparent": true,
     "autoHideMenuBar": true,
     "titleBarStyle": "hidden",
