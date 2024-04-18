@@ -53,6 +53,14 @@ contextBridge.exposeInMainWorld("electronAPI", {
     ipcRenderer.invoke(IpcChannels.OPEN_EXTERNAL_LINK, url),
 
   /**
+   * Opens an external app.
+   * @param url - The URL of the app to open.
+   * @returns A promise that resolves when the operation is complete.
+   */
+  openExternalApp: (url: string) =>
+    ipcRenderer.invoke(IpcChannels.OPEN_EXTERNAL_APP, url),
+
+  /**
    * Retrieves the disk usage information.
    * @returns A promise that resolves with the disk usage information.
    */
