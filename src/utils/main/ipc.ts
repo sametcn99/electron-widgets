@@ -180,6 +180,7 @@ ipcMain.handle(IpcChannels.ADD_WIDGET_DIALOG, async () => {
   addWidgetAsPlugin();
 });
 
+// Handles the 'system-info' IPC message by returning system information.
 ipcMain.handle(IpcChannels.SYSTEM_INFO, async () => {
   return getAllData();
 });
