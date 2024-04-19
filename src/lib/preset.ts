@@ -3,11 +3,9 @@ import { BrowserWindowConstructorOptions } from "electron";
 export const preset: WidgetConfig & BrowserWindowConstructorOptions = {
   title: `Widget Window - ${Math.floor(Math.random() * 1000)}`,
   visible: true,
+  locked: false,
   created_at: new Date().toISOString(),
-  updated_at: new Date().toISOString(),
   creator: "Anonymous",
-  path: "localhost:3000/",
-  port: 3000,
   width: 300,
   height: 130,
   transparent: true,

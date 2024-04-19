@@ -1,7 +1,10 @@
 import { BrowserWindow, dialog, ipcMain, shell } from "electron";
 import { IpcChannels } from "../../lib/channels/ipc-channels";
 import { applicationName, appName, widgetsJsonPath } from "../../lib/constants";
-import { getAllWindowsExceptMain } from "../browser-windows/utils";
+import {
+  getAllWindowsExceptMain,
+  reloadAllWidgets,
+} from "../browser-windows/utils";
 import { createSingleWindowForWidgets } from "../browser-windows/widget-windows";
 import {
   addWidgetAsPlugin,
@@ -134,7 +137,12 @@ ipcMain.handle(IpcChannels.RESIZE_WIDGET_WINDOW, () => {
     const title: string =
       BrowserWindow.getFocusedWindow()?.getTitle() as string;
     const widgets: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
-    if (win && widgets[title]) {
+    if (
+      win &&
+      widgets[title] &&
+      widgets[title].title !== applicationName &&
+      widgets[title].locked === false
+    ) {
       widgets[title].width = win.getSize()[0];
       widgets[title].height = win.getSize()[1];
       setWidgetsJson(widgets, widgetsJsonPath);
@@ -156,16 +164,26 @@ ipcMain.handle(IpcChannels.RESIZE_WIDGET_WINDOW, () => {
 ipcMain.handle(IpcChannels.DRAG_WIDGET_WINDOW, () => {
   const widgets: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
   const win = BrowserWindow.getFocusedWindow();
-  const title: string = BrowserWindow.getFocusedWindow()?.getTitle() as string;
+  const title: string = win?.getTitle() as string;
   if (
     win &&
     widgets[title] &&
     win?.isFocused() &&
-    widgets[title].title !== applicationName
+    widgets[title].title !== applicationName &&
+    widgets[title].locked === false
   ) {
     widgets[title].x = win.getPosition()[0];
     widgets[title].y = win.getPosition()[1];
     setWidgetsJson(widgets, widgetsJsonPath);
+  }
+  if (
+    win &&
+    widgets[title] &&
+    win?.isFocused() &&
+    widgets[title].title !== applicationName &&
+    widgets[title].locked === true
+  ) {
+    win.setPosition(widgets[title].x, widgets[title].y);
   }
 });
 
@@ -183,4 +201,33 @@ ipcMain.handle(IpcChannels.ADD_WIDGET_DIALOG, async () => {
 // Handles the 'system-info' IPC message by returning system information.
 ipcMain.handle(IpcChannels.SYSTEM_INFO, async () => {
   return getAllData();
+});
+
+// Handles the 'refresh-widget' IPC message by reloading the widget window.
+ipcMain.handle(IpcChannels.RELOAD_WIDGET, () => {
+  const win = BrowserWindow.getFocusedWindow();
+  if (win?.title !== appName) {
+    win?.reload();
+  }
+});
+
+ipcMain.handle(IpcChannels.LOCK_WIDGET, () => {
+  const win = BrowserWindow.getFocusedWindow();
+  const title: string = win?.getTitle() as string;
+  const widgets: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
+  widgets[title].locked = !widgets[title].locked;
+
+  if (win?.title !== appName) {
+    if (widgets[title].locked === true) {
+      win?.setResizable(false);
+      widgets[title].resizable = false;
+    }
+  } else if (widgets[title].locked === false) {
+    win?.setResizable(true);
+    widgets[title].resizable = true;
+  } else {
+    console.error("Main window cannot be locked.");
+  }
+  setWidgetsJson(widgets, widgetsJsonPath);
+  reloadAllWidgets();
 });

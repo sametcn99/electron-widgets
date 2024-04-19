@@ -4,8 +4,14 @@ import {
   dialog,
 } from "electron";
 import path from "node:path";
-import { getWidgetsJson, openDevToolsWithShortcut } from "../utils";
+import {
+  getWidgetsJson,
+  mergeWithPreset,
+  openDevToolsWithShortcut,
+  setWidgetsJson,
+} from "../utils";
 import { widgetsDir, widgetsJsonPath } from "../../lib/constants";
+import { preset } from "../../lib/preset";
 
 /**
  * Creates windows for widgets defined in the widgets.json file.
@@ -27,6 +33,16 @@ export function createWindowsForWidgets() {
     }
     // Iterate through each widget in the data
     Object.entries(widgetsData).forEach(([key, widget]) => {
+      // Merge the widget with the preset values
+      widgetsData[key] = mergeWithPreset(widget, preset);
+
+      // check if the widget is locked and set resizable to false if it is locked set it to true
+      if (widgetsData[key].locked === true) {
+        widgetsData[key].resizable = false;
+      } else {
+        widgetsData[key].resizable = true;
+      }
+      setWidgetsJson(widgetsData, widgetsJsonPath);
       // Check if the widget is set to be visible
       if (widget.visible) {
         createSingleWindowForWidgets(key);

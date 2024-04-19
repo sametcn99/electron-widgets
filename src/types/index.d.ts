@@ -3,14 +3,13 @@ interface WidgetConfig {
   title: string;
   visible: boolean;
   created_at: string;
-  updated_at: string;
   creator: string;
-  path: string;
-  port: number;
   width: number;
   height: number;
   x: number;
   y: number;
+  locked: boolean;
+  resizable: boolean;
 }
 
 // Assuming widgetsData is an object where each key is a string and the value is a WidgetConfig
@@ -34,6 +33,8 @@ interface Window {
     getSystemInfo: () => Promise<
       Systeminformation.StaticData & Systeminformation.DynamicData
     >;
+    reloadWidget: () => Promise<void>;
+    lockWidget: () => Promise<void>;
   };
   withoutContextApi: {
     openExternalLink: (url: string) => Promise<void>;

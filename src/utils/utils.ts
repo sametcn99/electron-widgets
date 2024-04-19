@@ -72,7 +72,10 @@ export function getDiskUsage() {
  * @param preset - The preset widget configuration.
  * @returns A new object that is a merge of the `preset` and `source` configurations.
  */
-export function mergeWithPreset(source: WidgetConfig, preset: WidgetConfig) {
+export function mergeWithPreset(
+  source: WidgetConfig,
+  preset: WidgetConfig,
+): WidgetConfig {
   return Object.assign({}, preset, source);
 }
 

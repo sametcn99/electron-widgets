@@ -71,4 +71,18 @@ contextBridge.exposeInMainWorld("electronAPI", {
    * @returns A promise that resolves with the system information.
    */
   getSystemInfo: async () => ipcRenderer.invoke(IpcChannels.SYSTEM_INFO),
+
+  /**
+   * Refreshes a widget.
+   * @param widgetId - The ID of the widget to refresh.
+   * @returns A promise that resolves when the operation is complete.
+   */
+  reloadWidget: () => ipcRenderer.invoke(IpcChannels.RELOAD_WIDGET),
+
+  /**
+   * Locks a widget.
+   * @param widgetId - The ID of the widget to lock.
+   * @returns A promise that resolves when the operation is complete.
+   */
+  lockWidget: () => ipcRenderer.invoke(IpcChannels.LOCK_WIDGET),
 });

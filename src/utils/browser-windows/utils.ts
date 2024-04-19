@@ -1,5 +1,6 @@
 import { BrowserWindow, dialog } from "electron";
 import { applicationName } from "../../lib/constants";
+import { createWindowsForWidgets } from "./widget-windows";
 
 /**
  * Retrieves the main Electron BrowserWindow instance.
@@ -51,6 +52,16 @@ export const closeAllWindowsExceptMain = (): void => {
     dialog.showErrorBox("Error closing windows", `${error}`);
   }
 };
+
+/**
+ * Reloads all widget windows.
+ * Closes all windows except for the main window and recreates
+ * the windows for all widgets defined in the widgets.json file.
+ */
+export function reloadAllWidgets() {
+  closeAllWindowsExceptMain();
+  createWindowsForWidgets();
+}
 
 /**
  * Closes all open windows.
