@@ -16,4 +16,5 @@ export enum IpcChannels {
   SYSTEM_INFO = "system-info", // Channel for getting system information
   RELOAD_WIDGET = "reload-widget", // Channel for refreshing widgets
   LOCK_WIDGET = "lock-widget", // Channel for locking widgets
+  GET_LOCATION = "get-location", // Channel for getting location
 }

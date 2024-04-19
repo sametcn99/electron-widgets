@@ -85,4 +85,10 @@ contextBridge.exposeInMainWorld("electronAPI", {
    * @returns A promise that resolves when the operation is complete.
    */
   lockWidget: () => ipcRenderer.invoke(IpcChannels.LOCK_WIDGET),
+
+  /**
+   * Retrieves the user's location.
+   * @returns A promise that resolves with the user's location.
+   */
+  getLocation: async () => ipcRenderer.invoke(IpcChannels.GET_LOCATION),
 });

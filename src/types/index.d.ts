@@ -35,6 +35,7 @@ interface Window {
     >;
     reloadWidget: () => Promise<void>;
     lockWidget: () => Promise<void>;
+    getLocation: () => Promise<void>;
   };
   withoutContextApi: {
     openExternalLink: (url: string) => Promise<void>;

@@ -211,6 +211,12 @@ ipcMain.handle(IpcChannels.RELOAD_WIDGET, () => {
   }
 });
 
+// Handles the 'lock-widget' IPC message by locking or unlocking the widget window.
+// This function gets the currently focused BrowserWindow instance and toggles the locked property
+// of the widget in the widgets.json file based on the window's title.
+// If the window is locked, it sets the window resizable property to false.
+// If the window is unlocked, it sets the window resizable property to true.
+// If the window title is the main window title, an error message is shown.
 ipcMain.handle(IpcChannels.LOCK_WIDGET, () => {
   const win = BrowserWindow.getFocusedWindow();
   const title: string = win?.getTitle() as string;
@@ -230,4 +236,20 @@ ipcMain.handle(IpcChannels.LOCK_WIDGET, () => {
   }
   setWidgetsJson(widgets, widgetsJsonPath);
   reloadAllWidgets();
+});
+
+// Handles the 'get-location' IPC message by retrieving the user's location.
+// This function uses the systeminformation library to get the user's location.
+// If the location is successfully retrieved, it is returned as a string.
+// If an error occurs, an error message is shown.
+ipcMain.handle(IpcChannels.GET_LOCATION, async () => {
+  try {
+    const location = fetch("http://ip-api.com/json/").then((response) =>
+      response.json(),
+    );
+    return location;
+  } catch (error) {
+    console.error("Error getting location:", error);
+    dialog.showErrorBox("Error getting location", `${error}`);
+  }
 });
