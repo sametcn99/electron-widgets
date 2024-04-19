@@ -64,7 +64,9 @@
           let hour = now.getHours();
           let minute = now.getMinutes();
           let second = now.getSeconds();
-
+          if (second < 10) {
+            second = "0" + second;
+          }
           hour = hour < 10 ? "0" + hour : hour;
           minute = minute < 10 ? "0" + minute : minute;
 
