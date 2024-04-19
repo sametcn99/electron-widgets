@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-document.addEventListener("DOMContentLoaded", () => {});
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("date").innerText = new Date().toDateString();
+});
 
 let lon;
 let lat;
