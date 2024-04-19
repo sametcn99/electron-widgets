@@ -91,4 +91,13 @@ contextBridge.exposeInMainWorld("electronAPI", {
    * @returns A promise that resolves with the user's location.
    */
   getLocation: async () => ipcRenderer.invoke(IpcChannels.GET_LOCATION),
+
+  /**
+   * Shows a notification.
+   * @param title - The title of the notification.
+   * @param body - The body of the notification.
+   * @returns A promise that resolves when the operation is complete.
+   */
+  showNotification: (title: string, body: string) =>
+    ipcRenderer.invoke(IpcChannels.SHOW_NOTIFICATION, title, body),
 });

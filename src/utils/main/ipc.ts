@@ -14,6 +14,7 @@ import {
 } from "../utils";
 import { execFile } from "child_process";
 import { getAllData } from "systeminformation";
+import { showNotification } from "../notification";
 
 /**
  * IPC FUNCTIONS
@@ -252,4 +253,11 @@ ipcMain.handle(IpcChannels.GET_LOCATION, async () => {
     console.error("Error getting location:", error);
     dialog.showErrorBox("Error getting location", `${error}`);
   }
+});
+
+// Handles the 'show-notification' IPC message by showing a notification.
+// This function creates a notification with the provided title and message
+// and shows it to the user.
+ipcMain.handle(IpcChannels.SHOW_NOTIFICATION, (event, title, message) => {
+  showNotification(title, message);
 });

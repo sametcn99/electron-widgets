@@ -17,4 +17,5 @@ export enum IpcChannels {
   RELOAD_WIDGET = "reload-widget", // Channel for refreshing widgets
   LOCK_WIDGET = "lock-widget", // Channel for locking widgets
   GET_LOCATION = "get-location", // Channel for getting location
+  SHOW_NOTIFICATION = "show-notification", // Channel for showing notifications
 }
