@@ -218,22 +218,13 @@ ipcMain.handle(IpcChannels.RELOAD_WIDGET, () => {
 // If the window is locked, it sets the window resizable property to false.
 // If the window is unlocked, it sets the window resizable property to true.
 // If the window title is the main window title, an error message is shown.
-ipcMain.handle(IpcChannels.LOCK_WIDGET, () => {
-  const win = BrowserWindow.getFocusedWindow();
-  const title: string = win?.getTitle() as string;
+ipcMain.handle(IpcChannels.LOCK_WIDGET, (event, widgetId) => {
   const widgets: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
-  widgets[title].locked = !widgets[title].locked;
-
-  if (win?.title !== appName) {
-    if (widgets[title].locked === true) {
-      win?.setResizable(false);
-      widgets[title].resizable = false;
-    }
-  } else if (widgets[title].locked === false) {
-    win?.setResizable(true);
-    widgets[title].resizable = true;
-  } else {
-    console.error("Main window cannot be locked.");
+  widgets[widgetId].locked = !widgets[widgetId].locked;
+  if (widgets[widgetId].locked === true) {
+    widgets[widgetId].resizable = false;
+  } else if (widgets[widgetId].locked === false) {
+    widgets[widgetId].resizable = true;
   }
   setWidgetsJson(widgets, widgetsJsonPath);
   reloadAllWidgets();

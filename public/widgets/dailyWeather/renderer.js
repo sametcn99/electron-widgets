@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("date").innerText = new Date().toDateString();
+
+  // reload page every 1 hour to get new weather data
+  setTimeout(() => {
+    location.reload();
+  }, 3600000);
 });
 
 let lon;
@@ -39,13 +44,6 @@ function renderWeatherData(data) {
   var current = data.current;
   // var weatherHTML = "";
 
-  // // Render current weather
-  var currentWeatherIcon =
-    current.weather_code === 0
-      ? "fas fa-sun weather-icon"
-      : "fas fa-cloud-sun weather-icon";
-  const icon = document.getElementById("icon");
-  icon.classList = currentWeatherIcon;
   const temp = document.getElementById("temp");
   temp.innerHTML = current.temperature_2m + "°C";
 }

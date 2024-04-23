@@ -21,16 +21,8 @@ This project is a desktop application developed using Electron.js and Node.js. T
   <img src="/public/widgets/clock/screenshot.png"></img>
 </details>
 <details>
-  <summary>weather</summary>
-  <img src="/public/widgets/weather/screenshot.png"></img>
-</details>
-<details>
   <summary>dailyWeather</summary>
   <img src="/public/widgets/dailyWeather/screenshot.png"></img>
-</details>
-<details>
-  <summary>analogClock</summary>
-  <img src="/public/widgets/analogClock/screenshot.png"></img>
 </details>
 <details>
   <summary>diskusage</summary>
@@ -39,10 +31,6 @@ This project is a desktop application developed using Electron.js and Node.js. T
 <details>
   <summary>hacker-news</summary>
   <img src="/public/widgets/hacker-news/screenshot.png"></img>
-</details>
-<details>
-  <summary>pomodoro</summary>
-  <img src="/public/widgets/pomodoro/screenshot.png"></img>
 </details>
 <details>
   <summary>transparentClock</summary>

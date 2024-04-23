@@ -6,15 +6,11 @@
   --light-background: rgb(222, 231, 235);
   --light-text: #131313e0;
   --light-primary: #242424c0;
-  --light-border: 1px solid #aebbd6c9;
-  --light-box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.171);
 
   /* Dark */
   --dark-background: #131313;
   --dark-text: #e0e0e0;
   --dark-primary: #c0c0c0;
-  --dark-border: 1px solid #3030309a;
-  --dark-box-shadow: 1px 1px 20px rgba(214, 214, 214, 0.096);
 }
 
 /* Dark */
@@ -24,7 +20,6 @@
     --text: var(--dark-text);
     --primary: var(--dark-primary);
     --border: var(--dark-border);
-    --box-shadow: var(--dark-box-shadow);
   }
 }
 
@@ -38,8 +33,6 @@
     --background: var(--light-background);
     --text: var(--light-text);
     --primary: var(--light-primary);
-    --border: var(--light-border);
-    --box-shadow: var(--light-box-shadow);
   }
 }
 
@@ -80,10 +73,8 @@ main {
   font-weight: 500;
   letter-spacing: 0.4rem;
   background-color: var(--background);
-  border: var(--border);
   height: 60px;
   padding-left: 5px;
-  box-shadow: var(--box-shadow);
   display: flex;
   width: 320px;
   place-items: center;
