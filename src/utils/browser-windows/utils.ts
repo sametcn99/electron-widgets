@@ -1,6 +1,9 @@
 import { BrowserWindow, dialog } from "electron";
 import { applicationName } from "../../lib/constants";
-import { createWindowsForWidgets } from "./widget-windows";
+import {
+  createSingleWindowForWidgets,
+  createWindowsForWidgets,
+} from "./widget-windows";
 
 /**
  * Retrieves the main Electron BrowserWindow instance.
@@ -61,6 +64,15 @@ export const closeAllWindowsExceptMain = (): void => {
 export function reloadAllWidgets() {
   closeAllWindowsExceptMain();
   createWindowsForWidgets();
+}
+
+// close and show spesific window
+export function reloadWidget(title: string) {
+  const window = getWindowExceptMain(title);
+  if (window) {
+    window.close();
+  }
+  createSingleWindowForWidgets(title);
 }
 
 /**
@@ -200,5 +212,22 @@ export const getAllWindowsExceptMain = (): BrowserWindow[] => {
     console.error("Error getting windows:", error);
     dialog.showErrorBox("Error getting windows", `${error}`);
     return [];
+  }
+};
+
+// get spesific window except main window
+export const getWindowExceptMain = (title: string): BrowserWindow | null => {
+  try {
+    let foundWindow: BrowserWindow | null = null;
+    getAllWindowsExceptMain().forEach((win) => {
+      if (win.webContents.getTitle() === title) {
+        foundWindow = win;
+      }
+    });
+    return foundWindow;
+  } catch (error) {
+    console.error("Error getting window:", error);
+    dialog.showErrorBox("Error getting window", `${error}`);
+    return null;
   }
 };

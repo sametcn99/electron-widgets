@@ -84,7 +84,8 @@ contextBridge.exposeInMainWorld("electronAPI", {
    * @param widgetId - The ID of the widget to lock.
    * @returns A promise that resolves when the operation is complete.
    */
-  lockWidget: () => ipcRenderer.invoke(IpcChannels.LOCK_WIDGET),
+  lockWidget: (widgetId: string) =>
+    ipcRenderer.invoke(IpcChannels.LOCK_WIDGET, widgetId),
 
   /**
    * Retrieves the user's location.

@@ -22,29 +22,6 @@
       "nodeIntegration": true
     }
   },
-  "weather": {
-    "title": "weather",
-    "visible": false,
-    "created_at": "24.03.2024",
-    "updated_at": "24.03.2024",
-    "creator": "sametcn99",
-    "width": 350,
-    "height": 250,
-    "transparent": true,
-    "autoHideMenuBar": true,
-    "titleBarStyle": "hidden",
-    "resizable": true,
-    "maximizable": false,
-    "minimizable": false,
-    "skipTaskbar": true,
-    "thickFrame": false,
-    "frame": false,
-    "hasShadow": false,
-    "webPreferences": {
-      "contextIsolation": true,
-      "nodeIntegration": true
-    }
-  },
   "transparentClock": {
     "title": "transparentClock",
     "visible": false,
@@ -152,51 +129,5 @@
       "contextIsolation": true,
       "nodeIntegration": true
     }
-  },
-  "pomodoro": {
-    "title": "pomodoro",
-    "visible": false,
-    "creator": "https://codepen.io/rajdgreat007/pen/edvZpx",
-    "path": "localhost:3000/",
-    "port": 3000,
-    "width": 257,
-    "height": 383,
-    "transparent": true,
-    "autoHideMenuBar": true,
-    "titleBarStyle": "hidden",
-    "resizable": true,
-    "maximizable": false,
-    "minimizable": false,
-    "skipTaskbar": true,
-    "thickFrame": false,
-    "frame": false,
-    "hasShadow": false,
-    "webpreferences": {
-      "contextIsolation": true,
-      "nodeIntegration": true
-    },
-    "closable": true
-  },
-  "analogClock": {
-    "title": "analogClock",
-    "visible": false,
-    "creator": "https://codepen.io/vaskopetrov/pen/yVEXjz",
-    "width": 360,
-    "height": 360,
-    "transparent": true,
-    "autoHideMenuBar": true,
-    "titleBarStyle": "hidden",
-    "resizable": false,
-    "maximizable": false,
-    "minimizable": false,
-    "skipTaskbar": true,
-    "thickFrame": false,
-    "frame": false,
-    "hasShadow": false,
-    "webpreferences": {
-      "contextIsolation": true,
-      "nodeIntegration": true
-    },
-    "closable": true
   }
 }

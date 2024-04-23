@@ -87,3 +87,9 @@ p {
 #weather-icon {
   font-family: "Montserrat", sans-serif;
 }
+#temp {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+}

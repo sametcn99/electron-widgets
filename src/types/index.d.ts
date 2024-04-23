@@ -34,7 +34,7 @@ interface Window {
       Systeminformation.StaticData & Systeminformation.DynamicData
     >;
     reloadWidget: () => Promise<void>;
-    lockWidget: () => Promise<void>;
+    lockWidget: (widgetId: string) => Promise<void>;
     getLocation: () => Promise<void>;
     showNotification: (title: string, body?: string) => Promise<void>;
   };

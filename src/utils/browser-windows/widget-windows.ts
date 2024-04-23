@@ -35,13 +35,6 @@ export function createWindowsForWidgets() {
     Object.entries(widgetsData).forEach(([key, widget]) => {
       // Merge the widget with the preset values
       widgetsData[key] = mergeWithPreset(widget, preset);
-
-      // check if the widget is locked and set resizable to false if it is locked set it to true
-      if (widgetsData[key].locked === true) {
-        widgetsData[key].resizable = false;
-      } else {
-        widgetsData[key].resizable = true;
-      }
       setWidgetsJson(widgetsData, widgetsJsonPath);
       // Check if the widget is set to be visible
       if (widget.visible) {
@@ -71,6 +64,20 @@ export function createSingleWindowForWidgets(key: string) {
         "Unexpected widgets data structure",
       );
       return;
+    }
+    // check if the widget is locked and set resizable to false if it is locked set it to true
+    if (
+      widgetsData[key].locked === true &&
+      widgetsData[key].resizable === true
+    ) {
+      widgetsData[key].resizable = false;
+      setWidgetsJson(widgetsData, widgetsJsonPath);
+    } else if (
+      widgetsData[key].locked === false &&
+      widgetsData[key].resizable === false
+    ) {
+      widgetsData[key].resizable = true;
+      setWidgetsJson(widgetsData, widgetsJsonPath);
     }
     // Iterate through each widget in the data
     const widget: WidgetConfig & BrowserWindowConstructorOptions =
