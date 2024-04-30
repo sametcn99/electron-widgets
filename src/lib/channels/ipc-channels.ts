@@ -18,4 +18,6 @@ export enum IpcChannels {
   LOCK_WIDGET = "lock-widget", // Channel for locking widgets
   GET_LOCATION = "get-location", // Channel for getting location
   SHOW_NOTIFICATION = "show-notification", // Channel for showing notifications
+  RSS_FEED_PARSER = "rss-feed-parser", // Channel for parse rss feed
+  OPML_TO_JSON = "opml-to-json", // Channel for parse opml to json
 }

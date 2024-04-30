@@ -101,4 +101,19 @@ contextBridge.exposeInMainWorld("electronAPI", {
    */
   showNotification: (title: string, body: string) =>
     ipcRenderer.invoke(IpcChannels.SHOW_NOTIFICATION, title, body),
+
+  /**
+   * Parses an OPML file to JSON.
+   * @param xml - The OPML file to parse.
+   */
+  getRSSFeed: (url: string) =>
+    ipcRenderer.invoke(IpcChannels.RSS_FEED_PARSER, url),
+
+  /**
+   * Parses an OPML file to JSON.
+   * @param xml - The OPML file to parse.
+   * @returns A promise that resolves with the parsed JSON.
+   */
+  opmlToJson: (xml: string) =>
+    ipcRenderer.invoke(IpcChannels.OPML_TO_JSON, xml),
 });
