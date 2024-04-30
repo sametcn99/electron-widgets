@@ -14,7 +14,8 @@ import {
 } from "../utils";
 import { execFile } from "child_process";
 import { getAllData } from "systeminformation";
-import { showNotification } from "../notification";
+import Parser from "rss-parser";
+import { opmlToJSON } from "opml-to-json";
 
 /**
  * IPC FUNCTIONS
@@ -249,6 +250,13 @@ ipcMain.handle(IpcChannels.GET_LOCATION, async () => {
 // Handles the 'show-notification' IPC message by showing a notification.
 // This function creates a notification with the provided title and message
 // and shows it to the user.
-ipcMain.handle(IpcChannels.SHOW_NOTIFICATION, (event, title, message) => {
-  showNotification(title, message);
+ipcMain.handle(IpcChannels.RSS_FEED_PARSER, (event, url) => {
+  const parser = new Parser();
+  return parser.parseURL(url);
+});
+
+// Handles the 'rss-feed-parser' IPC message by parsing an RSS feed.
+// This function uses the rss-parser library to parse an RSS feed from the provided URL.
+ipcMain.handle(IpcChannels.OPML_TO_JSON, async (event, xml) => {
+  return opmlToJSON(xml);
 });

@@ -37,6 +37,8 @@ interface Window {
     lockWidget: (widgetId: string) => Promise<void>;
     getLocation: () => Promise<void>;
     showNotification: (title: string, body?: string) => Promise<void>;
+    getRSSFeed: (url: string) => Promise<RSSFeed>;
+    opmlToJson: (xml: string) => Promise<opmlToJsonResult>;
   };
   withoutContextApi: {
     openExternalLink: (url: string) => Promise<void>;
