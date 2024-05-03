@@ -2,10 +2,7 @@ import { app, Menu, nativeImage, screen, Tray } from "electron";
 import is from "electron-is";
 import { applicationName, iconPath } from "../../lib/constants";
 import { createWindow } from "../browser-windows/main-window";
-import {
-  getAllWindowsExceptMain,
-  getMainWindow,
-} from "../browser-windows/utils";
+import { windowManager } from "../browser-windows/utils";
 
 let tray;
 
@@ -32,11 +29,13 @@ export function registerTray() {
     { label: "Open", click: () => createWindow() },
     {
       label: "Show All Widgets",
-      click: () => getAllWindowsExceptMain().forEach((win) => win.show()),
+      click: () =>
+        windowManager.getAllWindowsExceptMain().forEach((win) => win.show()),
     },
     {
       label: "Hide All Widgets",
-      click: () => getAllWindowsExceptMain().forEach((win) => win.hide()),
+      click: () =>
+        windowManager.getAllWindowsExceptMain().forEach((win) => win.hide()),
     },
     { label: "Quit", click: () => app.quit() },
   ]);
@@ -49,6 +48,6 @@ export function registerTray() {
 
   // Handle click event on the tray
   tray.on("click", () => {
-    getMainWindow()?.show();
+    windowManager.getMainWindow()?.show();
   });
 }
