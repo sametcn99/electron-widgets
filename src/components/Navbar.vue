@@ -6,11 +6,11 @@
             <span>Electron Widgets</span>
         </div>
         <div class="flex flex-row items-center gap-2 w-fit">
-            <button id="minimizeBtn"
+            <button id="minimizeBtn" title="Minimize the application"
                 class="w-8 h-8 font-extrabold transition-colors duration-300 bg-transparent border-0 rounded-md cursor-default hover:bg-zinc-800">
                 —
             </button>
-            <button id="closeBtn"
+            <button id="closeBtn" title="Close the application"
                 class="w-8 h-8 font-extrabold transition-colors duration-300 bg-transparent border-0 rounded-md cursor-default hover:bg-red-900">
                 X
             </button>

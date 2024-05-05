@@ -12,7 +12,7 @@ let mainWindow: BrowserWindow | null = null;
  * the local dev server URL or built HTML file depending on environment.
  * Also opens the DevTools for development.
  */
-export function createWindow() {
+export function createMainWindow() {
   if (mainWindow !== null) {
     mainWindow.show();
     return;
@@ -30,6 +30,7 @@ export function createWindow() {
     autoHideMenuBar: true, // Hide the menu bar
     titleBarStyle: "hidden", // Hide the title bar
     fullscreenable: false, // Disable fullscreen
+    maximizable: false, // Disable maximize
   });
 
   // Load the main window content

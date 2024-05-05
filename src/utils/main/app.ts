@@ -1,10 +1,10 @@
 import { app, BrowserWindow } from "electron";
-import { createWindow } from "../browser-windows/main-window";
 import { createWindowsForWidgets } from "../browser-windows/widget-windows";
 import "./ipc";
 import { registerTray } from "./tray";
 import { copyWidgetsDirIfNeeded } from "../widgets-folder-utils";
 import { sourceWidgetsDir, widgetsDir } from "../../lib/constants";
+import { createMainWindow } from "../browser-windows/main-window";
 
 /**
  * Registers the Electron app and sets up necessary event handlers and functionality.
@@ -19,12 +19,12 @@ if (require("electron-squirrel-startup")) {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   copyWidgetsDirIfNeeded(sourceWidgetsDir, widgetsDir);
-  createWindow();
+  createMainWindow();
   createWindowsForWidgets();
   registerTray();
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
+      createMainWindow();
     }
   });
 });

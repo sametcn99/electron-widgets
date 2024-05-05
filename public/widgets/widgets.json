@@ -16,11 +16,7 @@
     "skipTaskbar": true,
     "thickFrame": false,
     "frame": false,
-    "hasShadow": false,
-    "webPreferences": {
-      "contextIsolation": true,
-      "nodeIntegration": true
-    }
+    "hasShadow": false
   },
   "transparentClock": {
     "title": "transparentClock",
@@ -36,11 +32,7 @@
     "skipTaskbar": true,
     "thickFrame": false,
     "frame": false,
-    "hasShadow": false,
-    "webPreferences": {
-      "contextIsolation": true,
-      "nodeIntegration": true
-    }
+    "hasShadow": false
   },
   "hacker-news": {
     "title": "hacker-news",
@@ -58,11 +50,7 @@
     "skipTaskbar": true,
     "thickFrame": false,
     "frame": false,
-    "hasShadow": false,
-    "webPreferences": {
-      "contextIsolation": true,
-      "nodeIntegration": true
-    }
+    "hasShadow": false
   },
   "dailyWeather": {
     "title": "dailyWeather",
@@ -81,11 +69,7 @@
     "skipTaskbar": true,
     "thickFrame": false,
     "frame": false,
-    "hasShadow": false,
-    "webPreferences": {
-      "contextIsolation": true,
-      "nodeIntegration": true
-    }
+    "hasShadow": false
   },
   "diskusage": {
     "title": "diskusage",
@@ -101,11 +85,7 @@
     "skipTaskbar": true,
     "thickFrame": false,
     "frame": false,
-    "hasShadow": false,
-    "webPreferences": {
-      "contextIsolation": true,
-      "nodeIntegration": true
-    }
+    "hasShadow": false
   },
   "search": {
     "title": "search",
@@ -124,10 +104,6 @@
     "skipTaskbar": true,
     "thickFrame": false,
     "frame": false,
-    "hasShadow": false,
-    "webPreferences": {
-      "contextIsolation": true,
-      "nodeIntegration": true
-    }
+    "hasShadow": false
   }
 }

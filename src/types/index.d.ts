@@ -39,9 +39,7 @@ interface Window {
     showNotification: (title: string, body?: string) => Promise<void>;
     getRSSFeed: (url: string) => Promise<RSSFeed>;
     opmlToJson: (xml: string) => Promise<opmlToJsonResult>;
-  };
-  withoutContextApi: {
-    openExternalLink: (url: string) => Promise<void>;
-    openExternalApp: (url: string) => Promise<void>;
+    showAllWidgets: () => Promise<void>;
+    openDirectory: () => Promise<void>;
   };
 }

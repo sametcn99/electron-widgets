@@ -9,8 +9,9 @@
             <div class="flex flex-row gap-2">
                 <div v-if="widget.visible" @click="toggleLocked(widget, widget.title)"
                     class="rounded-full hover:bg-gray-700">
-                    <img v-if="!widget.locked" src="/assets/unlock.svg" alt="unlock" class="w-6 h-6">
-                    <img v-else src="/assets/lock.svg" alt="lock" class="w-6 h-6">
+                    <img v-if="!widget.locked" src="/assets/unlock.svg" alt="unlock" class="w-6 h-6"
+                        title="Lock Widget">
+                    <img v-else src="/assets/lock.svg" alt="lock" class="w-6 h-6" title="Unlock Widget">
                 </div>
                 <div class="flex items-center w-12 h-6 duration-300 ease-in-out bg-gray-800 rounded-full"
                     :class="{ 'bg-gray-600 ': !widget.visible }" @click="toggleVisibility(widget)">
