@@ -24,6 +24,10 @@
   --transition-duration: 1s;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 /* Dark */
 @media (prefers-color-scheme: dark) {
   :root {
@@ -91,11 +95,10 @@ body {
 .container {
   border-radius: 10px;
   background-color: var(--background);
-  padding-top: 12px;
-  padding-bottom: 12px;
   border: var(--border);
   display: flex;
-  width: 95%;
+  width: 100%;
+  height: 100vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
