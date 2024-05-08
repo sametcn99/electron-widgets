@@ -1,6 +1,6 @@
 import { BrowserWindow, dialog, ipcMain, shell } from "electron";
 import { IpcChannels } from "../../lib/channels/ipc-channels";
-import { applicationName, appName, widgetsJsonPath } from "../../lib/constants";
+import { applicationName, widgetsJsonPath } from "../../lib/constants";
 import { createSingleWindowForWidgets } from "../browser-windows/widget-windows";
 import {
   addWidgetAsPlugin,
@@ -132,7 +132,7 @@ ipcMain.handle(IpcChannels.SHOW_ALL_WIDGETS, () => {
 // Handles the 'resize-widget-window' IPC message by updating the width and height of the widget window.
 ipcMain.handle(IpcChannels.RESIZE_WIDGET_WINDOW, () => {
   const win = BrowserWindow.getFocusedWindow();
-  if (win?.title !== appName) {
+  if (win?.title !== applicationName) {
     const title: string =
       BrowserWindow.getFocusedWindow()?.getTitle() as string;
     const widgets: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
@@ -205,7 +205,7 @@ ipcMain.handle(IpcChannels.SYSTEM_INFO, async () => {
 // Handles the 'refresh-widget' IPC message by reloading the widget window.
 ipcMain.handle(IpcChannels.RELOAD_WIDGET, () => {
   const win = BrowserWindow.getFocusedWindow();
-  if (win?.title !== appName) {
+  if (win?.title !== applicationName) {
     win?.reload();
   }
 });
