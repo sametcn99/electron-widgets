@@ -28,3 +28,8 @@ app.whenReady().then(() => {
     }
   });
 });
+
+app.setLoginItemSettings({
+  openAtLogin: true,
+  enabled: true,
+});
