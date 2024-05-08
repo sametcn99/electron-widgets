@@ -5,6 +5,10 @@ import { IpcChannels } from "../lib/channels/ipc-channels";
  * Exposes Electron API to the main world.
  */
 contextBridge.exposeInMainWorld("electronAPI", {
+  //---------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   // WIDGET JSON OPERATIONS-----------------------------------------------------
   /**
    * Reads the widgets JSON file.
@@ -19,6 +23,10 @@ contextBridge.exposeInMainWorld("electronAPI", {
    */
   writeWidgetJson: (data: string) =>
     ipcRenderer.invoke(IpcChannels.WRITE_WIDGETS_JSON, data),
+
+  //---------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   //---------------------------------------------------------------------------
   // WINDOW OPERATIONS---------------------------------------------------------
   /**
@@ -26,6 +34,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
    * @param widgetKey - The key of the widget to create.
    * @returns A promise that resolves when the operation is complete.
    */
+
   createWidgetWindow: (widgetKey: string) =>
     ipcRenderer.invoke(IpcChannels.CREATE_WIDGET_WINDOW, widgetKey),
 
@@ -36,6 +45,31 @@ contextBridge.exposeInMainWorld("electronAPI", {
    */
   closeWidgetWindow: (widgetKey: string) =>
     ipcRenderer.invoke(IpcChannels.CLOSE_WIDGET_WINDOW, widgetKey),
+
+  /**
+   * Shows all widgets on the screen.
+   * @returns A promise that resolves when the operation is complete.
+   */
+  showAllWidgets: () => ipcRenderer.invoke(IpcChannels.SHOW_ALL_WIDGETS),
+
+  /**
+   * Refreshes a widget.
+   * @param widgetId - The ID of the widget to refresh.
+   * @returns A promise that resolves when the operation is complete.
+   */
+  reloadWidget: () => ipcRenderer.invoke(IpcChannels.RELOAD_WIDGET),
+
+  /**
+   * Locks a widget.
+   * @param widgetId - The ID of the widget to lock.
+   * @returns A promise that resolves when the operation is complete.
+   */
+  lockWidget: (widgetId: string) =>
+    ipcRenderer.invoke(IpcChannels.LOCK_WIDGET, widgetId),
+
+  //---------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
+  //---------------------------------------------------------------------------
   //---------------------------------------------------------------------------
   // APP OPERATIONS------------------------------------------------------------
   /**
@@ -43,6 +77,12 @@ contextBridge.exposeInMainWorld("electronAPI", {
    * @returns A promise that resolves when the operation is complete.
    */
   addWidget: () => ipcRenderer.invoke(IpcChannels.ADD_WIDGET_DIALOG),
+
+  /**
+   * Opens a dialog to select a directory.
+   * @returns A promise that resolves with the selected directory.
+   */
+  openDirectory: () => ipcRenderer.invoke(IpcChannels.OPEN_DIRECTORY),
 
   /**
    * Opens an external link in the default browser.
@@ -71,21 +111,6 @@ contextBridge.exposeInMainWorld("electronAPI", {
    * @returns A promise that resolves with the system information.
    */
   getSystemInfo: async () => ipcRenderer.invoke(IpcChannels.SYSTEM_INFO),
-
-  /**
-   * Refreshes a widget.
-   * @param widgetId - The ID of the widget to refresh.
-   * @returns A promise that resolves when the operation is complete.
-   */
-  reloadWidget: () => ipcRenderer.invoke(IpcChannels.RELOAD_WIDGET),
-
-  /**
-   * Locks a widget.
-   * @param widgetId - The ID of the widget to lock.
-   * @returns A promise that resolves when the operation is complete.
-   */
-  lockWidget: (widgetId: string) =>
-    ipcRenderer.invoke(IpcChannels.LOCK_WIDGET, widgetId),
 
   /**
    * Retrieves the user's location.

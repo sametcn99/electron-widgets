@@ -1,8 +1,30 @@
 {
   "name": "electron-widgets",
   "productName": "electron-widgets",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "A minimal widget application created with electron.js",
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sametcn99/electron-widgets"
+  },
+  "homepage": "https://www.electron-widgets.sametcc.me",
+  "keywords": [
+    "electron",
+    "widgets",
+    "application",
+    "widget manager"
+  ],
+  "author": {
+    "name": "sametcn99",
+    "email": "sametcn99@gmail.com",
+    "url": "https://www.electron-widgets.sametcc.me"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
   "main": ".vite/build/main.js",
   "scripts": {
     "start": "electron-forge start",
@@ -43,18 +65,11 @@
     "typescript": "^5.4.5",
     "vite": "^5.2.9"
   },
-  "keywords": [],
-  "author": {
-    "name": "sametcn99",
-    "email": "sametcn99@gmail.com"
-  },
-  "license": "GPL-3.0",
   "dependencies": {
     "@electron-forge/shared-types": "^7.4.0",
     "electron-is": "^3.0.0",
     "electron-localshortcut": "^3.2.1",
     "electron-squirrel-startup": "^1.0.0",
-    "electron-store": "^8.2.0",
     "fs-extra": "^11.2.0",
     "node-disk-info": "^1.3.0",
     "node-stream-zip": "^1.15.0",

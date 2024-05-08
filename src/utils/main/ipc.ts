@@ -1,10 +1,6 @@
 import { BrowserWindow, dialog, ipcMain, shell } from "electron";
 import { IpcChannels } from "../../lib/channels/ipc-channels";
-import { applicationName, appName, widgetsJsonPath } from "../../lib/constants";
-import {
-  getAllWindowsExceptMain,
-  reloadAllWidgets,
-} from "../browser-windows/utils";
+import { applicationName, widgetsJsonPath } from "../../lib/constants";
 import { createSingleWindowForWidgets } from "../browser-windows/widget-windows";
 import {
   addWidgetAsPlugin,
@@ -16,6 +12,7 @@ import { execFile } from "child_process";
 import { getAllData } from "systeminformation";
 import Parser from "rss-parser";
 import { opmlToJSON } from "opml-to-json";
+import { windowManager } from "../browser-windows/utils";
 
 /**
  * IPC FUNCTIONS
@@ -87,7 +84,7 @@ ipcMain.handle(IpcChannels.CREATE_WIDGET_WINDOW, (event, key) => {
  */
 ipcMain.handle(IpcChannels.CLOSE_WIDGET_WINDOW, (event, key) => {
   try {
-    getAllWindowsExceptMain().forEach((win) => {
+    windowManager.getAllWindowsExceptMain().forEach((win) => {
       if (win.title === key) {
         win.close();
       }
@@ -127,7 +124,7 @@ ipcMain.handle(IpcChannels.OPEN_DIRECTORY, () => {
 
 // Handles the 'show-all-widgets' IPC message by showing all widget windows except the main window.
 ipcMain.handle(IpcChannels.SHOW_ALL_WIDGETS, () => {
-  getAllWindowsExceptMain().forEach((win) => {
+  windowManager.getAllWindowsExceptMain().forEach((win) => {
     win.show();
   });
 });
@@ -135,7 +132,7 @@ ipcMain.handle(IpcChannels.SHOW_ALL_WIDGETS, () => {
 // Handles the 'resize-widget-window' IPC message by updating the width and height of the widget window.
 ipcMain.handle(IpcChannels.RESIZE_WIDGET_WINDOW, () => {
   const win = BrowserWindow.getFocusedWindow();
-  if (win?.title !== appName) {
+  if (win?.title !== applicationName) {
     const title: string =
       BrowserWindow.getFocusedWindow()?.getTitle() as string;
     const widgets: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
@@ -208,7 +205,7 @@ ipcMain.handle(IpcChannels.SYSTEM_INFO, async () => {
 // Handles the 'refresh-widget' IPC message by reloading the widget window.
 ipcMain.handle(IpcChannels.RELOAD_WIDGET, () => {
   const win = BrowserWindow.getFocusedWindow();
-  if (win?.title !== appName) {
+  if (win?.title !== applicationName) {
     win?.reload();
   }
 });
@@ -228,7 +225,7 @@ ipcMain.handle(IpcChannels.LOCK_WIDGET, (event, widgetId) => {
     widgets[widgetId].resizable = true;
   }
   setWidgetsJson(widgets, widgetsJsonPath);
-  reloadAllWidgets();
+  windowManager.reloadAllWidgets();
 });
 
 // Handles the 'get-location' IPC message by retrieving the user's location.

@@ -28,28 +28,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Add event listener for folder button
-  const folderBtn = document.getElementById("open-directory");
-  if (folderBtn) {
-    /**
-     * Event listener for the folder button.
-     */
-    folderBtn.addEventListener("click", () => {
-      ipcRenderer.invoke(IpcChannels.OPEN_DIRECTORY);
-    });
-  }
-
-  // Add event listener for show all widgets button
-  const showAllWidgetsBtn = document.getElementById("show-all-widgets");
-  if (showAllWidgetsBtn) {
-    /**
-     * Event listener for the "Show All Widgets" button.
-     */
-    showAllWidgetsBtn.addEventListener("click", () => {
-      ipcRenderer.invoke(IpcChannels.SHOW_ALL_WIDGETS);
-    });
-  }
-
   // Add an event listener to handle window resize events
   window.addEventListener("resize", async () => {
     try {
