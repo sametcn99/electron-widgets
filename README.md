@@ -51,7 +51,7 @@ This project is a desktop application developed using Electron.js and Node.js. T
 
 - **Cross-Platform Compatibility**: Leveraging Electron.js technology, the application is compatible with multiple operating systems, including Windows, macOS, and Linux. This cross-platform compatibility ensures that users can enjoy a consistent experience regardless of the operating system they use. Whether they are working on a Windows PC, a macOS laptop, or a Linux desktop, users can install and use the application without any compatibility issues. This versatility makes the application accessible to a wide range of users across different platforms, enhancing its usability and appeal.
 
-- **Create Your Own Widgets and Contribute to the Project!**: Our project encourages users to create their own widgets and contribute to the project. By creating your own widgets, you can increase the diversity of our project and contribute to the growth and strength of our community.
+- **Create Your Own Widgets and Contribute to the Project!**: Our project encourages users to create their own widgets and contribute to the project. By creating your own widgets, you can increase the diversity of our project and contribute to the growth and strength of our community. [See how](https://github.com/sametcn99/electron-widgets/wiki)
 
 ## Installation
 
