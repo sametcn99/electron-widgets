@@ -81,6 +81,8 @@ To install the application, follow these steps:
    npm start
    ```
 
+5. Or just run the `install.sh`
+
 ## Contribution
 
 For those who want to contribute to the project, you can follow these steps:
