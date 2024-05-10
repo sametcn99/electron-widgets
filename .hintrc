@@ -11,6 +11,12 @@
           "user-select"
         ]
       }
+    ],
+    "axe/text-alternatives": [
+      "default",
+      {
+        "document-title": "off"
+      }
     ]
   },
   "browserslist": [

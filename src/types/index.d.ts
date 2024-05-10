@@ -10,6 +10,7 @@ interface WidgetConfig {
   y: number;
   locked: boolean;
   resizable: boolean;
+  alwaysOnTop: boolean;
 }
 
 // Assuming widgetsData is an object where each key is a string and the value is a WidgetConfig

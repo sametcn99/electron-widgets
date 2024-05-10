@@ -1,8 +1,7 @@
 import { app, Menu, nativeImage, screen, Tray } from "electron";
 import is from "electron-is";
-import { applicationName, iconPath } from "../../lib/constants";
-import { createMainWindow } from "../browser-windows/main-window";
-import { windowManager } from "../browser-windows/utils";
+import { createMainWindow, windowManager } from "../../utils";
+import { config } from "../../lib/config";
 
 let tray;
 
@@ -16,7 +15,7 @@ export function registerTray() {
     : 1;
 
   // Create a tray icon from the specified path and resize it
-  const trayIcon = nativeImage.createFromPath(iconPath).resize({
+  const trayIcon = nativeImage.createFromPath(config.iconPath).resize({
     width: 16 * pixelRatio,
     height: 16 * pixelRatio,
   });
@@ -41,7 +40,7 @@ export function registerTray() {
   ]);
 
   // Set the tooltip for the tray
-  tray.setToolTip(applicationName);
+  tray.setToolTip(config.applicationName);
 
   // Set the context menu for the tray
   tray.setContextMenu(contextMenu);

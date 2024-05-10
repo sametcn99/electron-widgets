@@ -3,9 +3,9 @@
  * It imports necessary modules and sets up event listeners for the window.
  */
 
-import { IpcChannels } from "./lib/channels/ipc-channels";
+import { IpcChannels } from "../../lib/ipc-channels";
 import { ipcRenderer } from "electron";
-import "./utils/electronAPI";
+import "./electronAPI";
 
 window.addEventListener("DOMContentLoaded", async () => {
   const minimizeBtn = document.getElementById("minimizeBtn");

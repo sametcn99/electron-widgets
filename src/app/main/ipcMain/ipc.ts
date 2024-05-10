@@ -1,18 +1,22 @@
 import { BrowserWindow, dialog, ipcMain, shell } from "electron";
-import { IpcChannels } from "../../lib/channels/ipc-channels";
-import { applicationName, widgetsJsonPath } from "../../lib/constants";
-import { createSingleWindowForWidgets } from "../browser-windows/widget-windows";
+import path from "node:path";
+import { existsSync, mkdirSync } from "node:fs";
+import { copySync } from "fs-extra";
+import { execFile } from "child_process";
+import { getDiskInfoSync } from "node-disk-info";
+import Drive from "node-disk-info/dist/classes/drive";
+import { opmlToJSON } from "opml-to-json";
+import { getAllData } from "systeminformation";
+import { IpcChannels } from "../../../lib/ipc-channels";
 import {
-  addWidgetAsPlugin,
-  getDiskUsage,
   getWidgetsJson,
   setWidgetsJson,
-} from "../utils";
-import { execFile } from "child_process";
-import { getAllData } from "systeminformation";
+  createSingleWindowForWidgets,
+  windowManager,
+} from "../../../utils";
 import Parser from "rss-parser";
-import { opmlToJSON } from "opml-to-json";
-import { windowManager } from "../browser-windows/utils";
+import { config } from "../../../lib/config";
+import { preset } from "../../../lib/preset";
 
 /**
  * IPC FUNCTIONS
@@ -57,7 +61,7 @@ ipcMain.handle(IpcChannels.WINDOW_ACTION, (event, action) => {
  * located in the widgets directory and returns its contents as a string.
  */
 ipcMain.handle(IpcChannels.READ_WIDGETS_JSON, () => {
-  return getWidgetsJson(widgetsJsonPath);
+  return getWidgetsJson(config.widgetsJsonPath);
 });
 
 /**
@@ -66,7 +70,7 @@ ipcMain.handle(IpcChannels.READ_WIDGETS_JSON, () => {
  * Catches any errors writing and logs them.
  */
 ipcMain.handle(IpcChannels.WRITE_WIDGETS_JSON, (event, data) => {
-  setWidgetsJson(data, widgetsJsonPath);
+  setWidgetsJson(data, config.widgetsJsonPath);
 });
 
 /**
@@ -95,6 +99,63 @@ ipcMain.handle(IpcChannels.CLOSE_WIDGET_WINDOW, (event, key) => {
   }
 });
 
+// Handles the 'resize-widget-window' IPC message by updating the width and height of the widget window.
+ipcMain.handle(IpcChannels.RESIZE_WIDGET_WINDOW, () => {
+  const win = BrowserWindow.getFocusedWindow();
+  if (win?.title !== config.applicationName) {
+    const title: string =
+      BrowserWindow.getFocusedWindow()?.getTitle() as string;
+    const widgets: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath);
+    if (
+      win &&
+      widgets[title] &&
+      widgets[title].title !== config.applicationName &&
+      widgets[title].locked === false
+    ) {
+      widgets[title].width = win.getSize()[0];
+      widgets[title].height = win.getSize()[1];
+      setWidgetsJson(widgets, config.widgetsJsonPath);
+    } else {
+      console.error(
+        `Widget with title "${title}" not found in widgets config.`,
+        dialog.showErrorBox(
+          "Widget not found",
+          `Widget with title "${title}" not found in widgets config.`,
+        ),
+      );
+    }
+  }
+});
+
+// Handles the 'drag-widget-window' IPC message by updating the position of the widget window.
+// This function gets the currently focused BrowserWindow instance and updates the x and y coordinates
+// of the widget in the widgets.json file based on the window's position.
+ipcMain.handle(IpcChannels.DRAG_WIDGET_WINDOW, () => {
+  const widgets: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath);
+  const win = BrowserWindow.getFocusedWindow();
+  const title: string = win?.getTitle() as string;
+  if (
+    win &&
+    widgets[title] &&
+    win?.isFocused() &&
+    widgets[title].title !== config.applicationName &&
+    widgets[title].locked === false
+  ) {
+    widgets[title].x = win.getPosition()[0];
+    widgets[title].y = win.getPosition()[1];
+    setWidgetsJson(widgets, config.widgetsJsonPath);
+  }
+  if (
+    win &&
+    widgets[title] &&
+    win?.isFocused() &&
+    widgets[title].title !== config.applicationName &&
+    widgets[title].locked === true
+  ) {
+    win.setPosition(widgets[title].x, widgets[title].y);
+  }
+});
+
 // Handles the 'open-external-link' IPC message by opening the provided URL in the default browser.
 ipcMain.handle(IpcChannels.OPEN_EXTERNAL_LINK, (event, url) => {
   shell.openExternal(url);
@@ -114,12 +175,18 @@ ipcMain.handle(IpcChannels.OPEN_EXTERNAL_APP, (event, url) => {
 
 // Handles the 'get-disk-usage' IPC message by returning the disk usage information.
 ipcMain.handle(IpcChannels.GET_DISK_USAGE, () => {
-  return getDiskUsage();
+  try {
+    const disks: Drive[] = getDiskInfoSync();
+    return disks;
+  } catch (e) {
+    console.error(e);
+    dialog.showErrorBox("Error getting disk usage", `${e}`);
+  }
 });
 
 // Handles the 'open-directory' IPC message by showing the widgets.json file in the file explorer.
 ipcMain.handle(IpcChannels.OPEN_DIRECTORY, () => {
-  shell.showItemInFolder(widgetsJsonPath);
+  shell.showItemInFolder(config.widgetsJsonPath);
 });
 
 // Handles the 'show-all-widgets' IPC message by showing all widget windows except the main window.
@@ -129,72 +196,72 @@ ipcMain.handle(IpcChannels.SHOW_ALL_WIDGETS, () => {
   });
 });
 
-// Handles the 'resize-widget-window' IPC message by updating the width and height of the widget window.
-ipcMain.handle(IpcChannels.RESIZE_WIDGET_WINDOW, () => {
-  const win = BrowserWindow.getFocusedWindow();
-  if (win?.title !== applicationName) {
-    const title: string =
-      BrowserWindow.getFocusedWindow()?.getTitle() as string;
-    const widgets: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
-    if (
-      win &&
-      widgets[title] &&
-      widgets[title].title !== applicationName &&
-      widgets[title].locked === false
-    ) {
-      widgets[title].width = win.getSize()[0];
-      widgets[title].height = win.getSize()[1];
-      setWidgetsJson(widgets, widgetsJsonPath);
+/**
+ * Adds a widget as a plugin.
+ * This function prompts the user to select a folder to add as a widget. It then creates a destination directory for the widget and copies the widget files to the destination directory. It also updates the widgets.json file with the widget information. If the widget already exists, an error message is shown. If the selected directory does not contain an index.html file, an error message is shown as well.
+ * @returns {Promise<void>} A promise that resolves when the widget is added successfully.
+ */
+ipcMain.handle(IpcChannels.ADD_WIDGET_DIALOG, async () => {
+  const mainWindow = BrowserWindow.getFocusedWindow();
+  if (mainWindow) {
+    const { canceled, filePaths } = await dialog.showOpenDialog(mainWindow, {
+      properties: ["openDirectory"],
+      title: "Select a folder to add as a widget.",
+      defaultPath: config.homePath,
+    });
+    if (canceled) {
+      return;
     } else {
-      console.error(
-        `Widget with title "${title}" not found in widgets config.`,
-        dialog.showErrorBox(
-          "Widget not found",
-          `Widget with title "${title}" not found in widgets config.`,
-        ),
-      );
+      const srcDir = filePaths[0];
+      const srcDirName = path.basename(filePaths[0]);
+
+      // Create the destination directory for the widget
+      mkdirSync(path.join(config.widgetsDir, srcDirName), { recursive: true });
+
+      const indexhtml = path.join(filePaths[0], "index.html");
+
+      if (existsSync(indexhtml)) {
+        // Copy the widget files to the destination directory
+        copySync(path.join(srcDir), path.join(config.widgetsDir, srcDirName), {
+          overwrite: true,
+        });
+        getWidgetsJson(config.widgetsJsonPath);
+        if (
+          Object.keys(getWidgetsJson(config.widgetsJsonPath)).includes(
+            srcDirName,
+          )
+        ) {
+          // Show error message if the widget already exists
+          dialog.showMessageBox(mainWindow, {
+            type: "error",
+            message: "Widget already exists.",
+            detail: "The widget is already in the widgets directory.",
+          });
+          return;
+        } else {
+          // Add the widget to the widgets.json file
+          const widgetsData = getWidgetsJson(config.widgetsJsonPath);
+          widgetsData[srcDirName] = preset;
+          widgetsData[srcDirName].title = srcDirName;
+          setWidgetsJson(widgetsData, config.widgetsJsonPath);
+          // Show success message and restart the app
+          dialog.showMessageBox(mainWindow, {
+            type: "info",
+            message: "Widget added successfully.",
+            detail:
+              "The widget has been added to the widgets directory and added config to widgets.json file.",
+          });
+        }
+      } else {
+        // Show error message if the selected directory does not contain an index.html file
+        dialog.showMessageBox(mainWindow, {
+          type: "error",
+          message: "Invalid widget directory.",
+          detail: "The selected directory does not contain an index.html file.",
+        });
+      }
     }
   }
-});
-
-// Handles the 'drag-widget-window' IPC message by updating the position of the widget window.
-// This function gets the currently focused BrowserWindow instance and updates the x and y coordinates
-// of the widget in the widgets.json file based on the window's position.
-ipcMain.handle(IpcChannels.DRAG_WIDGET_WINDOW, () => {
-  const widgets: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
-  const win = BrowserWindow.getFocusedWindow();
-  const title: string = win?.getTitle() as string;
-  if (
-    win &&
-    widgets[title] &&
-    win?.isFocused() &&
-    widgets[title].title !== applicationName &&
-    widgets[title].locked === false
-  ) {
-    widgets[title].x = win.getPosition()[0];
-    widgets[title].y = win.getPosition()[1];
-    setWidgetsJson(widgets, widgetsJsonPath);
-  }
-  if (
-    win &&
-    widgets[title] &&
-    win?.isFocused() &&
-    widgets[title].title !== applicationName &&
-    widgets[title].locked === true
-  ) {
-    win.setPosition(widgets[title].x, widgets[title].y);
-  }
-});
-
-// Handles the 'add-widget-dialog' IPC message by showing a dialog to add a new widget.
-// The dialog allows the user to select a folder to add as a widget. If the user cancels the dialog, nothing happens.
-// If the user selects a folder, the function checks if the folder contains an index.html file.
-// If the folder contains an index.html file, the function creates a destination directory for the widget,
-// copies the widget files to the destination directory, and adds the widget to the widgets.json file.
-// If the widget already exists, an error message is shown, and if the widget is added successfully, a success message is shown.
-// The app is then relaunched to reflect the changes.
-ipcMain.handle(IpcChannels.ADD_WIDGET_DIALOG, async () => {
-  addWidgetAsPlugin();
 });
 
 // Handles the 'system-info' IPC message by returning system information.
@@ -205,7 +272,7 @@ ipcMain.handle(IpcChannels.SYSTEM_INFO, async () => {
 // Handles the 'refresh-widget' IPC message by reloading the widget window.
 ipcMain.handle(IpcChannels.RELOAD_WIDGET, () => {
   const win = BrowserWindow.getFocusedWindow();
-  if (win?.title !== applicationName) {
+  if (win?.title !== config.applicationName) {
     win?.reload();
   }
 });
@@ -217,14 +284,14 @@ ipcMain.handle(IpcChannels.RELOAD_WIDGET, () => {
 // If the window is unlocked, it sets the window resizable property to true.
 // If the window title is the main window title, an error message is shown.
 ipcMain.handle(IpcChannels.LOCK_WIDGET, (event, widgetId) => {
-  const widgets: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
+  const widgets: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath);
   widgets[widgetId].locked = !widgets[widgetId].locked;
   if (widgets[widgetId].locked === true) {
     widgets[widgetId].resizable = false;
   } else if (widgets[widgetId].locked === false) {
     widgets[widgetId].resizable = true;
   }
-  setWidgetsJson(widgets, widgetsJsonPath);
+  setWidgetsJson(widgets, config.widgetsJsonPath);
   windowManager.reloadAllWidgets();
 });
 

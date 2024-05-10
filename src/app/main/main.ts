@@ -1,10 +1,16 @@
+/**
+ * Entry point of the application.
+ * Registers the app and initializes it.
+ */
 import { app, BrowserWindow } from "electron";
-import { createWindowsForWidgets } from "../browser-windows/widget-windows";
-import "./ipc";
+import "./ipcMain/ipc";
 import { registerTray } from "./tray";
-import { copyWidgetsDirIfNeeded } from "../widgets-folder-utils";
-import { sourceWidgetsDir, widgetsDir } from "../../lib/constants";
-import { createMainWindow } from "../browser-windows/main-window";
+import { config } from "../../lib/config";
+import {
+  copyWidgetsDirIfNeeded,
+  createMainWindow,
+  createWindowsForWidgets,
+} from "../../utils";
 
 /**
  * Registers the Electron app and sets up necessary event handlers and functionality.
@@ -20,7 +26,7 @@ if (require("electron-squirrel-startup")) {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  copyWidgetsDirIfNeeded(sourceWidgetsDir, widgetsDir);
+  copyWidgetsDirIfNeeded(config.sourceWidgetsDir, config.widgetsDir);
   createMainWindow();
   createWindowsForWidgets();
   registerTray();

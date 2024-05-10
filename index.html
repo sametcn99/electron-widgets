@@ -1,25 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/src/app/renderer/index.css" />
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta charset="UTF-8" />
-  <link rel="stylesheet" href="/src/index.css" />
-  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-
-  <!-- 
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <!-- 
   - default-src 'self';: Allows loading resources (e.g., JavaScript, CSS, images, etc.) only from the same origin as the document.
   - script-src 'self';: Allows executing scripts only from the same origin as the document.
   - style-src 'self';: Allows loading stylesheets only from the same origin as the document.
 -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'" />
-  <title>Electron Widgets</title>
-</head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'"
+    />
+  </head>
 
-<body>
-  <div id="app"></div>
-  <!-- Scripts are separated into their own files for organization -->
-  <script type="module" src="/src/renderer.ts"></script>
-</body>
-
+  <body>
+    <div id="app"></div>
+    <!-- Scripts are separated into their own files for organization -->
+    <script type="module" src="/src/app/renderer/renderer.ts"></script>
+  </body>
 </html>

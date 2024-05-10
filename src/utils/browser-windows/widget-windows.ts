@@ -4,14 +4,11 @@ import {
   dialog,
 } from "electron";
 import path from "node:path";
-import {
-  getWidgetsJson,
-  mergeWithPreset,
-  openDevToolsWithShortcut,
-  setWidgetsJson,
-} from "../utils";
-import { widgetsDir, widgetsJsonPath } from "../../lib/constants";
+import { mergeWithPreset } from "../utils";
 import { preset } from "../../lib/preset";
+import { config } from "../../lib/config";
+import { openDevToolsWithShortcut } from "../shortcuts/shortcuts";
+import { getWidgetsJson, setWidgetsJson } from "../widget/widgets-folder";
 
 /**
  * Creates windows for widgets defined in the widgets.json file.
@@ -23,7 +20,7 @@ import { preset } from "../../lib/preset";
 export function createWindowsForWidgets() {
   try {
     // Parse the widgets JSON data
-    const widgetsData: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
+    const widgetsData: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath);
     if (typeof widgetsData !== "object" || Array.isArray(widgetsData)) {
       dialog.showErrorBox(
         "Error parsing widgets data",
@@ -35,7 +32,7 @@ export function createWindowsForWidgets() {
     Object.entries(widgetsData).forEach(([key, widget]) => {
       // Merge the widget with the preset values
       widgetsData[key] = mergeWithPreset(widget, preset);
-      setWidgetsJson(widgetsData, widgetsJsonPath);
+      setWidgetsJson(widgetsData, config.widgetsJsonPath);
       // Check if the widget is set to be visible
       if (widget.visible) {
         createSingleWindowForWidgets(key);
@@ -57,7 +54,7 @@ export function createWindowsForWidgets() {
 export function createSingleWindowForWidgets(key: string) {
   try {
     // Parse the widgets JSON data
-    const widgetsData: WidgetsConfig = getWidgetsJson(widgetsJsonPath);
+    const widgetsData: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath);
     if (typeof widgetsData !== "object" || Array.isArray(widgetsData)) {
       dialog.showErrorBox(
         "Error parsing widgets data",
@@ -71,13 +68,13 @@ export function createSingleWindowForWidgets(key: string) {
       widgetsData[key].resizable === true
     ) {
       widgetsData[key].resizable = false;
-      setWidgetsJson(widgetsData, widgetsJsonPath);
+      setWidgetsJson(widgetsData, config.widgetsJsonPath);
     } else if (
       widgetsData[key].locked === false &&
       widgetsData[key].resizable === false
     ) {
       widgetsData[key].resizable = true;
-      setWidgetsJson(widgetsData, widgetsJsonPath);
+      setWidgetsJson(widgetsData, config.widgetsJsonPath);
     }
     // Iterate through each widget in the data
     const widget: WidgetConfig & BrowserWindowConstructorOptions =
@@ -108,10 +105,11 @@ export function createSingleWindowForWidgets(key: string) {
           frame: widget.frame,
           hasShadow: widget.hasShadow,
           closable: true,
+          alwaysOnTop: widget.alwaysOnTop,
         });
 
         // Load the widget's HTML file into the window
-        const indexPath = path.join(widgetsDir, key, "index.html");
+        const indexPath = path.join(config.widgetsDir, key, "index.html");
         win.loadFile(indexPath);
         openDevToolsWithShortcut(win);
       } catch (err) {

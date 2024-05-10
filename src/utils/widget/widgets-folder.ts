@@ -5,11 +5,45 @@ import {
   existsSync,
   mkdirSync,
   readdirSync,
+  readFileSync,
   writeFileSync,
 } from "node:fs";
 import path from "node:path";
-import { homePath, sourceCodeUrl, widgetsDir } from "../lib/constants";
 import StreamZip from "node-stream-zip";
+import { config } from "../../lib/config";
+
+/**
+ * Reads the widgets.json file and returns its contents as a string.
+ * @param widgetsJsonPath - The path to the widgets.json file.
+ * @returns The contents of the widgets.json file as a string.
+ * @throws If an error occurs while reading the file.
+ */
+export function getWidgetsJson(widgetsJsonPath: string): WidgetsConfig {
+  try {
+    const widgetsDataRaw = readFileSync(widgetsJsonPath, "utf-8");
+    const widgetsData: WidgetsConfig = JSON.parse(widgetsDataRaw);
+    return widgetsData;
+  } catch (error) {
+    dialog.showErrorBox("Failed to read widgets.json", `${error}`);
+    throw error;
+  }
+}
+
+/**
+ * Writes the given JSON data to the widgets.json file located at the given path.
+ * @param jsonData - The JSON data to write.
+ * @param widgetsJsonPath - The path to the widgets.json file.
+ */
+export function setWidgetsJson(
+  jsonData: WidgetsConfig,
+  widgetsJsonPath: string,
+) {
+  try {
+    writeFileSync(widgetsJsonPath, JSON.stringify(jsonData, null, 2));
+  } catch (err) {
+    dialog.showErrorBox("Error writing to widgets.json", `${err}`);
+  }
+}
 
 /**
  * Copies the widgets directory if it does not already exist.
@@ -53,7 +87,7 @@ export function copyWidgetsDirIfNeeded(
  */
 export async function downloadAndCopyWidgetsFolderIfNeeded() {
   // Check if the widgets directory exists
-  if (!existsSync(widgetsDir)) {
+  if (!existsSync(config.widgetsDir)) {
     console.log("widgets directory is not found. Copying...");
     await downloadAndCopyWidgetsFolder();
   }
@@ -66,7 +100,7 @@ export async function downloadAndCopyWidgetsFolderIfNeeded() {
 export async function downloadAndCopyWidgetsFolder() {
   try {
     // Fetch the zip file from the URL
-    const arrayBuffer = await fetch(sourceCodeUrl).then((res) => {
+    const arrayBuffer = await fetch(config.sourceCodeUrl).then((res) => {
       if (!res.ok) {
         throw new Error(`Failed to download folder. HTTP status ${res.status}`);
       }
@@ -74,7 +108,7 @@ export async function downloadAndCopyWidgetsFolder() {
     });
 
     // Define the path where the zip file will be saved
-    const zipPath = path.join(homePath, "widgets.zip");
+    const zipPath = path.join(config.homePath, "widgets.zip");
     // Write the array buffer to a file
     writeFileSync(zipPath, new Uint8Array(arrayBuffer));
     // Open the zip file
@@ -86,7 +120,7 @@ export async function downloadAndCopyWidgetsFolder() {
       .join(`${Object.keys(entries)[0]}`, "public", "widgets")
       .replace(/\\/g, "/");
     // Extract the zip file to the widgets directory
-    await zip.extract(extractedZipPath, widgetsDir);
+    await zip.extract(extractedZipPath, config.widgetsDir);
     // Close the zip file
     await zip.close();
     // Remove the zip file

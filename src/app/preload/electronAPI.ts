@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from "electron";
-import { IpcChannels } from "../lib/channels/ipc-channels";
+import { IpcChannels } from "../../lib/ipc-channels";
 
 /**
  * Exposes Electron API to the main world.

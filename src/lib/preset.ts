@@ -21,4 +21,5 @@ export const preset: WidgetConfig & BrowserWindowConstructorOptions = {
   closable: true,
   x: 10,
   y: 10,
+  alwaysOnTop: false,
 };

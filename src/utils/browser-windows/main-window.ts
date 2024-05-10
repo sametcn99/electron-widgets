@@ -1,8 +1,8 @@
 import { BrowserWindow } from "electron";
 import path from "node:path";
-import { showNotification } from "../notification";
-import { openDevToolsWithShortcut } from "../utils";
-import { applicationName } from "../../lib/constants";
+import { showNotification } from "../notifications/notification";
+import { config } from "../../lib/config";
+import { openDevToolsWithShortcut } from "../shortcuts/shortcuts";
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -19,7 +19,7 @@ export function createMainWindow() {
   }
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    title: applicationName,
+    title: config.applicationName,
     width: 450, // Set the initial width of the window
     height: 650, // Set the initial height of the window
     minHeight: 400,
@@ -47,7 +47,7 @@ export function createMainWindow() {
     mainWindow = null;
     if (BrowserWindow.getAllWindows().length !== 0) {
       showNotification(
-        applicationName,
+        config.applicationName,
         "The application is still running in the background.",
       );
     }

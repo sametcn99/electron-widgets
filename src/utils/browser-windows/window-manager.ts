@@ -1,16 +1,16 @@
 import { BrowserWindow, dialog } from "electron";
-import { applicationName } from "../../lib/constants";
 import {
   createSingleWindowForWidgets,
   createWindowsForWidgets,
 } from "./widget-windows";
+import { config } from "../../lib/config";
 
 class WindowManager {
   getMainWindow(): Electron.BrowserWindow | undefined {
     try {
       let mainWindow: Electron.BrowserWindow | undefined;
       BrowserWindow.getAllWindows().forEach((win) => {
-        if (win.webContents.getTitle() === applicationName) {
+        if (win.webContents.getTitle() === config.applicationName) {
           mainWindow = win;
         }
       });
@@ -24,7 +24,7 @@ class WindowManager {
   minimizeAllWindowsExceptMain(): void {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
-        if (win.webContents.getTitle() !== applicationName) {
+        if (win.webContents.getTitle() !== config.applicationName) {
           win.minimize();
         }
       });
@@ -37,7 +37,7 @@ class WindowManager {
   closeAllWindowsExceptMain(): void {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
-        if (win.webContents.getTitle() !== applicationName) {
+        if (win.webContents.getTitle() !== config.applicationName) {
           win.close();
         }
       });
@@ -129,7 +129,7 @@ class WindowManager {
   hideAllWindowsExceptMain(): void {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
-        if (win.webContents.getTitle() !== applicationName) {
+        if (win.webContents.getTitle() !== config.applicationName) {
           win.hide();
         }
       });
@@ -142,7 +142,7 @@ class WindowManager {
   setAlwaysOnTopAllWindowsExceptMain(alwaysOnTop: boolean): void {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
-        if (win.webContents.getTitle() !== applicationName) {
+        if (win.webContents.getTitle() !== config.applicationName) {
           win.setAlwaysOnTop(alwaysOnTop);
         }
       });
@@ -156,7 +156,7 @@ class WindowManager {
     try {
       const windows: BrowserWindow[] = [];
       BrowserWindow.getAllWindows().forEach((win) => {
-        if (win.webContents.getTitle() !== applicationName) {
+        if (win.webContents.getTitle() !== config.applicationName) {
           windows.push(win);
         }
       });
