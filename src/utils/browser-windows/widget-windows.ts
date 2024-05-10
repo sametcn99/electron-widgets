@@ -9,6 +9,7 @@ import { preset } from "../../lib/preset";
 import { config } from "../../lib/config";
 import { openDevToolsWithShortcut } from "../shortcuts/shortcuts";
 import { getWidgetsJson, setWidgetsJson } from "../widget/widgets-folder";
+import is from "electron-is";
 
 /**
  * Creates windows for widgets defined in the widgets.json file.
@@ -107,6 +108,11 @@ export function createSingleWindowForWidgets(key: string) {
           closable: true,
           alwaysOnTop: widget.alwaysOnTop,
         });
+
+        // Hide the traffic light buttons (minimize, maximize, close)
+        if (widget.titleBarStyle === "hidden" && is.macOS()) {
+          win.setWindowButtonVisibility(false);
+        }
 
         // Load the widget's HTML file into the window
         const indexPath = path.join(config.widgetsDir, key, "index.html");
