@@ -1,8 +1,4 @@
 import { BrowserWindow, dialog } from "electron";
-import {
-  createSingleWindowForWidgets,
-  createWindowsForWidgets,
-} from "./widget-windows";
 import { config } from "../../lib/config";
 
 class WindowManager {
@@ -48,16 +44,16 @@ class WindowManager {
   }
 
   reloadAllWidgets(): void {
-    this.closeAllWindowsExceptMain();
-    createWindowsForWidgets();
+    this.getAllWindowsExceptMain().forEach((win) => {
+      win.reload();
+    });
   }
 
   reloadWidget(title: string): void {
     const window = this.getWindowExceptMain(title);
     if (window) {
-      window.close();
+      window.reload();
     }
-    createSingleWindowForWidgets(title);
   }
 
   static closeAllWindows(): void {

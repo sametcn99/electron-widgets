@@ -10,6 +10,7 @@ import {
   copyWidgetsDirIfNeeded,
   createMainWindow,
   createWindowsForWidgets,
+  hotReloadWidgets,
 } from "../../utils";
 
 /**
@@ -30,6 +31,7 @@ app.whenReady().then(() => {
   createMainWindow();
   createWindowsForWidgets();
   registerTray();
+  hotReloadWidgets();
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createMainWindow();
