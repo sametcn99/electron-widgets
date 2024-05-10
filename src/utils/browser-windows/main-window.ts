@@ -3,6 +3,7 @@ import path from "node:path";
 import { showNotification } from "../notifications/notification";
 import { config } from "../../lib/config";
 import { openDevToolsWithShortcut } from "../shortcuts/shortcuts";
+import is from "electron-is";
 
 let mainWindow: BrowserWindow | null = null;
 
@@ -32,6 +33,9 @@ export function createMainWindow() {
     fullscreenable: false, // Disable fullscreen
     maximizable: false, // Disable maximize
   });
+
+  // Hide the traffic light buttons (minimize, maximize, close)
+  is.macOS() && mainWindow.setWindowButtonVisibility(false);
 
   // Load the main window content
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
