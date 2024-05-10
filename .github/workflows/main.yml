@@ -1,6 +1,9 @@
 name: Make
 on: [push, pull_request]
 
+permissions:
+  contents: read
+
 jobs:
   build_on_linux:
     runs-on: ubuntu-latest
