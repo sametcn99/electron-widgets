@@ -4,11 +4,9 @@
         <div v-if="isOpen"
             class="absolute right-0 z-10 py-2 text-sm bg-white rounded-lg shadow-xl w-36 bg-opacity-30 backdrop-blur-2xl">
             <button v-if="alwaysOnTop === true" class="w-full p-2 text-gray-900 hover:bg-gray-900 hover:text-white"
-                @click="setAlwaysOnTop()">Set
-                Set Always On Top False</button>
+                @click="setAlwaysOnTop()">Set Always On Top False</button>
             <button v-if="alwaysOnTop === false" class="text-gray-900 hover:bg-gray-900 hover:text-white"
-                @click="setAlwaysOnTop()">Set
-                Set Always On Top True</button>
+                @click="setAlwaysOnTop()">Set Always On Top True</button>
             <button class="w-full p-2 text-gray-900 hover:bg-red-800 hover:text-white"
                 @click="removeWidget()">Remove</button>
         </div>
