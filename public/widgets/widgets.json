@@ -2,7 +2,7 @@
   "clock": {
     "title": "clock",
     "visible": false,
-    "locked": true,
+    "locked": false,
     "width": 366,
     "height": 160,
     "x": 511,
@@ -12,7 +12,7 @@
   "daily weather": {
     "title": "daily weather",
     "visible": false,
-    "locked": true,
+    "locked": false,
     "width": 408,
     "height": 113,
     "x": 739,
@@ -22,61 +22,71 @@
   "disk usage": {
     "title": "disk usage",
     "visible": false,
-    "locked": true,
+    "locked": false,
     "width": 344,
     "height": 170,
-    "x": 1334,
-    "y": 368,
+    "x": 167,
+    "y": 295,
     "alwaysOnTop": false
   },
   "hacker news": {
     "title": "hacker news",
     "visible": false,
-    "locked": true,
+    "locked": false,
     "width": 416,
-    "height": 1003,
+    "height": 450,
     "x": 13,
     "y": 13,
+    "alwaysOnTop": false
+  },
+  "r-programming": {
+    "title": "r-programming",
+    "visible": false,
+    "locked": false,
+    "width": 377,
+    "height": 505,
+    "x": 45,
+    "y": 82,
     "alwaysOnTop": false
   },
   "search": {
     "title": "search",
     "visible": false,
-    "locked": true,
+    "locked": false,
     "width": 416,
     "height": 72,
-    "x": 780,
+    "x": 680,
     "y": 274,
-    "alwaysOnTop": false
-  },
-  "transparent clock": {
-    "title": "transparent clock",
-    "visible": false,
-    "locked": true,
-    "width": 487,
-    "height": 145,
-    "x": 701,
-    "y": 0,
     "alwaysOnTop": false
   },
   "system information": {
     "title": "system information",
     "visible": false,
-    "locked": true,
+    "locked": false,
     "width": 395,
     "height": 520,
     "x": 10,
     "y": 10,
     "alwaysOnTop": false
   },
-  "r-programming": {
-    "title": "r-programming",
+  "transparent clock": {
+    "title": "transparent clock",
     "visible": false,
-    "locked": true,
-    "width": 377,
-    "height": 505,
-    "x": 45,
-    "y": 82,
+    "locked": false,
+    "width": 487,
+    "height": 145,
+    "x": 701,
+    "y": 0,
+    "alwaysOnTop": false
+  },
+  "app releases": {
+    "title": "app releases",
+    "visible": false,
+    "locked": false,
+    "width": 404,
+    "height": 539,
+    "x": 131,
+    "y": 180,
     "alwaysOnTop": false
   }
 }

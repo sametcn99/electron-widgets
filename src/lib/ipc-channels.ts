@@ -3,6 +3,9 @@ export enum IpcChannels {
   WINDOW_ACTION = "window-action", // Channel for window actions
   GET_APP_VERSION = "get-app-version", // Channel for getting app version
 
+  READ_CUSTOM_DATA = "read-custom-data", // Channel for reading custom data
+  WRITE_CUSTOM_DATA = "write-custom-data", // Channel for writing custom data
+
   READ_WIDGETS_JSON = "read-widgets-json", // Channel for reading widgets JSON
   WRITE_WIDGETS_JSON = "write-widgets-json", // Channel for writing widgets JSON
   SORT_WIDGETS = "sort-widgets", // Channel for sorting widgets

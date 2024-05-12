@@ -1,0 +1,268 @@
+{
+    "items": [
+        {
+            "title": "The State of the Subreddit (May 2024)",
+            "link": "https://www.reddit.com/r/programming/comments/1chs4ib/the_state_of_the_subreddit_may_2024/",
+            "pubDate": "2024-05-01T17:37:38.000Z",
+            "author": "/u/ketralnis",
+            "content": "<!-- SC_OFF --><div class=\"md\"><p>Hello fellow programs! </p> <p><strong>tl;dr</strong> some revisions to the rules to reduce low quality blogspam. The most notable are: banning <strong>listicles</strong> (&quot;7 cool things I copy-pasted from somebody else!&quot;), <strong>extreme beginner articles</strong> (&quot;how to use a for loop&quot;), and some <strong>limitations on career posts</strong> (they must be related to programming careers). Lastly, I want <strong>feedback</strong> on these changes and the subreddit in general and invite you to <strong>vote</strong> and <strong>use the report button</strong> when you see posts that violate the rules because they&#39;ll help us get to it faster.</p> <p><a href=\"/r/programming\">r/programming</a>&#39;s mission is to <strong>be the place with the highest quality programming content, where I can go to read something interesting and learn something new every day</strong>. <a href=\"https://www.reddit.com/r/programming/comments/173viwj/meta_the_future_of_rprogramming/\">Last time we spoke</a> I introduced the rules that we&#39;ve been moderating by to accomplish that. Subjectively, quality on the subreddit while not perfect is much improved since then. Since it&#39;s still mainly just me moderating it&#39;s hard to tell what&#39;s objectively bad vs what just annoys me personally, and to do that I&#39;ve been keeping an eye on a few forms of content to see how they perform (using mostly votes and comment quantity &amp; health).</p> <p>Based on that the notable changes are:</p> <ul> <li>🚫 <strong>Listicles</strong>. &quot;7 cool python functions&quot;, &quot;14 ways to get promoted&quot;. These are usually spammy content farms. If you found 15 amazing open source projects that will blow my mind, post those projects instead.</li> <li>🚫 <strong>Extreme beginner content</strong> (&quot;how to write a for loop&quot;). This is difficult to identify objectively (how can you tell it from good articles like &quot;how does kafka work?&quot; or &quot;getting started with linear algebra for ML&quot;?) so there will be some back and forth on calibrating, but there has been a swath of very low quality <a href=\"https://www.reddit.com/r/programming/comments/1chogwb/first_program_of_java/\">&quot;tutorials&quot;</a> if you can even call them that, that I very much doubt anybody is actually learning anything from and they sit at 0 points. Since &quot;what is a variable?&quot; is probably not useful to anybody already reading <a href=\"/r/programming\">r/programming</a> this is a quick painless way to boost the average quality on the subreddit.</li> <li>⚠️ <strong>Career posts must be related to software engineering careers</strong>. To be honest I&#39;m personally not a fan of career posts on <a href=\"/r/programming\">r/programming</a> at all (but shout out to <a href=\"https://www.reddit.com/r/cscareerquestions/\">cscareerquestions</a>!) but during the last rules revision they were doing pretty well so I know there is an audience for it that I don&#39;t want to get in the way of. Since then there has been growth in this category <a href=\"https://www.reddit.com/domain/eng-leadership.com/\">all across the quality spectrum</a> (with an accompanying rise in product management methodology like &quot;agile vs waterfall&quot;, also across the quality spectrum). Going forward these posts must be distinctly related to software engineering careers rather than just generic working. This isn&#39;t a huge problem yet but I predict that it will be as the percentage of career content is growing.</li> </ul> <p>In all of these cases the category is more of a tell that the quality is probably low, so exceptions will be made where that&#39;s not the case. These are difficult categories to moderate by so I&#39;ll <strong>probably make some mistakes</strong> on the boundaries and that&#39;s okay, let me know and we&#39;ll figure it out.</p> <p>Some other categories that I&#39;m <strong>keeping an eye on</strong> but not ruling on today are:</p> <ul> <li><strong>Corporate blogs</strong> simply describing their product in the guise of &quot;what is an authorisation framework?&quot; (I&#39;m <a href=\"https://www.reddit.com/domain/a0.to/\">looking at you Auth0</a> and <a href=\"https://www.reddit.com/r/programming/comments/1cgx739/what_is_ai_infrastructure_software/\">others like it</a>). Pretty much anything with a rocket ship emoji in it. Companies use their blogs as marketing, branding, and recruiting tools and that&#39;s okay when it&#39;s &quot;writing a good article will make people think of us&quot; but it doesn&#39;t go here if it&#39;s just a literal advert. Usually they are titled in a way that I don&#39;t spot them until somebody reports it or mentions it in the comments.</li> <li><strong>Generic AI content</strong> that <a href=\"https://www.reddit.com/r/programming/comments/1chll2o/ai_still_hasnt_figured_out_branding_yet_heres_why/\">isn&#39;t</a> technical in content. &quot;Does Devin mean that programming is over?&quot;, &quot;Will AI put farmers out of work?&quot;, &quot;Is AI art?&quot;. For a few weeks these were the titles of about 20 articles per day, some scoring high and some low. Fashions like this come and go but I&#39;m keeping an eye on it.</li> <li><strong>Newsletters</strong>: There are a <a href=\"https://www.reddit.com/r/programming/comments/1cho9ye/big_tech_digest_15_introducing_meta_llama_3_at/\">few people</a> that post every edition of their newsletter to reddit, where that newsletter is really just aggregating content from elsewhere. It&#39;s clear that they are trying to grow a monetised audience using reddit, but that&#39;s okay if it&#39;s providing valuable curation or if the content is good and people like it. So we&#39;ll see.</li> <li><strong>Career posts</strong>. Personally I&#39;d like <a href=\"/r/programming\">r/programming</a> to be a deeply technical place but as mentioned there&#39;s clearly an audience for career advice. That said, the posts that are scoring the highest in this category are mostly people upvoting to agree with a statement in the title, not something that anybody is learning from. (&quot;Don&#39;t make your engineers context-switch.&quot; &quot;Everybody should get private offices.&quot; &quot;Micromanaging sucks.&quot;) The ones that one could actually learn from with an instructive lean mostly don&#39;t do well; people seem to not really be interested in how to have the best 1:1s with their managers or how you went from Junior to Senior in 18 hours (though <a href=\"https://www.reddit.com/domain/highgrowthengineer.com/\">sometimes they are</a>). That tells me that there&#39;s some subtlety to why these posts are scoring well and I&#39;m keeping an eye on the category. What I don&#39;t want is for &quot;vote up if you want free snacks&quot; to push out the good stuff or to be a farm for the other 90% of content that&#39;s really just personal brand builders.</li> </ul> <p>I&#39;m sure you&#39;re as annoyed as I am about these but they&#39;re fuzzy lines and difficult to come up with objective criteria around. As always <strong>I&#39;m looking for feedback</strong> on these and if I&#39;m missing any and any other points regarding the subreddit and moderation so let me know what you think.</p> <hr/> <h2>The rules!</h2> <p>With all of that, here is the current set of the rules with the above changes included so I can link to them all in one place.</p> <p>✅ means that it&#39;s currently allowed, 🚫 means that it&#39;s not currently allowed, ⚠️ means that we leave it up if it is already popular but if we catch it young in its life we do try to remove it early.</p> <ul> <li>✅ Actual programming content. They probably have actual code in them. Language or library writeups, papers, technology descriptions. How an allocator works. How my new fancy allocator I just wrote works. How our startup built our Frobnicator. For many years this was the only category of allowed content.</li> <li>✅ Academic CS or programming papers</li> <li>✅ Programming news. ChatGPT can write code. A big new CVE just dropped. Curl 8.01 released now with Coffee over IP support.</li> <li>✅ Programmer career content. How to become a Staff engineer in 30 days. Habits of the best engineering managers. These must be related or specific to programming/software engineering careers in some way</li> <li>✅ Articles/news interesting <em>to</em> programmers but not about programming. Work from home is bullshit. Return to office is bullshit. There&#39;s a Steam sale on programming games. Terry Davis has died. How to SCRUMM. App Store commissions are going up. How to hire a more diverse development team. Interviewing programmers is broken.</li> <li>⚠️ General technology news. Google buys its last competitor. A self driving car hit a pedestrian. Twitter is collapsing. Oculus accidentally showed your grandmother a penis. Github sued when Copilot produces the complete works of Harry Potter in a code comment. Meta cancels work from home. Gnome dropped a feature I like. How to run Stable Diffusion to generate pictures of, uh, cats, yeah it&#39;s definitely just for cats. A bitcoin VR metaversed my AI and now my app store is mobile social local.</li> <li>🚫 Politics. The Pirate Party is winning in Sweden. Please vote for net neutrality. Big Tech is being sued in Europe for <em>gestures broadly</em>. Grace Hopper Conference is now 60% male.</li> <li>🚫 Gossip. Richard Stallman switches to Windows. Elon Musk farted. Linus Torvalds was a poopy-head on a mailing list. The People&#39;s Rust Foundation is arguing with the Rust Foundation For The People. Terraform has been forked into Terra and Form. Stack Overflow sucks now. Stack Overflow is good actually.</li> <li>✅ Demos with code. I wrote a game, here it is on GitHub</li> <li>🚫 Demos without code. I wrote a game, come buy it! Please give me feedback on my startup (totally not an ad nosirree). I stayed up all night writing a commercial text editor, here&#39;s the pricing page. I made a DALL-E image generator. I made the fifteenth animation of A* this week, here&#39;s a GIF.</li> <li>🚫 AskReddit type forum questions. What&#39;s your favourite programming language? Tabs or spaces? Does anyone else hate it when.</li> <li>🚫 Support questions. How do I write a web crawler? How do I get into programming? Where&#39;s my missing semicolon? Please do this obvious homework problem for me. Personally I feel very strongly about not allowing these because they&#39;d quickly drown out all of the actual content I come to see, and there are already much more effective places to get them answered anyway. In real life the quality of the ones that we see is also universally very low.</li> <li>🚫 Surveys and 🚫 Job postings and anything else that is looking to extract value from a place a lot of programmers hang out without contributing anything itself.</li> <li>🚫 Meta posts. DAE think <a href=\"/r/programming\">r/programming</a> sucks? Why did you remove my post? Why did you ban this user that is totes not me I swear I&#39;m just asking questions. Except this meta post. This one is okay because I&#39;m a tyrant that the rules don&#39;t apply to (I assume you are saying about me to yourself right now).</li> <li>🚫 Images, memes, anything low-effort or low-content. Thankfully we very rarely see any of this so there&#39;s not much to remove but like support questions once you have a few of these they tend to totally take over because it&#39;s easier to make a meme than to write a paper and also easier to vote on a meme than to read a paper.</li> <li>⚠️ Posts that we&#39;d normally allow but that are obviously, unquestioningly super low quality like blogspam copy-pasted onto a site with a bazillion ads. It has to be pretty bad before we remove it and even then sometimes these are the first post to get traction about a news event so we leave them up if they&#39;re the best discussion going on about the news event. There&#39;s a lot of grey area here with CVE announcements in particular: there are a lot of spammy security &quot;blogs&quot; that syndicate stories like this. Pretty much all listicles are disallowed under this rule. 7 cool python functions. 14 ways to get promoted. If you found 15 amazing open source projects that will blow my mind, post those projects instead.</li> <li>⚠️ Extreme beginner content. What is a variable. What is a <code>for</code> loop. Making an HTPT request using curl. Like listicles this is disallowed because of the quality typical to them, but high quality tutorials are still allowed and actively encouraged.</li> <li>⚠️ Posts that are duplicates of other posts or the same news event. We leave up either the first one or the healthiest discussion.</li> <li>⚠️ Posts where the title editorialises too heavily or especially is a lie or conspiracy theory.</li> <li>Comments are only very loosely moderated and it&#39;s mostly 🚫 Bots of any kind (Beep boop you misspelled misspelled!) and 🚫 Incivility (You idiot, everybody knows that my favourite toy is better than your favourite toy.) However the number of obvious GPT comment bots is rising and will quickly become untenable for the number of active moderators we have.</li> </ul> </div><!-- SC_ON --> &#32; submitted by &#32; <a href=\"https://www.reddit.com/user/ketralnis\"> /u/ketralnis </a> <br/> <span><a href=\"https://www.reddit.com/r/programming/comments/1chs4ib/the_state_of_the_subreddit_may_2024/\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1chs4ib/the_state_of_the_subreddit_may_2024/\">[comments]</a></span>",
+            "contentSnippet": "Hello fellow programs! \n tl;dr some revisions to the rules to reduce low quality blogspam. The most notable are: banning listicles (\"7 cool things I copy-pasted from somebody else!\"), extreme beginner articles (\"how to use a for loop\"), and some limitations on career posts (they must be related to programming careers). Lastly, I want feedback on these changes and the subreddit in general and invite you to vote and use the report button when you see posts that violate the rules because they'll help us get to it faster.\n r/programming's mission is to be the place with the highest quality programming content, where I can go to read something interesting and learn something new every day. Last time we spoke I introduced the rules that we've been moderating by to accomplish that. Subjectively, quality on the subreddit while not perfect is much improved since then. Since it's still mainly just me moderating it's hard to tell what's objectively bad vs what just annoys me personally, and to do that I've been keeping an eye on a few forms of content to see how they perform (using mostly votes and comment quantity & health).\n Based on that the notable changes are:\n  \n🚫 Listicles. \"7 cool python functions\", \"14 ways to get promoted\". These are usually spammy content farms. If you found 15 amazing open source projects that will blow my mind, post those projects instead.\n 🚫 Extreme beginner content (\"how to write a for loop\"). This is difficult to identify objectively (how can you tell it from good articles like \"how does kafka work?\" or \"getting started with linear algebra for ML\"?) so there will be some back and forth on calibrating, but there has been a swath of very low quality \"tutorials\" if you can even call them that, that I very much doubt anybody is actually learning anything from and they sit at 0 points. Since \"what is a variable?\" is probably not useful to anybody already reading r/programming this is a quick painless way to boost the average quality on the subreddit.\n ⚠️ Career posts must be related to software engineering careers. To be honest I'm personally not a fan of career posts on r/programming at all (but shout out to cscareerquestions!) but during the last rules revision they were doing pretty well so I know there is an audience for it that I don't want to get in the way of. Since then there has been growth in this category all across the quality spectrum (with an accompanying rise in product management methodology like \"agile vs waterfall\", also across the quality spectrum). Going forward these posts must be distinctly related to software engineering careers rather than just generic working. This isn't a huge problem yet but I predict that it will be as the percentage of career content is growing.\n  \nIn all of these cases the category is more of a tell that the quality is probably low, so exceptions will be made where that's not the case. These are difficult categories to moderate by so I'll probably make some mistakes on the boundaries and that's okay, let me know and we'll figure it out.\n Some other categories that I'm keeping an eye on but not ruling on today are:\n  \nCorporate blogs simply describing their product in the guise of \"what is an authorisation framework?\" (I'm looking at you Auth0 and others like it). Pretty much anything with a rocket ship emoji in it. Companies use their blogs as marketing, branding, and recruiting tools and that's okay when it's \"writing a good article will make people think of us\" but it doesn't go here if it's just a literal advert. Usually they are titled in a way that I don't spot them until somebody reports it or mentions it in the comments.\n Generic AI content that isn't technical in content. \"Does Devin mean that programming is over?\", \"Will AI put farmers out of work?\", \"Is AI art?\". For a few weeks these were the titles of about 20 articles per day, some scoring high and some low. Fashions like this come and go but I'm keeping an eye on it.\n Newsletters: There are a few people that post every edition of their newsletter to reddit, where that newsletter is really just aggregating content from elsewhere. It's clear that they are trying to grow a monetised audience using reddit, but that's okay if it's providing valuable curation or if the content is good and people like it. So we'll see.\n Career posts. Personally I'd like r/programming to be a deeply technical place but as mentioned there's clearly an audience for career advice. That said, the posts that are scoring the highest in this category are mostly people upvoting to agree with a statement in the title, not something that anybody is learning from. (\"Don't make your engineers context-switch.\" \"Everybody should get private offices.\" \"Micromanaging sucks.\") The ones that one could actually learn from with an instructive lean mostly don't do well; people seem to not really be interested in how to have the best 1:1s with their managers or how you went from Junior to Senior in 18 hours (though sometimes they are). That tells me that there's some subtlety to why these posts are scoring well and I'm keeping an eye on the category. What I don't want is for \"vote up if you want free snacks\" to push out the good stuff or to be a farm for the other 90% of content that's really just personal brand builders.\n  \nI'm sure you're as annoyed as I am about these but they're fuzzy lines and difficult to come up with objective criteria around. As always I'm looking for feedback on these and if I'm missing any and any other points regarding the subreddit and moderation so let me know what you think.\n  \nThe rules!\n With all of that, here is the current set of the rules with the above changes included so I can link to them all in one place.\n ✅ means that it's currently allowed, 🚫 means that it's not currently allowed, ⚠️ means that we leave it up if it is already popular but if we catch it young in its life we do try to remove it early.\n  \n✅ Actual programming content. They probably have actual code in them. Language or library writeups, papers, technology descriptions. How an allocator works. How my new fancy allocator I just wrote works. How our startup built our Frobnicator. For many years this was the only category of allowed content.\n ✅ Academic CS or programming papers\n ✅ Programming news. ChatGPT can write code. A big new CVE just dropped. Curl 8.01 released now with Coffee over IP support.\n ✅ Programmer career content. How to become a Staff engineer in 30 days. Habits of the best engineering managers. These must be related or specific to programming/software engineering careers in some way\n ✅ Articles/news interesting to programmers but not about programming. Work from home is bullshit. Return to office is bullshit. There's a Steam sale on programming games. Terry Davis has died. How to SCRUMM. App Store commissions are going up. How to hire a more diverse development team. Interviewing programmers is broken.\n ⚠️ General technology news. Google buys its last competitor. A self driving car hit a pedestrian. Twitter is collapsing. Oculus accidentally showed your grandmother a penis. Github sued when Copilot produces the complete works of Harry Potter in a code comment. Meta cancels work from home. Gnome dropped a feature I like. How to run Stable Diffusion to generate pictures of, uh, cats, yeah it's definitely just for cats. A bitcoin VR metaversed my AI and now my app store is mobile social local.\n 🚫 Politics. The Pirate Party is winning in Sweden. Please vote for net neutrality. Big Tech is being sued in Europe for gestures broadly. Grace Hopper Conference is now 60% male.\n 🚫 Gossip. Richard Stallman switches to Windows. Elon Musk farted. Linus Torvalds was a poopy-head on a mailing list. The People's Rust Foundation is arguing with the Rust Foundation For The People. Terraform has been forked into Terra and Form. Stack Overflow sucks now. Stack Overflow is good actually.\n ✅ Demos with code. I wrote a game, here it is on GitHub\n 🚫 Demos without code. I wrote a game, come buy it! Please give me feedback on my startup (totally not an ad nosirree). I stayed up all night writing a commercial text editor, here's the pricing page. I made a DALL-E image generator. I made the fifteenth animation of A* this week, here's a GIF.\n 🚫 AskReddit type forum questions. What's your favourite programming language? Tabs or spaces? Does anyone else hate it when.\n 🚫 Support questions. How do I write a web crawler? How do I get into programming? Where's my missing semicolon? Please do this obvious homework problem for me. Personally I feel very strongly about not allowing these because they'd quickly drown out all of the actual content I come to see, and there are already much more effective places to get them answered anyway. In real life the quality of the ones that we see is also universally very low.\n 🚫 Surveys and 🚫 Job postings and anything else that is looking to extract value from a place a lot of programmers hang out without contributing anything itself.\n 🚫 Meta posts. DAE think r/programming sucks? Why did you remove my post? Why did you ban this user that is totes not me I swear I'm just asking questions. Except this meta post. This one is okay because I'm a tyrant that the rules don't apply to (I assume you are saying about me to yourself right now).\n 🚫 Images, memes, anything low-effort or low-content. Thankfully we very rarely see any of this so there's not much to remove but like support questions once you have a few of these they tend to totally take over because it's easier to make a meme than to write a paper and also easier to vote on a meme than to read a paper.\n ⚠️ Posts that we'd normally allow but that are obviously, unquestioningly super low quality like blogspam copy-pasted onto a site with a bazillion ads. It has to be pretty bad before we remove it and even then sometimes these are the first post to get traction about a news event so we leave them up if they're the best discussion going on about the news event. There's a lot of grey area here with CVE announcements in particular: there are a lot of spammy security \"blogs\" that syndicate stories like this. Pretty much all listicles are disallowed under this rule. 7 cool python functions. 14 ways to get promoted. If you found 15 amazing open source projects that will blow my mind, post those projects instead.\n ⚠️ Extreme beginner content. What is a variable. What is a for loop. Making an HTPT request using curl. Like listicles this is disallowed because of the quality typical to them, but high quality tutorials are still allowed and actively encouraged.\n ⚠️ Posts that are duplicates of other posts or the same news event. We leave up either the first one or the healthiest discussion.\n ⚠️ Posts where the title editorialises too heavily or especially is a lie or conspiracy theory.\n Comments are only very loosely moderated and it's mostly 🚫 Bots of any kind (Beep boop you misspelled misspelled!) and 🚫 Incivility (You idiot, everybody knows that my favourite toy is better than your favourite toy.) However the number of obvious GPT comment bots is rising and will quickly become untenable for the number of active moderators we have.\n  \n   submitted by    /u/ketralnis  \n [link]   [comments]",
+            "id": "t3_1chs4ib",
+            "isoDate": "2024-05-01T17:37:38.000Z"
+        },
+        {
+            "title": "Microsoft Donates $1 Million to Rust Foundation",
+            "link": "https://www.reddit.com/r/programming/comments/1cpvhb8/microsoft_donates_1_million_to_rust_foundation/",
+            "pubDate": "2024-05-12T00:33:43.000Z",
+            "author": "/u/john83672",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/john83672\"> /u/john83672 </a> <br/> <span><a href=\"https://www.blobstreaming.org/microsofts-1m-vote-of-confidence-in-rusts-future/\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cpvhb8/microsoft_donates_1_million_to_rust_foundation/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/john83672  \n [link]   [comments]",
+            "id": "t3_1cpvhb8",
+            "isoDate": "2024-05-12T00:33:43.000Z"
+        },
+        {
+            "title": "Why the CORDIC algorithm lives rent-free in my head",
+            "link": "https://www.reddit.com/r/programming/comments/1cq6hoc/why_the_cordic_algorithm_lives_rentfree_in_my_head/",
+            "pubDate": "2024-05-12T12:13:05.000Z",
+            "author": "/u/FrancisStokes",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/FrancisStokes\"> /u/FrancisStokes </a> <br/> <span><a href=\"https://github.com/francisrstokes/githublog/blob/main/2024/5/10/cordic.md\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cq6hoc/why_the_cordic_algorithm_lives_rentfree_in_my_head/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/FrancisStokes  \n [link]   [comments]",
+            "id": "t3_1cq6hoc",
+            "isoDate": "2024-05-12T12:13:05.000Z"
+        },
+        {
+            "title": "Is Flutter Facing its End",
+            "link": "https://www.reddit.com/r/programming/comments/1cpgxkq/is_flutter_facing_its_end/",
+            "pubDate": "2024-05-11T12:57:39.000Z",
+            "author": "/u/ElyeProj",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/ElyeProj\"> /u/ElyeProj </a> <br/> <span><a href=\"https://elye-project.medium.com/is-flutter-facing-its-end-9da4d42334f9?sk=6652fee90aa30c0e87a520ff236269ea\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cpgxkq/is_flutter_facing_its_end/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/ElyeProj  \n [link]   [comments]",
+            "id": "t3_1cpgxkq",
+            "isoDate": "2024-05-11T12:57:39.000Z"
+        },
+        {
+            "title": "We faced challenges with Dynamic Task Scheduling and Concurrent Execution. Here's the architecture that we built to solve it in our Python backend and Redis.",
+            "link": "https://www.reddit.com/r/programming/comments/1cq8qhq/we_faced_challenges_with_dynamic_task_scheduling/",
+            "pubDate": "2024-05-12T14:11:02.000Z",
+            "author": "/u/Only_Piccolo5736",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/Only_Piccolo5736\"> /u/Only_Piccolo5736 </a> <br/> <span><a href=\"https://www.suprsend.com/post/how-redis-solved-our-challenges-with-dynamic-task-scheduling-and-concurrent-execution-developers-guide\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cq8qhq/we_faced_challenges_with_dynamic_task_scheduling/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/Only_Piccolo5736  \n [link]   [comments]",
+            "id": "t3_1cq8qhq",
+            "isoDate": "2024-05-12T14:11:02.000Z"
+        },
+        {
+            "title": "Compile like it's 1992",
+            "link": "https://www.reddit.com/r/programming/comments/1cpg50j/compile_like_its_1992/",
+            "pubDate": "2024-05-11T12:13:35.000Z",
+            "author": "/u/mariuz",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/mariuz\"> /u/mariuz </a> <br/> <span><a href=\"https://fabiensanglard.net/Compile_Like_Its_1992/\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cpg50j/compile_like_its_1992/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/mariuz  \n [link]   [comments]",
+            "id": "t3_1cpg50j",
+            "isoDate": "2024-05-11T12:13:35.000Z"
+        },
+        {
+            "title": "GraphQL Intro 101: A conscious introduction to the GraphQL World, part 1.",
+            "link": "https://www.reddit.com/r/programming/comments/1cq134c/graphql_intro_101_a_conscious_introduction_to_the/",
+            "pubDate": "2024-05-12T06:02:43.000Z",
+            "author": "/u/pepincho",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/pepincho\"> /u/pepincho </a> <br/> <span><a href=\"https://thetshaped.dev/p/graphql-intro-101-part-1\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cq134c/graphql_intro_101_a_conscious_introduction_to_the/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/pepincho  \n [link]   [comments]",
+            "id": "t3_1cq134c",
+            "isoDate": "2024-05-12T06:02:43.000Z"
+        },
+        {
+            "title": "I made an online freedom wall!",
+            "link": "https://www.reddit.com/r/programming/comments/1cq8owo/i_made_an_online_freedom_wall/",
+            "pubDate": "2024-05-12T14:08:54.000Z",
+            "author": "/u/Brief-Mulberry-6161",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/Brief-Mulberry-6161\"> /u/Brief-Mulberry-6161 </a> <br/> <span><a href=\"https://stickythoughts.alexndrho.dev/\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cq8owo/i_made_an_online_freedom_wall/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/Brief-Mulberry-6161  \n [link]   [comments]",
+            "id": "t3_1cq8owo",
+            "isoDate": "2024-05-12T14:08:54.000Z"
+        },
+        {
+            "title": "Dosbox-Staging 0.81.1 Has Been Released",
+            "link": "https://www.reddit.com/r/programming/comments/1cq7v31/dosboxstaging_0811_has_been_released/",
+            "pubDate": "2024-05-12T13:27:18.000Z",
+            "author": "/u/TheBigCore",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/TheBigCore\"> /u/TheBigCore </a> <br/> <span><a href=\"https://dosbox-staging.github.io/releases/release-notes/0.81.1/\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cq7v31/dosboxstaging_0811_has_been_released/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/TheBigCore  \n [link]   [comments]",
+            "id": "t3_1cq7v31",
+            "isoDate": "2024-05-12T13:27:18.000Z"
+        },
+        {
+            "title": "I developed a Python application that visualizes your brainwaves live on your screen! Github linked in my Notion page that I wrote to explain why and how I built the program.",
+            "link": "https://www.reddit.com/r/programming/comments/1cprs33/i_developed_a_python_application_that_visualizes/",
+            "pubDate": "2024-05-11T21:32:50.000Z",
+            "author": "/u/TheGrapez",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/TheGrapez\"> /u/TheGrapez </a> <br/> <span><a href=\"https://www.notion.so/ai9/Visialize-Your-Brainwaves-Live-With-Muse-EEG-Python-54391bc09bf04b95a117d0fcf41ba351\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cprs33/i_developed_a_python_application_that_visualizes/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/TheGrapez  \n [link]   [comments]",
+            "id": "t3_1cprs33",
+            "isoDate": "2024-05-11T21:32:50.000Z"
+        },
+        {
+            "title": "goldboot: immutable infrastructure for the desktop!",
+            "link": "https://www.reddit.com/r/programming/comments/1cpockq/goldboot_immutable_infrastructure_for_the_desktop/",
+            "pubDate": "2024-05-11T18:51:15.000Z",
+            "author": "/u/fossable",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/fossable\"> /u/fossable </a> <br/> <span><a href=\"https://github.com/fossable/goldboot\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cpockq/goldboot_immutable_infrastructure_for_the_desktop/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/fossable  \n [link]   [comments]",
+            "id": "t3_1cpockq",
+            "isoDate": "2024-05-11T18:51:15.000Z"
+        },
+        {
+            "title": "The Vary HTTP header",
+            "link": "https://www.reddit.com/r/programming/comments/1cpsmka/the_vary_http_header/",
+            "pubDate": "2024-05-11T22:13:10.000Z",
+            "author": "/u/wineandcode",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/wineandcode\"> /u/wineandcode </a> <br/> <span><a href=\"https://nfrankel.medium.com/the-vary-http-header-a2986e9ad549?source=friends_link&amp;sk=7b24e988ba3a601179744eb4c73ea0b2\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cpsmka/the_vary_http_header/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/wineandcode  \n [link]   [comments]",
+            "id": "t3_1cpsmka",
+            "isoDate": "2024-05-11T22:13:10.000Z"
+        },
+        {
+            "title": "Semantic Versioning 101 for Software Projects",
+            "link": "https://www.reddit.com/r/programming/comments/1cq6hbg/semantic_versioning_101_for_software_projects/",
+            "pubDate": "2024-05-12T12:12:29.000Z",
+            "author": "/u/pmz",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/pmz\"> /u/pmz </a> <br/> <span><a href=\"https://www.arjancodes.com/blog/how-to-implement-semantic-versioning-in-software-projects/\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cq6hbg/semantic_versioning_101_for_software_projects/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/pmz  \n [link]   [comments]",
+            "id": "t3_1cq6hbg",
+            "isoDate": "2024-05-12T12:12:29.000Z"
+        },
+        {
+            "title": "You Don’t Need a CSS Framework",
+            "link": "https://www.reddit.com/r/programming/comments/1cp61lb/you_dont_need_a_css_framework/",
+            "pubDate": "2024-05-11T01:39:10.000Z",
+            "author": "/u/stronghup",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/stronghup\"> /u/stronghup </a> <br/> <span><a href=\"https://www.infoq.com/articles/no-need-css-framework/\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cp61lb/you_dont_need_a_css_framework/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/stronghup  \n [link]   [comments]",
+            "id": "t3_1cp61lb",
+            "isoDate": "2024-05-11T01:39:10.000Z"
+        },
+        {
+            "title": "The Threat to Open Source Comes from Corporate Manipulation",
+            "link": "https://www.reddit.com/r/programming/comments/1coxcku/the_threat_to_open_source_comes_from_corporate/",
+            "pubDate": "2024-05-10T19:05:15.000Z",
+            "author": "/u/fagnerbrack",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/fagnerbrack\"> /u/fagnerbrack </a> <br/> <span><a href=\"https://newsletter.goodtechthings.com/p/the-threat-to-open-source-comes-from\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1coxcku/the_threat_to_open_source_comes_from_corporate/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/fagnerbrack  \n [link]   [comments]",
+            "id": "t3_1coxcku",
+            "isoDate": "2024-05-10T19:05:15.000Z"
+        },
+        {
+            "title": "Skill Issues | Any ideas how I can improve this package?",
+            "link": "https://www.reddit.com/r/programming/comments/1cq79dj/skill_issues_any_ideas_how_i_can_improve_this/",
+            "pubDate": "2024-05-12T12:56:15.000Z",
+            "author": "/u/sanxzhar",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/sanxzhar\"> /u/sanxzhar </a> <br/> <span><a href=\"https://www.npmjs.com/package/skill-issues\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cq79dj/skill_issues_any_ideas_how_i_can_improve_this/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/sanxzhar  \n [link]   [comments]",
+            "id": "t3_1cq79dj",
+            "isoDate": "2024-05-12T12:56:15.000Z"
+        },
+        {
+            "title": "Python 3.13 Beta: The New Features and Fixes Coming Soon",
+            "link": "https://www.reddit.com/r/programming/comments/1cp6jn2/python_313_beta_the_new_features_and_fixes_coming/",
+            "pubDate": "2024-05-11T02:05:14.000Z",
+            "author": "/u/Puzzleheaded_Ad4030",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/Puzzleheaded_Ad4030\"> /u/Puzzleheaded_Ad4030 </a> <br/> <span><a href=\"https://coderoasis.com/python-3-13-new-features/\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cp6jn2/python_313_beta_the_new_features_and_fixes_coming/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/Puzzleheaded_Ad4030  \n [link]   [comments]",
+            "id": "t3_1cp6jn2",
+            "isoDate": "2024-05-11T02:05:14.000Z"
+        },
+        {
+            "title": "Need Suggestion and Help",
+            "link": "https://www.reddit.com/r/programming/comments/1cq336y/need_suggestion_and_help/",
+            "pubDate": "2024-05-12T08:23:39.000Z",
+            "author": "/u/Pacific_3286",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/Pacific_3286\"> /u/Pacific_3286 </a> <br/> <span><a href=\"https://www.reddit.com/r/code/comments/1cq32s9/need_honest_feedback_and_suggestion/?utm_source=share&amp;utm_medium=web3x&amp;utm_name=web3xcss&amp;utm_term=1&amp;utm_content=share_button\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cq336y/need_suggestion_and_help/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/Pacific_3286  \n [link]   [comments]",
+            "id": "t3_1cq336y",
+            "isoDate": "2024-05-12T08:23:39.000Z"
+        },
+        {
+            "title": "use dev.to",
+            "link": "https://www.reddit.com/r/programming/comments/1cq4zrt/use_devto/",
+            "pubDate": "2024-05-12T10:38:45.000Z",
+            "author": "/u/alicangunduz",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/alicangunduz\"> /u/alicangunduz </a> <br/> <span><a href=\"https://github.com/alicangunduz/DevTo-Connect/\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cq4zrt/use_devto/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/alicangunduz  \n [link]   [comments]",
+            "id": "t3_1cq4zrt",
+            "isoDate": "2024-05-12T10:38:45.000Z"
+        },
+        {
+            "title": "Engineering With Java: Digest #19",
+            "link": "https://www.reddit.com/r/programming/comments/1cpulzx/engineering_with_java_digest_19/",
+            "pubDate": "2024-05-11T23:49:26.000Z",
+            "author": "/u/Educational-Ad2036",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/Educational-Ad2036\"> /u/Educational-Ad2036 </a> <br/> <span><a href=\"https://javabulletin.substack.com/p/engineering-with-java-digest-19\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cpulzx/engineering_with_java_digest_19/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/Educational-Ad2036  \n [link]   [comments]",
+            "id": "t3_1cpulzx",
+            "isoDate": "2024-05-11T23:49:26.000Z"
+        },
+        {
+            "title": "I made game of life in JS",
+            "link": "https://www.reddit.com/r/programming/comments/1cpztlm/i_made_game_of_life_in_js/",
+            "pubDate": "2024-05-12T04:40:11.000Z",
+            "author": "/u/Celestial-being117",
+            "content": "<!-- SC_OFF --><div class=\"md\"><p>Any suggestions or ideas</p> </div><!-- SC_ON --> &#32; submitted by &#32; <a href=\"https://www.reddit.com/user/Celestial-being117\"> /u/Celestial-being117 </a> <br/> <span><a href=\"https://logan-garcia-inc.github.io/game-of-life/\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cpztlm/i_made_game_of_life_in_js/\">[comments]</a></span>",
+            "contentSnippet": "Any suggestions or ideas\n    submitted by    /u/Celestial-being117  \n [link]   [comments]",
+            "id": "t3_1cpztlm",
+            "isoDate": "2024-05-12T04:40:11.000Z"
+        },
+        {
+            "title": "The Art of Using A Paper Notebook in App Development",
+            "link": "https://www.reddit.com/r/programming/comments/1cq074p/the_art_of_using_a_paper_notebook_in_app/",
+            "pubDate": "2024-05-12T05:03:44.000Z",
+            "author": "/u/reddit-user2025",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/reddit-user2025\"> /u/reddit-user2025 </a> <br/> <span><a href=\"https://medium.com/@gmobile2022/the-art-of-using-a-paper-notebook-in-app-development-7de3bcc07b7e\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cq074p/the_art_of_using_a_paper_notebook_in_app/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/reddit-user2025  \n [link]   [comments]",
+            "id": "t3_1cq074p",
+            "isoDate": "2024-05-12T05:03:44.000Z"
+        },
+        {
+            "title": "Critical SSRF Vulnerability Discovered in NextJS Framework",
+            "link": "https://www.reddit.com/r/programming/comments/1com297/critical_ssrf_vulnerability_discovered_in_nextjs/",
+            "pubDate": "2024-05-10T10:12:30.000Z",
+            "author": "/u/geek_noob",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/geek_noob\"> /u/geek_noob </a> <br/> <span><a href=\"https://www.cyberkendra.com/2024/05/critical-ssrf-vulnerability-discovered.html\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1com297/critical_ssrf_vulnerability_discovered_in_nextjs/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/geek_noob  \n [link]   [comments]",
+            "id": "t3_1com297",
+            "isoDate": "2024-05-10T10:12:30.000Z"
+        },
+        {
+            "title": "Elvish, expressive programming language and a versatile interactive shell",
+            "link": "https://www.reddit.com/r/programming/comments/1comqfs/elvish_expressive_programming_language_and_a/",
+            "pubDate": "2024-05-10T10:56:28.000Z",
+            "author": "/u/RecognitionDecent266",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/RecognitionDecent266\"> /u/RecognitionDecent266 </a> <br/> <span><a href=\"https://elv.sh/\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1comqfs/elvish_expressive_programming_language_and_a/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/RecognitionDecent266  \n [link]   [comments]",
+            "id": "t3_1comqfs",
+            "isoDate": "2024-05-10T10:56:28.000Z"
+        },
+        {
+            "title": "Swift Proxy Checker",
+            "link": "https://www.reddit.com/r/programming/comments/1cplzsp/swift_proxy_checker/",
+            "pubDate": "2024-05-11T17:00:42.000Z",
+            "author": "/u/Budget-Bicycle4121",
+            "content": "<!-- SC_OFF --><div class=\"md\"><p>ProxyBeast is a powerful, complete and free proxy checker with zero dependency and advanced capabilities. </p> <p>The video showcase is quite a success, we plan releasing on 20 May 2024. </p> <p>What is your opinion?</p> <ul> <li><a href=\"https://proxy.pix4.dev/\">https://proxy.pix4.dev/</a></li> </ul> </div><!-- SC_ON --> &#32; submitted by &#32; <a href=\"https://www.reddit.com/user/Budget-Bicycle4121\"> /u/Budget-Bicycle4121 </a> <br/> <span><a href=\"https://youtu.be/wMLY9BHepjo?si=Qi4Swt5yDZVaiQRU\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1cplzsp/swift_proxy_checker/\">[comments]</a></span>",
+            "contentSnippet": "ProxyBeast is a powerful, complete and free proxy checker with zero dependency and advanced capabilities. \n The video showcase is quite a success, we plan releasing on 20 May 2024. \n What is your opinion?\n  \nhttps://proxy.pix4.dev/\n  \n   submitted by    /u/Budget-Bicycle4121  \n [link]   [comments]",
+            "id": "t3_1cplzsp",
+            "isoDate": "2024-05-11T17:00:42.000Z"
+        },
+        {
+            "title": "Spider-Man (Neversoft) decompilation project Progress Checkpoint - May 2024",
+            "link": "https://www.reddit.com/r/programming/comments/1covnid/spiderman_neversoft_decompilation_project/",
+            "pubDate": "2024-05-10T17:52:44.000Z",
+            "author": "/u/krystalgamer",
+            "content": "&#32; submitted by &#32; <a href=\"https://www.reddit.com/user/krystalgamer\"> /u/krystalgamer </a> <br/> <span><a href=\"https://krystalgamer.github.io/spidey-decomp-status-may/\">[link]</a></span> &#32; <span><a href=\"https://www.reddit.com/r/programming/comments/1covnid/spiderman_neversoft_decompilation_project/\">[comments]</a></span>",
+            "contentSnippet": "submitted by    /u/krystalgamer  \n [link]   [comments]",
+            "id": "t3_1covnid",
+            "isoDate": "2024-05-10T17:52:44.000Z"
+        }
+    ],
+    "link": "https://www.reddit.com/r/programming",
+    "feedUrl": "https://www.reddit.com/r/programming.rss",
+    "title": "programming",
+    "lastBuildDate": "2024-05-12T14:42:08+00:00"
+}

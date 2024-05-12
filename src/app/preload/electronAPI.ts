@@ -49,4 +49,12 @@ contextBridge.exposeInMainWorld("electronAPI", {
     ipcRenderer.invoke(IpcChannels.SET_LOCK_ALL_WIDGETS, lock),
   setVisibilityAllWidgets: (visible: boolean) =>
     ipcRenderer.invoke(IpcChannels.SET_VISIBILITY_ALL_WIDGETS, visible),
+
+  // custom data operations
+  readCustomData: (widgetKey: string) =>
+    ipcRenderer.invoke(IpcChannels.READ_CUSTOM_DATA, widgetKey),
+
+  writeCustomData: (widgetKey: string, data: string) => {
+    ipcRenderer.invoke(IpcChannels.WRITE_CUSTOM_DATA, widgetKey, data);
+  },
 });

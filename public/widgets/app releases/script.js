@@ -14,9 +14,11 @@ async function fetchDataAndUpdateUI() {
       node.querySelector("#title").addEventListener("click", () => {
         window.electronAPI.openExternalLink(element.link);
       });
+      console.log(element.content);
+      document.getElementById("content").innerHTML = element.content;
       const pubDate = new Date(element.pubDate);
       node.querySelector("#pubDate").textContent = pubDate.toLocaleString();
-      const userLink = "https://www.reddit.com/" + element.author;
+      const userLink = "https://www.github.com/" + element.author;
       node.querySelector("#author").textContent = element.author;
       node.querySelector("#author").addEventListener("click", () => {
         window.electronAPI.openExternalLink(userLink);
@@ -25,8 +27,12 @@ async function fetchDataAndUpdateUI() {
     });
   }
 
+  document.getElementById(
+    "version"
+  ).textContent = `You are using version ${await window.electronAPI.getAppVersion()} of the app.`;
+
   const data = await window.electronAPI.getRSSFeed(
-    "https://www.reddit.com/r/programming.rss"
+    "https://github.com/sametcn99/electron-widgets/releases.atom"
   );
   console.log(data);
   if (data) updateUI();

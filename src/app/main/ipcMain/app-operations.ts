@@ -5,6 +5,9 @@ import { IpcChannels } from "../../../lib/ipc-channels";
 import Parser from "rss-parser";
 import { fsSize, getStaticData } from "systeminformation";
 import { showNotification } from "../../../utils";
+import { existsSync, readFileSync, writeFileSync } from "fs-extra";
+import { config } from "../../../lib/config";
+import path from "path";
 
 // Handles the 'get-app-version' IPC message by returning the app version.
 ipcMain.handle(IpcChannels.GET_APP_VERSION, () => {
@@ -81,3 +84,25 @@ ipcMain.handle(IpcChannels.SYSTEM_INFO, async () => {
 ipcMain.handle(IpcChannels.SHOW_NOTIFICATION, (event, title, body) => {
   showNotification(title, body);
 });
+
+ipcMain.handle(IpcChannels.READ_CUSTOM_DATA, (event, widgetKey: string) => {
+  // Read custom data from inside the widgetsDir folder
+  const dirPath = path.join(config.widgetsDir, widgetKey, "data.json");
+  // check if the file exists
+  if (!existsSync(dirPath)) {
+    return "";
+  } else {
+    const data = readFileSync(dirPath, "utf8");
+    return data;
+  }
+});
+
+ipcMain.handle(
+  IpcChannels.WRITE_CUSTOM_DATA,
+  (event, widgetKey: string, data: string) => {
+    // Write custom data to inside the widgetsDir folder
+    const dirPath = path.join(config.widgetsDir, widgetKey, "data.json");
+    data = JSON.stringify(data, null, 2);
+    writeFileSync(dirPath, data);
+  },
+);
