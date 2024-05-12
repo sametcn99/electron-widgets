@@ -210,5 +210,13 @@ class WindowManager {
       return null;
     }
   }
+
+  showWidget(widgetKey: string): void {
+    this.getAllWindowsExceptMain().forEach((win) => {
+      if (win.webContents.getTitle() === widgetKey) {
+        win.show();
+      }
+    });
+  }
 }
 export const windowManager = new WindowManager();

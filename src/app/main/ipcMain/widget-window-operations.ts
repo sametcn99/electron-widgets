@@ -138,3 +138,8 @@ ipcMain.handle(
     windowManager.reloadMainWindow();
   },
 );
+
+
+ipcMain.handle(IpcChannels.SHOW_WIDGET, (event, widgetKey: string) => {
+  windowManager.showWidget(widgetKey);
+});

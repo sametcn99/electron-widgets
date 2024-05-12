@@ -17,6 +17,7 @@ export enum IpcChannels {
 
   REVEAL_WIDGETS_FOLDER = "dialog:revealWidgetsFolder", // Channel for opening file dialog
 
+  SHOW_WIDGET= "show-widget", // Channel for showing widgets
   SHOW_ALL_WIDGETS = "show-all-widgets", // Channel for showing all widgets
   RELOAD_WIDGET = "reload-widget", // Channel for refreshing widgets
   RESIZE_WIDGET_WINDOW = "resize-widget-window", // Channel for resizing widget windows
