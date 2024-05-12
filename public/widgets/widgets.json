@@ -45,8 +45,8 @@
     "locked": true,
     "width": 416,
     "height": 72,
-    "x": -3,
-    "y": 139,
+    "x": 780,
+    "y": 274,
     "alwaysOnTop": false
   },
   "transparent clock": {
@@ -67,6 +67,16 @@
     "height": 520,
     "x": 10,
     "y": 10,
+    "alwaysOnTop": false
+  },
+  "r-programming": {
+    "title": "r-programming",
+    "visible": false,
+    "locked": true,
+    "width": 377,
+    "height": 505,
+    "x": 45,
+    "y": 82,
     "alwaysOnTop": false
   }
 }

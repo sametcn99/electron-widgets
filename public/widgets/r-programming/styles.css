@@ -1,0 +1,195 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+h1 {
+  -webkit-app-region: drag;
+}
+a {
+  -webkit-app-region: no-drag;
+}
+::-webkit-scrollbar {
+  width: 15px;
+  background: #141414;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: #e9e9e9;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1d1d1d;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #292929;
+}
+:root {
+  -webkit-user-select: none;
+  user-select: none;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  height: auto;
+
+  /* Dark */
+  --dark-background: #131313;
+  --dark-background-secondary: #1b1b1b;
+  --dark-text: #f2f4f5;
+  --dark-secondary-text: #878a8c;
+  --dark-primary: #c0c0c0;
+  --dark-border: 1px solid #3030309a;
+  --dark-box-shadow: 1px 1px 20px rgba(214, 214, 214, 0.096);
+
+  /* Transition */
+  --transition-duration: 1s;
+}
+
+:root {
+  --background: var(--dark-background);
+  --text: var(--dark-text);
+  --secondary-text: var(--dark-secondary-text);
+  --primary: var(--dark-primary);
+  --border: var(--dark-border);
+  --box-shadow: var(--dark-box-shadow);
+}
+
+:root,
+body {
+  transition: background-color var(--transition-duration);
+}
+p {
+  color: var(--dark-text);
+}
+
+@font-face {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  src: url();
+}
+
+* {
+  padding: 0px;
+  font-family: "Roboto", sans-serif;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--text);
+}
+
+main {
+  display: none;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  gap: 10px;
+  background-color: var(--background);
+  border-radius: 10px;
+  height: fit-content;
+  padding: 20px;
+}
+
+#message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--background);
+  border-radius: 10px;
+  height: 100vh;
+  font-weight: bold;
+}
+
+#loading {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #1abc9c;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+h1 {
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--dark-text);
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#container {
+  width: 100%;
+}
+#item {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+#title {
+  color: var(--dark-text);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+}
+#title:hover {
+  text-decoration: underline;
+}
+
+#author {
+  cursor: pointer;
+}
+#author:hover {
+  text-decoration: underline;
+}
+
+#pubDate,
+#author {
+  color: var(--dark-secondary-text);
+  font-size: 14px;
+}
+
+#author:before {
+  content: "by ";
+}
+
+#scrollTopButton {
+  font-size: small;
+  display: none; /* Default olarak düğme görünmez */
+  position: fixed; /* Düğme ekranın belirli bir konumunda sabit kalır */
+  bottom: 20px; /* Ekranın altından 20px yukarıda */
+  right: 30px; /* Ekranın sağ tarafından 30px uzakta */
+  z-index: 99; /* Diğer elementlerin üzerinde görünür */
+  border: none; /* Kenarlık yok */
+  outline: none; /* Dış çizgi yok */
+  background-color: var(--dark-background-secondary); /* Düğme rengi */
+  color: white; /* İkon veya metin rengi */
+  cursor: pointer; /* İmleç, üzerine geldiğinde el simgesi olur */
+  padding: 15px; /* Düğme içindeki boşluk */
+  border-radius: 10px; /* Düğmenin köşelerini yuvarlar */
+}
+
+#scrollTopButton:hover {
+  background-color: var(
+    --dark-secondary-text
+  ); /* İmleç, düğmenin üzerine geldiğinde düğme rengi değişir */
+}
