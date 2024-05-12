@@ -26,6 +26,10 @@ async function fetchDataAndUpdateUI() {
 
   // Call the updateDiskUsage function with the fetched data
   updateDiskUsage(data);
+  setInterval(
+    () => window.electronAPI.reloadWidget("disk usage"),
+    1000 * 60 * 60,
+  );
 }
 
 // Call the async function

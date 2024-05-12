@@ -36,6 +36,15 @@ ipcMain.handle(IpcChannels.CLOSE_WIDGET_WINDOW, (event, key) => {
 });
 
 /**
+ * Handles the reloading of a widget window.
+ * @param event - The event object.
+ * @param key - The key of the widget.
+ */
+ipcMain.handle(IpcChannels.RELOAD_WIDGET, (event, widgetKey) => {
+  windowManager.reCreateWidget(widgetKey);
+});
+
+/**
  * Handles the resizing of a widget window.
  */
 ipcMain.handle(IpcChannels.RESIZE_WIDGET_WINDOW, () => {

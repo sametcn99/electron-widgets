@@ -19,7 +19,8 @@ contextBridge.exposeInMainWorld("electronAPI", {
     ipcRenderer.invoke(IpcChannels.WINDOW_ACTION, "minimize"),
   closeWindow: () => ipcRenderer.invoke(IpcChannels.WINDOW_ACTION, "close"),
   showAllWidgets: () => ipcRenderer.invoke(IpcChannels.SHOW_ALL_WIDGETS),
-  reloadWidget: () => ipcRenderer.invoke(IpcChannels.RELOAD_WIDGET),
+  reloadWidget: (widgetKey: string) =>
+    ipcRenderer.invoke(IpcChannels.RELOAD_WIDGET, widgetKey),
   lockWidget: (widgetId: string) =>
     ipcRenderer.invoke(IpcChannels.LOCK_WIDGET, widgetId),
 

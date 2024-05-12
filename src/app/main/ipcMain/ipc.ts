@@ -113,12 +113,3 @@ ipcMain.handle(IpcChannels.REMOVE_WIDGET, async (event, widgetKey) => {
   setWidgetsJson(widgets, config.widgetsJsonPath);
   windowManager.reloadAllWindows();
 });
-
-/**
- * Handles locking a widget.
- * @param event - The event object.
- * @param widgetKey - The key of the widget to lock.
- */
-ipcMain.handle(IpcChannels.RELOAD_WIDGET, () => {
-  windowManager.reloadAllWindows();
-});
