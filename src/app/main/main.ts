@@ -11,6 +11,7 @@ import {
   createWindowsForWidgets,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   hotReloadWidgets,
+  displayControl,
 } from "../../utils";
 import "./ipcMain/ipc";
 import "./ipcMain/app-operations";
@@ -32,6 +33,7 @@ if (require("electron-squirrel-startup")) {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   copyWidgetsDirIfNeeded(config.sourceWidgetsDir, config.widgetsDir);
+  displayControl();
   createMainWindow();
   createWindowsForWidgets();
   registerTray();

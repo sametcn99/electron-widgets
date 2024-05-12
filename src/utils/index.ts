@@ -14,3 +14,4 @@ export {
 } from "./browser-windows/widget-windows";
 export { windowManager } from "./browser-windows/window-manager";
 export { mergeWithPreset, hotReloadWidgets } from "./utils";
+export { displayControl } from "./display-control";
