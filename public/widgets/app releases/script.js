@@ -14,8 +14,6 @@ async function fetchDataAndUpdateUI() {
       node.querySelector("#title").addEventListener("click", () => {
         window.electronAPI.openExternalLink(element.link);
       });
-      console.log(element.content);
-      document.getElementById("content").innerHTML = element.content;
       const pubDate = new Date(element.pubDate);
       node.querySelector("#pubDate").textContent = pubDate.toLocaleString();
       const userLink = "https://www.github.com/" + element.author;
@@ -27,18 +25,28 @@ async function fetchDataAndUpdateUI() {
     });
   }
 
-  document.getElementById(
-    "version"
-  ).textContent = `You are using version ${await window.electronAPI.getAppVersion()} of the app.`;
-
   const data = await window.electronAPI.getRSSFeed(
-    "https://github.com/sametcn99/electron-widgets/releases.atom"
+    "https://github.com/sametcn99/electron-widgets/releases.atom",
   );
   console.log(data);
+
+  const latestVersion = data.items[0].title.trim();
+  const version = await window.electronAPI.getAppVersion();
+  if (latestVersion !== version) {
+    window.alert(
+      `There is a new version available: ${latestVersion}\n You are using version ${version} of the app.\nPlease download the latest version from the releases page.`,
+    );
+  } else {
+    console.log(`You are using the latest version of the app.`);
+  }
+
+  document.getElementById("version").textContent =
+    `You are using version ${version} of the app.`;
+
   if (data) updateUI();
   setInterval(
     () => window.electronAPI.reloadWidget("disk usage"),
-    1000 * 60 * 60 // reload every hour
+    1000 * 60 * 60, // reload every hour
   );
 }
 
