@@ -7,7 +7,6 @@ export function displayControl() {
   const data = getWidgetsJson(config.widgetsJsonPath);
   let totalWidth: number = 0;
   let minHeight: number = 0;
-  console.log(screen.getDisplayMatching({ x: 0, y: 0, width: 0, height: 0 }));
   screen.getAllDisplays().forEach((display) => {
     // get the minimum height of the display
     if (display.bounds.height < minHeight || minHeight === 0) {
