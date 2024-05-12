@@ -1,4 +1,14 @@
 {
+  "app releases": {
+    "title": "app releases",
+    "visible": false,
+    "locked": false,
+    "width": 404,
+    "height": 539,
+    "x": 131,
+    "y": 180,
+    "alwaysOnTop": false
+  },
   "clock": {
     "title": "clock",
     "visible": false,
@@ -77,16 +87,6 @@
     "height": 145,
     "x": 701,
     "y": 0,
-    "alwaysOnTop": false
-  },
-  "app releases": {
-    "title": "app releases",
-    "visible": false,
-    "locked": false,
-    "width": 404,
-    "height": 539,
-    "x": 131,
-    "y": 180,
     "alwaysOnTop": false
   }
 }
