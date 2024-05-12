@@ -23,6 +23,9 @@ contextBridge.exposeInMainWorld("electronAPI", {
     ipcRenderer.invoke(IpcChannels.RELOAD_WIDGET, widgetKey),
   lockWidget: (widgetId: string) =>
     ipcRenderer.invoke(IpcChannels.LOCK_WIDGET, widgetId),
+  setAlwaysOnTop: (widgetId: string, alwaysOnTop: boolean) => {
+    ipcRenderer.invoke(IpcChannels.SET_ALWAYS_ON_TOP, widgetId, alwaysOnTop);
+  },
 
   // app operations
   addWidget: () => ipcRenderer.invoke(IpcChannels.ADD_WIDGET_DIALOG),

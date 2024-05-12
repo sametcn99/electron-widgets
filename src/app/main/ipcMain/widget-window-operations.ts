@@ -127,3 +127,14 @@ ipcMain.handle(IpcChannels.LOCK_WIDGET, (event, widgetKey) => {
   setWidgetsJson(widgets, config.widgetsJsonPath);
   windowManager.reCreateWidget(widgetKey);
 });
+
+ipcMain.handle(
+  IpcChannels.SET_ALWAYS_ON_TOP,
+  (event, widgetKey: string, alwaysOnTop: boolean) => {
+    const widgets: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath);
+    widgets[widgetKey].alwaysOnTop = alwaysOnTop;
+    setWidgetsJson(widgets, config.widgetsJsonPath);
+    windowManager.reCreateWidget(widgetKey);
+    windowManager.reloadMainWindow();
+  },
+);

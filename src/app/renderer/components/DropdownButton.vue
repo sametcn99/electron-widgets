@@ -1,8 +1,14 @@
 <template>
-    <div class="relative font-bold" v-on:mouseover="isOpen = true" v-on:mouseleave="isOpen = false">
+    <div class="relative" v-on:mouseover="isOpen = true" v-on:mouseleave="isOpen = false">
         <Bars4Icon class="w-6 h-6 rounded-xl hover:scale-105 hover:cursor-pointer" />
         <div v-if="isOpen"
-            class="absolute right-0 z-10 w-24 py-2 text-sm bg-white rounded-lg shadow-xl bg-opacity-30 backdrop-blur-2xl">
+            class="absolute right-0 z-10 w-32 py-2 text-sm bg-white rounded-lg shadow-xl bg-opacity-30 backdrop-blur-2xl">
+            <button v-if="alwaysOnTop === true" class="w-full p-2 text-gray-900 hover:bg-gray-900 hover:text-white"
+                @click="setAlwaysOnTop()">Set
+                Set Always On Top False</button>
+            <button v-if="alwaysOnTop === false" class="text-gray-900 hover:bg-gray-900 hover:text-white"
+                @click="setAlwaysOnTop()">Set
+                Set Always On Top True</button>
             <button class="w-full p-2 text-gray-900 hover:bg-red-800 hover:text-white"
                 @click="removeWidget()">Remove</button>
         </div>
@@ -22,14 +28,16 @@ export default {
             window.confirm('Are you sure you want to remove this widget?') &&
                 window.electronAPI.removeWidget(this.title || '');
         },
-
+        setAlwaysOnTop() {
+            window.electronAPI.setAlwaysOnTop(this.title || '', !this.alwaysOnTop);
+        }
     },
     props: {
-        title: String
+        title: String,
+        alwaysOnTop: Boolean
     },
     setup() {
         const isOpen = ref(false);
-
         function close() {
             isOpen.value = false;
         }

@@ -61,6 +61,7 @@ interface Window {
     setLockAllWidgets: (lock: boolean) => Promise<void>;
     setVisibilityAllWidgets: (visible: boolean) => Promise<void>;
     sortWidgets: () => Promise<void>;
+    setAlwaysOnTop: (widgetId: string, alwaysOnTop: boolean) => Promise<void>;
 
     // CUSTOM DATA
     readCustomData: (widgetKey: string) => Promise<string>;

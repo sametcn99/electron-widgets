@@ -6,7 +6,7 @@
             id="widgetsData">
             <div class="flex flex-row justify-between w-full">
                 <h1 class="font-bold break-words">{{ widget.title }} </h1>
-                <DropdownButton :title="widget.title" />
+                <DropdownButton :title="widget.title" :alwaysOnTop="widget.alwaysOnTop" />
             </div>
             <div class="flex flex-row justify-between w-full gap-2">
                 <div class="flex items-center w-8 h-4 duration-300 ease-in-out bg-gray-800 rounded-full hover:cursor-pointer"

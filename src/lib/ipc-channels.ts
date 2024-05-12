@@ -24,6 +24,7 @@ export enum IpcChannels {
   ADD_WIDGET_DIALOG = "add-widget-dialog", // Channel for adding a widget dialog
   REMOVE_WIDGET = "remove-widget", // Channel for removing a widget dialog
   LOCK_WIDGET = "lock-widget", // Channel for locking widgets
+  SET_ALWAYS_ON_TOP = "set-always-on-top", // Channel for setting always on top
 
   OPEN_EXTERNAL_LINK = "open-external-link", // Channel for opening external links
   SHOW_NOTIFICATION = "show-notification", // Channel for showing notifications
