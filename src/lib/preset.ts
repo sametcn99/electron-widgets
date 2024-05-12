@@ -3,7 +3,7 @@ export const preset: WidgetConfig = {
   visible: true,
   locked: false,
   width: 300,
-  height: 130,
+  height: 330,
   x: 10,
   y: 10,
   alwaysOnTop: false,
