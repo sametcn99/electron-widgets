@@ -21,10 +21,10 @@ export function createMainWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     title: config.applicationName,
-    width: 450, // Set the initial width of the window
-    height: 650, // Set the initial height of the window
-    minHeight: 400,
-    minWidth: 300,
+    width: 890, // Set the initial width of the window
+    height: 600, // Set the initial height of the window
+    minHeight: 460,
+    minWidth: 390,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"), // Path to preload script
     },

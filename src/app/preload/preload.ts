@@ -8,26 +8,6 @@ import { ipcRenderer } from "electron";
 import "./electronAPI";
 
 window.addEventListener("DOMContentLoaded", async () => {
-  const minimizeBtn = document.getElementById("minimizeBtn");
-  const closeBtn = document.getElementById("closeBtn");
-
-  // Add event listeners for minimize and close buttons
-  if (minimizeBtn && closeBtn) {
-    /**
-     * Event listener for the minimize button.
-     */
-    minimizeBtn.addEventListener("click", () => {
-      ipcRenderer.invoke(IpcChannels.WINDOW_ACTION, "minimize");
-    });
-
-    /**
-     * Event listener for the close button.
-     */
-    closeBtn.addEventListener("click", () => {
-      ipcRenderer.invoke(IpcChannels.WINDOW_ACTION, "close");
-    });
-  }
-
   // Add an event listener to handle window resize events
   window.addEventListener("resize", async () => {
     try {

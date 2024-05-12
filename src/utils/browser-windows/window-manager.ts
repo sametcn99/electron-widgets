@@ -1,5 +1,10 @@
 import { BrowserWindow, dialog } from "electron";
 import { config } from "../../lib/config";
+import {
+  createSingleWindowForWidgets,
+  createWindowsForWidgets,
+} from "./widget-windows";
+import { createMainWindow } from "./main-window";
 
 class WindowManager {
   getMainWindow(): Electron.BrowserWindow | undefined {
@@ -49,11 +54,37 @@ class WindowManager {
     });
   }
 
-  reloadWidget(title: string): void {
-    const window = this.getWindowExceptMain(title);
-    if (window) {
-      window.reload();
-    }
+  reloadMainWindow(): void {
+    this.getMainWindow()?.reload();
+  }
+
+  reCreateMainWindow(): void {
+    this.getMainWindow()?.close();
+    createMainWindow();
+  }
+
+  reCreateWidget(widgetKey: string): void {
+    this.getAllWindowsExceptMain().forEach((win) => {
+      if (win.webContents.getTitle() === widgetKey) {
+        win.close();
+        createSingleWindowForWidgets(widgetKey);
+      }
+    });
+  }
+
+  reCreateAllWidgets(): void {
+    this.getAllWindowsExceptMain().forEach((win) => {
+      win.close();
+    });
+    createWindowsForWidgets();
+  }
+
+  reloadWidget(widgetKey: string): void {
+    this.getAllWindowsExceptMain().forEach((win) => {
+      if (win.webContents.getTitle() === widgetKey) {
+        win.reload();
+      }
+    });
   }
 
   static closeAllWindows(): void {

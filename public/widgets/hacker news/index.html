@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
   <head>
@@ -6,6 +6,7 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
       rel="stylesheet"
     />
+    <title>hacker news</title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="" />
@@ -98,7 +99,9 @@
         padding-top: 0.4rem;
         padding-bottom: 0.4rem;
         display: none;
-        font-weight: bold;
+        font-weight: 600;
+        flex-direction: column;
+        gap: 0.6rem;
       }
 
       #title:hover {
@@ -155,7 +158,6 @@
         }
       }
     </style>
-    <title>hacker-news</title>
   </head>
 
   <body>
@@ -220,14 +222,14 @@
       function fetchData() {
         clearData();
         fetch(
-          "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
+          "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty"
         )
           .then((response) => response.json())
           .then((data) => {
             console.log(data);
             data.forEach((id) => {
               fetch(
-                `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`,
+                `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`
               )
                 .then((response) => response.json())
                 .then((story) => {
@@ -236,21 +238,16 @@
                     .getElementById("story")
                     .cloneNode(true);
                   storyContainer.id = "story";
-                  storyContainer.style.display = "block";
-                  storyContainer.innerHTML = `
-            <p id="time">${renderTime(story.time)}</p>
-            <a id="title" href="${story.url}"  target="_blank"
-            rel="noopener noreferrer"
-            >${story.title}</a
-            >
-            <div id="footer">
-              <p>▲</p>
-              <p id="score">${story.score}</p>
-              <p>•</p>
-              by
-              <p id="by">${story.by}</p>
-              </div>
-              `;
+                  storyContainer.style.display = "flex";
+                  const time = storyContainer.querySelector("#time");
+                  const title = storyContainer.querySelector("#title");
+                  const score = storyContainer.querySelector("#score");
+                  const by = storyContainer.querySelector("#by");
+                  time.innerText = renderTime(story.time);
+                  title.href = story.url;
+                  title.innerText = story.title;
+                  score.innerText = story.score;
+                  by.innerText = story.by;
                   const container = document.getElementById("container");
                   container.appendChild(storyContainer);
                 });

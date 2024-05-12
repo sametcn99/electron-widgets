@@ -4,21 +4,66 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    @apply p-0 select-none text-slate-300 bg-zinc-950;
+  :root,
+  body {
+    padding: 0px;
+    user-select: none;
+    --tw-text-opacity: 1;
+    color: rgb(203 213 225 / var(--tw-text-opacity));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #111111;
+    background: radial-gradient(
+      circle,
+      rgba(17, 17, 17, 1) 0%,
+      rgba(18, 18, 18, 1) 49%
+    );
+    border-radius: 1rem /* 16px */;
   }
-}
 
-@layer utilities {
-  .icon {
-    @apply inline-block w-6 h-6 m-1 bg-cover border-none rounded-md cursor-pointer bg-slate-300;
+  ::-webkit-scrollbar {
+    width: 10px;
+    background: #141414;
   }
-  .settings-icon {
-    @apply bg-[url("../assets/gear-six.svg")];
+
+  ::-webkit-scrollbar-track {
+    box-shadow: #e9e9e9;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1d1d1d;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #292929;
   }
 }
 
 .draggable {
-  -webkit-app-region: drag;
-  width: 100%;
+  -webkit-app-region: drag !important;
+}
+
+input,
+button,
+select,
+textarea,
+a,
+form,
+label,
+iframe,
+details,
+audio,
+video,
+area,
+details,
+embed,
+menu,
+object,
+svg,
+canvas,
+meter,
+progress {
+  -webkit-app-region: no-drag !important;
 }

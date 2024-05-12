@@ -1,0 +1,40 @@
+<template>
+    <div class="relative font-bold" v-on:mouseover="isOpen = true" v-on:mouseleave="isOpen = false">
+        <Bars4Icon class="w-6 h-6 rounded-xl hover:scale-105 hover:cursor-pointer" />
+        <div v-if="isOpen"
+            class="absolute right-0 z-10 w-24 py-2 text-sm bg-white rounded-lg shadow-xl bg-opacity-30 backdrop-blur-2xl">
+            <button class="w-full p-2 text-gray-900 hover:bg-red-800 hover:text-white"
+                @click="removeWidget()">Remove</button>
+        </div>
+    </div>
+</template>
+
+<script lang="ts">
+import { ref } from 'vue';
+import { Bars4Icon } from '@heroicons/vue/24/outline';
+
+export default {
+    components: {
+        Bars4Icon
+    },
+    methods: {
+        removeWidget() {
+            window.confirm('Are you sure you want to remove this widget?') &&
+                window.electronAPI.removeWidget(this.title || '');
+        },
+
+    },
+    props: {
+        title: String
+    },
+    setup() {
+        const isOpen = ref(false);
+
+        function close() {
+            isOpen.value = false;
+        }
+
+        return { isOpen, close };
+    }
+};
+</script>

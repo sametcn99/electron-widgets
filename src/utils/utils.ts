@@ -15,14 +15,30 @@ export function mergeWithPreset(
   return Object.assign({}, preset, source);
 }
 
+// Watch the widgets directory and its subdirectories for changes
 export function hotReloadWidgets() {
-  // Watch the widgets directory and its subdirectories for changes
+  // Initialize a watcher on the directory specified by `config.widgetsDir`
   const watcher = watch(config.widgetsDir, {
+    // Ignore any files or directories that start with a dot
     ignored: /(^|[/\\])\../,
+    // Keep the watcher running as long as the program is running
     persistent: true,
+    // Do not trigger 'add' events for existing files when the watcher is started
+    ignoreInitial: true,
+    // Options for waiting for the write operation to finish before triggering 'add' or 'change' events
+    awaitWriteFinish: {
+      // The amount of time in milliseconds for a file size to remain constant before emitting its event
+      stabilityThreshold: 1000,
+      // The polling interval in milliseconds (defaults to 100)
+      pollInterval: 100,
+    },
   });
 
-  watcher.on("change", () => {
+  watcher.on("change", (path, stats) => {
+    // log what widget directory has changed
+    console.log(path, stats);
+
+    console.log("Widgets directory changed.");
     // If an existing file is changed, reload the widgets
     windowManager.reloadAllWidgets();
   });

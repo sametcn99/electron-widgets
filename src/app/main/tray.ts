@@ -26,16 +26,7 @@ export function registerTray() {
   // Create a context menu for the tray
   const contextMenu = Menu.buildFromTemplate([
     { label: "Open", click: () => createMainWindow() },
-    {
-      label: "Show All Widgets",
-      click: () =>
-        windowManager.getAllWindowsExceptMain().forEach((win) => win.show()),
-    },
-    {
-      label: "Hide All Widgets",
-      click: () =>
-        windowManager.getAllWindowsExceptMain().forEach((win) => win.hide()),
-    },
+    { label: "Show All", click: () => windowManager.showAllWindows() },
     { label: "Quit", click: () => app.quit() },
   ]);
 

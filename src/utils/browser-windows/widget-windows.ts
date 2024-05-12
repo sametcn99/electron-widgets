@@ -1,8 +1,4 @@
-import {
-  BrowserWindow,
-  BrowserWindowConstructorOptions,
-  dialog,
-} from "electron";
+import { BrowserWindow, dialog } from "electron";
 import path from "node:path";
 import { mergeWithPreset } from "../utils";
 import { preset } from "../../lib/preset";
@@ -63,29 +59,13 @@ export function createSingleWindowForWidgets(key: string) {
       );
       return;
     }
-    // check if the widget is locked and set resizable to false if it is locked set it to true
-    if (
-      widgetsData[key].locked === true &&
-      widgetsData[key].resizable === true
-    ) {
-      widgetsData[key].resizable = false;
-      setWidgetsJson(widgetsData, config.widgetsJsonPath);
-    } else if (
-      widgetsData[key].locked === false &&
-      widgetsData[key].resizable === false
-    ) {
-      widgetsData[key].resizable = true;
-      setWidgetsJson(widgetsData, config.widgetsJsonPath);
-    }
     // Iterate through each widget in the data
-    const widget: WidgetConfig & BrowserWindowConstructorOptions =
-      widgetsData[key];
+    const widget: WidgetConfig = widgetsData[key];
     // Check if the widget is set to be visible
     if (widget.visible) {
       try {
         // Create a new browser window for the widget
         const win = new BrowserWindow({
-          title: widget.title,
           webPreferences: {
             contextIsolation: true,
             nodeIntegration: true,
@@ -93,30 +73,28 @@ export function createSingleWindowForWidgets(key: string) {
           },
           width: widget.width,
           height: widget.height,
-          autoHideMenuBar: widget.autoHideMenuBar,
-          titleBarStyle: widget.titleBarStyle,
-          transparent: widget.transparent,
-          resizable: widget.resizable,
+          autoHideMenuBar: true,
+          titleBarStyle: "hidden",
+          transparent: true,
+          resizable: widget.locked ? false : true,
           x: widget.x,
           y: widget.y,
-          maximizable: widget.maximizable,
-          minimizable: widget.minimizable,
-          skipTaskbar: widget.skipTaskbar,
-          thickFrame: widget.thickFrame,
-          frame: widget.frame,
-          hasShadow: widget.hasShadow,
+          maximizable: false,
+          minimizable: true,
+          skipTaskbar: true,
+          hasShadow: false,
           closable: true,
           alwaysOnTop: widget.alwaysOnTop,
+          thickFrame: false,
         });
 
         // Hide the traffic light buttons (minimize, maximize, close)
-        if (widget.titleBarStyle === "hidden" && is.macOS()) {
-          win.setWindowButtonVisibility(false);
-        }
+        is.macOS() && win.setWindowButtonVisibility(false);
 
         // Load the widget's HTML file into the window
         const indexPath = path.join(config.widgetsDir, key, "index.html");
         win.loadFile(indexPath);
+        win.setTitle(key);
         openDevToolsWithShortcut(win);
       } catch (err) {
         dialog.showErrorBox(`Error creating window for ${key}`, `${err}`);

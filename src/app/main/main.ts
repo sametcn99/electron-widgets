@@ -3,15 +3,19 @@
  * Registers the app and initializes it.
  */
 import { app, BrowserWindow } from "electron";
-import "./ipcMain/ipc";
 import { registerTray } from "./tray";
 import { config } from "../../lib/config";
 import {
   copyWidgetsDirIfNeeded,
   createMainWindow,
   createWindowsForWidgets,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   hotReloadWidgets,
 } from "../../utils";
+import "./ipcMain/ipc";
+import "./ipcMain/app-operations";
+import "./ipcMain/widget-window-operations";
+import "./ipcMain/widget-folder-operations";
 
 /**
  * Registers the Electron app and sets up necessary event handlers and functionality.
@@ -31,7 +35,7 @@ app.whenReady().then(() => {
   createMainWindow();
   createWindowsForWidgets();
   registerTray();
-  hotReloadWidgets();
+  // hotReloadWidgets();
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createMainWindow();

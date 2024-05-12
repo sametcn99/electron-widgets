@@ -1,5 +1,5 @@
 import { dialog } from "electron";
-import { removeSync } from "fs-extra";
+import { pathExistsSync, removeSync } from "fs-extra";
 import {
   copyFileSync,
   existsSync,
@@ -57,9 +57,8 @@ export function copyWidgetsDirIfNeeded(
   widgetsDir: string,
 ) {
   try {
-    if (!existsSync(widgetsDir)) {
-      console.log("widgets directory is not found. Copying...");
-
+    const pathExist = pathExistsSync(widgetsDir);
+    if (!pathExist) {
       // Create the destination directory if it doesn't exist
       mkdirSync(widgetsDir, { recursive: true });
       // Read the contents of the source directory
