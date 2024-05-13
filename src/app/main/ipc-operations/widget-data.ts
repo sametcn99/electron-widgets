@@ -45,7 +45,6 @@ ipcMain.handle(IpcChannels.SET_LOCK_ALL_WIDGETS, (event, lock: boolean) => {
   const widgets = getWidgetsJson(config.widgetsJsonPath);
   Object.keys(widgets).forEach((key) => {
     widgets[key].locked = lock;
-    windowManager.reCreateWidget(key);
   });
   setWidgetsJson(widgets, config.widgetsJsonPath);
   windowManager.reloadMainWindow();
