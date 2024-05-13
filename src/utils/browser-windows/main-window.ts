@@ -32,6 +32,7 @@ export function createMainWindow() {
     titleBarStyle: "hidden", // Hide the title bar
     fullscreenable: false, // Disable fullscreen
     maximizable: false, // Disable maximize
+    icon: config.iconPath, // Set the icon for the app
   });
 
   // Hide the traffic light buttons (minimize, maximize, close)

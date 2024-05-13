@@ -81,14 +81,14 @@ ipcMain.handle(IpcChannels.SYSTEM_INFO, async () => {
   return data;
 });
 
+// Handles the 'show-notification' IPC message by showing a notification.
 ipcMain.handle(IpcChannels.SHOW_NOTIFICATION, (event, title, body) => {
   showNotification(title, body);
 });
 
+// Handles the 'read-custom-data' IPC message by reading custom data from a file.
 ipcMain.handle(IpcChannels.READ_CUSTOM_DATA, (event, widgetKey: string) => {
-  // Read custom data from inside the widgetsDir folder
   const dirPath = path.join(config.widgetsDir, widgetKey, "data.json");
-  // check if the file exists
   if (!existsSync(dirPath)) {
     return "";
   } else {
@@ -97,10 +97,10 @@ ipcMain.handle(IpcChannels.READ_CUSTOM_DATA, (event, widgetKey: string) => {
   }
 });
 
+// Handles the 'write-custom-data' IPC message by writing custom data to a file.
 ipcMain.handle(
   IpcChannels.WRITE_CUSTOM_DATA,
   (event, widgetKey: string, data: string) => {
-    // Write custom data to inside the widgetsDir folder
     const dirPath = path.join(config.widgetsDir, widgetKey, "data.json");
     data = JSON.stringify(data, null, 2);
     writeFileSync(dirPath, data);

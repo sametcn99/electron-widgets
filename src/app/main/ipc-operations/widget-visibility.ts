@@ -3,37 +3,10 @@ import { IpcChannels } from "../../../lib/ipc-channels";
 import {
   getWidgetsJson,
   setWidgetsJson,
-  createSingleWindowForWidgets,
   windowManager,
+  createWindowsForWidgets,
 } from "../../../utils";
 import { config } from "../../../lib/config";
-
-/**
- * Handles the creation of a widget window.
- * @param event - The event object.
- * @param key - The key of the widget.
- */
-ipcMain.handle(IpcChannels.CREATE_WIDGET_WINDOW, (event, key) => {
-  createSingleWindowForWidgets(key);
-});
-
-/**
- * Handles the closing of a widget window.
- * @param event - The event object.
- * @param key - The key of the widget.
- */
-ipcMain.handle(IpcChannels.CLOSE_WIDGET_WINDOW, (event, key) => {
-  try {
-    windowManager.getAllWindowsExceptMain().forEach((win) => {
-      if (win.title === key) {
-        win.close();
-      }
-    });
-  } catch (error) {
-    console.error("Error closing widget window:", error);
-    dialog.showErrorBox("Error closing widget window", `${error}`);
-  }
-});
 
 /**
  * Handles the reloading of a widget window.
@@ -128,6 +101,12 @@ ipcMain.handle(IpcChannels.LOCK_WIDGET, (event, widgetKey) => {
   windowManager.reCreateWidget(widgetKey);
 });
 
+/**
+ * Handles setting the always-on-top property of a widget.
+ * @param event - The event object.
+ * @param widgetKey - The key of the widget.
+ * @param alwaysOnTop - The value indicating whether the widget should always be on top.
+ */
 ipcMain.handle(
   IpcChannels.SET_ALWAYS_ON_TOP,
   (event, widgetKey: string, alwaysOnTop: boolean) => {
@@ -139,7 +118,30 @@ ipcMain.handle(
   },
 );
 
-
+/**
+ * Handles showing a widget window.
+ * @param event - The event object.
+ * @param widgetKey - The key of the widget.
+ */
 ipcMain.handle(IpcChannels.SHOW_WIDGET, (event, widgetKey: string) => {
   windowManager.showWidget(widgetKey);
 });
+
+/**
+ * Handles setting the visibility of all widgets.
+ * @param event - The event object.
+ * @param visible - The visibility of the widgets.
+ */
+ipcMain.handle(
+  IpcChannels.SET_VISIBILITY_ALL_WIDGETS,
+  (event, visible: boolean) => {
+    const widgets = getWidgetsJson(config.widgetsJsonPath);
+    Object.keys(widgets).forEach((key) => {
+      widgets[key].visible = visible;
+    });
+    setWidgetsJson(widgets, config.widgetsJsonPath);
+    windowManager.closeAllWindowsExceptMain();
+    createWindowsForWidgets();
+    windowManager.reloadMainWindow();
+  },
+);

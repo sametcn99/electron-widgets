@@ -13,10 +13,11 @@ import {
   hotReloadWidgets,
   displayControl,
 } from "../../utils";
-import "./ipcMain/ipc";
-import "./ipcMain/app-operations";
-import "./ipcMain/widget-window-operations";
-import "./ipcMain/widget-folder-operations";
+import "./ipc-operations/global";
+import "./ipc-operations/app-operations";
+import "./ipc-operations/widget-window";
+import "./ipc-operations/widget-visibility";
+import "./ipc-operations/widget-data";
 
 /**
  * Registers the Electron app and sets up necessary event handlers and functionality.

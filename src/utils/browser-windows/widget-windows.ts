@@ -87,6 +87,7 @@ export function createSingleWindowForWidgets(key: string) {
           alwaysOnTop: widget.alwaysOnTop,
           thickFrame: false,
           movable: !widget.locked,
+          icon: config.iconPath,
         });
 
         // Hide the traffic light buttons (minimize, maximize, close)

@@ -5,10 +5,20 @@ import { IpcChannels } from "../../lib/ipc-channels";
  * Exposes Electron API to the main world.
  */
 contextBridge.exposeInMainWorld("electronAPI", {
-  // widget json operations
+  // custom data operations
+  readCustomData: (widgetKey: string) =>
+    ipcRenderer.invoke(IpcChannels.READ_CUSTOM_DATA, widgetKey),
+  writeCustomData: (widgetKey: string, data: string) => {
+    ipcRenderer.invoke(IpcChannels.WRITE_CUSTOM_DATA, widgetKey, data);
+  },
+
+  // widget data operations
   readWidgetsJson: () => ipcRenderer.invoke(IpcChannels.READ_WIDGETS_JSON),
   writeWidgetJson: (data: string) =>
     ipcRenderer.invoke(IpcChannels.WRITE_WIDGETS_JSON, data),
+  removeWidget: (widgetId: string) =>
+    ipcRenderer.invoke(IpcChannels.REMOVE_WIDGET, widgetId),
+  sortWidgets: () => ipcRenderer.invoke(IpcChannels.SORT_WIDGETS),
 
   // widget window operations
   createWidgetWindow: (widgetKey: string) =>
@@ -18,7 +28,11 @@ contextBridge.exposeInMainWorld("electronAPI", {
   minimizeWindow: () =>
     ipcRenderer.invoke(IpcChannels.WINDOW_ACTION, "minimize"),
   closeWindow: () => ipcRenderer.invoke(IpcChannels.WINDOW_ACTION, "close"),
+
+  // widget visibility operations
   showAllWidgets: () => ipcRenderer.invoke(IpcChannels.SHOW_ALL_WIDGETS),
+  showWidget: (widgetId: string) =>
+    ipcRenderer.invoke(IpcChannels.SHOW_WIDGET, widgetId),
   reloadWidget: (widgetKey: string) =>
     ipcRenderer.invoke(IpcChannels.RELOAD_WIDGET, widgetKey),
   lockWidget: (widgetId: string) =>
@@ -26,7 +40,10 @@ contextBridge.exposeInMainWorld("electronAPI", {
   setAlwaysOnTop: (widgetId: string, alwaysOnTop: boolean) => {
     ipcRenderer.invoke(IpcChannels.SET_ALWAYS_ON_TOP, widgetId, alwaysOnTop);
   },
-  showWidget: (widgetId: string) => ipcRenderer.invoke(IpcChannels.SHOW_WIDGET, widgetId),
+  setLockAllWidgets: (lock: boolean) =>
+    ipcRenderer.invoke(IpcChannels.SET_LOCK_ALL_WIDGETS, lock),
+  setVisibilityAllWidgets: (visible: boolean) =>
+    ipcRenderer.invoke(IpcChannels.SET_VISIBILITY_ALL_WIDGETS, visible),
 
   // app operations
   addWidget: () => ipcRenderer.invoke(IpcChannels.ADD_WIDGET_DIALOG),
@@ -45,20 +62,5 @@ contextBridge.exposeInMainWorld("electronAPI", {
     ipcRenderer.invoke(IpcChannels.RSS_FEED_PARSER, url),
   opmlToJson: (xml: string) =>
     ipcRenderer.invoke(IpcChannels.OPML_TO_JSON, xml),
-  removeWidget: (widgetId: string) =>
-    ipcRenderer.invoke(IpcChannels.REMOVE_WIDGET, widgetId),
   getAppVersion: () => ipcRenderer.invoke(IpcChannels.GET_APP_VERSION),
-  sortWidgets: () => ipcRenderer.invoke(IpcChannels.SORT_WIDGETS),
-  setLockAllWidgets: (lock: boolean) =>
-    ipcRenderer.invoke(IpcChannels.SET_LOCK_ALL_WIDGETS, lock),
-  setVisibilityAllWidgets: (visible: boolean) =>
-    ipcRenderer.invoke(IpcChannels.SET_VISIBILITY_ALL_WIDGETS, visible),
-
-  // custom data operations
-  readCustomData: (widgetKey: string) =>
-    ipcRenderer.invoke(IpcChannels.READ_CUSTOM_DATA, widgetKey),
-
-  writeCustomData: (widgetKey: string, data: string) => {
-    ipcRenderer.invoke(IpcChannels.WRITE_CUSTOM_DATA, widgetKey, data);
-  },
 });
