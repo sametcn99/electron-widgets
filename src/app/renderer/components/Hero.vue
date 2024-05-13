@@ -2,7 +2,7 @@
     <section
         class="grid grid-cols-1 gap-4 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7">
         <div v-for="widget in widgets" :key="widget.title"
-            class="flex flex-col flex-wrap items-start justify-between h-32 p-2 bg-opacity-50 shadow-xl min-w-32 hover:bg-zinc-700 bg-zinc-600 rounded-2xl shadow-zinc-900"
+            class="flex flex-col flex-wrap items-start justify-between p-2 bg-opacity-50 shadow-xl h-28 min-w-24 hover:bg-zinc-700 bg-zinc-800 rounded-2xl shadow-zinc-900"
             id="widgetsData">
             <div class="flex flex-row justify-between w-full">
                 <h1 class="font-bold break-words">{{ widget.title }} </h1>
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div @click="addWidget()"
-            class="flex flex-col items-center justify-center h-32 gap-2 p-2 mb-4 font-bold bg-opacity-50 min-w-32 hover:bg-zinc-900 bg-zinc-600 rounded-2xl hover:cursor-pointer">
+            class="flex flex-col items-center justify-center gap-2 p-2 mb-4 font-bold bg-opacity-50 h-28 min-w-24 hover:bg-zinc-700 bg-zinc-800 rounded-2xl hover:cursor-pointer">
             <SquaresPlusIcon class="w-8 h-8" />
             <p>Add New</p>
         </div>

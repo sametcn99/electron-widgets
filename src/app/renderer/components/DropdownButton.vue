@@ -1,8 +1,7 @@
 <template>
     <div class="relative" v-on:mouseover="isOpen = true" v-on:mouseleave="isOpen = false">
         <Bars4Icon class="w-6 h-6 rounded-xl hover:scale-105 hover:cursor-pointer" />
-        <div v-if="isOpen"
-            class="absolute right-0 z-10 py-2 text-sm bg-white rounded-lg shadow-xl w-36 bg-opacity-30 backdrop-blur-2xl">
+        <div v-if="isOpen" class="absolute right-0 z-10 py-2 text-sm bg-gray-300 rounded-lg shadow-xl w-36">
             <button v-if="visible === true" class="w-full p-2 text-gray-900 hover:bg-gray-900 hover:text-white"
                 @click="show()">Show</button>
             <button v-if="alwaysOnTop === true" class="w-full p-2 text-gray-900 hover:bg-gray-900 hover:text-white"
