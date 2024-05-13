@@ -48,7 +48,7 @@ export default {
     },
     methods: {
         openAbout() {
-            window.electronAPI.openExternalLink("https://github.com/sametcn99/electron-widgets")
+            window.electronAPI.openExternal("https://github.com/sametcn99/electron-widgets")
         },
         revealWidgetsFolder() {
             window.electronAPI.revealWidgetsFolder()
@@ -75,10 +75,10 @@ export default {
             window.electronAPI.showNotification("Thank you for considering to sponsor me! 🙏",
                 "I'm working on this project in my free time. Your support will help me to continue \
                 developing this project and adding new features. Thank you! ❤️");
-            window.electronAPI.openExternalLink("https://github.com/sponsors/sametcn99")
+            window.electronAPI.openExternal("https://github.com/sponsors/sametcn99")
         },
         openWiki() {
-            window.electronAPI.openExternalLink("https://github.com/sametcn99/electron-widgets/wiki")
+            window.electronAPI.openExternal("https://github.com/sametcn99/electron-widgets/wiki")
         }
     },
     setup() {

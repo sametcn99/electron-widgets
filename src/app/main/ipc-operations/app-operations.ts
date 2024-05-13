@@ -1,5 +1,5 @@
-import { app, dialog, ipcMain, shell } from "electron";
-import { execFile } from "child_process";
+import { app, dialog, ipcMain } from "electron";
+import { exec } from "child_process";
 import { opmlToJSON } from "opml-to-json";
 import { IpcChannels } from "../../../lib/ipc-channels";
 import { fsSize, getStaticData } from "systeminformation";
@@ -15,19 +15,12 @@ ipcMain.handle(IpcChannels.GET_APP_VERSION, () => {
 });
 
 // Handles the 'open-external-link' IPC message by opening the provided URL in the default browser.
-ipcMain.handle(IpcChannels.OPEN_EXTERNAL_LINK, (event, url) => {
-  shell.openExternal(url);
-});
-
-// Handles the 'open-external-link' IPC message by opening the provided URL in the default browser.
-ipcMain.handle(IpcChannels.OPEN_EXTERNAL_APP, (event, url) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  execFile(url, (error: any) => {
+ipcMain.handle(IpcChannels.OPEN_EXTERNAL, (event, url) => {
+  exec(`start "" "${url}"`, (error) => {
     if (error) {
-      console.error("Error opening external app:", error);
-      dialog.showErrorBox("Error opening external app", `${error}`);
+      console.error(`Error opening file: ${error}`);
+      dialog.showErrorBox("Error opening file", `${error}`);
     }
-    console.log("External app opened successfully.");
   });
 });
 

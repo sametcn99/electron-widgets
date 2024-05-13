@@ -20,7 +20,7 @@ async function fetchDataAndUpdateUI() {
       node.querySelector("#title").textContent = element.title;
       // Add an event listener to open the link when the title is clicked
       node.querySelector("#title").addEventListener("click", () => {
-        window.electronAPI.openExternalLink(element.link);
+        window.electronAPI.openExternal(element.link);
       });
       // Format the publication date
       const pubDate = new Date(element.pubDate);
@@ -31,7 +31,7 @@ async function fetchDataAndUpdateUI() {
       node.querySelector("#author").textContent = element.author;
       // Add an event listener to open the author's profile when the author is clicked
       node.querySelector("#author").addEventListener("click", () => {
-        window.electronAPI.openExternalLink(userLink);
+        window.electronAPI.openExternal(userLink);
       });
       // Append the new node to the main element
       main.appendChild(node);

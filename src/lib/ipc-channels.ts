@@ -17,7 +17,7 @@ export enum IpcChannels {
 
   REVEAL_WIDGETS_FOLDER = "dialog:revealWidgetsFolder", // Channel for opening file dialog
 
-  SHOW_WIDGET= "show-widget", // Channel for showing widgets
+  SHOW_WIDGET = "show-widget", // Channel for showing widgets
   SHOW_ALL_WIDGETS = "show-all-widgets", // Channel for showing all widgets
   RELOAD_WIDGET = "reload-widget", // Channel for refreshing widgets
   RESIZE_WIDGET_WINDOW = "resize-widget-window", // Channel for resizing widget windows
@@ -27,10 +27,9 @@ export enum IpcChannels {
   LOCK_WIDGET = "lock-widget", // Channel for locking widgets
   SET_ALWAYS_ON_TOP = "set-always-on-top", // Channel for setting always on top
 
-  OPEN_EXTERNAL_LINK = "open-external-link", // Channel for opening external links
+  OPEN_EXTERNAL = "open-external", // Channel for opening external links
   SHOW_NOTIFICATION = "show-notification", // Channel for showing notifications
   GET_DISK_USAGE = "get-disk-usage", // Channel for opening external links
-  OPEN_EXTERNAL_APP = "open-external-app", // Channel for opening external apps
   SYSTEM_INFO = "system-info", // Channel for getting system information
   GET_LOCATION = "get-location", // Channel for getting location
   RSS_FEED_PARSER = "rss-feed-parser", // Channel for parse rss feed

@@ -9,7 +9,7 @@ async function fetchDataAndUpdateUI() {
 
   // Fetch data from the RSS feed
   const data = await window.electronAPI.getRSSFeed(
-    "https://github.com/sametcn99/electron-widgets/releases.atom"
+    "https://github.com/sametcn99/electron-widgets/releases.atom",
   );
   console.log(data);
 
@@ -23,14 +23,14 @@ async function fetchDataAndUpdateUI() {
       node.style.display = "flex";
       node.querySelector("#title").textContent = element.title;
       node.querySelector("#title").addEventListener("click", () => {
-        window.electronAPI.openExternalLink(element.link);
+        window.electronAPI.openExternal(element.link);
       });
       const pubDate = new Date(element.pubDate);
       node.querySelector("#pubDate").textContent = pubDate.toLocaleString();
       const userLink = "https://www.github.com/" + element.author;
       node.querySelector("#author").textContent = element.author;
       node.querySelector("#author").addEventListener("click", () => {
-        window.electronAPI.openExternalLink(userLink);
+        window.electronAPI.openExternal(userLink);
       });
       main.appendChild(node);
     });
@@ -41,16 +41,15 @@ async function fetchDataAndUpdateUI() {
   const version = await window.electronAPI.getAppVersion();
   if (latestVersion !== version) {
     window.alert(
-      `There is a new version available: ${latestVersion}\n You are using version ${version} of the app.\nPlease download the latest version from the releases page.`
+      `There is a new version available: ${latestVersion}\n You are using version ${version} of the app.\nPlease download the latest version from the releases page.`,
     );
   } else {
     console.log(`You are using the latest version of the app.`);
   }
 
   // Update the UI with the app version
-  document.getElementById(
-    "version"
-  ).textContent = `You are using version ${version} of the app.`;
+  document.getElementById("version").textContent =
+    `You are using version ${version} of the app.`;
 
   // Update the UI if data is available
   if (data) updateUI();
@@ -58,7 +57,7 @@ async function fetchDataAndUpdateUI() {
   // Reload the widget every hour
   setInterval(
     () => window.electronAPI.reloadWidget("disk usage"),
-    1000 * 60 * 60
+    1000 * 60 * 60,
   );
 }
 

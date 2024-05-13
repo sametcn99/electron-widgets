@@ -22,7 +22,7 @@ interface Window {
     closeWindow: () => Promise<void>;
 
     // External links
-    openExternalLink: (url: string) => Promise<void>;
+    openExternal: (url: string) => Promise<void>;
 
     // Widget configuration
     readWidgetsJson: () => Promise<WidgetsConfig>;
@@ -41,7 +41,7 @@ interface Window {
     redownloadWidgetsFolder: () => Promise<void>;
 
     // External apps
-    openExternalApp: (url: string) => Promise<void>;
+    openExternal: (url: string) => Promise<void>;
 
     // System information
     getSystemInfo: () => Promise<

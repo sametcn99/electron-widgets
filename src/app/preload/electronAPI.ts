@@ -54,10 +54,8 @@ contextBridge.exposeInMainWorld("electronAPI", {
   addWidget: () => ipcRenderer.invoke(IpcChannels.ADD_WIDGET_DIALOG),
   revealWidgetsFolder: () =>
     ipcRenderer.invoke(IpcChannels.REVEAL_WIDGETS_FOLDER),
-  openExternalLink: (url: string) =>
-    ipcRenderer.invoke(IpcChannels.OPEN_EXTERNAL_LINK, url),
-  openExternalApp: (url: string) =>
-    ipcRenderer.invoke(IpcChannels.OPEN_EXTERNAL_APP, url),
+  openExternal: (path: string) =>
+    ipcRenderer.invoke(IpcChannels.OPEN_EXTERNAL, path),
   getDiskUsage: () => ipcRenderer.invoke(IpcChannels.GET_DISK_USAGE),
   getSystemInfo: async () => ipcRenderer.invoke(IpcChannels.SYSTEM_INFO),
   getLocation: async () => ipcRenderer.invoke(IpcChannels.GET_LOCATION),
