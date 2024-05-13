@@ -23,19 +23,23 @@ This project is a desktop application developed using Electron.js and Node.js. T
 </details>
 <details>
   <summary>dailyWeather</summary>
-  <img src="/public/widgets/dailyWeather/screenshot.png"></img>
+  <img src="/public/widgets/daily%20weather/screenshot.png"></img>
+</details>
+<details>
+  <summary>r/programming</summary>
+  <img src="/public/widgets/r-programming/screenshot.png"></img>
 </details>
 <details>
   <summary>diskusage</summary>
-  <img src="/public/widgets/diskusage/screenshot.png"></img>
+  <img src="/public/widgets/disk%20usage/screenshot.png"></img>
 </details>
 <details>
   <summary>hacker-news</summary>
-  <img src="/public/widgets/hacker-news/screenshot.png"></img>
+  <img src="/public/widgets/hacker%20news/screenshot.png"></img>
 </details>
 <details>
   <summary>transparentClock</summary>
-  <img src="/public/widgets/transparentClock/screenshot.png"></img>
+  <img src="/public/widgets/transparent%20clock/screenshot.png"></img>
 </details>
 <details>
   <summary>search</summary>
