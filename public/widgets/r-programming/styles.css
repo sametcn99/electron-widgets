@@ -86,7 +86,7 @@ p {
 
 /* Item styles */
 #item {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid var(--secondary-text);
   padding: 10px 0;
   display: none;
   flex-direction: column;
