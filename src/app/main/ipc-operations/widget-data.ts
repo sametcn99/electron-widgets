@@ -48,7 +48,8 @@ ipcMain.handle(IpcChannels.SET_LOCK_ALL_WIDGETS, (event, lock: boolean) => {
     windowManager.reCreateWidget(key);
   });
   setWidgetsJson(widgets, config.widgetsJsonPath);
-  windowManager.reloadAllWindows();
+  windowManager.reloadMainWindow();
+  windowManager.reCreateAllWidgets();
 });
 
 /**
