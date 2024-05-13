@@ -70,7 +70,8 @@ ipcMain.handle(IpcChannels.RSS_FEED_PARSER, async (event, url) => {
 // Handles the 'rss-feed-parser' IPC message by parsing an RSS feed.
 // This function uses the rss-parser library to parse an RSS feed from the provided URL.
 ipcMain.handle(IpcChannels.OPML_TO_JSON, async (event, xml) => {
-  return opmlToJSON(xml);
+  const data = await opmlToJSON(xml);
+  return data;
 });
 
 /**
