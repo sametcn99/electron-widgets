@@ -49,5 +49,4 @@ app.whenReady().then(() => {
 // Set the application to automatically start at login
 app.setLoginItemSettings({
   openAtLogin: true, // Open the app at login
-  enabled: true, // Enable this setting
 });

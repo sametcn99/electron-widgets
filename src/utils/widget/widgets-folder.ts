@@ -24,7 +24,7 @@ export function getWidgetsJson(widgetsJsonPath: string): WidgetsConfig {
     const widgetsData: WidgetsConfig = JSON.parse(widgetsDataRaw);
     return widgetsData;
   } catch (error) {
-    dialog.showErrorBox("Failed to read widgets.json", `${error}`);
+    dialog.showErrorBox("Failed to read data", `${error}`);
     throw error;
   }
 }
@@ -41,7 +41,7 @@ export function setWidgetsJson(
   try {
     writeFileSync(widgetsJsonPath, JSON.stringify(jsonData, null, 2));
   } catch (err) {
-    dialog.showErrorBox("Error writing to widgets.json", `${err}`);
+    dialog.showErrorBox("Error writing to data", `${err}`);
   }
 }
 
@@ -76,7 +76,7 @@ export function copyWidgetsDirIfNeeded(
       }
     }
   } catch (error) {
-    dialog.showErrorBox("Failed to copy widgets directory", `${error}`);
+    dialog.showErrorBox("Failed to copy directory", `${error}`);
   }
 }
 
@@ -87,7 +87,7 @@ export function copyWidgetsDirIfNeeded(
 export async function downloadAndCopyWidgetsFolderIfNeeded() {
   // Check if the widgets directory exists
   if (!existsSync(config.widgetsDir)) {
-    console.log("widgets directory is not found. Copying...");
+    console.log("Directory is not found. Copying...");
     await downloadAndCopyWidgetsFolder();
   }
 }

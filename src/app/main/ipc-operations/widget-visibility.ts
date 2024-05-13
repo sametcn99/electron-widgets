@@ -65,15 +65,6 @@ ipcMain.handle(IpcChannels.DRAG_WIDGET_WINDOW, () => {
     widgets[title].y = win.getPosition()[1];
     setWidgetsJson(widgets, config.widgetsJsonPath);
   }
-  if (
-    win &&
-    widgets[title] &&
-    win?.isFocused() &&
-    widgets[title].title !== config.applicationName &&
-    widgets[title].locked === true
-  ) {
-    win.setPosition(widgets[title].x, widgets[title].y);
-  }
 });
 
 /**
