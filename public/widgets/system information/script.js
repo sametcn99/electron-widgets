@@ -30,7 +30,7 @@ async function fetchDataAndUpdateUI() {
       // Calculate the total memory
       const totalMemory = data.memLayout.reduce(
         (acc, memory) => acc + memory.size,
-        0,
+        0
       );
       // Set the total RAM text
       main.querySelector("#total-ram").textContent =
@@ -64,7 +64,7 @@ async function fetchDataAndUpdateUI() {
   // Read the custom data
   let data = await window.electronAPI.readCustomData(
     "system information",
-    "data.json",
+    "data.json"
   );
   // If data exists, parse it
   if (data !== "") {
@@ -78,7 +78,7 @@ async function fetchDataAndUpdateUI() {
     await window.electronAPI.writeCustomData(
       "system information",
       "data.json",
-      data,
+      data
     );
   }
   // Log the data

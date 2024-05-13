@@ -38,6 +38,15 @@ async function fetchDataAndUpdateUI() {
     });
   }
 
+  const opml = await window.electronAPI.readCustomData(
+    "r-programming",
+    "feed.opml"
+  );
+
+  console.log(opml);
+
+  const parseOpml = await window.electronAPI.opmlToJson(opml);
+  console.log(parseOpml);
   // Fetch the RSS feed data
   const data = await window.electronAPI.getRSSFeed(
     "https://www.reddit.com/r/programming.rss"
