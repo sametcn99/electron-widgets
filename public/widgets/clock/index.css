@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
+* {
+  box-sizing: border-box;
+}
+
 :root {
   -webkit-user-select: none;
   user-select: none;
@@ -7,63 +11,12 @@
   margin: 0;
   width: auto;
   height: auto;
-
-  /* Light */
-  --light-background: rgb(222, 231, 235);
-  --light-text: #131313e0;
-  --light-primary: #242424c0;
-  --light-border: 1px solid #aebbd6c9;
-
-  /* Dark */
-  --dark-background: #131313;
-  --dark-text: #e0e0e0;
-  --dark-primary: #c0c0c0;
-  --dark-border: 1px solid #3030309a;
-
-  /* Transition */
-  --transition-duration: 1s;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-/* Dark */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--dark-background);
-    --text: var(--dark-text);
-    --primary: var(--dark-primary);
-    --border: var(--dark-border);
-  }
-
-  body {
-    transition: background-color var(--transition-duration);
-  }
-
-  .container {
-    transition: background-color var(--transition-duration),
-      border-color var(--transition-duration);
-  }
-}
-
-/* Light */
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: var(--light-background);
-    --text: var(--light-text);
-    --primary: var(--light-primary);
-    --border: var(--light-border);
-  }
-
-  body {
-    transition: background-color var(--transition-duration);
-  }
-
-  .container {
-    transition: background-color var(--transition-duration),
-      border-color var(--transition-duration);
-  }
+  --background: #131313;
+  --text: #f2f4f5;
+  --secondary-text: #878a8c;
+  --primary: #c0c0c0;
+  --border: 1px solid #3030309a;
+  --box-shadow: 1px 1px 20px rgba(214, 214, 214, 0.096);
 }
 
 body {
@@ -72,6 +25,11 @@ body {
   font-weight: 500;
   -webkit-app-region: drag;
   width: 100%;
+}
+
+.container {
+  transition: background-color var(--transition-duration),
+    border-color var(--transition-duration);
 }
 
 .container h1 {

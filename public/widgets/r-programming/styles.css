@@ -1,29 +1,21 @@
+/* Importing Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
-h1 {
-  -webkit-app-region: drag;
-}
-a {
-  -webkit-app-region: no-drag;
-}
-::-webkit-scrollbar {
-  width: 15px;
-  background: #141414;
+/* Custom font face */
+@font-face {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  src: url();
 }
 
-::-webkit-scrollbar-track {
-  box-shadow: #e9e9e9;
-  border-radius: 10px;
+/* Global CSS styles */
+* {
+  padding: 0px;
+  font-family: "Roboto", sans-serif;
+  margin: 0px;
+  box-sizing: border-box;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #1d1d1d;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #292929;
-}
+/* Root variables */
 :root {
   -webkit-user-select: none;
   user-select: none;
@@ -32,52 +24,21 @@ a {
   width: auto;
   height: auto;
 
-  /* Dark */
-  --dark-background: #131313;
-  --dark-background-secondary: #1b1b1b;
-  --dark-text: #f2f4f5;
-  --dark-secondary-text: #878a8c;
-  --dark-primary: #c0c0c0;
-  --dark-border: 1px solid #3030309a;
-  --dark-box-shadow: 1px 1px 20px rgba(214, 214, 214, 0.096);
-
-  /* Transition */
-  --transition-duration: 1s;
+  --background: #131313;
+  --background-secondary: #1b1b1b;
+  --text: #e0e0e0;
+  --secondary-text: #878a8c;
+  --primary: #c0c0c0;
+  --border: 1px solid #3030309a;
+  --box-shadow: 1px 1px 20px rgba(214, 214, 214, 0.096);
 }
 
-:root {
-  --background: var(--dark-background);
-  --text: var(--dark-text);
-  --secondary-text: var(--dark-secondary-text);
-  --primary: var(--dark-primary);
-  --border: var(--dark-border);
-  --box-shadow: var(--dark-box-shadow);
-}
-
-:root,
-body {
-  transition: background-color var(--transition-duration);
-}
-p {
-  color: var(--dark-text);
-}
-
-@font-face {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  src: url();
-}
-
-* {
-  padding: 0px;
-  font-family: "Roboto", sans-serif;
-  margin: 0px;
-  box-sizing: border-box;
-}
-
+/* Body styles */
 body {
   color: var(--text);
 }
 
+/* Main container styles */
 main {
   display: none;
   flex-direction: column;
@@ -90,6 +51,86 @@ main {
   padding: 20px;
 }
 
+/* Heading styles */
+h1 {
+  -webkit-app-region: drag;
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text);
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* Anchor styles */
+a {
+  -webkit-app-region: no-drag;
+}
+
+/* Paragraph styles */
+p {
+  color: var(--text);
+}
+
+/* Container styles */
+#container {
+  width: 100%;
+}
+
+/* Item styles */
+#item {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+/* Title styles */
+#title {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Title hover styles */
+#title:hover {
+  text-decoration: underline;
+}
+
+/* Author styles */
+#author {
+  cursor: pointer;
+}
+
+/* Author hover styles */
+#author:hover {
+  text-decoration: underline;
+}
+
+/* Publication date and author styles */
+#pubDate,
+#author {
+  color: var(--secondary-text);
+  font-size: 14px;
+}
+
+/* Author prefix */
+#author:before {
+  content: "by ";
+}
+
+/* Message styles */
 #message {
   display: flex;
   flex-direction: column;
@@ -102,6 +143,7 @@ main {
   font-weight: bold;
 }
 
+/* Loading spinner styles */
 #loading {
   border: 4px solid rgba(0, 0, 0, 0.1);
   border-left-color: #1abc9c;
@@ -111,67 +153,14 @@ main {
   animation: spin 1s linear infinite;
 }
 
+/* Spin animation */
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
 
-h1 {
-  font-size: 16px;
-  font-weight: 500;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--dark-text);
-  position: sticky;
-  top: 0;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-#container {
-  width: 100%;
-}
-#item {
-  border-bottom: 1px solid #ccc;
-  padding: 10px 0;
-  display: none;
-  flex-direction: column;
-  gap: 6px;
-  width: 100%;
-}
-
-#title {
-  color: var(--dark-text);
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: 500;
-  cursor: pointer;
-}
-#title:hover {
-  text-decoration: underline;
-}
-
-#author {
-  cursor: pointer;
-}
-#author:hover {
-  text-decoration: underline;
-}
-
-#pubDate,
-#author {
-  color: var(--dark-secondary-text);
-  font-size: 14px;
-}
-
-#author:before {
-  content: "by ";
-}
-
+/* Scroll top button styles */
 #scrollTopButton {
   font-size: small;
   display: none; /* Default olarak düğme görünmez */
@@ -181,15 +170,39 @@ h1 {
   z-index: 99; /* Diğer elementlerin üzerinde görünür */
   border: none; /* Kenarlık yok */
   outline: none; /* Dış çizgi yok */
-  background-color: var(--dark-background-secondary); /* Düğme rengi */
+  background-color: var(--background-secondary); /* Düğme rengi */
   color: white; /* İkon veya metin rengi */
   cursor: pointer; /* İmleç, üzerine geldiğinde el simgesi olur */
   padding: 15px; /* Düğme içindeki boşluk */
   border-radius: 10px; /* Düğmenin köşelerini yuvarlar */
 }
 
+/* Scroll top button hover styles */
 #scrollTopButton:hover {
   background-color: var(
-    --dark-secondary-text
+    --secondary-text
   ); /* İmleç, düğmenin üzerine geldiğinde düğme rengi değişir */
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 15px;
+  background: #141414;
+}
+
+/* Scrollbar track styles */
+::-webkit-scrollbar-track {
+  box-shadow: #e9e9e9;
+  border-radius: 10px;
+}
+
+/* Scrollbar thumb styles */
+::-webkit-scrollbar-thumb {
+  background: #1d1d1d;
+  border-radius: 10px;
+}
+
+/* Scrollbar thumb hover styles */
+::-webkit-scrollbar-thumb:hover {
+  background: #292929;
 }

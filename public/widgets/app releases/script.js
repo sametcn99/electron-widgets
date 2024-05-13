@@ -1,9 +1,20 @@
+/**
+ * Fetches data from an RSS feed, updates the UI, and checks for app updates.
+ * @returns {Promise<void>} A promise that resolves when the data is fetched and the UI is updated.
+ */
 async function fetchDataAndUpdateUI() {
-  // Örnek veri alımı yerine, sabit bir veri kullanıyorum.
+  // Update the UI to show loading state
+  document.getElementById("message").style.display = "none";
+  document.getElementById("loading").style.display = "none";
 
+  // Fetch data from the RSS feed
+  const data = await window.electronAPI.getRSSFeed(
+    "https://github.com/sametcn99/electron-widgets/releases.atom"
+  );
+  console.log(data);
+
+  // Update the UI with the fetched data
   function updateUI() {
-    document.getElementById("message").style.display = "none";
-    document.getElementById("loading").style.display = "none";
     const main = document.getElementsByTagName("main")[0];
     main.style.display = "flex";
     data.items.forEach((element) => {
@@ -25,35 +36,33 @@ async function fetchDataAndUpdateUI() {
     });
   }
 
-  const data = await window.electronAPI.getRSSFeed(
-    "https://github.com/sametcn99/electron-widgets/releases.atom",
-  );
-  console.log(data);
-
+  // Check for app updates
   const latestVersion = data.items[0].title.trim();
   const version = await window.electronAPI.getAppVersion();
   if (latestVersion !== version) {
     window.alert(
-      `There is a new version available: ${latestVersion}\n You are using version ${version} of the app.\nPlease download the latest version from the releases page.`,
+      `There is a new version available: ${latestVersion}\n You are using version ${version} of the app.\nPlease download the latest version from the releases page.`
     );
   } else {
     console.log(`You are using the latest version of the app.`);
   }
 
-  document.getElementById("version").textContent =
-    `You are using version ${version} of the app.`;
+  // Update the UI with the app version
+  document.getElementById(
+    "version"
+  ).textContent = `You are using version ${version} of the app.`;
 
+  // Update the UI if data is available
   if (data) updateUI();
+
+  // Reload the widget every hour
   setInterval(
     () => window.electronAPI.reloadWidget("disk usage"),
-    1000 * 60 * 60, // reload every hour
+    1000 * 60 * 60
   );
 }
 
-window.onscroll = function () {
-  scrollFunction();
-};
-
+// Function to handle scroll event
 function scrollFunction() {
   const scrollTopButton = document.getElementById("scrollTopButton");
   if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
@@ -63,6 +72,11 @@ function scrollFunction() {
   }
 }
 
+// Attach scroll event listener
+window.onscroll = function () {
+  scrollFunction();
+};
+
 // Scroll to top button click event
 document
   .getElementById("scrollTopButton")
@@ -70,6 +84,7 @@ document
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
   });
+
 try {
   fetchDataAndUpdateUI();
 } catch (error) {

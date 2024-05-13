@@ -11,158 +11,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      @font-face {
-        font-family: "Montserrat";
-        src: url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-      }
-
-      :root {
-        padding: 0;
-        margin: 0;
-        width: auto;
-        height: auto;
-        background-color: transparent;
-        /* Light */
-        --light-background: rgb(222, 231, 235);
-        --light-text: #131313e0;
-        --light-primary: #242424c0;
-        --light-border: 1px solid #aebbd6c9;
-        --light-box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.171);
-
-        /* Dark */
-        --dark-background: #131313;
-        --dark-text: #e0e0e0;
-        --dark-primary: #c0c0c0;
-        --dark-border: 1px solid #3030309a;
-        --dark-box-shadow: 1px 1px 20px rgba(214, 214, 214, 0.096);
-
-        /* Transition */
-        --transition-duration: 1s;
-
-        background-color: transparent;
-      }
-
-      body {
-        overflow-x: hidden;
-        font-family: "Montserrat", sans-serif;
-      }
-
-      /* This will hide the scrollbar */
-      ::-webkit-scrollbar {
-        width: 10px;
-      }
-
-      /* This will set the handle of the scrollbar to transparent */
-      ::-webkit-scrollbar-thumb {
-        background: transparent;
-      }
-
-      /* This will set the track of the scrollbar to transparent */
-      ::-webkit-scrollbar-track {
-        background: transparent;
-      }
-
-      #container {
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
-        padding: 1rem;
-        width: auto;
-        height: 100%;
-        font-family: Arial, sans-serif;
-
-        a {
-          text-decoration: none;
-        }
-
-        border-radius: 1rem;
-      }
-      #time {
-        font-size: small;
-        font-weight: lighter;
-      }
-      #footer {
-        display: flex;
-        flex-direction: row;
-        gap: 0.3rem;
-        font-size: small;
-        font-weight: lighter;
-      }
-
-      #story {
-        padding-top: 0.4rem;
-        padding-bottom: 0.4rem;
-        display: none;
-        font-weight: 600;
-        flex-direction: column;
-        gap: 0.6rem;
-      }
-
-      #title:hover {
-        text-decoration: underline;
-      }
-
-      h1 {
-        -webkit-user-select: none;
-        user-select: none;
-        -webkit-app-region: drag;
-        position: sticky;
-        top: 0;
-        width: 100%;
-        padding-bottom: 0.5rem;
-        padding-top: 0.5rem;
-        font-size: large;
-      }
-
-      @media (prefers-color-scheme: dark) {
-        h1 {
-          background-color: var(--dark-background);
-        }
-
-        #story {
-          border-bottom: 2px solid var(--dark-text);
-        }
-
-        #container {
-          background-color: var(--dark-background);
-          color: var(--dark-text);
-
-          a {
-            color: var(--dark-text);
-          }
-        }
-      }
-
-      @media (prefers-color-scheme: light) {
-        h1 {
-          background-color: var(--light-background);
-        }
-
-        #story {
-          border-bottom: 2px solid var(--light-text);
-        }
-
-        #container {
-          background-color: var(--light-background);
-          color: var(--light-text);
-
-          a {
-            color: var(--light-text);
-          }
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
 
   <body>
     <div id="container">
-      <h1 id="widget-title">Hacker News</h1>
+      <h1 id="widget-title">
+        <img
+          src="./YCombinator.png"
+          width="24px"
+          height="24px"
+          title="YCombinator"
+        />
+        <p>Hacker News</p>
+      </h1>
       <div id="story">
         <p id="time">1175714200</p>
         <a
@@ -180,82 +42,8 @@
           <p id="by">dhouston</p>
         </div>
       </div>
+      <div id="scrollTopButton">Scroll Top</div>
     </div>
-    <script>
-      function renderTime(time) {
-        const date = new Date(time * 1000);
-        const options = {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour: "numeric",
-          minute: "numeric",
-          second: "numeric",
-        };
-        return date.toLocaleString("en-US", options);
-      }
-      document.getElementById("time").innerText = renderTime(1175714200);
-      function clearData() {
-        const container = document.getElementById("container");
-        container.innerHTML = `
-          <h1 id="widget-title">Hacker News</h1>
-      <div id="story">
-        <p id="time">1175714200</p>
-        <a
-          id="title"
-          href="http://www.getdropbox.com/u/2/screencast.html"
-          target="_blank"
-          rel="noopener noreferrer"
-          >My YC app: Dropbox - Throw away your USB drive</a
-        >
-        <div id="footer">
-          <p>▲</p>
-          <p id="score">242</p>
-          <p>•</p>
-          by
-          <p id="by">dhouston</p>
-        </div>
-      </div>
-        `;
-      }
-
-      function fetchData() {
-        clearData();
-        fetch(
-          "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty"
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data);
-            data.forEach((id) => {
-              fetch(
-                `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`
-              )
-                .then((response) => response.json())
-                .then((story) => {
-                  console.log(story);
-                  const storyContainer = document
-                    .getElementById("story")
-                    .cloneNode(true);
-                  storyContainer.id = "story";
-                  storyContainer.style.display = "flex";
-                  const time = storyContainer.querySelector("#time");
-                  const title = storyContainer.querySelector("#title");
-                  const score = storyContainer.querySelector("#score");
-                  const by = storyContainer.querySelector("#by");
-                  time.innerText = renderTime(story.time);
-                  title.href = story.url;
-                  title.innerText = story.title;
-                  score.innerText = story.score;
-                  by.innerText = story.by;
-                  const container = document.getElementById("container");
-                  container.appendChild(storyContainer);
-                });
-            });
-          });
-      }
-      fetchData();
-      setInterval(fetchData, 30 * 60 * 1000);
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>

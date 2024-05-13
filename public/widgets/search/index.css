@@ -1,72 +1,30 @@
-:root {
-  padding: 0;
-  margin: 0;
-
-  /* Light */
-  --light-background: rgb(222, 231, 235);
-  --light-text: #131313e0;
-  --light-primary: #242424c0;
-
-  /* Dark */
-  --dark-background: #131313;
-  --dark-text: #e0e0e0;
-  --dark-primary: #c0c0c0;
-}
-
-/* Dark */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--dark-background);
-    --text: var(--dark-text);
-    --primary: var(--dark-primary);
-    --border: var(--dark-border);
-  }
-}
-
-::-webkit-scrollbar {
-  display: none;
-}
-
-/* Light */
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: var(--light-background);
-    --text: var(--light-text);
-    --primary: var(--light-primary);
-  }
-}
-
+/* Define custom font */
 @font-face {
   font-family: "Aleo-ExtraBold";
   src: url("Aleo-ExtraBold.ttf");
 }
 
+/* Define root variables */
+:root {
+  padding: 0;
+  margin: 0;
+
+  --background: #131313;
+  --background-secondary: #1b1b1b;
+  --text: #e0e0e0;
+  --secondary-text: #878a8c;
+  --primary: #c0c0c0;
+  --border: 1px solid #3030309a;
+  --box-shadow: 1px 1px 20px rgba(214, 214, 214, 0.096);
+}
+
+/* Reset body styles */
 body {
   padding: 0;
   margin: 0;
 }
 
-.draggable {
-  -webkit-app-region: drag;
-  height: 100%;
-  width: 100%;
-}
-
-.container {
-  border-radius: 20px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
-  height: fit-content;
-  background-color: var(--background);
-
-  padding: 0;
-  margin: 0;
-  border-radius: 10px;
-}
-
+/* Main container styles */
 main {
   margin: 0px;
   padding: 0px;
@@ -82,6 +40,29 @@ main {
   flex-direction: column;
 }
 
+/* Draggable region styles */
+.draggable {
+  -webkit-app-region: drag;
+  height: 100%;
+  width: 100%;
+}
+
+/* Container styles */
+.container {
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  height: fit-content;
+  background-color: var(--background);
+  padding: 0;
+  margin: 0;
+  border-radius: 10px;
+}
+
+/* Select element styles */
 select {
   background-color: var(--background);
   color: var(--text);
@@ -95,6 +76,7 @@ select:focus {
   border: transparent;
 }
 
+/* Input element styles */
 input {
   background-color: var(--background);
   color: var(--text);
@@ -108,4 +90,9 @@ input {
 input:focus {
   outline: transparent;
   border: transparent;
+}
+
+/* Hide scrollbar */
+::-webkit-scrollbar {
+  display: none;
 }

@@ -1,0 +1,60 @@
+/* Importing Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+/* Custom font face */
+@font-face {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  src: url();
+}
+
+/* Global styles */
+* {
+  padding: 0px;
+  margin: 0px;
+  font-family: "Roboto", sans-serif;
+}
+
+/* CSS variables */
+:root {
+  --text: #d8d8d8;
+  --background: #131313;
+  --primary: #cecece;
+}
+
+/* Body styles */
+body {
+  color: var(--text);
+  -webkit-app-region: drag;
+}
+
+/* Main container styles */
+main {
+  width: 100%;
+  height: 100vh;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 2rem;
+}
+
+/* Media queries for different screen sizes */
+@media screen and (min-width: 400px) {
+  main {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  main {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  main {
+    font-size: 5rem;
+  }
+}
