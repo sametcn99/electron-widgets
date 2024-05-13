@@ -37,19 +37,9 @@ async function fetchDataAndUpdateUI() {
       main.appendChild(node);
     });
   }
-
-  const opml = await window.electronAPI.readCustomData(
-    "r-programming",
-    "feed.opml"
-  );
-
-  console.log(opml);
-
-  const parseOpml = await window.electronAPI.opmlToJson(opml);
-  console.log(parseOpml);
   // Fetch the RSS feed data
   const data = await window.electronAPI.getRSSFeed(
-    "https://www.reddit.com/r/programming.rss"
+    "https://www.reddit.com/r/programming.rss",
   );
   // Log the data
   console.log(data);
@@ -58,7 +48,7 @@ async function fetchDataAndUpdateUI() {
   // Set an interval to reload the widget every hour
   setInterval(
     () => window.electronAPI.reloadWidget("r-programming"),
-    1000 * 60 * 60 // reload every hour
+    1000 * 60 * 60, // reload every hour
   );
 }
 

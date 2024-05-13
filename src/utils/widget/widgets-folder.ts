@@ -1,13 +1,13 @@
 import { dialog } from "electron";
-import { pathExistsSync, removeSync } from "fs-extra";
 import {
-  copyFileSync,
-  existsSync,
-  mkdirSync,
-  readdirSync,
-  readFileSync,
+  cpSync,
+  pathExistsSync,
+  removeSync,
   writeFileSync,
-} from "node:fs";
+  readFileSync,
+  mkdirSync,
+  existsSync,
+} from "fs-extra";
 import path from "node:path";
 import StreamZip from "node-stream-zip";
 import { config } from "../../lib/config";
@@ -59,21 +59,11 @@ export function copyWidgetsDirIfNeeded(
   try {
     const pathExist = pathExistsSync(widgetsDir);
     if (!pathExist) {
+      console.log("Copying widgets directory...");
       // Create the destination directory if it doesn't exist
       mkdirSync(widgetsDir, { recursive: true });
       // Read the contents of the source directory
-      const entries = readdirSync(sourceWidgetsDir, { withFileTypes: true });
-
-      // Iterate over the contents of the source directory
-      for (const entry of entries) {
-        const srcPath = path.join(sourceWidgetsDir, entry.name);
-        const destPath = path.join(widgetsDir, entry.name);
-
-        // Recursively copy directories, or copy files directly
-        entry.isDirectory()
-          ? copyWidgetsDirIfNeeded(srcPath, destPath)
-          : copyFileSync(srcPath, destPath);
-      }
+      cpSync(sourceWidgetsDir, widgetsDir, { recursive: true });
     }
   } catch (error) {
     dialog.showErrorBox("Failed to copy directory", `${error}`);

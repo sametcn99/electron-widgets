@@ -1,12 +1,14 @@
+import { app } from "electron";
 import path from "node:path";
 import { homedir } from "os";
 
 export const config = {
   applicationName: "Electron Widgets",
   sourceWidgetsDir: path.join(__dirname, "widgets"),
-  widgetsDir: path.join(homedir(), "electron-widgets"),
+  widgetsDir: path.join(app.getPath("userData"), "widgets"),
   widgetsJsonPath: path.join(
-    path.join(homedir(), "electron-widgets"),
+    app.getPath("userData"),
+    "widgets",
     "widgets.json",
   ),
   iconPath: path.join(__dirname, "assets", "electron.png"),

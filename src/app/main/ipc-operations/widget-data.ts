@@ -1,7 +1,6 @@
 import { BrowserWindow, dialog, ipcMain, shell } from "electron";
 import path from "node:path";
-import { existsSync, mkdirSync, rmSync } from "node:fs";
-import { copySync } from "fs-extra";
+import { copySync, existsSync, mkdirSync, rmSync } from "fs-extra";
 import { IpcChannels } from "../../../lib/ipc-channels";
 import {
   getWidgetsJson,
