@@ -65,7 +65,11 @@ interface Window {
     showWidget: (widgetId: string) => Promise<void>;
 
     // CUSTOM DATA
-    readCustomData: (widgetKey: string) => Promise<string>;
-    writeCustomData: (widgetKey: string, data: CustomData) => Promise<void>;
+    readCustomData: (widgetKey: string, filePath: string) => Promise<string>;
+    writeCustomData: (
+      widgetKey: string,
+      filePath: string,
+      data: CustomData,
+    ) => Promise<void>;
   };
 }

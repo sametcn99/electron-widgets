@@ -6,10 +6,15 @@ import { IpcChannels } from "../../lib/ipc-channels";
  */
 contextBridge.exposeInMainWorld("electronAPI", {
   // custom data operations
-  readCustomData: (widgetKey: string) =>
-    ipcRenderer.invoke(IpcChannels.READ_CUSTOM_DATA, widgetKey),
-  writeCustomData: (widgetKey: string, data: string) => {
-    ipcRenderer.invoke(IpcChannels.WRITE_CUSTOM_DATA, widgetKey, data);
+  readCustomData: (widgetKey: string, filePath: string) =>
+    ipcRenderer.invoke(IpcChannels.READ_CUSTOM_DATA, widgetKey, filePath),
+  writeCustomData: (widgetKey: string, filePath: string, data: string) => {
+    ipcRenderer.invoke(
+      IpcChannels.WRITE_CUSTOM_DATA,
+      widgetKey,
+      filePath,
+      data,
+    );
   },
 
   // widget data operations

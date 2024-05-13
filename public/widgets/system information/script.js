@@ -30,7 +30,7 @@ async function fetchDataAndUpdateUI() {
       // Calculate the total memory
       const totalMemory = data.memLayout.reduce(
         (acc, memory) => acc + memory.size,
-        0
+        0,
       );
       // Set the total RAM text
       main.querySelector("#total-ram").textContent =
@@ -62,7 +62,10 @@ async function fetchDataAndUpdateUI() {
     return gigabytes.toFixed(2) + " GB";
   }
   // Read the custom data
-  let data = await window.electronAPI.readCustomData("system information");
+  let data = await window.electronAPI.readCustomData(
+    "system information",
+    "data.json",
+  );
   // If data exists, parse it
   if (data !== "") {
     data = JSON.parse(data);
@@ -72,7 +75,11 @@ async function fetchDataAndUpdateUI() {
     // Get the system info
     data = await window.electronAPI.getSystemInfo();
     // Write the system info as custom data
-    await window.electronAPI.writeCustomData("system information", data);
+    await window.electronAPI.writeCustomData(
+      "system information",
+      "data.json",
+      data,
+    );
   }
   // Log the data
   console.log(data);

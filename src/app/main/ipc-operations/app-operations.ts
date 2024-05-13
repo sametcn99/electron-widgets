@@ -2,12 +2,12 @@ import { app, dialog, ipcMain, shell } from "electron";
 import { execFile } from "child_process";
 import { opmlToJSON } from "opml-to-json";
 import { IpcChannels } from "../../../lib/ipc-channels";
-import Parser from "rss-parser";
 import { fsSize, getStaticData } from "systeminformation";
 import { showNotification } from "../../../utils";
 import { existsSync, readFileSync, writeFileSync } from "fs-extra";
 import { config } from "../../../lib/config";
 import path from "path";
+import * as htmlparser2 from "htmlparser2";
 
 // Handles the 'get-app-version' IPC message by returning the app version.
 ipcMain.handle(IpcChannels.GET_APP_VERSION, () => {
@@ -61,9 +61,10 @@ ipcMain.handle(IpcChannels.GET_LOCATION, async () => {
 // Handles the 'show-notification' IPC message by showing a notification.
 // This function creates a notification with the provided title and message
 // and shows it to the user.
-ipcMain.handle(IpcChannels.RSS_FEED_PARSER, (event, url) => {
-  const parser = new Parser();
-  return parser.parseURL(url);
+ipcMain.handle(IpcChannels.RSS_FEED_PARSER, async (event, url) => {
+  const data = await fetch(url).then((response) => response.text());
+  const feed = htmlparser2.parseFeed(data);
+  return feed;
 });
 
 // Handles the 'rss-feed-parser' IPC message by parsing an RSS feed.
@@ -87,21 +88,24 @@ ipcMain.handle(IpcChannels.SHOW_NOTIFICATION, (event, title, body) => {
 });
 
 // Handles the 'read-custom-data' IPC message by reading custom data from a file.
-ipcMain.handle(IpcChannels.READ_CUSTOM_DATA, (event, widgetKey: string) => {
-  const dirPath = path.join(config.widgetsDir, widgetKey, "data.json");
-  if (!existsSync(dirPath)) {
-    return "";
-  } else {
-    const data = readFileSync(dirPath, "utf8");
-    return data;
-  }
-});
+ipcMain.handle(
+  IpcChannels.READ_CUSTOM_DATA,
+  (event, widgetKey: string, filePath: string) => {
+    const dirPath = path.join(config.widgetsDir, widgetKey, filePath);
+    if (!existsSync(dirPath)) {
+      return "";
+    } else {
+      const data = readFileSync(dirPath, "utf8");
+      return data;
+    }
+  },
+);
 
 // Handles the 'write-custom-data' IPC message by writing custom data to a file.
 ipcMain.handle(
   IpcChannels.WRITE_CUSTOM_DATA,
-  (event, widgetKey: string, data: string) => {
-    const dirPath = path.join(config.widgetsDir, widgetKey, "data.json");
+  (event, widgetKey: string, filePath: string, data: string) => {
+    const dirPath = path.join(config.widgetsDir, widgetKey, filePath);
     data = JSON.stringify(data, null, 2);
     writeFileSync(dirPath, data);
   },
