@@ -9,9 +9,8 @@ import {
   copyWidgetsDirIfNeeded,
   createMainWindow,
   createWindowsForWidgets,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  hotReloadWidgets,
   displayControl,
+  windowManager,
 } from "../../utils";
 import "./ipc-operations/global";
 import "./ipc-operations/app-operations";
@@ -38,12 +37,11 @@ app.whenReady().then(() => {
   displayControl();
   createWindowsForWidgets();
   registerTray();
-  // hotReloadWidgets();
-  // app.on("activate", () => {
-  //   if (BrowserWindow.getAllWindows().length === 0) {
-  //     createMainWindow();
-  //   }
-  // });
+  app.on("activate", () => {
+    if (windowManager.getAllWindows().length === 0) {
+      createMainWindow();
+    }
+  });
 });
 
 // Set the application to automatically start at login

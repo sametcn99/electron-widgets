@@ -179,6 +179,16 @@ class WindowManager {
     }
   }
 
+  getAllWindows(): BrowserWindow[] {
+    try {
+      return BrowserWindow.getAllWindows();
+    } catch (error) {
+      console.error("Error getting windows:", error);
+      dialog.showErrorBox("Error getting windows", `${error}`);
+      return [];
+    }
+  }
+
   getAllWindowsExceptMain(): BrowserWindow[] {
     try {
       const windows: BrowserWindow[] = [];
