@@ -1,16 +1,16 @@
 import { dialog } from "electron";
-import {
-  cpSync,
-  pathExistsSync,
-  removeSync,
-  writeFileSync,
-  readFileSync,
-  mkdirSync,
-  existsSync,
-} from "fs-extra";
 import path from "node:path";
 import StreamZip from "node-stream-zip";
 import { config } from "../../lib/config";
+import {
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
 
 /**
  * Reads the widgets.json file and returns its contents as a string.
@@ -57,16 +57,27 @@ export function copyWidgetsDirIfNeeded(
   widgetsDir: string,
 ) {
   try {
-    const pathExist = pathExistsSync(widgetsDir);
-    if (!pathExist) {
-      console.log("Copying widgets directory...");
+    if (!existsSync(widgetsDir)) {
+      console.log("widgets directory is not found. Copying...");
+
       // Create the destination directory if it doesn't exist
       mkdirSync(widgetsDir, { recursive: true });
       // Read the contents of the source directory
-      cpSync(sourceWidgetsDir, widgetsDir, { recursive: true });
+      const entries = readdirSync(sourceWidgetsDir, { withFileTypes: true });
+
+      // Iterate over the contents of the source directory
+      for (const entry of entries) {
+        const srcPath = path.join(sourceWidgetsDir, entry.name);
+        const destPath = path.join(widgetsDir, entry.name);
+
+        // Recursively copy directories, or copy files directly
+        entry.isDirectory()
+          ? copyWidgetsDirIfNeeded(srcPath, destPath)
+          : copyFileSync(srcPath, destPath);
+      }
     }
   } catch (error) {
-    dialog.showErrorBox("Failed to copy directory", `${error}`);
+    dialog.showErrorBox("Failed to copy widgets directory", `${error}`);
   }
 }
 
@@ -113,7 +124,7 @@ export async function downloadAndCopyWidgetsFolder() {
     // Close the zip file
     await zip.close();
     // Remove the zip file
-    removeSync(zipPath);
+    rmSync(zipPath);
   } catch (error) {
     // If there's an error, show it
     dialog.showErrorBox("Error downloading folder", `${error}`);

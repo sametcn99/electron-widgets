@@ -2,7 +2,7 @@
  * Entry point of the application.
  * Registers the app and initializes it.
  */
-import { app, BrowserWindow } from "electron";
+import { app } from "electron";
 import { registerTray } from "./tray";
 import { config } from "../../lib/config";
 import {
@@ -34,16 +34,16 @@ if (require("electron-squirrel-startup")) {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   copyWidgetsDirIfNeeded(config.sourceWidgetsDir, config.widgetsDir);
-  displayControl();
   createMainWindow();
+  displayControl();
   createWindowsForWidgets();
   registerTray();
   // hotReloadWidgets();
-  app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createMainWindow();
-    }
-  });
+  // app.on("activate", () => {
+  //   if (BrowserWindow.getAllWindows().length === 0) {
+  //     createMainWindow();
+  //   }
+  // });
 });
 
 // Set the application to automatically start at login
