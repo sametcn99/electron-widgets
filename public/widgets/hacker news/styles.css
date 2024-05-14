@@ -95,6 +95,7 @@ body {
 
 #title:hover {
   text-decoration: underline;
+  cursor: pointer;
 }
 
 h1 {

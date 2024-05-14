@@ -15,13 +15,13 @@ document.getElementById("time").innerText = renderTime(1175714200);
 
 async function fetchData() {
   const response = await fetch(
-    "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty"
+    "https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty",
   );
   const data = await response.json();
   console.log(data);
   for (const id of data) {
     const storyResponse = await fetch(
-      `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`
+      `https://hacker-news.firebaseio.com/v0/item/${id}.json?print=pretty`,
     );
     const story = await storyResponse.json();
     const storyContainer = document.getElementById("story").cloneNode(true);
@@ -29,6 +29,9 @@ async function fetchData() {
     storyContainer.style.display = "flex";
     const time = storyContainer.querySelector("#time");
     const title = storyContainer.querySelector("#title");
+    title.addEventListener("click", () => {
+      window.electronAPI.openExternal(story.url);
+    });
     const score = storyContainer.querySelector("#score");
     const by = storyContainer.querySelector("#by");
     time.innerText = renderTime(story.time);
@@ -44,7 +47,7 @@ fetchData();
 
 setInterval(
   () => window.electronAPI.reloadWidget("hacker news"),
-  1000 * 60 * 60 // reload every hour
+  1000 * 60 * 60, // reload every hour
 );
 
 window.onscroll = function () {
