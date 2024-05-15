@@ -6,6 +6,7 @@ import { MakerRpm } from "@electron-forge/maker-rpm";
 import { VitePlugin } from "@electron-forge/plugin-vite";
 import { FusesPlugin } from "@electron-forge/plugin-fuses";
 import { FuseV1Options, FuseVersion } from "@electron/fuses";
+import { MakerDMG } from "@electron-forge/maker-dmg";
 
 const config: ForgeConfig = {
   publishers: [
@@ -32,9 +33,11 @@ const config: ForgeConfig = {
   rebuildConfig: {},
   makers: [
     new MakerSquirrel({}),
-    new MakerZIP({}, ["darwin"]),
+    new MakerZIP({}),
     new MakerRpm({}),
     new MakerDeb({}),
+    new MakerRpm({}),
+    new MakerDMG({}),
   ],
   plugins: [
     new VitePlugin({
