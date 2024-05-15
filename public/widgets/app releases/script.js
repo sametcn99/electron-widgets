@@ -36,21 +36,6 @@ async function fetchDataAndUpdateUI() {
     });
   }
 
-  // Check for app updates
-  const latestVersion = data.items[0].title.trim();
-  const version = await window.electronAPI.getAppVersion();
-  if (latestVersion !== version) {
-    window.alert(
-      `There is a new version available: ${latestVersion}\n You are using version ${version} of the app.\nPlease download the latest version from the releases page.`,
-    );
-  } else {
-    console.log(`You are using the latest version of the app.`);
-  }
-
-  // Update the UI with the app version
-  document.getElementById("version").textContent =
-    `You are using version ${version} of the app.`;
-
   // Update the UI if data is available
   if (data) updateUI();
 
