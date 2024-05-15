@@ -21,6 +21,8 @@ jobs:
       - uses: actions/setup-node@master
         with:
           node-version: 20
+      - name: install appdmg
+        run: npm i -g appdmg
       - name: install dependencies
         run: npm install
       - name: build
