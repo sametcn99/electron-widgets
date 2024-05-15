@@ -7,7 +7,7 @@ import { showNotification } from "../../../utils";
 import { existsSync, readFileSync, writeFileSync } from "fs-extra";
 import { config } from "../../../lib/config";
 import path from "path";
-import * as htmlparser2 from "htmlparser2";
+import Parser from "rss-parser";
 
 // Handles the 'get-app-version' IPC message by returning the app version.
 ipcMain.handle(IpcChannels.GET_APP_VERSION, () => {
@@ -55,8 +55,11 @@ ipcMain.handle(IpcChannels.GET_LOCATION, async () => {
 // This function creates a notification with the provided title and message
 // and shows it to the user.
 ipcMain.handle(IpcChannels.RSS_FEED_PARSER, async (event, url) => {
-  const data = await fetch(url).then((response) => response.text());
-  const feed = htmlparser2.parseFeed(data);
+  const response = await fetch(url).then((response) => response.text());
+  const data = response.toString();
+  const parser = new Parser();
+
+  const feed = parser.parseString(data);
   return feed;
 });
 
