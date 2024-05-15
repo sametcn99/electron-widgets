@@ -23,8 +23,6 @@ jobs:
           node-version: 20
       - name: install dependencies
         run: npm ci
-      - name: install appdmg
-        run: npm i appdmg
       - name: build
         run: npm run make
 
