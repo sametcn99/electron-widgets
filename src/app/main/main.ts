@@ -17,6 +17,7 @@ import "./ipc-operations/app-operations";
 import "./ipc-operations/widget-window";
 import "./ipc-operations/widget-visibility";
 import "./ipc-operations/widget-data";
+import { updateElectronApp } from "update-electron-app";
 
 /**
  * Registers the Electron app and sets up necessary event handlers and functionality.
@@ -27,6 +28,7 @@ import "./ipc-operations/widget-data";
 if (require("electron-squirrel-startup")) {
   app.quit();
 }
+updateElectronApp(); // additional configuration options available
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

@@ -78,6 +78,7 @@
     "opml-to-json": "^1.0.1",
     "rss-parser": "^3.13.0",
     "systeminformation": "^5.22.9",
+    "update-electron-app": "^3.0.0",
     "vue": "^3.4.27"
   }
 }
