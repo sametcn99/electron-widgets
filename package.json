@@ -41,7 +41,8 @@
           "config": {
             "repository": {
               "owner": "sametcn99",
-              "name": "electron-widgets"
+              "name": "electron-widgets",
+              "draft": true
             }
           }
         }
