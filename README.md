@@ -10,7 +10,7 @@
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 ![MacOS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=apple&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-[![Build](https://github.com/sametcn99/electron-widgets/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/sametcn99/electron-widgets/actions/workflows/main.yml)
+[![Build](https://github.com/sametcn99/electron-widgets/actions/workflows/build.yml/badge.svg)](https://github.com/sametcn99/electron-widgets/actions/workflows/build.yml)
 
 ## Project Overview
 
