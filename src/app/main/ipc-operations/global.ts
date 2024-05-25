@@ -13,6 +13,12 @@ ipcMain.handle(IpcChannels.WINDOW_ACTION, (event, action) => {
       case "minimize":
         win.minimize();
         break;
+      case "maximize":
+        win.maximize();
+        break;
+      case "restore":
+        win.restore();
+        break;
       case "close":
         win.close();
         break;

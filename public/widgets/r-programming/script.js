@@ -23,7 +23,7 @@ async function fetchDataAndUpdateUI() {
         window.electronAPI.openExternal(element.link);
       });
       // Format the publication date
-      const pubDate = new Date(element.pubDate);
+      const pubDate = new Date(element.isoDate);
       node.querySelector("#pubDate").textContent = pubDate.toLocaleString();
       // Create a link to the author's profile
       const userLink = "https://www.reddit.com/" + element.author;
@@ -37,17 +37,18 @@ async function fetchDataAndUpdateUI() {
       main.appendChild(node);
     });
   }
+
   // Fetch the RSS feed data
-  const data = await window.electronAPI.getRSSFeed(
-    "https://www.reddit.com/r/programming.rss",
-  );
+  const data = await fetch(
+    "https://reddit-rss-api.deno.dev/r/programming?sort=desc",
+  ).then((response) => response.json());
   // Log the data
   console.log(data);
   // If data exists, update the UI
   if (data) updateUI();
   // Set an interval to reload the widget every hour
   setInterval(
-    () => window.electronAPI.reloadWidget("r-programming"),
+    () => window.electronAPI.reloadWidget("r-turkey"),
     1000 * 60 * 60, // reload every hour
   );
 }

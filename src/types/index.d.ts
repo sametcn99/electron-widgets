@@ -50,6 +50,7 @@ interface Window {
 
     // Widget actions
     reloadWidget: (widgetKey: string) => Promise<void>;
+    recreateWidget: (widgetKey: string) => Promise<void>;
     lockWidget: (widgetId: string) => Promise<void>;
     getLocation: () => Promise<void>;
     showNotification: (title: string, body?: string) => Promise<void>;

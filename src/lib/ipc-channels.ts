@@ -20,6 +20,7 @@ export enum IpcChannels {
   SHOW_WIDGET = "show-widget", // Channel for showing widgets
   SHOW_ALL_WIDGETS = "show-all-widgets", // Channel for showing all widgets
   RELOAD_WIDGET = "reload-widget", // Channel for refreshing widgets
+  RECREATE_WIDGET = "recreate-widget", // Channel for recreating widgets
   RESIZE_WIDGET_WINDOW = "resize-widget-window", // Channel for resizing widget windows
   DRAG_WIDGET_WINDOW = "drag-widget-window", // Channel for dragging widget windows
   ADD_WIDGET_DIALOG = "add-widget-dialog", // Channel for adding a widget dialog

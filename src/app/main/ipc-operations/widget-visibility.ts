@@ -14,7 +14,16 @@ import { config } from "../../../lib/config";
  * @param key - The key of the widget.
  */
 ipcMain.handle(IpcChannels.RELOAD_WIDGET, (event, widgetKey) => {
-  windowManager.reCreateWidget(widgetKey);
+  windowManager.reloadWidget(widgetKey);
+});
+
+/**
+ * Handles the recreating of a widget window.
+ * @param event - The event object.
+ * @param key - The key of the widget.
+ */
+ipcMain.handle(IpcChannels.RECREATE_WIDGET, (event, widgetKey) => {
+  windowManager.reloadWidget(widgetKey);
 });
 
 /**
