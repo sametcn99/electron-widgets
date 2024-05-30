@@ -23,7 +23,7 @@ ipcMain.handle(IpcChannels.RELOAD_WIDGET, (event, widgetKey) => {
  * @param key - The key of the widget.
  */
 ipcMain.handle(IpcChannels.RECREATE_WIDGET, (event, widgetKey) => {
-  windowManager.reloadWidget(widgetKey);
+  windowManager.reCreateWidget(widgetKey);
 });
 
 /**
