@@ -26,13 +26,13 @@ export function createWindowsForWidgets() {
       return;
     }
     // Iterate through each widget in the data
-    Object.entries(widgetsData).forEach(async ([key, widget]) => {
+    Object.entries(widgetsData).forEach(([key, widget]) => {
       // Merge the widget with the preset values
       widgetsData[key] = mergeWithPreset(widget, preset);
       setWidgetsJson(widgetsData, config.widgetsJsonPath);
       // Check if the widget is set to be visible
       if (widget.visible) {
-       await createSingleWindowForWidgets(key);
+        createSingleWindowForWidgets(key);
       }
     });
   } catch (err) {
@@ -95,9 +95,9 @@ export async function createSingleWindowForWidgets(key: string) {
 
         // Load the widget's HTML file into the window
         const indexPath = path.join(config.widgetsDir, key, "index.html");
-        await win.loadFile(indexPath);
-        if (win.title !== key) {
-          win.setTitle(key);
+      await  win.loadFile(indexPath);
+        if(win.title !== key){
+         win.setTitle(key);
         }
         openDevToolsWithShortcut(win);
       } catch (err) {
