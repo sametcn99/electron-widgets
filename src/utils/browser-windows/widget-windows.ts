@@ -26,13 +26,13 @@ export function createWindowsForWidgets() {
       return;
     }
     // Iterate through each widget in the data
-    Object.entries(widgetsData).forEach(([key, widget]) => {
+    Object.entries(widgetsData).forEach(async ([key, widget]) => {
       // Merge the widget with the preset values
       widgetsData[key] = mergeWithPreset(widget, preset);
       setWidgetsJson(widgetsData, config.widgetsJsonPath);
       // Check if the widget is set to be visible
       if (widget.visible) {
-        createSingleWindowForWidgets(key);
+       await createSingleWindowForWidgets(key);
       }
     });
   } catch (err) {
@@ -48,7 +48,7 @@ export function createWindowsForWidgets() {
  *
  * @param key - The key of the widget to create a window for
  */
-export function createSingleWindowForWidgets(key: string) {
+export async function createSingleWindowForWidgets(key: string) {
   try {
     // Parse the widgets JSON data
     const widgetsData: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath);
@@ -95,8 +95,10 @@ export function createSingleWindowForWidgets(key: string) {
 
         // Load the widget's HTML file into the window
         const indexPath = path.join(config.widgetsDir, key, "index.html");
-        win.loadFile(indexPath);
-        win.setTitle(key);
+        await win.loadFile(indexPath);
+        if (win.title !== key) {
+          win.setTitle(key);
+        }
         openDevToolsWithShortcut(win);
       } catch (err) {
         dialog.showErrorBox(`Error creating window for ${key}`, `${err}`);
