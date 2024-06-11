@@ -36,6 +36,13 @@ async function fetchDataAndUpdateUI() {
     });
   }
 
+  // Check for app updates
+  const version = await window.electronAPI.getAppVersion();
+
+  // Update the UI with the app version
+  document.getElementById("version").textContent =
+    `You are using version ${version} of the app.`;
+
   // Update the UI if data is available
   if (data) updateUI();
 

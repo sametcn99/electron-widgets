@@ -18,6 +18,10 @@ async function fetchDataAndUpdateUI() {
       node.style.display = "flex";
       // Set the title of the item
       node.querySelector("#title").textContent = element.title;
+      if(element.message) {
+        node.querySelector("#detail").textContent = element.message.substring(0, 250) + "...";
+        node.querySelector("#detail").style.display = "block";
+      }
       // Add an event listener to open the link when the title is clicked
       node.querySelector("#title").addEventListener("click", () => {
         window.electronAPI.openExternal(element.link);
@@ -40,7 +44,7 @@ async function fetchDataAndUpdateUI() {
 
   // Fetch the RSS feed data
   const data = await fetch(
-    "https://reddit-rss-api.deno.dev/r/programming?sort=desc",
+    "https://reddit-rss-api.deno.dev/r/programming?sort=desc"
   ).then((response) => response.json());
   // Log the data
   console.log(data);
@@ -49,7 +53,7 @@ async function fetchDataAndUpdateUI() {
   // Set an interval to reload the widget every hour
   setInterval(
     () => window.electronAPI.reloadWidget("r-turkey"),
-    1000 * 60 * 60, // reload every hour
+    1000 * 60 * 60 // reload every hour
   );
 }
 

@@ -11,7 +11,7 @@ class WindowManager {
     try {
       let mainWindow: Electron.BrowserWindow | undefined;
       BrowserWindow.getAllWindows().forEach((win) => {
-        if (win.webContents.getTitle() === config.applicationName) {
+        if (win.title === config.applicationName) {
           mainWindow = win;
         }
       });
@@ -25,7 +25,7 @@ class WindowManager {
   minimizeAllWindowsExceptMain(): void {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
-        if (win.webContents.getTitle() !== config.applicationName) {
+        if (win.title !== config.applicationName) {
           win.minimize();
         }
       });
@@ -38,7 +38,7 @@ class WindowManager {
   closeAllWindowsExceptMain(): void {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
-        if (win.webContents.getTitle() !== config.applicationName) {
+        if (win.title !== config.applicationName) {
           win.close();
         }
       });
@@ -65,7 +65,7 @@ class WindowManager {
 
   reCreateWidget(widgetKey: string): void {
     this.getAllWindowsExceptMain().forEach((win) => {
-      if (win.webContents.getTitle() === widgetKey) {
+      if (win.title === widgetKey) {
         win.close();
         createSingleWindowForWidgets(widgetKey);
       }
@@ -81,7 +81,7 @@ class WindowManager {
 
   reloadWidget(widgetKey: string): void {
     this.getAllWindowsExceptMain().forEach((win) => {
-      if (win.webContents.getTitle() === widgetKey) {
+      if (win.title === widgetKey) {
         win.reload();
       }
     });
@@ -156,7 +156,7 @@ class WindowManager {
   hideAllWindowsExceptMain(): void {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
-        if (win.webContents.getTitle() !== config.applicationName) {
+        if (win.title !== config.applicationName) {
           win.hide();
         }
       });
@@ -169,7 +169,7 @@ class WindowManager {
   setAlwaysOnTopAllWindowsExceptMain(alwaysOnTop: boolean): void {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
-        if (win.webContents.getTitle() !== config.applicationName) {
+        if (win.title!== config.applicationName) {
           win.setAlwaysOnTop(alwaysOnTop);
         }
       });
@@ -209,7 +209,7 @@ class WindowManager {
     try {
       let foundWindow: BrowserWindow | null = null;
       this.getAllWindowsExceptMain().forEach((win) => {
-        if (win.webContents.getTitle() === title) {
+        if (win.title=== title) {
           foundWindow = win;
         }
       });

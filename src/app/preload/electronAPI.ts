@@ -24,6 +24,8 @@ contextBridge.exposeInMainWorld("electronAPI", {
   removeWidget: (widgetId: string) =>
     ipcRenderer.invoke(IpcChannels.REMOVE_WIDGET, widgetId),
   sortWidgets: () => ipcRenderer.invoke(IpcChannels.SORT_WIDGETS),
+  duplicateWidget: (widgetId: string) =>
+    ipcRenderer.invoke(IpcChannels.DUPLICATE_WIDGET, widgetId),
 
   // widget window operations
   createWidgetWindow: (widgetKey: string) =>

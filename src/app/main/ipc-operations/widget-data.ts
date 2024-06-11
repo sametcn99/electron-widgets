@@ -142,3 +142,27 @@ ipcMain.handle(IpcChannels.REMOVE_WIDGET, async (event, widgetKey) => {
   setWidgetsJson(widgets, config.widgetsJsonPath);
   windowManager.reloadAllWindows();
 });
+
+/**
+ * Handles duplicating a widget.
+ * @param event - The event object.
+ * @param widgetKey - The key of the widget to duplicate.
+ */
+ipcMain.handle(IpcChannels.DUPLICATE_WIDGET, async (event, widgetKey) => {
+  const widgets = getWidgetsJson(config.widgetsJsonPath);
+  const widget = widgets[widgetKey];
+  const widgetFolderPath = path.join(config.widgetsDir, widgetKey);
+  const randomNumber = Math.floor(Math.random() * 1000);
+  const newWidgetId = `${widgetKey}-${randomNumber}`;
+  const newWidgetFolderPath = path.join(config.widgetsDir, newWidgetId);
+  copySync(widgetFolderPath, newWidgetFolderPath);
+  widgets[newWidgetId] = { ...widget };
+  widgets[newWidgetId].title = newWidgetId
+  widgets[newWidgetId].visible = false;
+  widgets[newWidgetId].x = 10;
+  widgets[newWidgetId].y = 10;
+  widgets[newWidgetId].locked = false;
+  widgets[newWidgetId].alwaysOnTop = false;
+  setWidgetsJson(widgets, config.widgetsJsonPath);
+  windowManager.reloadAllWindows();
+});
