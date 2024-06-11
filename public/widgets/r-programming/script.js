@@ -52,7 +52,7 @@ async function fetchDataAndUpdateUI() {
   if (data) updateUI();
   // Set an interval to reload the widget every hour
   setInterval(
-    () => window.electronAPI.reloadWidget("r-turkey"),
+    () => window.electronAPI.reloadWidget("r-programming"),
     1000 * 60 * 60 // reload every hour
   );
 }
