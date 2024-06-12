@@ -95,6 +95,6 @@ try {
   document.getElementById("loading").style.display = "none";
   // If the message element exists, display the error message
   if (messageElement) {
-    messageElement.textContent = "Hata oluştu: " + error.message;
+    messageElement.textContent = "Something went wrong: " + error.message;
   }
 }

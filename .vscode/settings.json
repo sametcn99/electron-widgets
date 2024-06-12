@@ -1,4 +1,0 @@
-{
-    "css.lint.unknownAtRules": "ignore",
-    "deno.enable": false
-}

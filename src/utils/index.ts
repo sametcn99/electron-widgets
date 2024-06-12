@@ -1,17 +1,15 @@
 export { createMainWindow } from "./browser-windows/main-window";
-export { showNotification } from "./notifications/notification";
-export { openDevToolsWithShortcut } from "./shortcuts/shortcuts";
+export { showNotification, openDevToolsWithShortcut } from "./utils";
 export {
   getWidgetsJson,
   setWidgetsJson,
   copyWidgetsDirIfNeeded,
-  downloadAndCopyWidgetsFolderIfNeeded,
-  downloadAndCopyWidgetsFolder,
 } from "./widget/widgets-folder";
 export {
   createWindowsForWidgets,
   createSingleWindowForWidgets,
 } from "./browser-windows/widget-windows";
 export { windowManager } from "./browser-windows/window-manager";
-export { mergeWithPreset, hotReloadWidgets } from "./utils";
+export { mergeWithPreset } from "./utils";
 export { displayControl } from "./display-control";
+export { registerTray } from "./tray";

@@ -1,5 +1,4 @@
 async function fetchDataAndUpdateUI() {
-  // Örnek veri alımı yerine, sabit bir veri kullanıyorum.
   const data = await window.electronAPI.getDiskUsage();
   console.log(data);
   function updateDiskUsage(data) {

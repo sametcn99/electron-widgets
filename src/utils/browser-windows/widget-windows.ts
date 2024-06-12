@@ -1,9 +1,8 @@
 import { BrowserWindow, dialog } from "electron";
 import path from "node:path";
-import { mergeWithPreset } from "../utils";
+import { mergeWithPreset, openDevToolsWithShortcut } from "../utils";
 import { preset } from "../../lib/preset";
 import { config } from "../../lib/config";
-import { openDevToolsWithShortcut } from "../shortcuts/shortcuts";
 import { getWidgetsJson, setWidgetsJson } from "../widget/widgets-folder";
 import is from "electron-is";
 

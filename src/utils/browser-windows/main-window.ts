@@ -1,9 +1,9 @@
 import { BrowserWindow } from "electron";
 import path from "node:path";
-import { showNotification } from "../notifications/notification";
+import { showNotification ,openDevToolsWithShortcut} from "../index";
 import { config } from "../../lib/config";
-import { openDevToolsWithShortcut } from "../shortcuts/shortcuts";
 import is from "electron-is";
+import {  } from "../utils";
 
 let mainWindow: BrowserWindow | null = null;
 

@@ -19,9 +19,7 @@ ipcMain.handle(IpcChannels.CREATE_WIDGET_WINDOW, (event, key) => {
 ipcMain.handle(IpcChannels.CLOSE_WIDGET_WINDOW, (event, key) => {
   try {
     windowManager.getAllWindowsExceptMain().forEach((win) => {
-      if (win.title === key) {
-        win.close();
-      }
+      if (win.title === key) win.close();
     });
   } catch (error) {
     console.error("Error closing widget window:", error);

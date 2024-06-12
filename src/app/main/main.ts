@@ -3,7 +3,6 @@
  * Registers the app and initializes it.
  */
 import { app } from "electron";
-import { registerTray } from "./tray";
 import { config } from "../../lib/config";
 import {
   copyWidgetsDirIfNeeded,
@@ -11,6 +10,7 @@ import {
   createWindowsForWidgets,
   displayControl,
   windowManager,
+  registerTray
 } from "../../utils";
 import "./ipc-operations/global";
 import "./ipc-operations/app-operations";

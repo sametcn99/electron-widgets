@@ -83,6 +83,6 @@ try {
   const messageElement = document.getElementById("message");
   document.getElementById("loading").style.display = "none";
   if (messageElement) {
-    messageElement.textContent = "Hata oluştu: " + error.message;
+    messageElement.textContent = "Something went wrong: " + error.message;
   }
 }

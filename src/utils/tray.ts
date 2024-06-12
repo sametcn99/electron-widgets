@@ -1,7 +1,7 @@
 import { app, Menu, nativeImage, screen, Tray } from "electron";
 import is from "electron-is";
-import { createMainWindow, windowManager } from "../../utils";
-import { config } from "../../lib/config";
+import { createMainWindow, windowManager } from ".";
+import { config } from "../lib/config";
 
 let tray;
 

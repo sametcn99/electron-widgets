@@ -92,3 +92,5 @@ typings/
 out/
 
 public/widgets/**/*.json
+
+.vscode/
