@@ -7,6 +7,8 @@
   font-family: "Roboto", sans-serif;
   margin: 0px;
   box-sizing: border-box;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 /* Root variables */
