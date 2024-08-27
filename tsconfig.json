@@ -2,13 +2,8 @@
   "compilerOptions": {
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": [
-      "./node_modules/@types",
-      "./src/types"
-    ],
-    "types": [
-      "node",
-    ],
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "types": ["node"],
     "target": "ESNext",
     "module": "commonjs",
     "moduleDetection": "auto",

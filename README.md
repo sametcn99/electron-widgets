@@ -17,6 +17,7 @@
 This project is a desktop application developed using Electron.js and Node.js. The application allows users to create and manage widgets on their desktops. These widgets enable users to quickly and easily access the information or tools they need.
 
 ## Widget Screenshots
+
 <details>
   <summary>Clock</summary>
   <img src="/public/widgets/clock/screenshot.png"></img>

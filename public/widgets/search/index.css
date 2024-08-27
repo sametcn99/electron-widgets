@@ -1,7 +1,7 @@
 /* Define custom font */
 @font-face {
-  font-family: "Aleo-ExtraBold";
-  src: url("Aleo-ExtraBold.ttf");
+  font-family: 'Aleo-ExtraBold';
+  src: url('Aleo-ExtraBold.ttf');
 }
 
 /* Define root variables */
@@ -13,7 +13,7 @@
   --background-secondary: #1b1b1b;
   --text: #e0e0e0;
   --secondary-text: #878a8c;
-  --border: 1px solid #3030309a;
+  --border: transparent;
   --box-shadow: 1px 1px 20px rgba(214, 214, 214, 0.096);
 }
 
@@ -65,7 +65,7 @@ main {
 select {
   background-color: var(--background);
   color: var(--text);
-  border: 1px solid rgba(0, 0, 0, 0.089);
+  border: var(--border);
   border-radius: 10px;
   height: 32px;
 }
@@ -79,11 +79,9 @@ select:focus {
 input {
   background-color: var(--background);
   color: var(--text);
-  border: 1px solid var(--text);
+  border: var(--border);
   padding-left: 15px;
   height: 30px;
-  border: 1px solid rgba(0, 0, 0, 0.089);
-  border-radius: 10px;
 }
 
 input:focus {

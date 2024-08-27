@@ -1,20 +1,15 @@
-import { contextBridge, ipcRenderer } from "electron";
-import { IpcChannels } from "../../lib/ipc-channels";
+import { contextBridge, ipcRenderer } from 'electron'
+import { IpcChannels } from '../../lib/ipc-channels'
 
 /**
  * Exposes Electron API to the main world.
  */
-contextBridge.exposeInMainWorld("electronAPI", {
+contextBridge.exposeInMainWorld('electronAPI', {
   // custom data operations
   readCustomData: (widgetKey: string, filePath: string) =>
     ipcRenderer.invoke(IpcChannels.READ_CUSTOM_DATA, widgetKey, filePath),
   writeCustomData: (widgetKey: string, filePath: string, data: string) => {
-    ipcRenderer.invoke(
-      IpcChannels.WRITE_CUSTOM_DATA,
-      widgetKey,
-      filePath,
-      data,
-    );
+    ipcRenderer.invoke(IpcChannels.WRITE_CUSTOM_DATA, widgetKey, filePath, data)
   },
 
   // widget data operations
@@ -33,8 +28,8 @@ contextBridge.exposeInMainWorld("electronAPI", {
   closeWidgetWindow: (widgetKey: string) =>
     ipcRenderer.invoke(IpcChannels.CLOSE_WIDGET_WINDOW, widgetKey),
   minimizeWindow: () =>
-    ipcRenderer.invoke(IpcChannels.WINDOW_ACTION, "minimize"),
-  closeWindow: () => ipcRenderer.invoke(IpcChannels.WINDOW_ACTION, "close"),
+    ipcRenderer.invoke(IpcChannels.WINDOW_ACTION, 'minimize'),
+  closeWindow: () => ipcRenderer.invoke(IpcChannels.WINDOW_ACTION, 'close'),
 
   // widget visibility operations
   showAllWidgets: () => ipcRenderer.invoke(IpcChannels.SHOW_ALL_WIDGETS),
@@ -47,7 +42,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
   lockWidget: (widgetId: string) =>
     ipcRenderer.invoke(IpcChannels.LOCK_WIDGET, widgetId),
   setAlwaysOnTop: (widgetId: string, alwaysOnTop: boolean) => {
-    ipcRenderer.invoke(IpcChannels.SET_ALWAYS_ON_TOP, widgetId, alwaysOnTop);
+    ipcRenderer.invoke(IpcChannels.SET_ALWAYS_ON_TOP, widgetId, alwaysOnTop)
   },
   setLockAllWidgets: (lock: boolean) =>
     ipcRenderer.invoke(IpcChannels.SET_LOCK_ALL_WIDGETS, lock),
@@ -69,5 +64,5 @@ contextBridge.exposeInMainWorld("electronAPI", {
     ipcRenderer.invoke(IpcChannels.RSS_FEED_PARSER, url),
   opmlToJson: (xml: string) =>
     ipcRenderer.invoke(IpcChannels.OPML_TO_JSON, xml),
-  getAppVersion: () => ipcRenderer.invoke(IpcChannels.GET_APP_VERSION),
-});
+  getAppVersion: () => ipcRenderer.invoke(IpcChannels.GET_APP_VERSION)
+})
