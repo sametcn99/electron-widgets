@@ -21,29 +21,21 @@
 body {
   padding: 0;
   margin: 0;
+  -webkit-app-region: drag; /* Make the whole body draggable by default */
 }
 
 /* Main container styles */
 main {
   margin: 0px;
-  padding: 0px;
+  padding: 10px; /* Add some padding */
   font-weight: 500;
   letter-spacing: 0.4rem;
   background-color: var(--background);
   height: 100vh;
-  padding-left: 5px;
-  display: flex;
-  width: 320px;
-  place-items: center;
-  border-radius: 10px;
-  flex-direction: column;
-}
-
-/* Draggable region styles */
-.draggable {
-  -webkit-app-region: drag;
-  height: 100%;
   width: 100%;
+  box-sizing: border-box; /* Include padding in width/height */
+  justify-content: center;
+  align-items: center;
 }
 
 /* Container styles */
@@ -55,38 +47,44 @@ main {
   justify-content: center;
   gap: 0.3rem;
   height: fit-content;
-  background-color: var(--background);
-  padding: 0;
-  margin: 0;
-  border-radius: 10px;
+  width: 100%; /* Take full width */
+  padding: 5px;
+  background-color: var(--background-secondary); /* Use secondary background */
+  border: var(--border);
+  -webkit-app-region: no-drag; /* Make container non-draggable */
 }
 
 /* Select element styles */
 select {
   background-color: var(--background);
   color: var(--text);
-  border: var(--border);
-  border-radius: 10px;
+  border: 1px solid var(--secondary-text); /* Use variable for border */
+  border-radius: 5px; /* Slightly less rounded */
   height: 32px;
+  padding: 0 5px;
+  -webkit-app-region: no-drag; /* Make select non-draggable */
 }
 
 select:focus {
-  outline: transparent;
-  border: transparent;
+  outline: 1px solid var(--text); /* Add visible outline on focus */
+  border-color: var(--text);
 }
 
 /* Input element styles */
 input {
+  flex-grow: 1; /* Allow input to take available space */
   background-color: var(--background);
   color: var(--text);
-  border: var(--border);
-  padding-left: 15px;
+  border: 1px solid var(--secondary-text); /* Use variable for border */
+  border-radius: 5px; /* Slightly less rounded */
+  padding-left: 10px; /* Adjust padding */
   height: 30px;
+  -webkit-app-region: no-drag; /* Make input non-draggable */
 }
 
 input:focus {
-  outline: transparent;
-  border: transparent;
+  outline: 1px solid var(--text); /* Add visible outline on focus */
+  border-color: var(--text);
 }
 
 /* Hide scrollbar */

@@ -12,7 +12,8 @@ async function fetchDataAndUpdateUI() {
       const usingPercentage = ((element.used / element.size) * 100).toFixed(2)
       node.querySelector('#usedSpace').textContent = used
       node.querySelector('#totalSpace').textContent = total
-      node.querySelector('#bar').textContent = 'Using: ' + usingPercentage + '%'
+      node.querySelector('#percentage').textContent = `(${usingPercentage}%)` // Update the new percentage span
+      // node.querySelector('#bar').textContent = 'Using: ' + usingPercentage + '%' // Remove text from bar
       node.querySelector('#bar').style.width = usingPercentage + '%'
       main.appendChild(node)
     })

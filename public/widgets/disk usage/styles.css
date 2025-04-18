@@ -69,8 +69,9 @@ p {
 #diskUsage {
   display: flex;
   flex-direction: row;
+  align-items: baseline; /* Align text baselines */
   margin-left: 10px;
-  margin-bottom: -10px;
+  margin-bottom: -5px; /* Adjusted margin */
   color: var(--text);
 }
 
@@ -78,26 +79,24 @@ p {
   width: 95%;
   margin-right: auto;
   margin-left: auto;
-  height: 20px;
+  height: 15px; /* Slightly reduced height */
   border-radius: 50px;
-  background-color: #1392fb;
+  background-color: #3a3a3a; /* Darker background for better contrast */
+  overflow: hidden; /* Ensure bar stays within container bounds */
 }
 
 #bar {
-  width: 90%;
-  background: rgb(68, 125, 231);
+  /* width: 90%; */ /* Width is now set dynamically by JS */
   background: linear-gradient(
     90deg,
-    rgba(47, 103, 209, 1) 20%,
-    rgba(38, 98, 210, 1) 32%,
-    rgba(29, 90, 204, 1) 44%,
-    rgba(23, 87, 205, 0.9724264705882353) 61%,
-    rgba(12, 77, 197, 0.9724264705882353) 78%,
-    rgba(24, 73, 163, 1) 100%
-  );
-  height: 20px;
+    rgba(47, 103, 209, 1) 0%,
+    rgba(12, 77, 197, 1) 100%
+  ); /* Simplified gradient */
+  height: 100%; /* Fill container height */
   color: rgba(255, 255, 255, 0.644);
   border-radius: 50px;
   font-size: 15px;
-  padding-left: 15px;
+  /* text-align: center; */ /* Text removed */
+  /* line-height: 20px; */ /* Text removed */
+  transition: width 0.3s ease-in-out; /* Smooth width transition */
 }
