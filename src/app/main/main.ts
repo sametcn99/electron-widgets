@@ -12,11 +12,7 @@ import {
   windowManager,
   registerTray
 } from '../../utils'
-import './ipc-operations/global'
-import './ipc-operations/app-operations'
-import './ipc-operations/widget-window'
-import './ipc-operations/widget-visibility'
-import './ipc-operations/widget-data'
+import { IpcManager } from './ipc-operations/ipc-manager'
 import { updateElectronApp } from 'update-electron-app'
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -33,6 +29,18 @@ class ElectronWidgetsApp {
     this.onReady = this.onReady.bind(this)
     this.onActivate = this.onActivate.bind(this)
     this.registerAppListeners()
+
+    // Initialize and register all IPC handlers
+    this.initializeIpcHandlers()
+  }
+
+  /**
+   * Initializes all IPC handlers.
+   */
+  private initializeIpcHandlers(): void {
+    // Get the IPC manager instance and register all handlers
+    const ipcManager = IpcManager.getInstance()
+    ipcManager.registerHandlers()
   }
 
   /**
