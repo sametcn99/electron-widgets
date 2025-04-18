@@ -48,7 +48,7 @@ export class IpcManager {
    * Registers all IPC handlers.
    */
   public registerHandlers(): void {
-    this.handlers.forEach(handler => handler.register())
+    this.handlers.forEach((handler) => handler.register())
     console.log('All IPC handlers registered successfully.')
   }
 

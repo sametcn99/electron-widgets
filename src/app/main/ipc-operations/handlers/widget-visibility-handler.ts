@@ -17,15 +17,42 @@ export class WidgetVisibilityHandler extends IpcHandlerBase {
    * Registers all widget visibility IPC handlers.
    */
   public register(): void {
-    this.registerHandler(IpcChannels.RELOAD_WIDGET, this.handleReloadWidget.bind(this))
-    this.registerHandler(IpcChannels.RECREATE_WIDGET, this.handleRecreateWidget.bind(this))
-    this.registerHandler(IpcChannels.RESIZE_WIDGET_WINDOW, this.handleResizeWidgetWindow.bind(this))
-    this.registerHandler(IpcChannels.DRAG_WIDGET_WINDOW, this.handleDragWidgetWindow.bind(this))
-    this.registerHandler(IpcChannels.SHOW_ALL_WIDGETS, this.handleShowAllWidgets.bind(this))
-    this.registerHandler(IpcChannels.LOCK_WIDGET, this.handleLockWidget.bind(this))
-    this.registerHandler(IpcChannels.SET_ALWAYS_ON_TOP, this.handleSetAlwaysOnTop.bind(this))
-    this.registerHandler(IpcChannels.SHOW_WIDGET, this.handleShowWidget.bind(this))
-    this.registerHandler(IpcChannels.SET_VISIBILITY_ALL_WIDGETS, this.handleSetVisibilityAllWidgets.bind(this))
+    this.registerHandler(
+      IpcChannels.RELOAD_WIDGET,
+      this.handleReloadWidget.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.RECREATE_WIDGET,
+      this.handleRecreateWidget.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.RESIZE_WIDGET_WINDOW,
+      this.handleResizeWidgetWindow.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.DRAG_WIDGET_WINDOW,
+      this.handleDragWidgetWindow.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.SHOW_ALL_WIDGETS,
+      this.handleShowAllWidgets.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.LOCK_WIDGET,
+      this.handleLockWidget.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.SET_ALWAYS_ON_TOP,
+      this.handleSetAlwaysOnTop.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.SHOW_WIDGET,
+      this.handleShowWidget.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.SET_VISIBILITY_ALL_WIDGETS,
+      this.handleSetVisibilityAllWidgets.bind(this)
+    )
   }
 
   /**
@@ -33,7 +60,10 @@ export class WidgetVisibilityHandler extends IpcHandlerBase {
    * @param event - The event object.
    * @param widgetKey - The key of the widget.
    */
-  private handleReloadWidget(event: Electron.IpcMainInvokeEvent, widgetKey: string): void {
+  private handleReloadWidget(
+    event: Electron.IpcMainInvokeEvent,
+    widgetKey: string
+  ): void {
     windowManager.reloadWidget(widgetKey)
   }
 
@@ -42,7 +72,10 @@ export class WidgetVisibilityHandler extends IpcHandlerBase {
    * @param event - The event object.
    * @param widgetKey - The key of the widget.
    */
-  private handleRecreateWidget(event: Electron.IpcMainInvokeEvent, widgetKey: string): void {
+  private handleRecreateWidget(
+    event: Electron.IpcMainInvokeEvent,
+    widgetKey: string
+  ): void {
     windowManager.reCreateWidget(widgetKey)
   }
 
@@ -52,7 +85,8 @@ export class WidgetVisibilityHandler extends IpcHandlerBase {
   private handleResizeWidgetWindow(): void {
     const win = BrowserWindow.getFocusedWindow()
     if (win?.title !== config.applicationName) {
-      const title: string = BrowserWindow.getFocusedWindow()?.getTitle() as string
+      const title: string =
+        BrowserWindow.getFocusedWindow()?.getTitle() as string
       const widgets: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath)
       if (
         win &&
@@ -109,7 +143,10 @@ export class WidgetVisibilityHandler extends IpcHandlerBase {
    * @param event - The event object.
    * @param widgetKey - The key of the widget.
    */
-  private handleLockWidget(event: Electron.IpcMainInvokeEvent, widgetKey: string): void {
+  private handleLockWidget(
+    event: Electron.IpcMainInvokeEvent,
+    widgetKey: string
+  ): void {
     const widgets: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath)
     if (widgets[widgetKey].locked === true) {
       widgets[widgetKey].locked = false
@@ -127,8 +164,8 @@ export class WidgetVisibilityHandler extends IpcHandlerBase {
    * @param alwaysOnTop - The value indicating whether the widget should always be on top.
    */
   private handleSetAlwaysOnTop(
-    event: Electron.IpcMainInvokeEvent, 
-    widgetKey: string, 
+    event: Electron.IpcMainInvokeEvent,
+    widgetKey: string,
     alwaysOnTop: boolean
   ): void {
     const widgets: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath)
@@ -143,7 +180,10 @@ export class WidgetVisibilityHandler extends IpcHandlerBase {
    * @param event - The event object.
    * @param widgetKey - The key of the widget.
    */
-  private handleShowWidget(event: Electron.IpcMainInvokeEvent, widgetKey: string): void {
+  private handleShowWidget(
+    event: Electron.IpcMainInvokeEvent,
+    widgetKey: string
+  ): void {
     windowManager.showWidget(widgetKey)
   }
 
@@ -153,7 +193,7 @@ export class WidgetVisibilityHandler extends IpcHandlerBase {
    * @param visible - The visibility of the widgets.
    */
   private handleSetVisibilityAllWidgets(
-    event: Electron.IpcMainInvokeEvent, 
+    event: Electron.IpcMainInvokeEvent,
     visible: boolean
   ): void {
     const widgets = getWidgetsJson(config.widgetsJsonPath)

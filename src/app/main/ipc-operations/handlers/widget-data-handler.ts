@@ -20,14 +20,38 @@ export class WidgetDataHandler extends IpcHandlerBase {
    * Registers all widget data IPC handlers.
    */
   public register(): void {
-    this.registerHandler(IpcChannels.READ_WIDGETS_JSON, this.handleReadWidgetsJson.bind(this))
-    this.registerHandler(IpcChannels.WRITE_WIDGETS_JSON, this.handleWriteWidgetsJson.bind(this))
-    this.registerHandler(IpcChannels.REVEAL_WIDGETS_FOLDER, this.handleRevealWidgetsFolder.bind(this))
-    this.registerHandler(IpcChannels.SET_LOCK_ALL_WIDGETS, this.handleSetLockAllWidgets.bind(this))
-    this.registerHandler(IpcChannels.SORT_WIDGETS, this.handleSortWidgets.bind(this))
-    this.registerHandler(IpcChannels.ADD_WIDGET_DIALOG, this.handleAddWidgetDialog.bind(this))
-    this.registerHandler(IpcChannels.REMOVE_WIDGET, this.handleRemoveWidget.bind(this))
-    this.registerHandler(IpcChannels.DUPLICATE_WIDGET, this.handleDuplicateWidget.bind(this))
+    this.registerHandler(
+      IpcChannels.READ_WIDGETS_JSON,
+      this.handleReadWidgetsJson.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.WRITE_WIDGETS_JSON,
+      this.handleWriteWidgetsJson.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.REVEAL_WIDGETS_FOLDER,
+      this.handleRevealWidgetsFolder.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.SET_LOCK_ALL_WIDGETS,
+      this.handleSetLockAllWidgets.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.SORT_WIDGETS,
+      this.handleSortWidgets.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.ADD_WIDGET_DIALOG,
+      this.handleAddWidgetDialog.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.REMOVE_WIDGET,
+      this.handleRemoveWidget.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.DUPLICATE_WIDGET,
+      this.handleDuplicateWidget.bind(this)
+    )
   }
 
   /**
@@ -43,7 +67,10 @@ export class WidgetDataHandler extends IpcHandlerBase {
    * @param event - The event object.
    * @param data - The data to write to the widgets JSON file.
    */
-  private handleWriteWidgetsJson(event: Electron.IpcMainInvokeEvent, data: any): void {
+  private handleWriteWidgetsJson(
+    event: Electron.IpcMainInvokeEvent,
+    data: any
+  ): void {
     setWidgetsJson(data, config.widgetsJsonPath)
   }
 
@@ -59,7 +86,10 @@ export class WidgetDataHandler extends IpcHandlerBase {
    * @param event - The event object.
    * @param lock - The lock state.
    */
-  private handleSetLockAllWidgets(event: Electron.IpcMainInvokeEvent, lock: boolean): void {
+  private handleSetLockAllWidgets(
+    event: Electron.IpcMainInvokeEvent,
+    lock: boolean
+  ): void {
     const widgets = getWidgetsJson(config.widgetsJsonPath)
     Object.keys(widgets).forEach((key) => {
       widgets[key].locked = lock
@@ -107,10 +137,14 @@ export class WidgetDataHandler extends IpcHandlerBase {
             recursive: true
           })
 
-          copySync(path.join(srcDir), path.join(config.widgetsDir, srcDirName), {
-            overwrite: true
-          })
-          
+          copySync(
+            path.join(srcDir),
+            path.join(config.widgetsDir, srcDirName),
+            {
+              overwrite: true
+            }
+          )
+
           if (
             Object.keys(getWidgetsJson(config.widgetsJsonPath)).includes(
               srcDirName
@@ -141,7 +175,8 @@ export class WidgetDataHandler extends IpcHandlerBase {
           dialog.showMessageBox(mainWindow, {
             type: 'error',
             message: 'Invalid widget directory.',
-            detail: 'The selected directory does not contain an index.html file.'
+            detail:
+              'The selected directory does not contain an index.html file.'
           })
         }
       }
@@ -153,7 +188,10 @@ export class WidgetDataHandler extends IpcHandlerBase {
    * @param event - The event object.
    * @param widgetKey - The key of the widget to remove.
    */
-  private handleRemoveWidget(event: Electron.IpcMainInvokeEvent, widgetKey: string): void {
+  private handleRemoveWidget(
+    event: Electron.IpcMainInvokeEvent,
+    widgetKey: string
+  ): void {
     const widgets = getWidgetsJson(config.widgetsJsonPath)
     delete widgets[widgetKey]
     const widgetPath = `${config.widgetsDir}/${widgetKey}`
@@ -167,7 +205,10 @@ export class WidgetDataHandler extends IpcHandlerBase {
    * @param event - The event object.
    * @param widgetKey - The key of the widget to duplicate.
    */
-  private handleDuplicateWidget(event: Electron.IpcMainInvokeEvent, widgetKey: string): void {
+  private handleDuplicateWidget(
+    event: Electron.IpcMainInvokeEvent,
+    widgetKey: string
+  ): void {
     const widgets = getWidgetsJson(config.widgetsJsonPath)
     const widget = widgets[widgetKey]
     const widgetFolderPath = path.join(config.widgetsDir, widgetKey)

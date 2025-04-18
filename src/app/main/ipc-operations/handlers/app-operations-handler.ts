@@ -19,16 +19,46 @@ export class AppOperationsHandler extends IpcHandlerBase {
    * Registers all app operations IPC handlers.
    */
   public register(): void {
-    this.registerHandler(IpcChannels.GET_APP_VERSION, this.handleGetAppVersion.bind(this))
-    this.registerHandler(IpcChannels.OPEN_EXTERNAL, this.handleOpenExternal.bind(this))
-    this.registerHandler(IpcChannels.GET_DISK_USAGE, this.handleGetDiskUsage.bind(this))
-    this.registerHandler(IpcChannels.GET_LOCATION, this.handleGetLocation.bind(this))
-    this.registerHandler(IpcChannels.RSS_FEED_PARSER, this.handleRssFeedParser.bind(this))
-    this.registerHandler(IpcChannels.OPML_TO_JSON, this.handleOpmlToJson.bind(this))
-    this.registerHandler(IpcChannels.SYSTEM_INFO, this.handleSystemInfo.bind(this))
-    this.registerHandler(IpcChannels.SHOW_NOTIFICATION, this.handleShowNotification.bind(this))
-    this.registerHandler(IpcChannels.READ_CUSTOM_DATA, this.handleReadCustomData.bind(this))
-    this.registerHandler(IpcChannels.WRITE_CUSTOM_DATA, this.handleWriteCustomData.bind(this))
+    this.registerHandler(
+      IpcChannels.GET_APP_VERSION,
+      this.handleGetAppVersion.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.OPEN_EXTERNAL,
+      this.handleOpenExternal.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.GET_DISK_USAGE,
+      this.handleGetDiskUsage.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.GET_LOCATION,
+      this.handleGetLocation.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.RSS_FEED_PARSER,
+      this.handleRssFeedParser.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.OPML_TO_JSON,
+      this.handleOpmlToJson.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.SYSTEM_INFO,
+      this.handleSystemInfo.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.SHOW_NOTIFICATION,
+      this.handleShowNotification.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.READ_CUSTOM_DATA,
+      this.handleReadCustomData.bind(this)
+    )
+    this.registerHandler(
+      IpcChannels.WRITE_CUSTOM_DATA,
+      this.handleWriteCustomData.bind(this)
+    )
   }
 
   /**
@@ -44,7 +74,10 @@ export class AppOperationsHandler extends IpcHandlerBase {
    * @param event - The event object.
    * @param url - The URL to open.
    */
-  private handleOpenExternal(event: Electron.IpcMainInvokeEvent, url: string): void {
+  private handleOpenExternal(
+    event: Electron.IpcMainInvokeEvent,
+    url: string
+  ): void {
     exec(`start "" "${url}"`, (error) => {
       if (error) {
         console.error(`Error opening file: ${error}`)
@@ -91,7 +124,10 @@ export class AppOperationsHandler extends IpcHandlerBase {
    * @param url - The URL of the RSS feed.
    * @returns The parsed RSS feed.
    */
-  private async handleRssFeedParser(event: Electron.IpcMainInvokeEvent, url: string): Promise<any> {
+  private async handleRssFeedParser(
+    event: Electron.IpcMainInvokeEvent,
+    url: string
+  ): Promise<any> {
     const response = await fetch(url).then((response) => response.text())
     const data = response.toString()
     const parser = new Parser()
@@ -106,7 +142,10 @@ export class AppOperationsHandler extends IpcHandlerBase {
    * @param xml - The OPML XML string.
    * @returns The JSON object.
    */
-  private async handleOpmlToJson(event: Electron.IpcMainInvokeEvent, xml: string): Promise<any> {
+  private async handleOpmlToJson(
+    event: Electron.IpcMainInvokeEvent,
+    xml: string
+  ): Promise<any> {
     const data = await opmlToJSON(xml)
     return data
   }
@@ -126,7 +165,11 @@ export class AppOperationsHandler extends IpcHandlerBase {
    * @param title - The notification title.
    * @param body - The notification body.
    */
-  private handleShowNotification(event: Electron.IpcMainInvokeEvent, title: string, body?: string): void {
+  private handleShowNotification(
+    event: Electron.IpcMainInvokeEvent,
+    title: string,
+    body?: string
+  ): void {
     showNotification(title, body)
   }
 
@@ -137,7 +180,11 @@ export class AppOperationsHandler extends IpcHandlerBase {
    * @param filePath - The file path.
    * @returns The custom data.
    */
-  private handleReadCustomData(event: Electron.IpcMainInvokeEvent, widgetKey: string, filePath: string): string {
+  private handleReadCustomData(
+    event: Electron.IpcMainInvokeEvent,
+    widgetKey: string,
+    filePath: string
+  ): string {
     const dirPath = path.join(config.widgetsDir, widgetKey, filePath)
     if (!existsSync(dirPath)) {
       return ''
@@ -154,7 +201,12 @@ export class AppOperationsHandler extends IpcHandlerBase {
    * @param filePath - The file path.
    * @param data - The data to write.
    */
-  private handleWriteCustomData(event: Electron.IpcMainInvokeEvent, widgetKey: string, filePath: string, data: string): void {
+  private handleWriteCustomData(
+    event: Electron.IpcMainInvokeEvent,
+    widgetKey: string,
+    filePath: string,
+    data: string
+  ): void {
     const dirPath = path.join(config.widgetsDir, widgetKey, filePath)
     data = JSON.stringify(data, null, 2)
     writeFileSync(dirPath, data)
