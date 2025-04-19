@@ -8,7 +8,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
       - name: install dependencies
-        run: npm i
+        run: bun i
       - name: build
         run: npm run make
 
@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
       - name: install dependencies
-        run: npm i
+        run: bun i
       - name: build
         run: npm run make
 
@@ -28,6 +28,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
       - name: install dependencies
-        run: npm i
+        run: bun i
       - name: build
         run: npm run make
