@@ -10,7 +10,7 @@ jobs:
       - name: install dependencies
         run: bun i
       - name: build
-        run: npm run make
+        run: bun run make
 
   build_on_mac:
     runs-on: macos-latest
@@ -20,7 +20,7 @@ jobs:
       - name: install dependencies
         run: bun i
       - name: build
-        run: npm run make
+        run: bun run make
 
   build_on_win:
     runs-on: windows-latest
@@ -30,4 +30,4 @@ jobs:
       - name: install dependencies
         run: bun i
       - name: build
-        run: npm run make
+        run: bun run make
