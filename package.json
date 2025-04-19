@@ -1,7 +1,7 @@
 {
   "name": "electron-widgets",
   "productName": "electron-widgets",
-  "version": "2.1.4",
+  "version": "2.1.6",
   "description": "A minimal widget application created with electron.js",
   "license": "GPL-3.0",
   "repository": {
