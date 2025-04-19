@@ -5,7 +5,21 @@ on:
       - 'v*'
 
 jobs:
+  create_release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # This creates a release draft initially. Electron Forge will publish it.
+          draft: false
+          prerelease: false
+
   publish_on_linux:
+    needs: create_release # Add dependency
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -18,6 +32,7 @@ jobs:
         run: bun run publish
 
   publish_on_mac:
+    needs: create_release # Add dependency
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
@@ -30,6 +45,7 @@ jobs:
         run: bun run publish
 
   publish_on_win:
+    needs: create_release # Add dependency
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
