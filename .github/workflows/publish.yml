@@ -9,40 +9,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@master
-        with:
-          node-version: 20
+      - uses: oven-sh/setup-bun@v2
       - name: install dependencies
-        run: npm i
+        run: bun i
       - name: publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run publish
+        run: bun run publish
 
   publish_on_mac:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@master
-        with:
-          node-version: 20
+      - uses: oven-sh/setup-bun@v2
       - name: install dependencies
-        run: npm install
+        run: bun install
       - name: publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run publish
+        run: bun run publish
 
   publish_on_win:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@master
-        with:
-          node-version: 20
+      - uses: oven-sh/setup-bun@v2
       - name: install dependencies
-        run: npm i
+        run: bun i
       - name: publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm run publish
+        run: bun run publish
