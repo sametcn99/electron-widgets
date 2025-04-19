@@ -1,5 +1,5 @@
 export { createMainWindow } from './browser-windows/main-window'
-export { showNotification, openDevToolsWithShortcut } from './utils'
+export { showNotification } from './utils'
 export {
   getWidgetsJson,
   setWidgetsJson,

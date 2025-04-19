@@ -1,6 +1,6 @@
 import { BrowserWindow } from 'electron'
 import path from 'node:path'
-import { showNotification, openDevToolsWithShortcut } from '../index'
+import { showNotification } from '../index'
 import { config } from '../../lib/config'
 import {} from '../utils'
 
@@ -56,7 +56,4 @@ export function createMainWindow() {
       )
     }
   })
-  // Open the DevTools for debugging
-  // mainWindow.webContents.openDevTools();
-  openDevToolsWithShortcut(mainWindow)
 }

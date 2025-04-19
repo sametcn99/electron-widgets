@@ -1,5 +1,4 @@
 import { BrowserWindow, Notification } from 'electron'
-import { register } from 'electron-localshortcut'
 
 /**
  * Merges two widget configurations, with the properties from the `preset` taking precedence over the `source`.
@@ -14,16 +13,6 @@ export function mergeWithPreset(
   return Object.assign({}, preset, source)
 }
 
-/**
- * Registers a keyboard shortcut to open the dev tools when pressing F12.
- * @export
- * @param {BrowserWindow} win - The BrowserWindow instance.
- */
-export function openDevToolsWithShortcut(win: BrowserWindow) {
-  register(win, 'F12', () => {
-    win.webContents.openDevTools()
-  })
-}
 
 export function showNotification(
   NOTIFICATION_TITLE: string,

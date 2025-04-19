@@ -1,6 +1,6 @@
 import { BrowserWindow, dialog } from 'electron'
 import path from 'node:path'
-import { mergeWithPreset, openDevToolsWithShortcut } from '../utils'
+import { mergeWithPreset } from '../utils'
 import { preset } from '../../lib/preset'
 import { config } from '../../lib/config'
 import { getWidgetsJson, setWidgetsJson } from '../widget/widgets-folder'
@@ -97,7 +97,6 @@ export async function createSingleWindowForWidgets(key: string) {
         if (win.title !== key) {
           win.setTitle(key)
         }
-        openDevToolsWithShortcut(win)
       } catch (err) {
         dialog.showErrorBox(`Error creating window for ${key}`, `${err}`)
       }
