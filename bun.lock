@@ -7,7 +7,6 @@
         "@adobe/css-tools": "^4.4.2",
         "@electron-forge/shared-types": "^7.8.0",
         "@heroicons/vue": "^2.2.0",
-        "electron-is": "^3.0.0",
         "electron-localshortcut": "^3.2.1",
         "electron-squirrel-startup": "^1.0.1",
         "node-stream-zip": "^1.15.0",
@@ -1095,11 +1094,7 @@
 
     "electron-installer-redhat": ["electron-installer-redhat@3.4.0", "", { "dependencies": { "@malept/cross-spawn-promise": "^1.0.0", "debug": "^4.1.1", "electron-installer-common": "^0.10.2", "fs-extra": "^9.0.0", "lodash": "^4.17.15", "word-wrap": "^1.2.3", "yargs": "^16.0.2" }, "os": [ "linux", "darwin", ], "bin": { "electron-installer-redhat": "src/cli.js" } }, "sha512-gEISr3U32Sgtj+fjxUAlSDo3wyGGq6OBx7rF5UdpIgbnpUvMN4W5uYb0ThpnAZ42VEJh/3aODQXHbFS4f5J3Iw=="],
 
-    "electron-is": ["electron-is@3.0.0", "", { "dependencies": { "electron-is-dev": "^0.3.0", "semver": "^5.5.0" } }, "sha512-aQv1y3WrDZ+mtO8acbhiiip/8fa0Et7cvZyvlqJm2H7fih4hiJWEFRyYxzLgDG2kmiLdF8l3y5tbek5JFOPQkQ=="],
-
     "electron-is-accelerator": ["electron-is-accelerator@0.1.2", "", {}, "sha512-fLGSAjXZtdn1sbtZxx52+krefmtNuVwnJCV2gNiVt735/ARUboMl8jnNC9fZEqQdlAv2ZrETfmBUsoQci5evJA=="],
-
-    "electron-is-dev": ["electron-is-dev@0.3.0", "", {}, "sha512-jLttuuq8QK67n3mXmIe9pkrO7IH3LGIk12xJkhTmc852U2sCJaRAOpRGPSh+1Xnzck5v9escd9YXzuze9nGejg=="],
 
     "electron-localshortcut": ["electron-localshortcut@3.2.1", "", { "dependencies": { "debug": "^4.0.1", "electron-is-accelerator": "^0.1.0", "keyboardevent-from-electron-accelerator": "^2.0.0", "keyboardevents-areequal": "^0.2.1" } }, "sha512-DWvhKv36GsdXKnaFFhEiK8kZZA+24/yFLgtTwJJHc7AFgDjNRIBJZ/jq62Y/dWv9E4ypYwrVWN2bVrCYw1uv7Q=="],
 
@@ -2504,8 +2499,6 @@
     "electron-installer-redhat/@malept/cross-spawn-promise": ["@malept/cross-spawn-promise@1.1.1", "", { "dependencies": { "cross-spawn": "^7.0.1" } }, "sha512-RTBGWL5FWQcg9orDOCcp4LvItNzUPcyEU9bwaeJX0rJ1IQxzucC48Y0/sQLp/g6t99IQgAlGIaesJS+gTn7tVQ=="],
 
     "electron-installer-redhat/fs-extra": ["fs-extra@9.1.0", "", { "dependencies": { "at-least-node": "^1.0.0", "graceful-fs": "^4.2.0", "jsonfile": "^6.0.1", "universalify": "^2.0.0" } }, "sha512-hcg3ZmepS30/7BSFqRvoo3DOMQu7IjqxO5nCDt+zM9XWjb33Wg7ziNT+Qvqbuc3+gWpzO02JubVyk2G4Zvo1OQ=="],
-
-    "electron-is/semver": ["semver@5.7.2", "", { "bin": { "semver": "bin/semver" } }, "sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g=="],
 
     "electron-squirrel-startup/debug": ["debug@2.6.9", "", { "dependencies": { "ms": "2.0.0" } }, "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="],
 

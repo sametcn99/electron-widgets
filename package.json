@@ -70,7 +70,6 @@
     "@adobe/css-tools": "^4.4.2",
     "@electron-forge/shared-types": "^7.8.0",
     "@heroicons/vue": "^2.2.0",
-    "electron-is": "^3.0.0",
     "electron-localshortcut": "^3.2.1",
     "electron-squirrel-startup": "^1.0.1",
     "node-stream-zip": "^1.15.0",

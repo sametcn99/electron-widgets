@@ -2,7 +2,6 @@ import { BrowserWindow } from 'electron'
 import path from 'node:path'
 import { showNotification, openDevToolsWithShortcut } from '../index'
 import { config } from '../../lib/config'
-import is from 'electron-is'
 import {} from '../utils'
 
 let mainWindow: BrowserWindow | null = null
@@ -36,7 +35,7 @@ export function createMainWindow() {
   })
 
   // Hide the traffic light buttons (minimize, maximize, close)
-  is.macOS() && mainWindow.setWindowButtonVisibility(false)
+  process.platform === 'darwin' && mainWindow.setWindowButtonVisibility(false)
 
   // Load the main window content
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {

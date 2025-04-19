@@ -1,5 +1,4 @@
 import { app, Menu, nativeImage, screen, Tray } from 'electron'
-import is from 'electron-is'
 import { createMainWindow, windowManager } from '.'
 import { config } from '../lib/config'
 
@@ -10,7 +9,7 @@ let tray
  */
 export function registerTray() {
   // Get the pixel ratio based on the platform
-  const pixelRatio = is.windows()
+  const pixelRatio = process.platform === 'win32'
     ? screen.getPrimaryDisplay().scaleFactor || 1
     : 1
 

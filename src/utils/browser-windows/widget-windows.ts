@@ -4,7 +4,6 @@ import { mergeWithPreset, openDevToolsWithShortcut } from '../utils'
 import { preset } from '../../lib/preset'
 import { config } from '../../lib/config'
 import { getWidgetsJson, setWidgetsJson } from '../widget/widgets-folder'
-import is from 'electron-is'
 
 /**
  * Creates windows for widgets defined in the widgets.json file.
@@ -90,7 +89,7 @@ export async function createSingleWindowForWidgets(key: string) {
         })
 
         // Hide the traffic light buttons (minimize, maximize, close)
-        is.macOS() && win.setWindowButtonVisibility(false)
+        process.platform === 'darwin' && win.setWindowButtonVisibility(false)
 
         // Load the widget's HTML file into the window
         const indexPath = path.join(config.widgetsDir, key, 'index.html')
