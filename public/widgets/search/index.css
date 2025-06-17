@@ -1,7 +1,7 @@
 /* Define custom font */
 @font-face {
-  font-family: 'Aleo-ExtraBold';
-  src: url('Aleo-ExtraBold.ttf');
+  font-family: "Aleo-ExtraBold";
+  src: url("Aleo-ExtraBold.ttf");
 }
 
 /* Define root variables */
@@ -13,7 +13,7 @@
   --background-secondary: #1b1b1b;
   --text: #e0e0e0;
   --secondary-text: #878a8c;
-  --border: transparent;
+  --border: 1px solid #3030309a;
   --box-shadow: 1px 1px 20px rgba(214, 214, 214, 0.096);
 }
 
@@ -21,21 +21,29 @@
 body {
   padding: 0;
   margin: 0;
-  -webkit-app-region: drag; /* Make the whole body draggable by default */
 }
 
 /* Main container styles */
 main {
   margin: 0px;
-  padding: 10px; /* Add some padding */
+  padding: 0px;
   font-weight: 500;
   letter-spacing: 0.4rem;
   background-color: var(--background);
   height: 100vh;
+  padding-left: 5px;
+  display: flex;
+  width: 320px;
+  place-items: center;
+  border-radius: 10px;
+  flex-direction: column;
+}
+
+/* Draggable region styles */
+.draggable {
+  -webkit-app-region: drag;
+  height: 100%;
   width: 100%;
-  box-sizing: border-box; /* Include padding in width/height */
-  justify-content: center;
-  align-items: center;
 }
 
 /* Container styles */
@@ -47,44 +55,40 @@ main {
   justify-content: center;
   gap: 0.3rem;
   height: fit-content;
-  width: 100%; /* Take full width */
-  padding: 5px;
-  background-color: var(--background-secondary); /* Use secondary background */
-  border: var(--border);
-  -webkit-app-region: no-drag; /* Make container non-draggable */
+  background-color: var(--background);
+  padding: 0;
+  margin: 0;
+  border-radius: 10px;
 }
 
 /* Select element styles */
 select {
   background-color: var(--background);
   color: var(--text);
-  border: 1px solid var(--secondary-text); /* Use variable for border */
-  border-radius: 5px; /* Slightly less rounded */
+  border: 1px solid rgba(0, 0, 0, 0.089);
+  border-radius: 10px;
   height: 32px;
-  padding: 0 5px;
-  -webkit-app-region: no-drag; /* Make select non-draggable */
 }
 
 select:focus {
-  outline: 1px solid var(--text); /* Add visible outline on focus */
-  border-color: var(--text);
+  outline: transparent;
+  border: transparent;
 }
 
 /* Input element styles */
 input {
-  flex-grow: 1; /* Allow input to take available space */
   background-color: var(--background);
   color: var(--text);
-  border: 1px solid var(--secondary-text); /* Use variable for border */
-  border-radius: 5px; /* Slightly less rounded */
-  padding-left: 10px; /* Adjust padding */
+  border: 1px solid var(--text);
+  padding-left: 15px;
   height: 30px;
-  -webkit-app-region: no-drag; /* Make input non-draggable */
+  border: 1px solid rgba(0, 0, 0, 0.089);
+  border-radius: 10px;
 }
 
 input:focus {
-  outline: 1px solid var(--text); /* Add visible outline on focus */
-  border-color: var(--text);
+  outline: transparent;
+  border: transparent;
 }
 
 /* Hide scrollbar */

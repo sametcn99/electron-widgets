@@ -6,28 +6,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-node@master
+        with:
+          node-version: 20
       - name: install dependencies
-        run: bun i
+        run: npm i
       - name: build
-        run: bun run make
+        run: npm run make
 
   build_on_mac:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-node@master
+        with:
+          node-version: 20
       - name: install dependencies
-        run: bun i
+        run: npm i
       - name: build
-        run: bun run make
+        run: npm run make
 
   build_on_win:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-node@master
+        with:
+          node-version: 20
       - name: install dependencies
-        run: bun i
+        run: npm i
       - name: build
-        run: bun run make
+        run: npm run make

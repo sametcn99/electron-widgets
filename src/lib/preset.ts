@@ -6,5 +6,5 @@ export const preset: WidgetConfig = {
   height: 330,
   x: 10,
   y: 10,
-  alwaysOnTop: false
-}
+  alwaysOnTop: false,
+};

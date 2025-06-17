@@ -1,9 +1,10 @@
-import { BrowserWindow, dialog } from 'electron'
-import path from 'node:path'
-import { mergeWithPreset } from '../utils'
-import { preset } from '../../lib/preset'
-import { config } from '../../lib/config'
-import { getWidgetsJson, setWidgetsJson } from '../widget/widgets-folder'
+import { BrowserWindow, dialog } from "electron";
+import path from "node:path";
+import { mergeWithPreset, openDevToolsWithShortcut } from "../utils";
+import { preset } from "../../lib/preset";
+import { config } from "../../lib/config";
+import { getWidgetsJson, setWidgetsJson } from "../widget/widgets-folder";
+import is from "electron-is";
 
 /**
  * Creates windows for widgets defined in the widgets.json file.
@@ -15,26 +16,26 @@ import { getWidgetsJson, setWidgetsJson } from '../widget/widgets-folder'
 export function createWindowsForWidgets() {
   try {
     // Parse the widgets JSON data
-    const widgetsData: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath)
-    if (typeof widgetsData !== 'object' || Array.isArray(widgetsData)) {
+    const widgetsData: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath);
+    if (typeof widgetsData !== "object" || Array.isArray(widgetsData)) {
       dialog.showErrorBox(
-        'Error parsing widgets data',
-        'Unexpected widgets data structure'
-      )
-      return
+        "Error parsing widgets data",
+        "Unexpected widgets data structure",
+      );
+      return;
     }
     // Iterate through each widget in the data
     Object.entries(widgetsData).forEach(([key, widget]) => {
       // Merge the widget with the preset values
-      widgetsData[key] = mergeWithPreset(widget, preset)
-      setWidgetsJson(widgetsData, config.widgetsJsonPath)
+      widgetsData[key] = mergeWithPreset(widget, preset);
+      setWidgetsJson(widgetsData, config.widgetsJsonPath);
       // Check if the widget is set to be visible
       if (widget.visible) {
-        createSingleWindowForWidgets(key)
+        createSingleWindowForWidgets(key);
       }
-    })
+    });
   } catch (err) {
-    dialog.showErrorBox(`Error parsing widgets data`, `${err}`)
+    dialog.showErrorBox(`Error parsing widgets data`, `${err}`);
   }
 }
 
@@ -49,16 +50,16 @@ export function createWindowsForWidgets() {
 export async function createSingleWindowForWidgets(key: string) {
   try {
     // Parse the widgets JSON data
-    const widgetsData: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath)
-    if (typeof widgetsData !== 'object' || Array.isArray(widgetsData)) {
+    const widgetsData: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath);
+    if (typeof widgetsData !== "object" || Array.isArray(widgetsData)) {
       dialog.showErrorBox(
-        'Error parsing widgets data',
-        'Unexpected widgets data structure'
-      )
-      return
+        "Error parsing widgets data",
+        "Unexpected widgets data structure",
+      );
+      return;
     }
     // Iterate through each widget in the data
-    const widget: WidgetConfig = widgetsData[key]
+    const widget: WidgetConfig = widgetsData[key];
     // Check if the widget is set to be visible
     if (widget.visible) {
       try {
@@ -67,12 +68,12 @@ export async function createSingleWindowForWidgets(key: string) {
           webPreferences: {
             contextIsolation: true,
             nodeIntegration: true,
-            preload: path.join(__dirname, 'preload.js') // Path to preload script
+            preload: path.join(__dirname, "preload.js"), // Path to preload script
           },
           width: widget.width,
           height: widget.height,
           autoHideMenuBar: true,
-          titleBarStyle: 'hidden',
+          titleBarStyle: "hidden",
           transparent: true,
           resizable: widget.locked ? false : true,
           x: widget.x,
@@ -85,23 +86,24 @@ export async function createSingleWindowForWidgets(key: string) {
           alwaysOnTop: widget.alwaysOnTop,
           thickFrame: false,
           movable: !widget.locked,
-          icon: config.iconPath
-        })
+          icon: config.iconPath,
+        });
 
         // Hide the traffic light buttons (minimize, maximize, close)
-        process.platform === 'darwin' && win.setWindowButtonVisibility(false)
+        is.macOS() && win.setWindowButtonVisibility(false);
 
         // Load the widget's HTML file into the window
-        const indexPath = path.join(config.widgetsDir, key, 'index.html')
-        await win.loadFile(indexPath)
-        if (win.title !== key) {
-          win.setTitle(key)
+        const indexPath = path.join(config.widgetsDir, key, "index.html");
+      await  win.loadFile(indexPath);
+        if(win.title !== key){
+         win.setTitle(key);
         }
+        openDevToolsWithShortcut(win);
       } catch (err) {
-        dialog.showErrorBox(`Error creating window for ${key}`, `${err}`)
+        dialog.showErrorBox(`Error creating window for ${key}`, `${err}`);
       }
     }
   } catch (err) {
-    dialog.showErrorBox(`Error parsing widgets data`, `${err}`)
+    dialog.showErrorBox(`Error parsing widgets data`, `${err}`);
   }
 }

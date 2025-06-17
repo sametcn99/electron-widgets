@@ -2,31 +2,31 @@
 /* eslint-disable no-undef */
 
 // Add event listener to execute code when the DOM is fully loaded
-document.addEventListener('DOMContentLoaded', () => {
-  search() // Call search function
-})
+document.addEventListener("DOMContentLoaded", () => {
+  search(); // Call search function
+});
 
 // Function to perform search
 function search() {
   try {
     document
-      .getElementById('searchInput')
-      .addEventListener('keydown', function (event) {
+      .getElementById("searchInput")
+      .addEventListener("keydown", function (event) {
         if (event.keyCode === 13) {
           // Check if Enter key is pressed
-          var searchEngine = document.getElementById('searchEngine').value // Get search engine value
-          var searchTerm = document.getElementById('searchInput').value // Get search term value
+          var searchEngine = document.getElementById("searchEngine").value; // Get search engine value
+          var searchTerm = document.getElementById("searchInput").value; // Get search term value
 
-          if (searchTerm.trim() !== '') {
+          if (searchTerm.trim() !== "") {
             // Check if search term is not empty
-            var searchURL = searchEngine + encodeURIComponent(searchTerm) // Create search URL
-            window.electronAPI.openExternal(searchURL) // Open search URL in external browser
+            var searchURL = searchEngine + encodeURIComponent(searchTerm); // Create search URL
+            window.electronAPI.openExternal(searchURL); // Open search URL in external browser
           }
         }
-      })
+      });
   } catch (error) {
-    console.error('Error occurred during search:', error) // Log any errors that occur during search
+    console.error("Error occurred during search:", error); // Log any errors that occur during search
   } finally {
-    document.getElementById('searchInput').value = '' // Clear search input field
+    document.getElementById("searchInput").value = ""; // Clear search input field
   }
 }

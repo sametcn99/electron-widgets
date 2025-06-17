@@ -6,7 +6,7 @@
  * `contextIsolation` is turned on. Use the contextBridge API in `preload.js`
  * to expose Node.js functionality from the main process.
  */
-import { createApp } from 'vue'
-import App from './app.vue'
+import { createApp } from "vue";
+import App from "./app.vue";
 
-createApp(App).mount('#app')
+createApp(App).mount("#app");

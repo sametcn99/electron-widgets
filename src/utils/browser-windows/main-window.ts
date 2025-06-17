@@ -1,10 +1,11 @@
-import { BrowserWindow } from 'electron'
-import path from 'node:path'
-import { showNotification } from '../index'
-import { config } from '../../lib/config'
-import {} from '../utils'
+import { BrowserWindow } from "electron";
+import path from "node:path";
+import { showNotification ,openDevToolsWithShortcut} from "../index";
+import { config } from "../../lib/config";
+import is from "electron-is";
+import {  } from "../utils";
 
-let mainWindow: BrowserWindow | null = null
+let mainWindow: BrowserWindow | null = null;
 
 /**
  * Creates the main browser window.
@@ -14,8 +15,8 @@ let mainWindow: BrowserWindow | null = null
  */
 export function createMainWindow() {
   if (mainWindow !== null) {
-    mainWindow.show()
-    return
+    mainWindow.show();
+    return;
   }
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -25,35 +26,38 @@ export function createMainWindow() {
     minHeight: 460,
     minWidth: 390,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js') // Path to preload script
+      preload: path.join(__dirname, "preload.js"), // Path to preload script
     },
     autoHideMenuBar: true, // Hide the menu bar
-    titleBarStyle: 'hidden', // Hide the title bar
+    titleBarStyle: "hidden", // Hide the title bar
     fullscreenable: false, // Disable fullscreen
     maximizable: false, // Disable maximize
-    icon: config.iconPath // Set the icon for the app
-  })
+    icon: config.iconPath, // Set the icon for the app
+  });
 
   // Hide the traffic light buttons (minimize, maximize, close)
-  process.platform === 'darwin' && mainWindow.setWindowButtonVisibility(false)
+  is.macOS() && mainWindow.setWindowButtonVisibility(false);
 
   // Load the main window content
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     // If a dev server URL is provided, load it
-    mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL)
+    mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
   } else {
     // Otherwise, load the index.html from the file system
     mainWindow.loadFile(
-      path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`)
-    )
+      path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`),
+    );
   }
-  mainWindow.on('closed', () => {
-    mainWindow = null
+  mainWindow.on("closed", () => {
+    mainWindow = null;
     if (BrowserWindow.getAllWindows().length !== 0) {
       showNotification(
         config.applicationName,
-        'The application is still running in the background.'
-      )
+        "The application is still running in the background.",
+      );
     }
-  })
+  });
+  // Open the DevTools for debugging
+  // mainWindow.webContents.openDevTools();
+  openDevToolsWithShortcut(mainWindow);
 }
