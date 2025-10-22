@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Install dependencies with Bun
 COPY package.json bun.lock* ./
-RUN bun install --frozen-lockfile --production=false
+RUN bun install --frozen-lockfile
 
 # Build the static site
 COPY . .
