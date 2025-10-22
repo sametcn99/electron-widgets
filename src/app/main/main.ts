@@ -2,6 +2,7 @@
  * Entry point of the application.
  * Registers the app and initializes it.
  */
+/** biome-ignore-all lint/style/noCommonJs: . */
 import { app } from 'electron'
 import { config } from '../../lib/config'
 import {

@@ -17,13 +17,14 @@
 - `npm run make` — create installers/bundles for the host OS.
 - `npm run package` — package app without creating installers.
 - `npm run publish` — publish via GitHub (used by CI on tags `v*`).
-- `npm run lint` — ESLint for TS/JS.
+- `npm run lint` — biome linting.
+- `npm run format` — biome code formatting.
 
 CI: Push/PR runs `.github/workflows/build.yml`. Tags `v*` trigger publish.
 
 ## Coding Style & Naming Conventions
 
-- Language: TypeScript (strict). Lint with ESLint (`@typescript-eslint`, import rules). Fix issues before PR.
+- Language: TypeScript (strict). Lint with biome. Fix issues before PR.
 - Format with Prettier 3 (honor repo config). Keep Vue components PascalCase (e.g., `Navbar.vue`), variables/function names camelCase, constants UPPER_SNAKE_CASE.
 - Place shared types in `src/types/`. Keep renderer‑safe code out of `main`.
 

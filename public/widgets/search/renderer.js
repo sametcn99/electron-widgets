@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable no-undef */
+/** biome-ignore-all lint/correctness/noInnerDeclarations: .*/
 
 // Add event listener to execute code when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {

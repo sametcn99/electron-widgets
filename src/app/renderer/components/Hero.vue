@@ -31,6 +31,7 @@
 </template>
 
 <script setup lang="ts">
+/** biome-ignore-all lint/correctness/noUnusedVariables: .*/
 import {
   SquaresPlusIcon,
   LockClosedIcon,

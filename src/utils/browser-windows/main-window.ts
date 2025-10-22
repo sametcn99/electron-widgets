@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 /** biome-ignore-all lint/correctness/noUndeclaredVariables: . */
 import { BrowserWindow } from 'electron'
 import path from 'node:path'
