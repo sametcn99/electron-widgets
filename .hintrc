@@ -8,7 +8,8 @@
       {
         "ignore": [
           "@layer",
-          "user-select"
+          "user-select",
+          "-webkit-app-region"
         ]
       }
     ],

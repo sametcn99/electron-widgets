@@ -92,6 +92,34 @@ export async function createSingleWindowForWidgets(key: string) {
         // Hide the traffic light buttons (minimize, maximize, close)
         is.macOS() && win.setWindowButtonVisibility(false)
 
+        if (widget.locked) {
+          let isEnforcingPosition = false
+          const enforceWidgetPosition = () => {
+            if (isEnforcingPosition || win.isDestroyed()) {
+              return
+            }
+            isEnforcingPosition = true
+            win.setPosition(widget.x, widget.y)
+            isEnforcingPosition = false
+          }
+
+          win.setMovable(false)
+          win.on('will-move', (event) => {
+            event.preventDefault()
+            enforceWidgetPosition()
+          })
+          win.on('move', enforceWidgetPosition)
+          win.webContents.on('did-finish-load', () => {
+            win.webContents.insertCSS(
+              `
+                * {
+                  -webkit-app-region: no-drag !important;
+                }
+              `.trim(),
+            )
+          })
+        }
+
         // Load the widget's HTML file into the window
         const indexPath = path.join(config.widgetsDir, key, 'index.html')
         await win.loadFile(indexPath)
