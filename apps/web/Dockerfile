@@ -20,7 +20,7 @@ COPY --from=builder /app/.vitepress/dist ./.vitepress/dist
 COPY --from=builder /app/package.json ./
 
 # Install only production dependencies
-RUN bun install --frozen-lockfile --production
+RUN bun install --frozen-lockfile
 
 # Use non-root user for security
 USER bun
