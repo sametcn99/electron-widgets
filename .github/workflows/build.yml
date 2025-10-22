@@ -10,8 +10,10 @@ jobs:
         with:
           node-version: 20
       - name: install dependencies
+        working-directory: apps/desktop
         run: npm i
       - name: build
+        working-directory: apps/desktop
         run: npm run make
 
   build_on_mac:
@@ -22,8 +24,10 @@ jobs:
         with:
           node-version: 20
       - name: install dependencies
+        working-directory: apps/desktop
         run: npm i
       - name: build
+        working-directory: apps/desktop
         run: npm run make
 
   build_on_win:
@@ -34,6 +38,8 @@ jobs:
         with:
           node-version: 20
       - name: install dependencies
+        working-directory: apps/desktop
         run: npm i
       - name: build
+        working-directory: apps/desktop
         run: npm run make

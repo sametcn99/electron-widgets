@@ -1,0 +1,15 @@
+{
+  "name": "web",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "docs:dev": "vitepress dev",
+    "docs:build": "vitepress build",
+    "docs:preview": "vitepress preview"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "vitepress": "^2.0.0-alpha.12"
+  }
+}

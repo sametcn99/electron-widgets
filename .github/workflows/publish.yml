@@ -13,8 +13,10 @@ jobs:
         with:
           node-version: 20
       - name: install dependencies
+        working-directory: apps/desktop
         run: npm i
       - name: publish
+        working-directory: apps/desktop
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run publish
@@ -27,8 +29,10 @@ jobs:
         with:
           node-version: 20
       - name: install dependencies
+        working-directory: apps/desktop
         run: npm install
       - name: publish
+        working-directory: apps/desktop
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run publish
@@ -41,8 +45,10 @@ jobs:
         with:
           node-version: 20
       - name: install dependencies
+        working-directory: apps/desktop
         run: npm i
       - name: publish
+        working-directory: apps/desktop
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run publish

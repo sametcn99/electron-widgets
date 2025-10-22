@@ -19,31 +19,31 @@ This project is a desktop application developed using Electron.js and Node.js. T
 ## Widget Screenshots
 <details>
   <summary>Clock</summary>
-  <img src="/public/widgets/clock/screenshot.png"></img>
+  <img src="/apps/desktop/public/widgets/clock/screenshot.png"></img>
 </details>
 <details>
   <summary>dailyWeather</summary>
-  <img src="/public/widgets/daily%20weather/screenshot.png"></img>
+  <img src="/apps/desktop/public/widgets/daily%20weather/screenshot.png"></img>
 </details>
 <details>
   <summary>r/programming</summary>
-  <img src="/public/widgets/r-programming/screenshot.png"></img>
+  <img src="/apps/desktop/public/widgets/r-programming/screenshot.png"></img>
 </details>
 <details>
   <summary>diskusage</summary>
-  <img src="/public/widgets/disk%20usage/screenshot.png"></img>
+  <img src="/apps/desktop/public/widgets/disk%20usage/screenshot.png"></img>
 </details>
 <details>
   <summary>hacker-news</summary>
-  <img src="/public/widgets/hacker%20news/screenshot.png"></img>
+  <img src="/apps/desktop/public/widgets/hacker%20news/screenshot.png"></img>
 </details>
 <details>
   <summary>transparentClock</summary>
-  <img src="/public/widgets/transparent%20clock/screenshot.png"></img>
+  <img src="/apps/desktop/public/widgets/transparent%20clock/screenshot.png"></img>
 </details>
 <details>
   <summary>search</summary>
-  <img src="/public/widgets/search/screenshot.png"></img>
+  <img src="/apps/desktop/public/widgets/search/screenshot.png"></img>
 </details>
 
 ## Features
