@@ -27,7 +27,8 @@ body {
 }
 
 .container {
-  transition: background-color var(--transition-duration),
+  transition:
+    background-color var(--transition-duration),
     border-color var(--transition-duration);
 }
 

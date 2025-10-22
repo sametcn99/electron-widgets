@@ -17,40 +17,40 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
-import { Bars4Icon } from '@heroicons/vue/24/outline';
+import { ref } from 'vue'
+import { Bars4Icon } from '@heroicons/vue/24/outline'
 
 export default {
-    components: {
-        Bars4Icon
+  components: {
+    Bars4Icon,
+  },
+  methods: {
+    removeWidget() {
+      window.confirm('Are you sure you want to remove this widget?') &&
+        window.electronAPI.removeWidget(this.title || '')
     },
-    methods: {
-        removeWidget() {
-            window.confirm('Are you sure you want to remove this widget?') &&
-                window.electronAPI.removeWidget(this.title || '');
-        },
-        setAlwaysOnTop() {
-            window.electronAPI.setAlwaysOnTop(this.title || '', !this.alwaysOnTop);
-        },
-        show() {
-            window.electronAPI.showWidget(this.title || '');
-        },
-        duplicateWidget() {
-            window.electronAPI.duplicateWidget(this.title || '');
-        }
+    setAlwaysOnTop() {
+      window.electronAPI.setAlwaysOnTop(this.title || '', !this.alwaysOnTop)
     },
-    props: {
-        title: String,
-        alwaysOnTop: Boolean,
-        visible: Boolean
+    show() {
+      window.electronAPI.showWidget(this.title || '')
     },
-    setup() {
-        const isOpen = ref(false);
-        function close() {
-            isOpen.value = false;
-        }
-
-        return { isOpen, close };
+    duplicateWidget() {
+      window.electronAPI.duplicateWidget(this.title || '')
+    },
+  },
+  props: {
+    title: String,
+    alwaysOnTop: Boolean,
+    visible: Boolean,
+  },
+  setup() {
+    const isOpen = ref(false)
+    function close() {
+      isOpen.value = false
     }
-};
+
+    return { isOpen, close }
+  },
+}
 </script>

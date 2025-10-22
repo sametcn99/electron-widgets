@@ -1,24 +1,24 @@
-import { BrowserWindow, dialog } from "electron";
-import { config } from "../../lib/config";
+import { BrowserWindow, dialog } from 'electron'
+import { config } from '../../lib/config'
 import {
   createSingleWindowForWidgets,
   createWindowsForWidgets,
-} from "./widget-windows";
-import { createMainWindow } from "./main-window";
+} from './widget-windows'
+import { createMainWindow } from './main-window'
 
 class WindowManager {
   getMainWindow(): Electron.BrowserWindow | undefined {
     try {
-      let mainWindow: Electron.BrowserWindow | undefined;
+      let mainWindow: Electron.BrowserWindow | undefined
       BrowserWindow.getAllWindows().forEach((win) => {
         if (win.title === config.applicationName) {
-          mainWindow = win;
+          mainWindow = win
         }
-      });
-      return mainWindow;
+      })
+      return mainWindow
     } catch (error) {
-      console.error("Error getting main window:", error);
-      dialog.showErrorBox("Error getting main window", `${error}`);
+      console.error('Error getting main window:', error)
+      dialog.showErrorBox('Error getting main window', `${error}`)
     }
   }
 
@@ -26,12 +26,12 @@ class WindowManager {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
         if (win.title !== config.applicationName) {
-          win.minimize();
+          win.minimize()
         }
-      });
+      })
     } catch (error) {
-      console.error("Error minimizing windows:", error);
-      dialog.showErrorBox("Error minimizing windows", `${error}`);
+      console.error('Error minimizing windows:', error)
+      dialog.showErrorBox('Error minimizing windows', `${error}`)
     }
   }
 
@@ -39,117 +39,117 @@ class WindowManager {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
         if (win.title !== config.applicationName) {
-          win.close();
+          win.close()
         }
-      });
+      })
     } catch (error) {
-      console.error("Error closing windows:", error);
-      dialog.showErrorBox("Error closing windows", `${error}`);
+      console.error('Error closing windows:', error)
+      dialog.showErrorBox('Error closing windows', `${error}`)
     }
   }
 
   reloadAllWidgets(): void {
     this.getAllWindowsExceptMain().forEach((win) => {
-      win.reload();
-    });
+      win.reload()
+    })
   }
 
   reloadMainWindow(): void {
-    this.getMainWindow()?.reload();
+    this.getMainWindow()?.reload()
   }
 
   reCreateMainWindow(): void {
-    this.getMainWindow()?.close();
-    createMainWindow();
+    this.getMainWindow()?.close()
+    createMainWindow()
   }
 
   reCreateWidget(widgetKey: string): void {
     this.getAllWindowsExceptMain().forEach((win) => {
       if (win.title === widgetKey) {
-        win.close();
-        createSingleWindowForWidgets(widgetKey);
+        win.close()
+        createSingleWindowForWidgets(widgetKey)
       }
-    });
+    })
   }
 
   reCreateAllWidgets(): void {
     this.getAllWindowsExceptMain().forEach((win) => {
-      win.close();
-    });
-    createWindowsForWidgets();
+      win.close()
+    })
+    createWindowsForWidgets()
   }
 
   reloadWidget(widgetKey: string): void {
     this.getAllWindowsExceptMain().forEach((win) => {
       if (win.title === widgetKey) {
-        win.reload();
+        win.reload()
       }
-    });
+    })
   }
 
   static closeAllWindows(): void {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
-        win.close();
-      });
+        win.close()
+      })
     } catch (error) {
-      console.error("Error closing windows:", error);
-      dialog.showErrorBox("Error closing windows", `${error}`);
+      console.error('Error closing windows:', error)
+      dialog.showErrorBox('Error closing windows', `${error}`)
     }
   }
 
   minimizeAllWindows(): void {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
-        win.minimize();
-      });
+        win.minimize()
+      })
     } catch (error) {
-      console.error("Error minimizing windows:", error);
-      dialog.showErrorBox("Error minimizing windows", `${error}`);
+      console.error('Error minimizing windows:', error)
+      dialog.showErrorBox('Error minimizing windows', `${error}`)
     }
   }
 
   restoreAllWindows(): void {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
-        win.restore();
-      });
+        win.restore()
+      })
     } catch (error) {
-      console.error("Error restoring windows:", error);
-      dialog.showErrorBox("Error restoring windows", `${error}`);
+      console.error('Error restoring windows:', error)
+      dialog.showErrorBox('Error restoring windows', `${error}`)
     }
   }
 
   toggleDevToolsAllWindows(): void {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
-        win.webContents.toggleDevTools();
-      });
+        win.webContents.toggleDevTools()
+      })
     } catch (error) {
-      console.error("Error toggling DevTools:", error);
-      dialog.showErrorBox("Error toggling DevTools", `${error}`);
+      console.error('Error toggling DevTools:', error)
+      dialog.showErrorBox('Error toggling DevTools', `${error}`)
     }
   }
 
   reloadAllWindows(): void {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
-        win.reload();
-      });
+        win.reload()
+      })
     } catch (error) {
-      console.error("Error reloading windows:", error);
-      dialog.showErrorBox("Error reloading windows", `${error}`);
+      console.error('Error reloading windows:', error)
+      dialog.showErrorBox('Error reloading windows', `${error}`)
     }
   }
 
   showAllWindows(): void {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
-        win.show();
-      });
+        win.show()
+      })
     } catch (error) {
-      console.error("Error showing windows:", error);
-      dialog.showErrorBox("Error showing windows", `${error}`);
+      console.error('Error showing windows:', error)
+      dialog.showErrorBox('Error showing windows', `${error}`)
     }
   }
 
@@ -157,76 +157,76 @@ class WindowManager {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
         if (win.title !== config.applicationName) {
-          win.hide();
+          win.hide()
         }
-      });
+      })
     } catch (error) {
-      console.error("Error hiding windows:", error);
-      dialog.showErrorBox("Error hiding windows", `${error}`);
+      console.error('Error hiding windows:', error)
+      dialog.showErrorBox('Error hiding windows', `${error}`)
     }
   }
 
   setAlwaysOnTopAllWindowsExceptMain(alwaysOnTop: boolean): void {
     try {
       BrowserWindow.getAllWindows().forEach((win) => {
-        if (win.title!== config.applicationName) {
-          win.setAlwaysOnTop(alwaysOnTop);
+        if (win.title !== config.applicationName) {
+          win.setAlwaysOnTop(alwaysOnTop)
         }
-      });
+      })
     } catch (error) {
-      console.error("Error setting always on top:", error);
-      dialog.showErrorBox("Error setting always on top", `${error}`);
+      console.error('Error setting always on top:', error)
+      dialog.showErrorBox('Error setting always on top', `${error}`)
     }
   }
 
   getAllWindows(): BrowserWindow[] {
     try {
-      return BrowserWindow.getAllWindows();
+      return BrowserWindow.getAllWindows()
     } catch (error) {
-      console.error("Error getting windows:", error);
-      dialog.showErrorBox("Error getting windows", `${error}`);
-      return [];
+      console.error('Error getting windows:', error)
+      dialog.showErrorBox('Error getting windows', `${error}`)
+      return []
     }
   }
 
   getAllWindowsExceptMain(): BrowserWindow[] {
     try {
-      const windows: BrowserWindow[] = [];
+      const windows: BrowserWindow[] = []
       BrowserWindow.getAllWindows().forEach((win) => {
         if (win.webContents.getTitle() !== config.applicationName) {
-          windows.push(win);
+          windows.push(win)
         }
-      });
-      return windows;
+      })
+      return windows
     } catch (error) {
-      console.error("Error getting windows:", error);
-      dialog.showErrorBox("Error getting windows", `${error}`);
-      return [];
+      console.error('Error getting windows:', error)
+      dialog.showErrorBox('Error getting windows', `${error}`)
+      return []
     }
   }
 
   getWindowExceptMain(title: string): BrowserWindow | null {
     try {
-      let foundWindow: BrowserWindow | null = null;
+      let foundWindow: BrowserWindow | null = null
       this.getAllWindowsExceptMain().forEach((win) => {
-        if (win.title=== title) {
-          foundWindow = win;
+        if (win.title === title) {
+          foundWindow = win
         }
-      });
-      return foundWindow;
+      })
+      return foundWindow
     } catch (error) {
-      console.error("Error getting window:", error);
-      dialog.showErrorBox("Error getting window", `${error}`);
-      return null;
+      console.error('Error getting window:', error)
+      dialog.showErrorBox('Error getting window', `${error}`)
+      return null
     }
   }
 
   showWidget(widgetKey: string): void {
     this.getAllWindowsExceptMain().forEach((win) => {
       if (win.webContents.getTitle() === widgetKey) {
-        win.show();
+        win.show()
       }
-    });
+    })
   }
 }
-export const windowManager = new WindowManager();
+export const windowManager = new WindowManager()

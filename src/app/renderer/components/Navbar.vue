@@ -17,33 +17,34 @@
 </template>
 
 <script lang="ts">
-import { MinusIcon, XMarkIcon } from '@heroicons/vue/24/outline';
-import SettingsButton from './SettingsButton.vue';
+import { MinusIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import SettingsButton from './SettingsButton.vue'
 
 export default {
-    components: {
-        MinusIcon,
-        XMarkIcon,
-        SettingsButton
-    },
-    emits: ["search"], // Define the "search" event here
-    setup(_props, { emit }) { // Add the { emit } argument here
-        const search = (event: Event) => {
-            const searchInput = event.target as HTMLInputElement;
-            const searchValue = searchInput.value;
-            emit("search", searchValue); // Use emit here
-        };
-        const minimize = () => {
-            window.electronAPI.minimizeWindow();
-        };
-        const close = () => {
-            window.electronAPI.closeWindow();
-        };
-        return {
-            search,
-            minimize,
-            close,
-        };
+  components: {
+    MinusIcon,
+    XMarkIcon,
+    SettingsButton,
+  },
+  emits: ['search'], // Define the "search" event here
+  setup(_props, { emit }) {
+    // Add the { emit } argument here
+    const search = (event: Event) => {
+      const searchInput = event.target as HTMLInputElement
+      const searchValue = searchInput.value
+      emit('search', searchValue) // Use emit here
     }
-};
+    const minimize = () => {
+      window.electronAPI.minimizeWindow()
+    }
+    const close = () => {
+      window.electronAPI.closeWindow()
+    }
+    return {
+      search,
+      minimize,
+      close,
+    }
+  },
+}
 </script>

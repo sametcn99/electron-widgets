@@ -1,5 +1,5 @@
-import { dialog } from "electron";
-import path from "node:path";
+import { dialog } from 'electron'
+import path from 'node:path'
 import {
   copyFileSync,
   existsSync,
@@ -7,7 +7,7 @@ import {
   readdirSync,
   readFileSync,
   writeFileSync,
-} from "node:fs";
+} from 'node:fs'
 
 /**
  * Reads the widgets.json file and returns its contents as a string.
@@ -17,12 +17,12 @@ import {
  */
 export function getWidgetsJson(widgetsJsonPath: string): WidgetsConfig {
   try {
-    const widgetsDataRaw = readFileSync(widgetsJsonPath, "utf-8");
-    const widgetsData: WidgetsConfig = JSON.parse(widgetsDataRaw);
-    return widgetsData;
+    const widgetsDataRaw = readFileSync(widgetsJsonPath, 'utf-8')
+    const widgetsData: WidgetsConfig = JSON.parse(widgetsDataRaw)
+    return widgetsData
   } catch (error) {
-    dialog.showErrorBox("Failed to read data", `${error}`);
-    throw error;
+    dialog.showErrorBox('Failed to read data', `${error}`)
+    throw error
   }
 }
 
@@ -36,9 +36,9 @@ export function setWidgetsJson(
   widgetsJsonPath: string,
 ) {
   try {
-    writeFileSync(widgetsJsonPath, JSON.stringify(jsonData, null, 2));
+    writeFileSync(widgetsJsonPath, JSON.stringify(jsonData, null, 2))
   } catch (err) {
-    dialog.showErrorBox("Error writing to data", `${err}`);
+    dialog.showErrorBox('Error writing to data', `${err}`)
   }
 }
 
@@ -55,25 +55,25 @@ export function copyWidgetsDirIfNeeded(
 ) {
   try {
     if (!existsSync(widgetsDir)) {
-      console.log("widgets directory is not found. Copying...");
+      console.log('widgets directory is not found. Copying...')
 
       // Create the destination directory if it doesn't exist
-      mkdirSync(widgetsDir, { recursive: true });
+      mkdirSync(widgetsDir, { recursive: true })
       // Read the contents of the source directory
-      const entries = readdirSync(sourceWidgetsDir, { withFileTypes: true });
+      const entries = readdirSync(sourceWidgetsDir, { withFileTypes: true })
 
       // Iterate over the contents of the source directory
       for (const entry of entries) {
-        const srcPath = path.join(sourceWidgetsDir, entry.name);
-        const destPath = path.join(widgetsDir, entry.name);
+        const srcPath = path.join(sourceWidgetsDir, entry.name)
+        const destPath = path.join(widgetsDir, entry.name)
 
         // Recursively copy directories, or copy files directly
         entry.isDirectory()
           ? copyWidgetsDirIfNeeded(srcPath, destPath)
-          : copyFileSync(srcPath, destPath);
+          : copyFileSync(srcPath, destPath)
       }
     }
   } catch (error) {
-    dialog.showErrorBox("Failed to copy widgets directory", `${error}`);
+    dialog.showErrorBox('Failed to copy widgets directory', `${error}`)
   }
 }

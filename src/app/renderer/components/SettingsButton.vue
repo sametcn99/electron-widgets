@@ -37,64 +37,68 @@
 </template>
 
 <script lang="ts">
-import { onMounted, ref } from 'vue';
-import { Bars4Icon, HeartIcon } from '@heroicons/vue/24/outline';
-
+import { onMounted, ref } from 'vue'
+import { Bars4Icon, HeartIcon } from '@heroicons/vue/24/outline'
 
 export default {
-    components: {
-        Bars4Icon,
-        HeartIcon
+  components: {
+    Bars4Icon,
+    HeartIcon,
+  },
+  methods: {
+    openAbout() {
+      window.electronAPI.openExternal(
+        'https://github.com/sametcn99/electron-widgets',
+      )
     },
-    methods: {
-        openAbout() {
-            window.electronAPI.openExternal("https://github.com/sametcn99/electron-widgets")
-        },
-        revealWidgetsFolder() {
-            window.electronAPI.revealWidgetsFolder()
-        },
-        showAllWidgets() {
-            window.electronAPI.showAllWidgets()
-        },
-        lockWidgets() {
-            window.electronAPI.setLockAllWidgets(true)
-        },
-        unlockWidgets() {
-            window.electronAPI.setLockAllWidgets(false)
-        },
-        makeVisibleAllWidgets() {
-            window.electronAPI.setVisibilityAllWidgets(true)
-        },
-        makeInvisibleAllWidgets() {
-            window.electronAPI.setVisibilityAllWidgets(false)
-        },
-        sortWidgets() {
-            window.electronAPI.sortWidgets()
-        },
-        openSponsor() {
-            window.electronAPI.showNotification("Thank you for considering to sponsor me! 🙏",
-                "I'm working on this project in my free time. Your support will help me to continue \
-                developing this project and adding new features. Thank you! ❤️");
-            window.electronAPI.openExternal("https://github.com/sponsors/sametcn99")
-        },
-        openWiki() {
-            window.electronAPI.openExternal("https://github.com/sametcn99/electron-widgets/wiki")
-        }
+    revealWidgetsFolder() {
+      window.electronAPI.revealWidgetsFolder()
     },
-    setup() {
-        const isOpen = ref(false);
+    showAllWidgets() {
+      window.electronAPI.showAllWidgets()
+    },
+    lockWidgets() {
+      window.electronAPI.setLockAllWidgets(true)
+    },
+    unlockWidgets() {
+      window.electronAPI.setLockAllWidgets(false)
+    },
+    makeVisibleAllWidgets() {
+      window.electronAPI.setVisibilityAllWidgets(true)
+    },
+    makeInvisibleAllWidgets() {
+      window.electronAPI.setVisibilityAllWidgets(false)
+    },
+    sortWidgets() {
+      window.electronAPI.sortWidgets()
+    },
+    openSponsor() {
+      window.electronAPI.showNotification(
+        'Thank you for considering to sponsor me! 🙏',
+        "I'm working on this project in my free time. Your support will help me to continue \
+                developing this project and adding new features. Thank you! ❤️",
+      )
+      window.electronAPI.openExternal('https://github.com/sponsors/sametcn99')
+    },
+    openWiki() {
+      window.electronAPI.openExternal(
+        'https://github.com/sametcn99/electron-widgets/wiki',
+      )
+    },
+  },
+  setup() {
+    const isOpen = ref(false)
 
-        function close() {
-            isOpen.value = false;
-        }
-        const appVersion = ref('');
-
-        onMounted(async () => {
-            appVersion.value = await window.electronAPI.getAppVersion();
-        });
-
-
-        return { isOpen, close, appVersion };
+    function close() {
+      isOpen.value = false
     }
-};
+    const appVersion = ref('')
+
+    onMounted(async () => {
+      appVersion.value = await window.electronAPI.getAppVersion()
+    })
+
+    return { isOpen, close, appVersion }
+  },
+}
 </script>

@@ -31,58 +31,62 @@
 </template>
 
 <script setup lang="ts">
-import { SquaresPlusIcon, LockClosedIcon, LockOpenIcon } from '@heroicons/vue/24/outline';
-import DropdownButton from './DropdownButton.vue';
+import {
+  SquaresPlusIcon,
+  LockClosedIcon,
+  LockOpenIcon,
+} from '@heroicons/vue/24/outline'
+import DropdownButton from './DropdownButton.vue'
 
 // Define the props
 defineProps({
-    widgets: Object as () => WidgetsConfig | null
-});
+  widgets: Object as () => WidgetsConfig | null,
+})
 
 async function toggleLocked(widget: WidgetConfig, widgetKey: string) {
-    window.electronAPI.lockWidget(widgetKey);
-    if (widget) {
-        widget.locked = !widget.locked;
-    }
+  window.electronAPI.lockWidget(widgetKey)
+  if (widget) {
+    widget.locked = !widget.locked
+  }
 }
 
 async function toggleWidgetVisibility(widgetId: string, visible: boolean) {
-    try {
-        // Invoke IPC to read the current widgets configuration
-        const widgetsData: WidgetsConfig = await window.electronAPI.readWidgetsJson();
-        // Check if the widget exists in the configuration
-        if (widgetsData[widgetId as keyof WidgetsConfig]) {
-            // Update the visibility of the widget
-            widgetsData[widgetId as keyof WidgetsConfig].visible = visible;
-        } else {
-            // Log an error if the widget is not found
-            console.error("Widget not found: ", widgetId);
-            return;
-        }
-        const data = widgetsData;
-        // Write the updated widgets configuration back
-        window.electronAPI.writeWidgetJson(data);
-        // Create or close the widget window based on visibility
-        if (visible === true) {
-            window.electronAPI.createWidgetWindow(widgetId);
-        } else if (visible === false) {
-            window.electronAPI.closeWidgetWindow(widgetId);
-        }
-    } catch (error) {
-        // Log any errors encountered during the process
-        console.error("Failed to toggle widget visibility:", error);
+  try {
+    // Invoke IPC to read the current widgets configuration
+    const widgetsData: WidgetsConfig =
+      await window.electronAPI.readWidgetsJson()
+    // Check if the widget exists in the configuration
+    if (widgetsData[widgetId as keyof WidgetsConfig]) {
+      // Update the visibility of the widget
+      widgetsData[widgetId as keyof WidgetsConfig].visible = visible
+    } else {
+      // Log an error if the widget is not found
+      console.error('Widget not found: ', widgetId)
+      return
     }
+    const data = widgetsData
+    // Write the updated widgets configuration back
+    window.electronAPI.writeWidgetJson(data)
+    // Create or close the widget window based on visibility
+    if (visible === true) {
+      window.electronAPI.createWidgetWindow(widgetId)
+    } else if (visible === false) {
+      window.electronAPI.closeWidgetWindow(widgetId)
+    }
+  } catch (error) {
+    // Log any errors encountered during the process
+    console.error('Failed to toggle widget visibility:', error)
+  }
 }
 
-
 function toggleVisibility(widget: WidgetConfig) {
-    widget.visible = !widget.visible;
-    toggleWidgetVisibility(widget.title, widget.visible);
+  widget.visible = !widget.visible
+  toggleWidgetVisibility(widget.title, widget.visible)
 }
 
 // Function to add a new widget
 const addWidget = () => {
-    // Calls the Electron API to add a widget
-    window.electronAPI.addWidget();
+  // Calls the Electron API to add a widget
+  window.electronAPI.addWidget()
 }
 </script>
