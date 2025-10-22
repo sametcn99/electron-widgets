@@ -5,7 +5,7 @@
             class="flex flex-col flex-wrap items-start justify-between p-2 bg-opacity-50 shadow-xl h-28 min-w-24 hover:bg-zinc-700 bg-zinc-800 rounded-2xl shadow-zinc-900"
             id="widgetsData">
             <div class="flex flex-row justify-between w-full">
-                <h1 class="font-bold break-words">{{ widget.title }} </h1>
+                <h1 class="font-bold wrap-break-word">{{ widget.title }} </h1>
                 <DropdownButton :title="widget.title" :alwaysOnTop="widget.alwaysOnTop" :visible="widget.visible" />
             </div>
             <div class="flex flex-row justify-between w-full gap-2">
