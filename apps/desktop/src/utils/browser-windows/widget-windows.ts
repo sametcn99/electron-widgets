@@ -126,6 +126,40 @@ export async function createSingleWindowForWidgets(key: string) {
         if (win.title !== key) {
           win.setTitle(key)
         }
+
+        if (!widget.locked) {
+          let moveTimeout: NodeJS.Timeout | null = null
+          const persistWidgetPosition = (x?: number, y?: number) => {
+            if (win.isDestroyed()) {
+              return
+            }
+            const targetX = x ?? win.getBounds().x
+            const targetY = y ?? win.getBounds().y
+            const widgets = getWidgetsJson(config.widgetsJsonPath)
+            const currentWidget = widgets[key]
+            if (!currentWidget || currentWidget.locked === true) {
+              return
+            }
+            currentWidget.x = targetX
+            currentWidget.y = targetY
+            setWidgetsJson(widgets, config.widgetsJsonPath)
+          }
+
+          const schedulePersist = (bounds?: Electron.Rectangle) => {
+            if (moveTimeout) {
+              clearTimeout(moveTimeout)
+            }
+            moveTimeout = setTimeout(() => {
+              persistWidgetPosition(bounds?.x, bounds?.y)
+            }, 120)
+          }
+
+          win.on('move', () => schedulePersist())
+          // Windows emits will-move with the future bounds; macOS fires moved after finish.
+          win.on('will-move', (_event, newBounds) => schedulePersist(newBounds))
+          win.on('moved', () => persistWidgetPosition())
+        }
+
         openDevToolsWithShortcut(win)
       } catch (err) {
         dialog.showErrorBox(`Error creating window for ${key}`, `${err}`)

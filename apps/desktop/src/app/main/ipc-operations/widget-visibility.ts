@@ -9,6 +9,14 @@ import {
 import { config } from '../../../lib/config'
 
 /**
+ * Handles getting the window title for the current window.
+ */
+ipcMain.handle('get-window-title', (event) => {
+  const win = BrowserWindow.fromWebContents(event.sender)
+  return win?.getTitle() || null
+})
+
+/**
  * Handles the reloading of a widget window.
  * @param event - The event object.
  * @param key - The key of the widget.
@@ -29,50 +37,77 @@ ipcMain.handle(IpcChannels.RECREATE_WIDGET, (event, widgetKey) => {
 /**
  * Handles the resizing of a widget window.
  */
-ipcMain.handle(IpcChannels.RESIZE_WIDGET_WINDOW, () => {
-  const win = BrowserWindow.getFocusedWindow()
-  if (win?.title !== config.applicationName) {
-    const title: string = BrowserWindow.getFocusedWindow()?.getTitle() as string
-    const widgets: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath)
-    if (
-      win &&
-      widgets[title] &&
-      widgets[title].title !== config.applicationName &&
-      widgets[title].locked === false
-    ) {
-      widgets[title].width = win.getSize()[0]
-      widgets[title].height = win.getSize()[1]
-      setWidgetsJson(widgets, config.widgetsJsonPath)
-    } else {
-      console.error(
-        `Widget with title "${title}" not found in widgets config.`,
-        dialog.showErrorBox(
-          'Widget not found',
-          `Widget with title "${title}" not found in widgets config.`,
-        ),
-      )
-    }
+ipcMain.handle(IpcChannels.RESIZE_WIDGET_WINDOW, (event, widgetKey: string) => {
+  if (!widgetKey) {
+    console.warn('No widget key provided during resize operation')
   }
+
+  const win =
+    BrowserWindow.fromWebContents(event.sender) ||
+    BrowserWindow.getAllWindows().find((w) => w.getTitle() === widgetKey)
+
+  if (!win) {
+    console.warn(`Window not found for widget: ${widgetKey}`)
+    return
+  }
+
+  const resolvedKey = widgetKey || win.getTitle()
+  if (win.getTitle() === config.applicationName) {
+    return
+  }
+
+  const widgets: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath)
+  const widget = widgets[resolvedKey]
+  if (!widget) {
+    console.error(`Widget "${resolvedKey}" not found in widgets config.`)
+    return
+  }
+
+  if (widget.locked === true) {
+    return
+  }
+
+  const [width, height] = win.getSize()
+  widget.width = width
+  widget.height = height
+  setWidgetsJson(widgets, config.widgetsJsonPath)
 })
 
 /**
  * Handles the dragging of a widget window.
  */
-ipcMain.handle(IpcChannels.DRAG_WIDGET_WINDOW, () => {
-  const widgets: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath)
-  const win = BrowserWindow.getFocusedWindow()
-  const title: string = win?.getTitle() as string
-  if (
-    win &&
-    widgets[title] &&
-    win?.isFocused() &&
-    widgets[title].title !== config.applicationName &&
-    widgets[title].locked === false
-  ) {
-    widgets[title].x = win.getPosition()[0]
-    widgets[title].y = win.getPosition()[1]
-    setWidgetsJson(widgets, config.widgetsJsonPath)
+ipcMain.handle(IpcChannels.DRAG_WIDGET_WINDOW, (event, widgetKey: string) => {
+  if (!widgetKey) {
+    console.warn('No widget key provided during drag operation')
   }
+
+  const win =
+    BrowserWindow.fromWebContents(event.sender) ||
+    BrowserWindow.getAllWindows().find((w) => w.getTitle() === widgetKey)
+
+  if (!win) {
+    return
+  }
+
+  const resolvedKey = widgetKey || win.getTitle()
+  if (win.getTitle() === config.applicationName) {
+    return
+  }
+
+  const widgets: WidgetsConfig = getWidgetsJson(config.widgetsJsonPath)
+  const widget = widgets[resolvedKey]
+  if (!widget) {
+    return
+  }
+
+  if (widget.locked === true) {
+    return
+  }
+
+  const [x, y] = win.getPosition()
+  widget.x = x
+  widget.y = y
+  setWidgetsJson(widgets, config.widgetsJsonPath)
 })
 
 /**

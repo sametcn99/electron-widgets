@@ -44,6 +44,13 @@ main {
   gap: 18px;
   overflow-y: auto;
   -webkit-app-region: drag;
+  background:
+    linear-gradient(180deg, rgba(2, 6, 23, 0.76) 0%, rgba(2, 6, 23, 0.6) 100%),
+    radial-gradient(
+      460px 300px at 0% 0%,
+      rgba(249, 115, 22, 0.12),
+      transparent 60%
+    );
 }
 
 #header {
@@ -150,6 +157,13 @@ main {
   box-shadow:
     0 0 0 1px rgba(15, 23, 42, 0.6) inset,
     0 24px 60px -45px rgba(248, 113, 113, 0.82);
+  background:
+    linear-gradient(180deg, rgba(2, 6, 23, 0.76) 0%, rgba(2, 6, 23, 0.6) 100%),
+    radial-gradient(
+      460px 300px at 0% 0%,
+      rgba(249, 115, 22, 0.12),
+      transparent 60%
+    );
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
