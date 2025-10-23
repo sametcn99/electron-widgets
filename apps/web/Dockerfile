@@ -29,6 +29,6 @@ USER bun
 ENV NODE_ENV=production
 
 # Use 0.0.0.0 to bind to all interfaces (required for Docker)
-EXPOSE 4173
+EXPOSE 3000
 
-CMD ["bun", "run", "docs:preview", "--host", "0.0.0.0"]
+CMD ["bun", "run", "docs:preview", "--host", "0.0.0.0", "--port", "3000"]
