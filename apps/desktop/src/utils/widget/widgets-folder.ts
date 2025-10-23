@@ -8,6 +8,7 @@ import {
   readFileSync,
   writeFileSync,
 } from 'node:fs'
+import { config } from '../../lib/config'
 
 /**
  * Reads the widgets.json file and returns its contents as a string.
@@ -20,7 +21,32 @@ export function getWidgetsJson(widgetsJsonPath: string): WidgetsConfig {
     const widgetsDataRaw = readFileSync(widgetsJsonPath, 'utf-8')
     const widgetsData: WidgetsConfig = JSON.parse(widgetsDataRaw)
     return widgetsData
-  } catch (error) {
+  } catch (error: any) {
+    // If the widgets.json file is missing, initialize it from the public template
+    // or create an empty config so the app can start gracefully.
+    if (error && error.code === 'ENOENT') {
+      try {
+        const targetDir = path.dirname(widgetsJsonPath)
+        if (!existsSync(targetDir)) {
+          mkdirSync(targetDir, { recursive: true })
+        }
+
+        const defaultJsonPath = path.join(
+          config.sourceWidgetsDir,
+          'widgets.json',
+        )
+        let initial: WidgetsConfig = {}
+        if (existsSync(defaultJsonPath)) {
+          const raw = readFileSync(defaultJsonPath, 'utf-8')
+          initial = JSON.parse(raw)
+        }
+        writeFileSync(widgetsJsonPath, JSON.stringify(initial, null, 2))
+        return initial
+      } catch (initErr) {
+        dialog.showErrorBox('Failed to initialize widgets.json', `${initErr}`)
+        throw initErr
+      }
+    }
     dialog.showErrorBox('Failed to read data', `${error}`)
     throw error
   }
@@ -54,23 +80,29 @@ export function copyWidgetsDirIfNeeded(
   widgetsDir: string,
 ) {
   try {
+    // Ensure destination directory exists
     if (!existsSync(widgetsDir)) {
-      console.log('widgets directory is not found. Copying...')
-
-      // Create the destination directory if it doesn't exist
       mkdirSync(widgetsDir, { recursive: true })
-      // Read the contents of the source directory
-      const entries = readdirSync(sourceWidgetsDir, { withFileTypes: true })
+    }
 
-      // Iterate over the contents of the source directory
-      for (const entry of entries) {
-        const srcPath = path.join(sourceWidgetsDir, entry.name)
-        const destPath = path.join(widgetsDir, entry.name)
+    // Read the contents of the source directory
+    const entries = readdirSync(sourceWidgetsDir, { withFileTypes: true })
 
-        // Recursively copy directories, or copy files directly
-        entry.isDirectory()
-          ? copyWidgetsDirIfNeeded(srcPath, destPath)
-          : copyFileSync(srcPath, destPath)
+    // Copy only missing entries to avoid clobbering user changes
+    for (const entry of entries) {
+      const srcPath = path.join(sourceWidgetsDir, entry.name)
+      const destPath = path.join(widgetsDir, entry.name)
+
+      if (entry.isDirectory()) {
+        // If the widget folder does not exist in destination, copy recursively
+        if (!existsSync(destPath)) {
+          copyWidgetsDirIfNeeded(srcPath, destPath)
+        }
+      } else {
+        // Copy missing files (e.g., default widgets.json) but never overwrite
+        if (!existsSync(destPath)) {
+          copyFileSync(srcPath, destPath)
+        }
       }
     }
   } catch (error) {
