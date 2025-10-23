@@ -1,112 +1,169 @@
-/* Importing Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
-/* Custom font face */
-@font-face {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  src: url(); /* Add the URL of the font file here */
-}
-
-/* Global CSS Reset */
-* {
-  padding: 0px;
-  font-family: "Roboto", sans-serif;
-  margin: 0px;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
 }
 
-/* Root variables */
 :root {
+  --text-primary: #f8fafc;
+  --text-muted: rgba(226, 232, 240, 0.65);
+  --accent: #818cf8;
+  --accent-strong: #6366f1;
+  --outline: rgba(148, 163, 184, 0.28);
   -webkit-user-select: none;
   user-select: none;
-  padding: 0;
-  margin: 0;
-  width: auto;
-  height: auto;
-
-  /* Default color variables */
-  --background: #131313;
-  --text: #f2f4f5;
-  --secondary-text: #878a8c;
-  --border: 1px solid #3030309a;
-  --box-shadow: 1px 1px 20px rgba(214, 214, 214, 0.096);
 }
 
-/* Main container */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 28px;
+  background: transparent;
+  font-family:
+    "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: var(--text-primary);
+}
+
 main {
   display: none;
+  width: clamp(280px, 68vw, 480px);
+  height: 100vh;
+  padding: 32px 30px;
+  border-radius: 28px;
+  border: 1px solid var(--outline);
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.6) inset,
+    0 28px 65px -45px rgba(99, 102, 241, 0.85);
   flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  gap: 10px;
-  background-color: var(--background);
-  border-radius: 10px;
-  height: fit-content;
-  padding: 20px;
-}
-
-/* Body styles */
-body {
-  color: var(--text);
-}
-
-/* Heading styles */
-h1 {
+  gap: 18px;
+  overflow-y: auto;
   -webkit-app-region: drag;
 }
 
-/* Anchor styles */
-a {
-  -webkit-app-region: no-drag;
-}
-
-/* Scrollbar styles */
-::-webkit-scrollbar {
-  width: 15px;
-  background: #141414;
-}
-
-::-webkit-scrollbar-track {
-  box-shadow: #e9e9e9;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #1d1d1d;
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #292929;
-}
-
-/* Paragraph styles */
-p {
-  color: var(--dark-text);
-}
-
-/* Message container */
-#message {
+h1,
+#header {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 10px;
-  background-color: var(--background);
-  border-radius: 10px;
-  height: 100vh;
-  font-weight: bold;
+  gap: 8px;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  position: sticky;
+  top: -2px;
+  padding-bottom: 16px;
 }
 
-/* Loading spinner */
+#header img {
+  filter: drop-shadow(0 0 12px rgba(129, 140, 248, 0.45));
+}
+
+#version {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  color: var(--text-muted);
+}
+
+#container {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+}
+
+#item {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(129, 140, 248, 0.3);
+}
+
+#item:last-child {
+  border-bottom: none;
+}
+
+#title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+#title:hover {
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+#pubDate,
+#author {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#author {
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+  color: var(--accent);
+  transition: color 180ms ease;
+}
+
+#author:hover {
+  color: var(--accent-strong);
+}
+
+#author:before {
+  content: "by";
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+#message {
+  width: clamp(280px, 68vw, 480px);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  border-radius: 28px;
+  border: 1px solid var(--outline);
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.6) inset,
+    0 24px 60px -45px rgba(99, 102, 241, 0.85);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  -webkit-app-region: drag;
+}
+
 #loading {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #1abc9c;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  border: 4px solid rgba(129, 140, 248, 0.18);
+  border-top-color: var(--accent);
+  border-radius: 999px;
+  width: 40px;
+  height: 40px;
   animation: spin 1s linear infinite;
 }
 
@@ -116,95 +173,41 @@ p {
   }
 }
 
-/* Header styles */
-#header {
-  font-size: 16px;
-  font-weight: 500;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: var(--dark-text);
-  position: sticky;
-  top: 0;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  gap: 10px;
-}
-
-/* Version styles */
-#version {
-  font-size: 12px;
-}
-
-/* Container styles */
-#container {
-  width: 100%;
-}
-
-/* Item styles */
-#item {
-  border-bottom: 1px solid #ccc;
-  padding: 10px 0;
-  display: none;
-  flex-direction: column;
-  gap: 6px;
-  width: 100%;
-}
-
-/* Title styles */
-#title {
-  color: var(--dark-text);
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-#title:hover {
-  text-decoration: underline;
-}
-
-/* Author styles */
-#author {
-  cursor: pointer;
-}
-
-#author:hover {
-  text-decoration: underline;
-}
-
-/* Publication date and author styles */
-#pubDate,
-#author {
-  color: var(--dark-secondary-text);
-  font-size: 14px;
-}
-
-#author:before {
-  content: "by ";
-}
-
-/* Scroll to top button styles */
 #scrollTopButton {
-  font-size: small;
   display: none;
   position: fixed;
-  bottom: 20px;
-  right: 30px;
-  z-index: 99;
-  border: none;
-  outline: none;
-  background-color: var(--dark-background-secondary);
-  color: white;
+  bottom: 24px;
+  right: 24px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(129, 140, 248, 0.4);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
   cursor: pointer;
-  padding: 15px;
-  border-radius: 10px;
+  -webkit-app-region: no-drag;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease;
 }
 
 #scrollTopButton:hover {
-  background-color: var(--dark-secondary-text);
+  color: var(--accent);
+  border-color: rgba(129, 140, 248, 0.65);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(129, 140, 248, 0.35);
+  border-radius: 999px;
 }

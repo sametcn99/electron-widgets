@@ -9,19 +9,43 @@
 
   <body id="body">
     <main>
-      <div class="draggable"></div>
-      <div class="container">
-        <input type="text" id="searchInput" placeholder="Search..." />
-        <select id="searchEngine" title="searchEngine">
-          <option value="https://www.google.com/search?q=">Google</option>
-          <option value="https://www.bing.com/search?q=">Bing</option>
-          <option value="https://www.perplexity.ai/search?q=">
-            Perplexity
-          </option>
-          <option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
-        </select>
+      <div class="drag-zone draggable"></div>
+      <div class="search-card">
+        <div class="search-card__input">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="1.6"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1 0 5.25 5.25a7.5 7.5 0 0 0 11.4 11.4Z"
+            />
+          </svg>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search the web..."
+            autocomplete="off"
+          />
+        </div>
+        <div class="search-card__select">
+          <label for="searchEngine">Engine</label>
+          <select id="searchEngine" title="searchEngine">
+            <option value="https://www.google.com/search?q=">Google</option>
+            <option value="https://www.bing.com/search?q=">Bing</option>
+            <option value="https://www.perplexity.ai/search?q=">
+              Perplexity
+            </option>
+            <option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
+          </select>
+        </div>
       </div>
-      <div class="draggable"></div>
+      <div class="drag-zone draggable"></div>
     </main>
     <script src="./renderer.js" type="module"></script>
     <script></script>

@@ -1,48 +1,108 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 :root {
+  --text-primary: #f8fafc;
+  --text-muted: rgba(226, 232, 240, 0.68);
+  --accent: #38bdf8;
+  --accent-secondary: #22d3ee;
+  --outline: rgba(148, 163, 184, 0.28);
   -webkit-user-select: none;
   user-select: none;
-  padding: 0;
-  margin: 0;
-  width: auto;
-  height: auto;
-
-  --background: #131313;
-  --text: #f2f4f5;
-  --secondary-text: #878a8c;
-  --border: 1px solid #3030309a;
-  --box-shadow: 1px 1px 20px rgba(214, 214, 214, 0.096);
 }
 
 body {
-  font-family: "Roboto", sans-serif;
   margin: 0;
-  padding: 0;
-  width: 100%;
-  letter-spacing: 0.1rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: transparent;
+  font-family:
+    "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: var(--text-primary);
+}
+
+.weather-card {
+  width: clamp(240px, 68vw, 420px);
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  border-radius: 26px;
+  border: 1px solid var(--outline);
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.6) inset,
+    0 28px 65px -45px rgba(14, 165, 233, 0.85);
   -webkit-app-region: drag;
-  color: var(--text);
 }
 
-.container {
-  transition:
-    background-color var(--transition-duration),
-    border-color var(--transition-duration),
-    box-shadow var(--transition-duration);
+.weather-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-p {
-  margin: 0;
-  padding: 0;
+.weather-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-#weather-icon {
-  font-family: "Montserrat", sans-serif;
+.weather-card__date {
+  font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-primary);
 }
+
+.weather-card__location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: clamp(0.9rem, 2.3vw, 1.05rem);
+  font-weight: 500;
+  color: var(--text-muted);
+  -webkit-app-region: no-drag;
+}
+
+.weather-card__location svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--accent);
+  filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.4));
+}
+
+.weather-card__body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Space Grotesk", "Inter", sans-serif;
+  font-size: clamp(3.2rem, 12vw, 4.8rem);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  -webkit-app-region: drag;
+}
+
 #temp {
-  font-family: "Montserrat", sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--secondary-text);
+  margin: 0;
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow:
+    0 16px 40px rgba(2, 6, 23, 0.92),
+    0 0 30px rgba(56, 189, 248, 0.35);
+}
+
+#location,
+#location span {
+  margin: 0;
 }

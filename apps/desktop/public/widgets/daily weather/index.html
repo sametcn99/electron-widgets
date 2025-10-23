@@ -12,78 +12,42 @@
   </head>
 
   <body>
-    <div
-      style="
-        border-radius: 20px;
-        background-color: var(--background);
-        padding-top: 20px;
-        padding-bottom: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding-top: 20px;
-        flex-wrap: wrap;
-        gap: 1rem;
-        padding: 20px;
-        width: 100%;
-        padding: 0;
-        text-align: center;
-        height: 100vh;
-      "
-    >
-      <div
-        style="
-          display: flex;
-          flex-direction: row;
-          gap: 2px;
-          margin-top: 20px;
+    <main class="weather-card draggable">
+      <header class="weather-card__header">
+        <div class="weather-card__meta">
+          <span id="date" class="weather-card__date">Saturday, Mar 30</span>
+          <div class="weather-card__location">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+              />
+            </svg>
+            <p id="location">
+              <span id="regionName">Ankara</span>,
+              <span id="country">Turkey</span>
+            </p>
+          </div>
+        </div>
+      </header>
 
-          margin-bottom: -20px;
-          align-items: center;
-          justify-content: center;
-        "
-      >
-        <p id="date" style="font-size: large; font-weight: bold">
-          Saturday, Mar 30
-        </p>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="#ffffff"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          style="width: 11px"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-          />
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
-          />
-        </svg>
-        <p id="location">
-          <span id="regionName">Ankara</span>, <span id="country">Turkey</span>
-        </p>
-      </div>
-      <div
-        id="weather-icon"
-        style="
-          font-size: 1.5rem;
-          display: flex;
-          margin-bottom: 20px;
-          flex-direction: row;
-          align-items: center;
-          margin-top: 10px;
-        "
-      >
+      <section id="weather-icon" class="weather-card__body">
         <p id="temp">23</p>
-      </div>
-    </div>
+      </section>
+    </main>
     <script src="./renderer.js" type="module"></script>
   </body>
 </html>

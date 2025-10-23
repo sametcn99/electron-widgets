@@ -1,202 +1,212 @@
-/* Importing Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
-/* Global CSS styles */
-* {
-  padding: 0px;
-  font-family: "Roboto", sans-serif;
-  margin: 0px;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
 }
 
-/* Root variables */
 :root {
+  --text-primary: #f8fafc;
+  --text-muted: rgba(226, 232, 240, 0.68);
+  --accent: #fb923c;
+  --accent-strong: #f97316;
+  --outline: rgba(248, 113, 113, 0.28);
   -webkit-user-select: none;
   user-select: none;
-  padding: 0;
-  margin: 0;
-  width: auto;
-  height: auto;
-
-  --background: #131313;
-  --background-secondary: #1b1b1b;
-  --text: #e0e0e0;
-  --secondary-text: #878a8c;
-  --border: 1px solid #3030309a;
-  --box-shadow: 1px 1px 20px rgba(214, 214, 214, 0.096);
 }
 
-/* Body styles */
 body {
-  color: var(--text);
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 28px;
+  background: transparent;
+  font-family:
+    "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: var(--text-primary);
 }
 
-/* Main container styles */
 main {
+  width: clamp(280px, 70vw, 480px);
+  height: 100vh;
+  padding: 32px 30px;
+  border-radius: 28px;
+  border: 1px solid var(--outline);
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.6) inset,
+    0 26px 60px -45px rgba(248, 113, 113, 0.82);
   display: none;
   flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  gap: 10px;
-  background-color: var(--background);
-  border-radius: 10px;
-  height: fit-content;
-  padding: 20px;
+  gap: 18px;
+  overflow-y: auto;
+  -webkit-app-region: drag;
 }
 
-/* Heading styles */
-h1 {
-  -webkit-app-region: drag;
-  font-size: 16px;
-  font-weight: 500;
+#header {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--text);
+  gap: 10px;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
   position: sticky;
-  top: 0;
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: var(--background);
+  top: -2px;
+  padding-bottom: 16px;
 }
 
-/* Anchor styles */
-a {
-  -webkit-app-region: no-drag;
+#header img {
+  filter: drop-shadow(0 0 12px rgba(248, 113, 113, 0.45));
 }
 
-/* Paragraph styles */
-p {
-  color: var(--text);
-}
-
-/* Container styles */
 #container {
-  width: 100%;
-}
-
-/* Item styles */
-#item {
-  border-bottom: 1px solid var(--secondary-text);
-  padding: 10px 0;
   display: none;
   flex-direction: column;
-  gap: 6px;
   width: 100%;
 }
 
-/* Title styles */
+#item {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(248, 113, 113, 0.28);
+}
+
+#item:last-child {
+  border-bottom: none;
+}
+
 #title {
-  color: var(--text);
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--text-primary);
   text-decoration: none;
-  font-size: 18px;
-  font-weight: 500;
+  letter-spacing: 0.03em;
   cursor: pointer;
+  -webkit-app-region: no-drag;
+  transition:
+    color 180ms ease,
+    transform 180ms ease;
 }
 
-/* Title hover styles */
 #title:hover {
-  text-decoration: underline;
+  color: var(--accent);
+  transform: translateX(4px);
 }
 
-/* Author styles */
-#author {
-  cursor: pointer;
+#detail {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
 }
 
-/* Author hover styles */
-#author:hover {
-  text-decoration: underline;
-}
-
-/* Publication date and author styles */
 #pubDate,
 #author {
-  color: var(--secondary-text);
-  font-size: 14px;
-}
-
-/* Author prefix */
-#author:before {
-  content: "by ";
-}
-
-/* Message styles */
-#message {
+  font-size: 0.82rem;
+  color: var(--text-muted);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 10px;
-  background-color: var(--background);
-  border-radius: 10px;
-  height: 100vh;
-  font-weight: bold;
+  gap: 6px;
 }
 
-/* Loading spinner styles */
+#author {
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+  color: var(--accent);
+  font-weight: 600;
+  transition: color 180ms ease;
+}
+
+#author:hover {
+  color: var(--accent-strong);
+}
+
+#author:before {
+  content: "by";
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+}
+
+#message {
+  width: clamp(280px, 70vw, 480px);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  border-radius: 28px;
+  border: 1px solid var(--outline);
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.6) inset,
+    0 24px 60px -45px rgba(248, 113, 113, 0.82);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  -webkit-app-region: drag;
+}
+
 #loading {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: #1abc9c;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  border: 4px solid rgba(248, 113, 113, 0.18);
+  border-top-color: var(--accent);
+  border-radius: 999px;
+  width: 40px;
+  height: 40px;
   animation: spin 1s linear infinite;
 }
 
-/* Spin animation */
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
 
-/* Scroll top button styles */
 #scrollTopButton {
-  font-size: small;
-  display: none; /* Default olarak düğme görünmez */
-  position: fixed; /* Düğme ekranın belirli bir konumunda sabit kalır */
-  bottom: 20px; /* Ekranın altından 20px yukarıda */
-  right: 30px; /* Ekranın sağ tarafından 30px uzakta */
-  z-index: 99; /* Diğer elementlerin üzerinde görünür */
-  border: none; /* Kenarlık yok */
-  outline: none; /* Dış çizgi yok */
-  background-color: var(--background-secondary); /* Düğme rengi */
-  color: white; /* İkon veya metin rengi */
-  cursor: pointer; /* İmleç, üzerine geldiğinde el simgesi olur */
-  padding: 15px; /* Düğme içindeki boşluk */
-  border-radius: 10px; /* Düğmenin köşelerini yuvarlar */
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 12px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(248, 113, 113, 0.45);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease;
 }
 
-/* Scroll top button hover styles */
 #scrollTopButton:hover {
-  background-color: var(
-    --secondary-text
-  ); /* İmleç, düğmenin üzerine geldiğinde düğme rengi değişir */
+  color: var(--accent);
+  border-color: rgba(248, 113, 113, 0.7);
 }
 
-/* Scrollbar styles */
 ::-webkit-scrollbar {
-  width: 15px;
-  background: #141414;
+  width: 8px;
 }
 
-/* Scrollbar track styles */
 ::-webkit-scrollbar-track {
-  box-shadow: #e9e9e9;
-  border-radius: 10px;
+  background: transparent;
 }
 
-/* Scrollbar thumb styles */
 ::-webkit-scrollbar-thumb {
-  background: #1d1d1d;
-  border-radius: 10px;
-}
-
-/* Scrollbar thumb hover styles */
-::-webkit-scrollbar-thumb:hover {
-  background: #292929;
+  background: rgba(248, 113, 113, 0.32);
+  border-radius: 999px;
 }
