@@ -16,36 +16,6 @@
 
 This project is a desktop application developed using Electron.js and Node.js. The application allows users to create and manage widgets on their desktops. These widgets enable users to quickly and easily access the information or tools they need.
 
-## Widget Screenshots
-<details>
-  <summary>Clock</summary>
-  <img src="/apps/desktop/public/widgets/clock/screenshot.png"></img>
-</details>
-<details>
-  <summary>dailyWeather</summary>
-  <img src="/apps/desktop/public/widgets/daily%20weather/screenshot.png"></img>
-</details>
-<details>
-  <summary>r/programming</summary>
-  <img src="/apps/desktop/public/widgets/r-programming/screenshot.png"></img>
-</details>
-<details>
-  <summary>diskusage</summary>
-  <img src="/apps/desktop/public/widgets/disk%20usage/screenshot.png"></img>
-</details>
-<details>
-  <summary>hacker-news</summary>
-  <img src="/apps/desktop/public/widgets/hacker%20news/screenshot.png"></img>
-</details>
-<details>
-  <summary>transparentClock</summary>
-  <img src="/apps/desktop/public/widgets/transparent%20clock/screenshot.png"></img>
-</details>
-<details>
-  <summary>search</summary>
-  <img src="/apps/desktop/public/widgets/search/screenshot.png"></img>
-</details>
-
 ## Features
 
 - **Widget Management**: This feature allows users to manage widgets on their desktops effortlessly. They can create new widgets, edit existing ones, and delete widgets they no longer need. This functionality provides users with the flexibility to organize their desktops according to their preferences and needs.
