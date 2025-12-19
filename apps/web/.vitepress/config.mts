@@ -4,6 +4,39 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
 	title: "Electron Widgets",
 	description: "Documentation for the HTML-based widget manager",
+	lastUpdated: true,
+	head: [
+		["meta", { name: "author", content: "sametcn99" }],
+		[
+			"meta",
+			{
+				name: "keywords",
+				content: "electron, widgets, desktop, html, javascript, documentation, guide, widget-manager",
+			},
+		],
+		["meta", { property: "og:type", content: "website" }],
+		["meta", { property: "og:title", content: "Electron Widgets" }],
+		[
+			"meta",
+			{
+				property: "og:description",
+				content:
+					"Documentation for the HTML-based widget manager. Guides, recipes, and references for building your widget workspace.",
+			},
+		],
+		["meta", { name: "twitter:card", content: "summary_large_image" }],
+		["meta", { name: "twitter:title", content: "Electron Widgets" }],
+		["meta", { name: "twitter:description", content: "HTML-based desktop widgets documentation." }],
+		["meta", { name: "viewport", content: "width=device-width, initial-scale=1" }],
+		[
+			"script",
+			{
+				defer: "",
+				src: "https://umami.sametcc.me/script.js",
+				"data-website-id": "60e40393-63c9-4f53-a545-a76ac13b6787",
+			},
+		],
+	],
 	themeConfig: {
 		nav: [
 			{ text: "Overview", link: "/docs/overview" },
