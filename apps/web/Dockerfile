@@ -1,5 +1,8 @@
 FROM oven/bun:1 AS builder
 
+# Install git for VitePress lastUpdated feature
+RUN apt-get update && apt-get install -y git
+
 WORKDIR /app
 
 # Install dependencies with Bun
